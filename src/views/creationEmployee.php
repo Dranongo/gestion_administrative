@@ -16,12 +16,14 @@
 			<form>
 				<div class="form-group">
 					<label for="LastName">Nom</label>
-					<input type="text" id="form-lastName" class="form-control" name="LastName">
+					<input type="text" id="form-lastName" class="form-control" name="LastName" required>
+					<div class="invalid-feedback">Veuillez insérer un nom</div>
 				</div>
 
 				<div class="form-group">
 					<label for="FirstName">Prénom</label>
-					<input type="text" id="form-firstName" class="form-control" name="FirstName">
+					<input type="text" id="form-firstName" class="form-control" name="FirstName" required>
+					<div class="invalid-feedback">Veuillez insérer un prénom</div>
 				</div>
 
 				<div class="form-group">
@@ -31,52 +33,62 @@
 
 				<div class="form-group">
 					<label for="Nationality">Nationnalité</label>
-					<input type="text" id="form-nationality" class="form-control" name="Nationality">
+					<input type="text" id="form-nationality" class="form-control" name="Nationality" required>
+					<div class="invalid-feedback">Veuillez insérer une nationalité</div>
 				</div>
 
 				<div class="form-group">
 					<label for="Birthdate">Date de naissance</label>
-					<input type="date" id="form-birthdate" class="form-control" name="Birthdate">
+					<input type="date" id="form-birthdate" class="form-control" name="Birthdate" required>
+					<div class="invalid-feedback">Veuillez insérer une date</div>
 				</div>
 
 				<div class="form-group">
 					<label for="Birthplace">Lieu de naissance</label>
-					<input type="text" id="form-birthplace" class="form-control" name="Birthplace">
+					<input type="text" id="form-birthplace" class="form-control" name="Birthplace" required>
+					<div class="invalid-feedback">Veuillez insérer un lieu de naissance</div>
 				</div>
 
 				<div class="form-group">
 					<label for="Adress">Adresse</label>
-					<input type="text" id="form-adress" class="form-control" name="Adress">
+					<input type="text" id="form-adress" class="form-control" name="Adress" required>
+					<div class="invalid-feedback">Veuillez insérer un lieu de résidence</div>
 				</div>
 
 				<div class="form-group">
 					<label for="PostalCode">Code postal</label>
-					<input type="text" id="form-postalCode" class="form-control" name="PostalCode">
+					<input type="text" id="form-postalCode" class="form-control" name="PostalCode" required>
+					<div class="invalid-feedback">Veuillez insérer un code postal du lieu de résidence</div>
 				</div>
 
 				<div class="form-group">
 					<label for="EmailProfessional">E-mail professionnel</label>
-					<input type="email" id="form-emailProfessional" class="form-control" name="EmailProfessional">
+					<input type="email" id="form-emailProfessional" class="form-control" name="EmailProfessional" required>
+					<div class="invalid-feedback">Veuillez insérer un mail professionnel valide</div>
 				</div>
 
 				<div class="form-group">
 					<label for="EmailPersonal">E-mail personnel</label>
-					<input type="text" id="form-emailPersonnal" class="form-control" name="EmailPersonal">
+					<input type="text" id="form-emailPersonnal" class="form-control" name="EmailPersonal" required>
+					<div class="invalid-feedback">Veuillez insérer un mail personnel valide</div>
 				</div>
 
 				<div class="form-group">
 					<label for="SocialSecurityNumber">Numéro de sécurité sociale</label>
-					<input type="text" id="form-socialSecurityNumber" class="form-control" name="SocialSecurityNumber">
+					<input type="text" id="form-socialSecurityNumber" class="form-control" name="SocialSecurityNumber" required>
+					<div class="invalid-feedback">Veuillez insérer un numéro de sécurité sociale valide</div>
 				</div>
 
 				<div class="form-group">
 					<label for="Salary">Rémunération</label>
-					<input type="text" id="form-salary" class="form-control" name="Salary">
+					<input type="text" id="form-salary" class="form-control" name="Salary" required>
+					<div class="invalid-feedback">Veuillez insérer une rémunération</div>
 				</div>
 
 				<div class="form-group">
 					<label for="FamilyStatus">Situation Familiale</label>
-					<input type="text" id="form-familyStatus" class="form-control" name="FamilyStatus">
+					<input type="text" id="form-familyStatus" class="form-control" name="FamilyStatus" required>
+					<div class="invalid-feedback">Veuillez décrire la situation familiale (célibataire, mariage,...)</div>
 				</div>
 
 				<div class="form-group">
@@ -108,7 +120,10 @@
 					<label for="DetailDisabledWorker">Détails du taux d'handicap</label>
 					<input type="text" id="form-DetailDisabledWorker" class="form-control" name="DetailDisabledWorker">
 				</div>
+				<button class="btn btn-primary" type="submit">Enregistrer le salarié</button>
 			</form>
 		</div>
+
+
 	</body>
 </html>
