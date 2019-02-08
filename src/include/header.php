@@ -12,7 +12,7 @@
 						<a class="nav-link text-muted" id="nav_accueil" href="#">Liste des salariés</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-muted" id="nav_competence" href="#">Création d'une fiche</a>
+						<a class="nav-link text-muted" id="nav_competence" href="creationEmployee.php">Création d'une fiche</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link text-muted" id="nav_experience">Indicateur de performance</a>
