@@ -69,7 +69,7 @@
 
 				<div class="form-group">
 					<label for="EmailPersonal">E-mail personnel</label>
-					<input type="text" id="EmailPersonnal" class="form-control" name="EmailPersonal" required>
+					<input type="email" id="EmailPersonnal" class="form-control" name="EmailPersonal" required>
 					<div class="invalid-feedback">Veuillez insérer un mail personnel valide</div>
 				</div>
 
@@ -93,12 +93,13 @@
 
 				<div class="form-group">
 					<label for="Languages">Langues étrangères</label>
-					<input type="text" id="Languages" class="form-control" name="Languages">
+					<textarea name="Languages" id="Languages" class="form-control"></textarea>
 				</div>
 
 				<div class="form-check">
-					<input type="checkbox" id="SecondaryProfessionalActivity" class="form-check-input" name="SecondaryProfessionalActivity">
-					<label class="form-check-label" for="SecondaryProfessionalActivity">Exerce-t-il/elle une activité professionnel secondaire ?</label>
+					<label class="form-radio-inline" for="SecondaryProfessionalActivity">Exerce-t-il/elle une activité professionnel secondaire ?</label>
+					<input type="radio" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity">Oui
+					<input type="radio" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity">Non
 				</div>
 
 				<div class="form-group">
@@ -107,13 +108,15 @@
 				</div>
 
 				<div class="form-check">
-					<input type="checkbox" id="ParentalPermission" class="form-check-input" name="ParentalPermission">
-					<label class="form-check-label" for="ParentalPermission">A-t-il/elle une autorisation écrite de travail de ses responsables légaux ?</label>
+					<label class="form-radio-inline" for="ParentalPermission">A-t-il/elle une autorisation écrite de travail de ses responsables légaux ?</label>
+					<input type="radio" id="ParentalPermission" class="form-radio-input" name="ParentalPermission">Oui
+					<input type="radio" id="ParentalPermission" class="form-radio-input" name="ParentalPermission">Non
 				</div>
 
 				<div class="form-check">
-					<input type="checkbox" id="DisabledWorker" class="form-check-input" name="DisabledWorker">
-					<label class="form-check-label" for="DisabledWorker">Est-il reconnu comme travailleur handicapé ?</label>
+					<label class="form-radio-inline" for="DisabledWorker">Est-il reconnu comme travailleur handicapé ?</label>
+					<input type="radio" id="DisabledWorker" class="form-radio-input" name="DisabledWorker">Oui
+					<input type="radio" id="DisabledWorker" class="form-radio-input" name="DisabledWorker">Non
 				</div>
 
 				<div class="form-group">
