@@ -6,6 +6,8 @@
 		<link href="../../public/css/bootstrap.min.css" rel="stylesheet"/>
 		<script src="../../public/js/jquery-3.3.1.min.js"></script>
 		<script src="../../public/js/bootstrap.min.js"></script>
+		<script src="../../public/js/creationEmployee.js"></script>
+
 	</head>
 	<body>
 		<?php
@@ -57,8 +59,20 @@
 
 				<div class="form-group">
 					<label for="PostalCode">Code postal</label>
-					<input type="text" id="PostalCode" class="form-control" name="PostalCode" required>
+					<input type="number" id="PostalCode" class="form-control" name="PostalCode" required>
 					<div class="invalid-feedback">Veuillez insérer un code postal du lieu de résidence</div>
+				</div>
+
+				<div class="form-group">
+					<label for="City">Ville</label>
+					<input type="text" id="City" class="form-control" name="City" required>
+					<div class="invalid-feedback">Veuillez ajouter une ville</div>
+				</div>
+
+				<div class="form-group">
+					<label for="Phone">Téléphone</label>
+					<input type="tel" id="Phone" class="form-control" name="Phone" required>
+					<div class="invalid-feedback">Veuillez renseigner le numéro de téléphone du salarié</div>
 				</div>
 
 				<div class="form-group">
@@ -75,13 +89,13 @@
 
 				<div class="form-group">
 					<label for="SocialSecurityNumber">Numéro de sécurité sociale</label>
-					<input type="text" id="SocialSecurityNumber" class="form-control" name="SocialSecurityNumber" required>
+					<input type="number" min="100000000000000" max="200000000000000" id="SocialSecurityNumber" class="form-control" name="SocialSecurityNumber" required>
 					<div class="invalid-feedback">Veuillez insérer un numéro de sécurité sociale valide</div>
 				</div>
 
 				<div class="form-group">
 					<label for="Salary">Rémunération</label>
-					<input type="text" id="Salary" class="form-control" name="Salary" required>
+					<input type="number" id="Salary" class="form-control" name="Salary" required>
 					<div class="invalid-feedback">Veuillez insérer une rémunération</div>
 				</div>
 
@@ -98,11 +112,11 @@
 
 				<div class="form-check">
 					<label class="form-radio-inline" for="SecondaryProfessionalActivity">Exerce-t-il/elle une activité professionnel secondaire ?</label>
-					<input type="radio" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity">Oui
-					<input type="radio" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity">Non
+					<input type="radio" onclick="displayDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity">Oui
+					<input type="radio" onclick="hideDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity">Non
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" id="DetailSecondaryActivity" style="display: none;">
 					<label for="DetailSecondaryActivity">Détails de cette activité</label>
 					<input type="text" id="DetailSecondaryActivity" class="form-control" name="DetailSecondaryActivity">
 				</div>
@@ -115,11 +129,11 @@
 
 				<div class="form-check">
 					<label class="form-radio-inline" for="DisabledWorker">Est-il reconnu comme travailleur handicapé ?</label>
-					<input type="radio" id="DisabledWorker" class="form-radio-input" name="DisabledWorker">Oui
-					<input type="radio" id="DisabledWorker" class="form-radio-input" name="DisabledWorker">Non
+					<input type="radio" onclick="displayDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker">Oui
+					<input type="radio" onclick="hideDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker">Non
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" id="DetailDisabledWorker" style="display: none;">
 					<label for="DetailDisabledWorker">Détails du taux d'handicap</label>
 					<input type="text" id="DetailDisabledWorker" class="form-control" name="DetailDisabledWorker">
 				</div>
@@ -127,6 +141,7 @@
 			</form>
 		</div>
 
+		<script type="text/javascript" src="../../public/js/creationEmployee.js"></script>
 
 	</body>
 </html>
