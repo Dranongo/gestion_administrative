@@ -15,7 +15,7 @@
 		?>
 
 		<div class="container">
-			<form>
+			<form class="needs-validation" novalidate>
 				<div class="form-group">
 					<label for="LastName">Nom</label>
 					<input type="text" id="LastName" class="form-control" name="LastName" required>
