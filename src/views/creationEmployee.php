@@ -15,7 +15,7 @@
 		?>
 
 		<div class="container">
-			<form class="needs-validation" novalidate>
+			<form class="needs-validation" method="POST" action="../controller/creationEmployeeController.php" novalidate>
 				<div class="form-group">
 					<label for="LastName">Nom</label>
 					<input type="text" id="LastName" class="form-control" name="LastName" required>
@@ -83,7 +83,7 @@
 
 				<div class="form-group">
 					<label for="EmailPersonal">E-mail personnel</label>
-					<input type="email" id="EmailPersonnal" class="form-control" name="EmailPersonal" required>
+					<input type="email" id="EmailPersonal" class="form-control" name="EmailPersonal" required>
 					<div class="invalid-feedback">Veuillez insérer un mail personnel valide</div>
 				</div>
 
@@ -140,8 +140,5 @@
 				<button class="btn btn-primary" type="submit">Enregistrer le salarié</button>
 			</form>
 		</div>
-
-		<script type="text/javascript" src="../../public/js/creationEmployee.js"></script>
-
 	</body>
 </html>
