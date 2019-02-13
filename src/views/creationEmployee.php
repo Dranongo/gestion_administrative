@@ -71,7 +71,7 @@
 
 				<div class="form-group">
 					<label for="Phone">Téléphone</label>
-					<input type="tel" id="Phone" class="form-control" name="Phone" required>
+					<input type="tel number" id="Phone" class="form-control" name="Phone" required>
 					<div class="invalid-feedback">Veuillez renseigner le numéro de téléphone du salarié</div>
 				</div>
 
