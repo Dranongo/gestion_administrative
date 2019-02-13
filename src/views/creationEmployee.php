@@ -99,6 +99,12 @@
 					<div class="invalid-feedback">Veuillez insérer une rémunération</div>
 				</div>
 
+				<div class="form-check">
+					<label class="form-radio-inline" for="CurrentlyEmployed">Le salarié est-il en poste ?</label>
+					<input type="radio" id="CurrentlyEmployed" class="form-radio-input" name="CurrentlyEmployed">Oui
+					<input type="radio" id="CurrentlyEmployed" class="form-radio-input" name="CurrentlyEmployed">Non
+				</div>
+
 				<div class="form-group">
 					<label for="FamilyStatus">Situation Familiale</label>
 					<input type="text" id="FamilyStatus" class="form-control" name="FamilyStatus" required>

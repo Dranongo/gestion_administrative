@@ -35,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	} else {
 		echo 'Le numéro de tel est incorrect <br>';
 	}
+
+	require('../DAO/employeeDAO.php');
+	connectBDD();
 }
 
 function checkEmail($email, $required = true){
