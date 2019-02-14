@@ -15,7 +15,7 @@ function createEmployee($bdd){
 	$prenom_salarie = "";
 	$nom_jeune_fille_salarie = "";
 	$nationalite_salarie = "";
-	$date_naissance_salarie = "";
+	$date_naissance_salarie = date("Y-m-d");
 	$lieu_naissance_salarie = ""; 
 	$adresse_salarie = "";
 	$code_postal_salarie = "";
@@ -24,60 +24,60 @@ function createEmployee($bdd){
 	$mail_professionnel_salarie = ""; 
 	$mail_personnel_salarie = "";
 	$num_secu_salarie = ""; 
-	$remuneration_salarie = ""; 
-	$salarie_en_poste = "";
+	$remuneration_salarie = 0; 
+	$salarie_en_poste = 0;
 	$situation_familiale_salarie = "";
 	$langues_etrangeres = "";
-	$autre_activite_salarie = "";
+	$autre_activite_salarie = 0;
 	$details_autre_activite_salarie = "";
-	$autorisation_travail_responsable_legaux = "";
-	$statut_handicap_salarie = "";
+	$autorisation_travail_responsable_legaux = 0;
+	$statut_handicap_salarie = 0;
 	$taux_invalidite = "";
 
-		$req = $bdd->prepare('INSERT into salarie(nom_salarie, 
-			prenom_salarie, 
-			nom_jeune_fille_salarie, 
-			nationalite_salarie, 
-			date_naissance_salarie, 
-			lieu_naissance_salarie, 
-			adresse_salarie, 
-			code_postal_salarie, 
-			ville_habitat_salarie, 
-			telephone_salarie, 
-			mail_professionnel_salarie, 
-			mail_personnel_salarie, 
-			num_secu_salarie, 
-			remuneration_salarie, 
-			salarie_en_poste, 
-			situation_familiale_salarie, 
-			langues_etrangeres, 
-			autre_activite_salarie,
-			details_autre_activite_salarie,
-			autorisation_travail_responsable_legaux, 
-			statut_handicap_salarie, 
-			taux_invalidite) 
-			VALUES (:nom_salarie, 
-			:prenom_salarie, 
-			:nom_jeune_fille_salarie, 
-			:nationalite_salarie, 
-			:date_naissance_salarie, 
-			:lieu_naissance_salarie, 
-			:adresse_salarie, 
-			:code_postal_salarie, 
-			:ville_habitat_salarie, 
-			:telephone_salarie, 
-			:mail_professionnel_salarie, 
-			:mail_personnel_salarie, 
-			:num_secu_salarie, 
-			:remuneration_salarie, 
-			:salarie_en_poste, 
-			:situation_familiale_salarie, 
-			:langues_etrangeres, 
-			:autre_activite_salarie, 
-			:details_autre_activite_salarie, 
-			:autorisation_travail_responsable_legaux, 
-			:statut_handicap_salarie, 
-			:taux_invalidite)');
+	$req = $bdd->prepare('INSERT into salarie(nom_salarie, 
+		prenom_salarie, 
+		nom_jeune_fille_salarie, 
+		nationalite_salarie, 
+		date_naissance_salarie, 
+		lieu_naissance_salarie, 
+		adresse_salarie, 
+		code_postal_salarie, 
+		ville_habitat_salarie, 
+		telephone_salarie, 
+		mail_professionnel_salarie, 
+		mail_personnel_salarie, 
+		num_secu_salarie, 
+		remuneration_salarie, 
+		salarie_en_poste, 
+		situation_familiale_salarie, 
+		langues_etrangeres, 
+		autre_activite_salarie,
+		details_autre_activite_salarie,
+		autorisation_travail_responsable_legaux, 
+		statut_handicap_salarie, 
+		taux_invalidite) 
+		VALUES (:nom_salarie, 
+		:prenom_salarie, 
+		:nom_jeune_fille_salarie, 
+		:nationalite_salarie, 
+		:date_naissance_salarie, 
+		:lieu_naissance_salarie, 
+		:adresse_salarie, 
+		:code_postal_salarie, 
+		:ville_habitat_salarie, 
+		:telephone_salarie, 
+		:mail_professionnel_salarie, 
+		:mail_personnel_salarie, 
+		:num_secu_salarie, 
+		:remuneration_salarie, 
+		:salarie_en_poste, 
+		:situation_familiale_salarie, 
+		:langues_etrangeres, 
+		:autre_activite_salarie, 
+		:details_autre_activite_salarie, 
+		:autorisation_travail_responsable_legaux, 
+		:statut_handicap_salarie, 
+		:taux_invalidite)');
 
 	$req->bindParam(':nom_salarie', $nom_salarie);
 	$req->bindParam(':prenom_salarie', $prenom_salarie);
@@ -137,7 +137,7 @@ function securite_bdd($string, $bdd){
 		$string = intval($string);
 	}
 	else {
-		$string = mysqli_real_escape_string($bdd, $string);
+		$bdd->quote($string);
 		$string = addcslashes($string, '%_');
 	}
 	return $string;
