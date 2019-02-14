@@ -11,30 +11,32 @@ function connectBDD(){
 }
 
 function createEmployee($bdd){
-	$nom_salarie = "";
-	$prenom_salarie = "";
-	$nom_jeune_fille_salarie = "";
-	$nationalite_salarie = "";
-	$date_naissance_salarie = date("Y-m-d");
-	$lieu_naissance_salarie = ""; 
-	$adresse_salarie = "";
-	$code_postal_salarie = "";
-	$ville_habitat_salarie = "";
-	$telephone_salarie = "";
-	$mail_professionnel_salarie = ""; 
-	$mail_personnel_salarie = "";
-	$num_secu_salarie = ""; 
-	$remuneration_salarie = 0; 
-	$salarie_en_poste = 0;
-	$situation_familiale_salarie = "";
-	$langues_etrangeres = "";
-	$autre_activite_salarie = 0;
-	$details_autre_activite_salarie = "";
-	$autorisation_travail_responsable_legaux = 0;
-	$statut_handicap_salarie = 0;
-	$taux_invalidite = "";
+	$qualite_salarie = securite_bdd($_POST["Gender"], $bdd);
+	$nom_salarie = securite_bdd($_POST["LastName"], $bdd);
+	$prenom_salarie = securite_bdd($_POST["FirstName"], $bdd);
+	$nom_jeune_fille_salarie = securite_bdd($_POST["MaidenName"], $bdd);
+	$nationalite_salarie = securite_bdd($_POST["Nationality"], $bdd);
+	$date_naissance_salarie = securite_bdd($_POST["Birthdate"], $bdd);
+	$lieu_naissance_salarie = securite_bdd($_POST["Birthplace"], $bdd); 
+	$adresse_salarie = securite_bdd($_POST["Address"], $bdd);
+	$code_postal_salarie = securite_bdd($_POST["PostalCode"], $bdd);
+	$ville_habitat_salarie = securite_bdd($_POST["City"], $bdd);
+	$telephone_salarie = securite_bdd($_POST["Phone"], $bdd);
+	$mail_professionnel_salarie = securite_bdd($_POST["EmailProfessional"], $bdd); 
+	$mail_personnel_salarie = securite_bdd($_POST["EmailPersonal"], $bdd);
+	$num_secu_salarie = securite_bdd($_POST["SocialSecurityNumber"], $bdd); 
+	$remuneration_salarie = securite_bdd($_POST["Salary"], $bdd); 
+	$salarie_en_poste = securite_bdd($_POST["CurrentlyEmployed"], $bdd);
+	$situation_familiale_salarie = securite_bdd($_POST["FamilyStatus"], $bdd);
+	$langues_etrangeres = securite_bdd($_POST["Languages"], $bdd);
+	$autre_activite_salarie = securite_bdd($_POST["SecondaryProfessionalActivity"], $bdd);;
+	$details_autre_activite_salarie = securite_bdd($_POST["DetailSecondaryActivity"], $bdd);
+	$autorisation_travail_responsable_legaux = securite_bdd($_POST["ParentalPermission"], $bdd);;
+	$statut_handicap_salarie = securite_bdd($_POST["DisabledWorker"], $bdd);;
+	$taux_invalidite = securite_bdd($_POST["DetailDisabledWorker"], $bdd);
 
-	$req = $bdd->prepare('INSERT into salarie(nom_salarie, 
+	$req = $bdd->prepare('INSERT into salarie(qualite_salarie,
+		nom_salarie, 
 		prenom_salarie, 
 		nom_jeune_fille_salarie, 
 		nationalite_salarie, 
@@ -56,7 +58,8 @@ function createEmployee($bdd){
 		autorisation_travail_responsable_legaux, 
 		statut_handicap_salarie, 
 		taux_invalidite) 
-		VALUES (:nom_salarie, 
+		VALUES (:qualite_salarie,
+		:nom_salarie, 
 		:prenom_salarie, 
 		:nom_jeune_fille_salarie, 
 		:nationalite_salarie, 
@@ -79,6 +82,7 @@ function createEmployee($bdd){
 		:statut_handicap_salarie, 
 		:taux_invalidite)');
 
+	$req->bindParam(':qualite_salarie', $qualite_salarie);
 	$req->bindParam(':nom_salarie', $nom_salarie);
 	$req->bindParam(':prenom_salarie', $prenom_salarie);
 	$req->bindParam(':nom_jeune_fille_salarie', $nom_jeune_fille_salarie);
@@ -101,29 +105,6 @@ function createEmployee($bdd){
 	$req->bindParam(':autorisation_travail_responsable_legaux', $autorisation_travail_responsable_legaux);
 	$req->bindParam(':statut_handicap_salarie', $statut_handicap_salarie);
 	$req->bindParam(':taux_invalidite', $taux_invalidite);
-
-	$nom_salarie = securite_bdd($_POST["LastName"], $bdd);
-	$prenom_salarie = securite_bdd($_POST["FirstName"], $bdd);
-	$nom_jeune_fille_salarie = securite_bdd($_POST["MaidenName"], $bdd);
-	$nationalite_salarie = securite_bdd($_POST["Nationality"], $bdd);
-	$date_naissance_salarie = securite_bdd($_POST["Birthdate"], $bdd);
-	$lieu_naissance_salarie = securite_bdd($_POST["Birthplace"], $bdd); 
-	$adresse_salarie = securite_bdd($_POST["Address"], $bdd);
-	$code_postal_salarie = securite_bdd($_POST["PostalCode"], $bdd);
-	$ville_habitat_salarie = securite_bdd($_POST["City"], $bdd);
-	$telephone_salarie = $_POST["Phone"];
-	$mail_professionnel_salarie = securite_bdd($_POST["EmailProfessional"], $bdd); 
-	$mail_personnel_salarie = securite_bdd($_POST["EmailPersonal"], $bdd);
-	$num_secu_salarie = securite_bdd($_POST["SocialSecurityNumber"], $bdd); 
-	$remuneration_salarie = securite_bdd($_POST["Salary"], $bdd); 
-	$salarie_en_poste = 1;
-	$situation_familiale_salarie = securite_bdd($_POST["FamilyStatus"], $bdd);
-	$langues_etrangeres = securite_bdd($_POST["Languages"], $bdd);
-	$autre_activite_salarie = 1;
-	$details_autre_activite_salarie = securite_bdd($_POST["DetailSecondaryActivity"], $bdd);
-	$autorisation_travail_responsable_legaux = 1;
-	$statut_handicap_salarie = 1;
-	$taux_invalidite = securite_bdd($_POST["DetailDisabledWorker"], $bdd);
 
 	$req->execute();
 	$arr = $req->errorInfo();
