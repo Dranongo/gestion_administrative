@@ -5,29 +5,30 @@ $bdd = connectBDD();
 $formValidated = true;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	if (trim($_POST["LastName"])==null)
+	if (trim($_POST["LastName"]) == "")
 		{$formValidated = false;}
 
-	if (trim($_POST["LastName"])==null)
+	if (trim($_POST["FirstName"]) == "")
 		{$formValidated = false;}
 
-	if (trim($_POST["Nationality"])==null)
+	if (trim($_POST["Nationality"]) == "")
 		{$formValidated = false;}
 
-	if (trim($_POST["Birthdate"])==null)
+	if (trim($_POST["Birthdate"]) == "")
 		{$formValidated = false;}
 
-	if (trim($_POST["Birthplace"])==null)
+	if (trim($_POST["Birthplace"]) == "")
 		{$formValidated = false;}
 
-	if (trim($_POST["Address"])==null)
+	if (trim($_POST["Address"]) == "")
 		{$formValidated = false;}
 
-	if (trim($_POST["City"])==null)
+	if (trim($_POST["City"]) == "")
 		{$formValidated = false;}
 
-	if (trim($_POST["FamilyStatus"])==null)
-		{$formValidated = false;}	
+	if (trim($_POST["FamilyStatus"]) == "")
+		{$formValidated = false;}
+
 
 	if (checkEmail($_POST["EmailProfessional"])) {
 		echo 'Le mail professionnel est correct <br>';
@@ -73,17 +74,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 
 	if($formValidated == true){
-		
 		createEmployee($bdd);
 	}
 }
 
 function checkEmail($email, $required = true){
-	return $required ? filter_var($email, FILTER_VALIDATE_EMAIL) : trim($email) || filter_var($email, FILTER_VALIDATE_EMAIL);
+	return $required ? filter_var($email, FILTER_VALIDATE_EMAIL) : trim($email) == "" || filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
 function checkBirthdate($date, $format = 'Y-m-d') {
 	$d = DateTime::createFromFormat($format, $date);
+	echo $date;
 	return $d && $d->format($format) == $date;
 }
 
@@ -96,10 +97,10 @@ function checkSalary($salary) {
 }
 
 function checkPostalCode($postalcode) {
-	return is_numeric($postalcode) && strlen($postalcode) <= 5;
+	return is_numeric($postalcode) && strlen($postalcode) == 5;
 }
 
 function checkPhone($phone){
-	return preg_match ( " #^[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}?$# " , $phone);
+	return is_numeric($phone) && strlen($phone) == 10;
 }
 ?>
