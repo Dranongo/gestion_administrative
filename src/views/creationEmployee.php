@@ -16,6 +16,18 @@
 
 		<div class="container">
 			<form class="needs-validation" method="POST" action="../controller/creationEmployeeController.php" novalidate>
+
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" class="custom-control-input" id="Gender" name="Gender" value="Monsieur" required>
+					<label class="custom-control-label" for="Gender">Monsieur</label>
+				</div>
+
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" class="custom-control-input" id="Gender" name="Gender" value="Madame" required>
+					<label class="custom-control-label" for="Gender">Madame</label>
+					<div class="invalid-feedback">&nbsp;Veuillez sélectionner un genre</div>
+				</div>
+
 				<div class="form-group">
 					<label for="LastName">Nom</label>
 					<input type="text" id="LastName" class="form-control" name="LastName" required>
@@ -101,14 +113,19 @@
 
 				<div class="form-check">
 					<label class="form-radio-inline" for="CurrentlyEmployed">Le salarié est-il en poste ?</label>
-					<input type="radio" id="CurrentlyEmployed" class="form-radio-input" name="CurrentlyEmployed">Oui
-					<input type="radio" id="CurrentlyEmployed" class="form-radio-input" name="CurrentlyEmployed">Non
+					<input type="radio" id="CurrentlyEmployed" class="form-radio-input" name="CurrentlyEmployed" value=0>Oui
+					<input type="radio" id="CurrentlyEmployed" class="form-radio-input" name="CurrentlyEmployed" value=1>Non
 				</div>
 
 				<div class="form-group">
-					<label for="FamilyStatus">Situation Familiale</label>
-					<input type="text" id="FamilyStatus" class="form-control" name="FamilyStatus" required>
-					<div class="invalid-feedback">Veuillez décrire la situation familiale (célibataire, mariage,...)</div>
+					<select id="FamilyStatus" name="FamilyStatus" class="custom-select" required>
+						<option id="FamilyStatus" name="FamilyStatus" value="">Situation familiale</option>
+						<option id="FamilyStatus" name="FamilyStatus" dvalue="Célibataire">Célibataire</option>
+						<option id="FamilyStatus" name="FamilyStatus" value="Concubin(e)">Concubin(e)</option>
+						<option id="FamilyStatus" name="FamilyStatus" value="Pacsé(e)">Pacsé(e)</option>
+						<option id="FamilyStatus" name="FamilyStatus" value="Marié(e)">Marié(e)</option>
+					</select>
+					<div class="invalid-feedback">Veuillez sélectionner votre situation familiale</div>
 				</div>
 
 				<div class="form-group">
@@ -118,8 +135,8 @@
 
 				<div class="form-check">
 					<label class="form-radio-inline" for="SecondaryProfessionalActivity">Exerce-t-il/elle une activité professionnel secondaire ?</label>
-					<input type="radio" onclick="displayDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity">Oui
-					<input type="radio" onclick="hideDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity">Non
+					<input type="radio" onclick="displayDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity" value=0>Oui
+					<input type="radio" onclick="hideDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity" value=1>Non
 				</div>
 
 				<div class="form-group" id="DetailSecondaryActivity" style="display: none;">
@@ -129,14 +146,14 @@
 
 				<div class="form-check">
 					<label class="form-radio-inline" for="ParentalPermission">A-t-il/elle une autorisation écrite de travail de ses responsables légaux ?</label>
-					<input type="radio" id="ParentalPermission" class="form-radio-input" name="ParentalPermission">Oui
-					<input type="radio" id="ParentalPermission" class="form-radio-input" name="ParentalPermission">Non
+					<input type="radio" id="ParentalPermission" class="form-radio-input" name="ParentalPermission" value=0>Oui
+					<input type="radio" id="ParentalPermission" class="form-radio-input" name="ParentalPermission" value=1>Non
 				</div>
 
 				<div class="form-check">
 					<label class="form-radio-inline" for="DisabledWorker">Est-il reconnu comme travailleur handicapé ?</label>
-					<input type="radio" onclick="displayDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker">Oui
-					<input type="radio" onclick="hideDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker">Non
+					<input type="radio" onclick="displayDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker" value=0>Oui
+					<input type="radio" onclick="hideDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker" value=1>Non
 				</div>
 
 				<div class="form-group" id="DetailDisabledWorker" style="display: none;">
