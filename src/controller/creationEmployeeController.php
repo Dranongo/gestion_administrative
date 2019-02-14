@@ -5,6 +5,9 @@ $bdd = connectBDD();
 $formValidated = true;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	if ($_POST["Gender"] == "")
+		{$formValidated = false;}
+
 	if (trim($_POST["LastName"]) == "")
 		{$formValidated = false;}
 
@@ -26,9 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if (trim($_POST["City"]) == "")
 		{$formValidated = false;}
 
-	if (trim($_POST["FamilyStatus"]) == "")
+	if ($_POST["FamilyStatus"] == "")
 		{$formValidated = false;}
-
 
 	if (checkEmail($_POST["EmailProfessional"])) {
 		echo 'Le mail professionnel est correct <br>';
@@ -102,5 +104,11 @@ function checkPostalCode($postalcode) {
 
 function checkPhone($phone){
 	return is_numeric($phone) && strlen($phone) == 10;
+}
+
+function checkButtonRadio($radio){
+	if ($_POST[$radio] == null) {
+		$_POST[$radio] = 1;
+	}
 }
 ?>
