@@ -160,6 +160,35 @@
 					<label for="DetailDisabledWorker">Détails du taux d'handicap</label>
 					<input type="text" id="DetailDisabledWorker" class="form-control" name="DetailDisabledWorker">
 				</div>
+
+				<div class="form-check">
+					<label class="form-radio-inline" for="ForeignWorker">A-il le statut de travailleur étranger ?</label>
+					<input type="checkbox" onclick="displayDiv('DetailForeignWorker');" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=0>Oui
+					<input type="radio" onclick="hideDiv('DetailForeignWorker');" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=1>Non
+				</div>
+				<div class="form-group" id="DetailForeignWorker" style="display: none;">
+					<label for="">Renseignement du travailleur étranger</label>
+					<div class="form-group">
+						<label for="PermissionWorkDate">Date d'autorisation d'embauche</label>
+						<input type="date" id="PermissionWorkDate" class="form-control" name="PermissionWorkDate" required>
+						<div class="invalid-feedback">Veuillez insérer une date</div>
+					</div>
+					<div class="form-check">
+						<label class="form-radio-inline" for="PermissionWork">A-t-il une autorisation travail ?</label>
+						<input type="radio" id="PermissionWork" class="form-radio-input" name="PermissionWork" value=0>Oui
+						<input type="radio" id="PermissionWork" class="form-radio-input" name="PermissionWork" value=1>Non
+					</div>
+					<div class="form-group">
+						<label for="ResidencePermitNumber">Numéro de carte de séjour</label>
+						<input type="number" id="ResidencePermitNumber" class="form-control" name="ResidencePermitNumber" required>
+						<div class="invalid-feedback">Veuillez insérer une numéro</div>
+					</div>
+					<div class="form-group">
+						<label for="DeadLinePermission">Date limite de validité du séjour</label>
+						<input type="date" id="DeadLinePermission" class="form-control" name="DeadLinePermission" required>
+						<div class="invalid-feedback">Veuillez insérer une date</div>
+					</div>
+				</div>
 				<button class="btn btn-primary" type="submit">Enregistrer le salarié</button>
 			</form>
 		</div>
