@@ -11,6 +11,8 @@ function connectBDD(){
 }
 
 function createEmployee($bdd){
+
+	//var create = false;
 	$qualite_salarie = securite_bdd($_POST["Gender"], $bdd);
 	$nom_salarie = securite_bdd($_POST["LastName"], $bdd);
 	$prenom_salarie = securite_bdd($_POST["FirstName"], $bdd);
@@ -110,6 +112,10 @@ function createEmployee($bdd){
 	$arr = $req->errorInfo();
 	print_r($arr);
 
+	if ($_POST["ForeignWorker"] == 0){
+		setStatusForeignWorker($bdd->lastInsertId(), $bdd);
+	}
+
 	echo'enregistré';
 }
 
@@ -122,6 +128,36 @@ function securite_bdd($string, $bdd){
 		$string = addcslashes($string, '%_');
 	}
 	return $string;
+}
+
+function setStatusForeignWorker($idSalarie, $bdd){
+	$autorisation_travail = securite_bdd($_POST["PermissionWork"], $bdd);
+	$date_autorisation_embauche = securite_bdd($_POST["PermissionWorkDate"], $bdd);
+	$num_carte_sejour = securite_bdd($_POST["ResidencePermitNumber"], $bdd);
+	$date_limite_validite = securite_bdd($_POST["DeadLinePermission"], $bdd);
+	$id_salarie = securite_bdd($idSalarie, $bdd);
+
+	$req = $bdd->prepare('INSERT into travailleur_etranger(autorisation_travail, 
+		date_autorisation_embauche,
+		num_carte_sejour,
+		date_limite_validite,
+		id_salarie) 
+		VALUES (:autorisation_travail,
+		:date_autorisation_embauche,
+		:num_carte_sejour,
+		:date_limite_validite,
+		:id_salarie)');
+
+	$req->bindParam(':autorisation_travail', $autorisation_travail);
+	$req->bindParam(':date_autorisation_embauche', $date_autorisation_embauche);
+	$req->bindParam(':num_carte_sejour', $num_carte_sejour);
+	$req->bindParam(':date_limite_validite', $date_limite_validite);
+	$req->bindParam(':id_salarie', $id_salarie);
+
+	$req->execute();
+	$arr = $req->errorInfo();
+	print_r($arr);
+
 }
 
 ?>
