@@ -14,6 +14,20 @@ function hideDiv(id){
 	}
 }
 
+function setRequired(){
+	document.getElementById("PermitWork").required = true;
+	document.getElementById("PermitWorkDate").required = true;
+	document.getElementById("ResidencePermitNumber").required = true;
+	document.getElementById("DeadLinePermit").required = true;
+}
+
+function deleteRequired(){
+	document.getElementById("PermitWork").required = false;
+	document.getElementById("PermitWorkDate").required = false;
+	document.getElementById("ResidencePermitNumber").required = false;
+	document.getElementById("DeadLinePermit").required = false;
+}
+
 (function() {
 	'use strict';
 	window.addEventListener('load', function() {

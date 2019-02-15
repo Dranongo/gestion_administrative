@@ -145,9 +145,9 @@
 				</div>
 
 				<div class="form-check">
-					<label class="form-radio-inline" for="ParentalPermission">A-t-il/elle une autorisation écrite de travail de ses responsables légaux ?</label>
-					<input type="radio" id="ParentalPermission" class="form-radio-input" name="ParentalPermission" value=0>Oui
-					<input type="radio" id="ParentalPermission" class="form-radio-input" name="ParentalPermission" value=1>Non
+					<label class="form-radio-inline" for="ParentalPermit">A-t-il/elle une autorisation écrite de travail de ses responsables légaux ?</label>
+					<input type="radio" id="ParentalPermit" class="form-radio-input" name="ParentalPermit" value=0>Oui
+					<input type="radio" id="ParentalPermit" class="form-radio-input" name="ParentalPermit" value=1>Non
 				</div>
 
 				<div class="form-check">
@@ -163,29 +163,29 @@
 
 				<div class="form-check">
 					<label class="form-radio-inline" for="ForeignWorker">A-il le statut de travailleur étranger ?</label>
-					<input type="radio" onclick="displayDiv('DetailForeignWorker');" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=0>Oui
-					<input type="radio" onclick="hideDiv('DetailForeignWorker');" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=1>Non
+					<input type="radio" onclick="displayDiv('DetailForeignWorker'); setRequired();" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=0>Oui
+					<input type="radio" onclick="hideDiv('DetailForeignWorker'); deleteRequired();" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=1>Non
 				</div>
 				<div class="form-group" id="DetailForeignWorker" style="display: none;">
 					<label for="">Renseignement du travailleur étranger</label>
 					<div class="form-check">
-						<label class="form-radio-inline" for="PermissionWork">A-t-il une autorisation travail ?</label>
-						<input type="radio" id="PermissionWork" class="form-radio-input" name="PermissionWork" value=0>Oui
-						<input type="radio" id="PermissionWork" class="form-radio-input" name="PermissionWork" value=1>Non
+						<label class="form-radio-inline" for="PermitnWork">A-t-il une autorisation travail ?</label>
+						<input type="radio" id="PermitWork" class="form-radio-input" name="PermitWork" value=0>Oui
+						<input type="radio" id="PermitWork" class="form-radio-input" name="PermitWork" value=1>Non
 					</div>
 					<div class="form-group">
-						<label for="PermissionWorkDate">Date d'autorisation d'embauche</label>
-						<input type="date" id="PermissionWorkDate" class="form-control" name="PermissionWorkDate">
+						<label for="PermitWorkDate">Date d'autorisation d'embauche</label>
+						<input type="date" id="PermitWorkDate" class="form-control" name="PermitWorkDate">
 						<div class="invalid-feedback">Veuillez insérer une date</div>
 					</div>
 					<div class="form-group">
 						<label for="ResidencePermitNumber">Numéro de carte de séjour</label>
-						<input type="number" id="ResidencePermitNumber" class="form-control" name="ResidencePermitNumber">
+						<input type="number" id="ResidencePermitNumber" class="form-control" name="ResidencePermitNumber" min="1000000000" max="9999999999">
 						<div class="invalid-feedback">Veuillez insérer une numéro</div>
 					</div>
 					<div class="form-group">
-						<label for="DeadLinePermission">Date limite de validité du séjour</label>
-						<input type="date" id="DeadLinePermission" class="form-control" name="DeadLinePermission">
+						<label for="DeadLinePermit">Date limite de validité du séjour</label>
+						<input type="date" id="DeadLinePermit" class="form-control" name="DeadLinePermit">
 						<div class="invalid-feedback">Veuillez insérer une date</div>
 					</div>
 				</div>

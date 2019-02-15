@@ -33,7 +33,7 @@ function createEmployee($bdd){
 	$langues_etrangeres = securite_bdd($_POST["Languages"], $bdd);
 	$autre_activite_salarie = securite_bdd($_POST["SecondaryProfessionalActivity"], $bdd);;
 	$details_autre_activite_salarie = securite_bdd($_POST["DetailSecondaryActivity"], $bdd);
-	$autorisation_travail_responsable_legaux = securite_bdd($_POST["ParentalPermission"], $bdd);;
+	$autorisation_travail_responsable_legaux = securite_bdd($_POST["ParentalPermit"], $bdd);;
 	$statut_handicap_salarie = securite_bdd($_POST["DisabledWorker"], $bdd);;
 	$taux_invalidite = securite_bdd($_POST["DetailDisabledWorker"], $bdd);
 
@@ -131,10 +131,10 @@ function securite_bdd($string, $bdd){
 }
 
 function setStatusForeignWorker($idSalarie, $bdd){
-	$autorisation_travail = securite_bdd($_POST["PermissionWork"], $bdd);
-	$date_autorisation_embauche = securite_bdd($_POST["PermissionWorkDate"], $bdd);
+	$autorisation_travail = securite_bdd($_POST["PermitWork"], $bdd);
+	$date_autorisation_embauche = securite_bdd($_POST["PermitWorkDate"], $bdd);
 	$num_carte_sejour = securite_bdd($_POST["ResidencePermitNumber"], $bdd);
-	$date_limite_validite = securite_bdd($_POST["DeadLinePermission"], $bdd);
+	$date_limite_validite = securite_bdd($_POST["DeadLinePermit"], $bdd);
 	$id_salarie = securite_bdd($idSalarie, $bdd);
 
 	$req = $bdd->prepare('INSERT into travailleur_etranger(autorisation_travail, 

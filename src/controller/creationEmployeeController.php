@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 
 	if($_POST["ForeignWorker"] == 0){
-		if ($_POST["PermissionWork"] != "" && checkFormatDate($_POST["PermissionWorkDate"]) && checkResidencePermitNumber($_POST["ResidencePermitNumber"]) && checkFormatDate($_POST["DeadLinePermission"])) {
+		if ($_POST["PermitWork"] != "" && checkFormatDate($_POST["PermitWorkDate"]) && checkResidencePermitNumber($_POST["ResidencePermitNumber"]) && checkFormatDate($_POST["DeadLinePermit"])) {
 			echo 'le formulaire travailleur étranger est correct';
 		} else {
 			echo 'le formulaire est incorrect';
@@ -95,7 +95,6 @@ function checkEmail($email, $required = true){
 
 function checkFormatDate($date, $format = 'Y-m-d') {
 	$d = DateTime::createFromFormat($format, $date);
-	echo $date;
 	return $d && $d->format($format) == $date;
 }
 
