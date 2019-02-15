@@ -21,6 +21,7 @@ function createEmployee($bdd){
 	$date_naissance_salarie = securite_bdd($_POST["Birthdate"], $bdd);
 	$lieu_naissance_salarie = securite_bdd($_POST["Birthplace"], $bdd); 
 	$adresse_salarie = securite_bdd($_POST["Address"], $bdd);
+	$adresse2_salarie = securite_bdd($_POST["Address2"], $bdd);
 	$code_postal_salarie = securite_bdd($_POST["PostalCode"], $bdd);
 	$ville_habitat_salarie = securite_bdd($_POST["City"], $bdd);
 	$telephone_salarie = securite_bdd($_POST["Phone"], $bdd);
@@ -44,7 +45,8 @@ function createEmployee($bdd){
 		nationalite_salarie, 
 		date_naissance_salarie, 
 		lieu_naissance_salarie, 
-		adresse_salarie, 
+		adresse_salarie,
+		adresse2_salarie, 
 		code_postal_salarie, 
 		ville_habitat_salarie, 
 		telephone_salarie, 
@@ -67,7 +69,8 @@ function createEmployee($bdd){
 		:nationalite_salarie, 
 		:date_naissance_salarie, 
 		:lieu_naissance_salarie, 
-		:adresse_salarie, 
+		:adresse_salarie,
+		:adresse2_salarie, 
 		:code_postal_salarie, 
 		:ville_habitat_salarie, 
 		:telephone_salarie, 
@@ -92,6 +95,7 @@ function createEmployee($bdd){
 	$req->bindParam(':date_naissance_salarie', $date_naissance_salarie);
 	$req->bindParam(':lieu_naissance_salarie', $lieu_naissance_salarie);
 	$req->bindParam(':adresse_salarie', $adresse_salarie);
+	$req->bindParam(':adresse2_salarie', $adresse2_salarie);
 	$req->bindParam(':code_postal_salarie', $code_postal_salarie);
 	$req->bindParam(':ville_habitat_salarie', $ville_habitat_salarie);
 	$req->bindParam(':telephone_salarie', $telephone_salarie);

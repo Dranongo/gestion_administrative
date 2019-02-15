@@ -70,6 +70,11 @@
 				</div>
 
 				<div class="form-group">
+					<label for="Address2">Adresse Ligne 2</label>
+					<input type="text" id="Address2" class="form-control" name="Address2">
+				</div>
+
+				<div class="form-group">
 					<label for="PostalCode">Code postal</label>
 					<input type="number" id="PostalCode" class="form-control" name="PostalCode" required>
 					<div class="invalid-feedback">Veuillez insérer un code postal du lieu de résidence</div>
@@ -101,7 +106,7 @@
 
 				<div class="form-group">
 					<label for="SocialSecurityNumber">Numéro de sécurité sociale</label>
-					<input type="number" min="100000000000000" max="200000000000000" id="SocialSecurityNumber" class="form-control" name="SocialSecurityNumber" required>
+					<input type="number" min="100000000000000" max="299999999999999" id="SocialSecurityNumber" class="form-control" name="SocialSecurityNumber" required>
 					<div class="invalid-feedback">Veuillez insérer un numéro de sécurité sociale valide</div>
 				</div>
 

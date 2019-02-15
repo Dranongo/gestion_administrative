@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 15 fév. 2019 à 14:26
+-- Généré le :  ven. 15 fév. 2019 à 16:08
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -31,11 +31,22 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `categorie_socio-professionnelle`;
 CREATE TABLE IF NOT EXISTS `categorie_socio-professionnelle` (
   `id_categorie_socio-professionnelle` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_categorie` varchar(255) NOT NULL,
   `code_categorie_socio_professionnelle` varchar(255) NOT NULL,
+  `nom_categorie` varchar(255) NOT NULL,
   PRIMARY KEY (`id_categorie_socio-professionnelle`),
   UNIQUE KEY `code_categorie_socio_professionnelle` (`code_categorie_socio_professionnelle`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `categorie_socio-professionnelle`
+--
+
+INSERT INTO `categorie_socio-professionnelle` (`id_categorie_socio-professionnelle`, `code_categorie_socio_professionnelle`, `nom_categorie`) VALUES
+(1, 'STAGI_APPRENTI', 'Stage ou apprenti'),
+(2, 'OUVRIERS_QUALI', 'Ouvriers qualifiés'),
+(3, 'ETAM', 'Employés Techniciens Agent de Maîtrise'),
+(4, 'CADRE_PRO_INTELLEC', 'Cadres et professions intellectuelles supérieures'),
+(5, 'CADRE_DIRIG', 'Cadres dirigeants');
 
 -- --------------------------------------------------------
 
@@ -140,9 +151,10 @@ CREATE TABLE IF NOT EXISTS `salarie` (
   `date_naissance_salarie` date NOT NULL,
   `lieu_naissance_salarie` varchar(255) NOT NULL,
   `adresse_salarie` varchar(255) NOT NULL,
+  `adresse2_salarie` varchar(255) NOT NULL,
   `code_postal_salarie` varchar(5) NOT NULL,
   `ville_habitat_salarie` varchar(255) NOT NULL,
-  `telephone_salarie` varchar(255) NOT NULL,
+  `telephone_salarie` varchar(10) NOT NULL,
   `mail_professionnel_salarie` varchar(255) NOT NULL,
   `mail_personnel_salarie` varchar(255) NOT NULL,
   `num_secu_salarie` varchar(15) NOT NULL,
@@ -162,19 +174,19 @@ CREATE TABLE IF NOT EXISTS `salarie` (
 -- Déchargement des données de la table `salarie`
 --
 
-INSERT INTO `salarie` (`id_salarie`, `qualite_salarie`, `nom_salarie`, `prenom_salarie`, `nom_jeune_fille_salarie`, `nationalite_salarie`, `date_naissance_salarie`, `lieu_naissance_salarie`, `adresse_salarie`, `code_postal_salarie`, `ville_habitat_salarie`, `telephone_salarie`, `mail_professionnel_salarie`, `mail_personnel_salarie`, `num_secu_salarie`, `remuneration_salarie`, `salarie_en_poste`, `situation_familiale_salarie`, `langues_etrangeres`, `autre_activite_salarie`, `details_autre_activite_salarie`, `autorisation_travail_responsable_legaux`, `statut_handicap_salarie`, `taux_invalidite`) VALUES
-(12, 'Monsieur', 'Clenche', 'Jean', 'Fonteyn', 'France', '1998-02-01', 'Vernon', '36 bis bidule', '27200', 'Vernon', '232210388', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 10, 0, 'Concubin(e)', 'eefefe', 0, 'Vidéo', 1, 0, 'Fou'),
-(13, 'Monsieur', 'Clenche', 'Jean', 'Fonteyn', 'France', '1998-02-01', 'Vernon', '36 bis bidule', '27200', 'Vernon', '232210388', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 10, 0, 'Concubin(e)', 'eefefe', 0, 'Vidéo', 1, 0, 'Fou'),
-(14, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
-(15, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
-(16, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
-(17, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
-(18, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
-(19, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
-(20, 'Monsieur', 'Fonteyn', 'Maximilien', '', 'huh', '1998-06-24', 'ui', 'ughio', '65987', 'Mont Saint Aignan', '767957134', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 68, 1, 'Célibataire', '', 1, '', 1, 1, ''),
-(21, 'Monsieur', 'Fonteyn', 'Maximilien', '', 'huh', '1998-06-24', 'ui', 'ughio', '65987', 'Mont Saint Aignan', '767957134', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 68, 1, 'Célibataire', '', 1, '', 1, 1, ''),
-(22, 'Monsieur', 'Fonteyn', 'Maximilien', '', 'huh', '1998-06-24', 'ui', 'ughio', '65987', 'Mont Saint Aignan', '767957134', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 68, 1, 'Célibataire', '', 1, '', 1, 1, ''),
-(23, 'Monsieur', 'Fonteyn', 'Maximilien', '', 'huh', '1998-06-24', 'ui', 'ughio', '65987', 'Mont Saint Aignan', '767957134', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 68, 1, 'Célibataire', '', 1, '', 1, 1, '');
+INSERT INTO `salarie` (`id_salarie`, `qualite_salarie`, `nom_salarie`, `prenom_salarie`, `nom_jeune_fille_salarie`, `nationalite_salarie`, `date_naissance_salarie`, `lieu_naissance_salarie`, `adresse_salarie`, `adresse2_salarie`, `code_postal_salarie`, `ville_habitat_salarie`, `telephone_salarie`, `mail_professionnel_salarie`, `mail_personnel_salarie`, `num_secu_salarie`, `remuneration_salarie`, `salarie_en_poste`, `situation_familiale_salarie`, `langues_etrangeres`, `autre_activite_salarie`, `details_autre_activite_salarie`, `autorisation_travail_responsable_legaux`, `statut_handicap_salarie`, `taux_invalidite`) VALUES
+(12, 'Monsieur', 'Clenche', 'Jean', 'Fonteyn', 'France', '1998-02-01', 'Vernon', '36 bis bidule', '', '27200', 'Vernon', '232210388', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 10, 0, 'Concubin(e)', 'eefefe', 0, 'Vidéo', 1, 0, 'Fou'),
+(13, 'Monsieur', 'Clenche', 'Jean', 'Fonteyn', 'France', '1998-02-01', 'Vernon', '36 bis bidule', '', '27200', 'Vernon', '232210388', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 10, 0, 'Concubin(e)', 'eefefe', 0, 'Vidéo', 1, 0, 'Fou'),
+(14, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
+(15, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
+(16, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
+(17, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
+(18, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
+(19, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15', 'la', '36 bis bidule', '', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
+(20, 'Monsieur', 'Fonteyn', 'Maximilien', '', 'huh', '1998-06-24', 'ui', 'ughio', '', '65987', 'Mont Saint Aignan', '767957134', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 68, 1, 'Célibataire', '', 1, '', 1, 1, ''),
+(21, 'Monsieur', 'Fonteyn', 'Maximilien', '', 'huh', '1998-06-24', 'ui', 'ughio', '', '65987', 'Mont Saint Aignan', '767957134', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 68, 1, 'Célibataire', '', 1, '', 1, 1, ''),
+(22, 'Monsieur', 'Fonteyn', 'Maximilien', '', 'huh', '1998-06-24', 'ui', 'ughio', '', '65987', 'Mont Saint Aignan', '767957134', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 68, 1, 'Célibataire', '', 1, '', 1, 1, ''),
+(23, 'Monsieur', 'Fonteyn', 'Maximilien', '', 'huh', '1998-06-24', 'ui', 'ughio', '', '65987', 'Mont Saint Aignan', '767957134', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 68, 1, 'Célibataire', '', 1, '', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -251,7 +263,20 @@ CREATE TABLE IF NOT EXISTS `type_contrat` (
   `libelle_type_contrat` varchar(255) NOT NULL,
   PRIMARY KEY (`id_type_contrat`),
   UNIQUE KEY `code_type_contrat` (`code_type_contrat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `type_contrat`
+--
+
+INSERT INTO `type_contrat` (`id_type_contrat`, `code_type_contrat`, `libelle_type_contrat`) VALUES
+(1, 'CDD', 'Contrat à Durée Déterminée'),
+(2, 'CDI', 'Contrat à Durée Indéterminée'),
+(3, 'CONTRAT_PRO', 'Contrat de professionnalisation'),
+(4, 'CONTRAT_APPRENTI', 'Contrat d\'apprentissage'),
+(5, 'STAGE', 'Stage'),
+(6, 'CTT', 'Interim'),
+(7, 'PRESTA', 'Prestataire');
 
 -- --------------------------------------------------------
 
