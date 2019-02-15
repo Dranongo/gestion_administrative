@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		echo 'Le mail personnel est incorrect <br>';
 		$formValidated = false;
 	}
-	if (checkBirthdate($_POST["Birthdate"])) {
+	if (checkFormatDate($_POST["Birthdate"])) {
 		echo 'La date de naissance est correcte <br>';
 	} else {
 		echo 'La date de naissance est incorrecte <br>';
@@ -75,6 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$formValidated = false;
 	}
 
+	if($_POST["ForeignWorker"] == 0){
+		if ($_POST["PermissionWork"] != "" && checkFormatDate($_POST["PermissionWorkDate"]) && checkResidencePermitNumber($_POST["ResidencePermitNumber"]) && checkFormatDate($_POST["DeadLinePermission"])) {
+			echo 'le formulaire travailleur étranger est correct';
+		} else {
+			echo 'le formulaire est incorrect';
+			$formValidated = false;
+		}
+	}
+
 	if($formValidated == true){
 		createEmployee($bdd);
 	}
@@ -84,7 +93,7 @@ function checkEmail($email, $required = true){
 	return $required ? filter_var($email, FILTER_VALIDATE_EMAIL) : trim($email) == "" || filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-function checkBirthdate($date, $format = 'Y-m-d') {
+function checkFormatDate($date, $format = 'Y-m-d') {
 	$d = DateTime::createFromFormat($format, $date);
 	echo $date;
 	return $d && $d->format($format) == $date;
@@ -104,6 +113,10 @@ function checkPostalCode($postalcode) {
 
 function checkPhone($phone){
 	return is_numeric($phone) && strlen($phone) == 10;
+}
+
+function checkResidencePermitNumber($number){
+	return is_numeric($number) && strlen($number) == 10;
 }
 
 function checkButtonRadio($radio){
