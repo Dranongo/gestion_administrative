@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$formValidated = false;
 	}
 
-	if($_POST["ForeignWorker"] == 0){
+	if($_POST["ForeignWorker"] == 1){
 		if ($_POST["PermitWork"] != "" && checkFormatDate($_POST["PermitWorkDate"]) && checkResidencePermitNumber($_POST["ResidencePermitNumber"]) && checkFormatDate($_POST["DeadLinePermit"])) {
 			echo 'le formulaire travailleur étranger est correct';
 		} else {

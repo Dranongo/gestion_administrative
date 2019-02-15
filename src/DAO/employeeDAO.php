@@ -112,7 +112,7 @@ function createEmployee($bdd){
 	$arr = $req->errorInfo();
 	print_r($arr);
 
-	if ($_POST["ForeignWorker"] == 0){
+	if ($_POST["ForeignWorker"] == 1){
 		setStatusForeignWorker($bdd->lastInsertId(), $bdd);
 	}
 

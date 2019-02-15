@@ -14,14 +14,14 @@ function hideDiv(id){
 	}
 }
 
-function setRequired(){
+function setRequiredDetailsForeignWorker(){
 	document.getElementById("PermitWork").required = true;
 	document.getElementById("PermitWorkDate").required = true;
 	document.getElementById("ResidencePermitNumber").required = true;
 	document.getElementById("DeadLinePermit").required = true;
 }
 
-function deleteRequired(){
+function removeRequiredDetailsForeignWorker(){
 	document.getElementById("PermitWork").required = false;
 	document.getElementById("PermitWorkDate").required = false;
 	document.getElementById("ResidencePermitNumber").required = false;

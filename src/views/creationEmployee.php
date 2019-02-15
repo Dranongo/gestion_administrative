@@ -18,13 +18,13 @@
 			<form class="needs-validation" method="POST" action="../controller/creationEmployeeController.php" novalidate>
 
 				<div class="custom-control custom-radio custom-control-inline">
-					<input type="radio" class="custom-control-input" id="Gender" name="Gender" value="Monsieur" required>
-					<label class="custom-control-label" for="Gender">Monsieur</label>
+					<input type="radio" class="custom-control-input" id="GenderMale" name="Gender" value="Monsieur" required>
+					<label class="custom-control-label" for="GenderMale">Monsieur</label>
 				</div>
 
 				<div class="custom-control custom-radio custom-control-inline">
-					<input type="radio" class="custom-control-input" id="Gender" name="Gender" value="Madame" required>
-					<label class="custom-control-label" for="Gender">Madame</label>
+					<input type="radio" class="custom-control-input" id="GenderFemale" name="Gender" value="Madame">
+					<label class="custom-control-label" for="GenderFemale">Madame</label>
 					<div class="invalid-feedback">&nbsp;Veuillez sélectionner un genre</div>
 				</div>
 
@@ -135,8 +135,8 @@
 
 				<div class="form-check">
 					<label class="form-radio-inline" for="SecondaryProfessionalActivity">Exerce-t-il/elle une activité professionnel secondaire ?</label>
-					<input type="radio" onclick="displayDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity" value=0>Oui
-					<input type="radio" onclick="hideDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity" value=1>Non
+					<input type="radio" onclick="displayDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity" value=1>Oui
+					<input type="radio" onclick="hideDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity" value=0>Non
 				</div>
 
 				<div class="form-group" id="DetailSecondaryActivity" style="display: none;">
@@ -146,14 +146,14 @@
 
 				<div class="form-check">
 					<label class="form-radio-inline" for="ParentalPermit">A-t-il/elle une autorisation écrite de travail de ses responsables légaux ?</label>
-					<input type="radio" id="ParentalPermit" class="form-radio-input" name="ParentalPermit" value=0>Oui
-					<input type="radio" id="ParentalPermit" class="form-radio-input" name="ParentalPermit" value=1>Non
+					<input type="radio" id="ParentalPermit" class="form-radio-input" name="ParentalPermit" value=1>Oui
+					<input type="radio" id="ParentalPermit" class="form-radio-input" name="ParentalPermit" value=0>Non
 				</div>
 
 				<div class="form-check">
 					<label class="form-radio-inline" for="DisabledWorker">Est-il reconnu comme travailleur handicapé ?</label>
-					<input type="radio" onclick="displayDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker" value=0>Oui
-					<input type="radio" onclick="hideDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker" value=1>Non
+					<input type="radio" onclick="displayDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker" value=1>Oui
+					<input type="radio" onclick="hideDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker" value=0>Non
 				</div>
 
 				<div class="form-group" id="DetailDisabledWorker" style="display: none;">
@@ -162,17 +162,26 @@
 				</div>
 
 				<div class="form-check">
-					<label class="form-radio-inline" for="ForeignWorker">A-il le statut de travailleur étranger ?</label>
-					<input type="radio" onclick="displayDiv('DetailForeignWorker'); setRequired();" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=0>Oui
-					<input type="radio" onclick="hideDiv('DetailForeignWorker'); deleteRequired();" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=1>Non
+					<label class="form-radio-inline" for="ForeignWorker">A-t-il le statut de travailleur étranger ?</label>
+					<input type="radio" onclick="displayDiv('DetailForeignWorker'); setRequiredDetailsForeignWorker();" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=1>Oui
+					<input type="radio" onclick="hideDiv('DetailForeignWorker'); removeRequiredDetailsForeignWorker();" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=0>Non
 				</div>
+
 				<div class="form-group" id="DetailForeignWorker" style="display: none;">
-					<label for="">Renseignement du travailleur étranger</label>
-					<div class="form-check">
-						<label class="form-radio-inline" for="PermitnWork">A-t-il une autorisation travail ?</label>
-						<input type="radio" id="PermitWork" class="form-radio-input" name="PermitWork" value=0>Oui
-						<input type="radio" id="PermitWork" class="form-radio-input" name="PermitWork" value=1>Non
+					<label class="form-label" for="DetailForeignWorker">Renseignement du travailleur étranger</label>
+
+					<label for="PermitWorkYes">A-t-il une permission de travail ?</label>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="PermitWorkYes" name="PermitWork" value="1">
+						<label class="custom-control-label" for="PermitWorkYes">Oui</label>
 					</div>
+
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="PermitWorkNo" name="PermitWork" value="0">
+						<label class="custom-control-label" for="PermitWorkNo">Non</label>
+						<div class="invalid-feedback">&nbsp;Veuillez sélectionner une réponse</div>
+					</div>
+
 					<div class="form-group">
 						<label for="PermitWorkDate">Date d'autorisation d'embauche</label>
 						<input type="date" id="PermitWorkDate" class="form-control" name="PermitWorkDate">
