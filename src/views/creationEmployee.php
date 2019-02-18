@@ -110,25 +110,36 @@
 					<div class="invalid-feedback">Veuillez insérer un numéro de sécurité sociale valide</div>
 				</div>
 
+				<?php
+					require_once('../controller/insertDataForm.php');
+				?>
+
 				<div class="form-group">
 					<label for="Salary">Rémunération</label>
 					<input type="number" id="Salary" class="form-control" name="Salary" required>
 					<div class="invalid-feedback">Veuillez insérer une rémunération</div>
 				</div>
 
-				<div class="form-check">
-					<label class="form-radio-inline" for="CurrentlyEmployed">Le salarié est-il en poste ?</label>
-					<input type="radio" id="CurrentlyEmployed" class="form-radio-input" name="CurrentlyEmployed" value=0>Oui
-					<input type="radio" id="CurrentlyEmployed" class="form-radio-input" name="CurrentlyEmployed" value=1>Non
+				<div class="form-group">
+					<label>Le salarie est-il en poste ?</label>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="CurrentlyEmployedYes" name="CurrentlyEmployed" value="1" required>
+						<label class="custom-control-label" for="CurrentlyEmployedYes">Oui</label>
+					</div>
+
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="CurrentlyEmployedNo" name="CurrentlyEmployed" value="0">
+						<label class="custom-control-label" for="CurrentlyEmployedNo">Non</label>
+					</div>
 				</div>
 
 				<div class="form-group">
 					<select id="FamilyStatus" name="FamilyStatus" class="custom-select" required>
-						<option id="FamilyStatus" name="FamilyStatus" value="">Situation familiale</option>
-						<option id="FamilyStatus" name="FamilyStatus" dvalue="Célibataire">Célibataire</option>
-						<option id="FamilyStatus" name="FamilyStatus" value="Concubin(e)">Concubin(e)</option>
-						<option id="FamilyStatus" name="FamilyStatus" value="Pacsé(e)">Pacsé(e)</option>
-						<option id="FamilyStatus" name="FamilyStatus" value="Marié(e)">Marié(e)</option>
+						<option value="">Situation familiale</option>
+						<option value="Célibataire">Célibataire</option>
+						<option value="Concubin(e)">Concubin(e)</option>
+						<option value="Pacsé(e)">Pacsé(e)</option>
+						<option value="Marié(e)">Marié(e)</option>
 					</select>
 					<div class="invalid-feedback">Veuillez sélectionner votre situation familiale</div>
 				</div>
@@ -138,10 +149,17 @@
 					<textarea name="Languages" id="Languages" class="form-control"></textarea>
 				</div>
 
-				<div class="form-check">
-					<label class="form-radio-inline" for="SecondaryProfessionalActivity">Exerce-t-il/elle une activité professionnel secondaire ?</label>
-					<input type="radio" onclick="displayDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity" value=1>Oui
-					<input type="radio" onclick="hideDiv('DetailSecondaryActivity');" id="SecondaryProfessionalActivity" class="form-radio-input" name="SecondaryProfessionalActivity" value=0>Non
+				<div class="form-group">
+					<label>Exerce-t-il/elle une activité professionnel secondaire ?</label>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" onclick="displayDiv('DetailSecondaryActivity');" class="custom-control-input" id="SecondaryProfessionalActivityYes" name="SecondaryProfessionalActivity" value="1" required>
+						<label class="custom-control-label" for="SecondaryProfessionalActivityYes">Oui</label>
+					</div>
+
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" onclick="hideDiv('DetailSecondaryActivity');" class="custom-control-input" id="SecondaryProfessionalActivityNo" name="SecondaryProfessionalActivity" value="0">
+						<label class="custom-control-label" for="SecondaryProfessionalActivityNo">Non</label>
+					</div>
 				</div>
 
 				<div class="form-group" id="DetailSecondaryActivity" style="display: none;">
@@ -149,16 +167,30 @@
 					<input type="text" id="DetailSecondaryActivity" class="form-control" name="DetailSecondaryActivity">
 				</div>
 
-				<div class="form-check">
-					<label class="form-radio-inline" for="ParentalPermit">A-t-il/elle une autorisation écrite de travail de ses responsables légaux ?</label>
-					<input type="radio" id="ParentalPermit" class="form-radio-input" name="ParentalPermit" value=1>Oui
-					<input type="radio" id="ParentalPermit" class="form-radio-input" name="ParentalPermit" value=0>Non
+				<div class="form-group">
+					<label>A-t-il/elle une autorisation écrite de travail de ses responsables légaux ?</label>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="ParentalPermitYes" name="ParentalPermit" value="1" required>
+						<label class="custom-control-label" for="ParentalPermitYes">Oui</label>
+					</div>
+
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="ParentalPermitNo" name="ParentalPermit" value="0">
+						<label class="custom-control-label" for="ParentalPermitNo">Non</label>
+					</div>
 				</div>
 
-				<div class="form-check">
-					<label class="form-radio-inline" for="DisabledWorker">Est-il reconnu comme travailleur handicapé ?</label>
-					<input type="radio" onclick="displayDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker" value=1>Oui
-					<input type="radio" onclick="hideDiv('DetailDisabledWorker');" id="DisabledWorker" class="form-radio-input" name="DisabledWorker" value=0>Non
+				<div class="form-group">
+					<label>Est-il reconnu comme travailleur handicapé ?</label>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" onclick="displayDiv('DetailDisabledWorker');" class="custom-control-input" id="DisabledWorkerYes" name="DisabledWorker" value="1" required>
+						<label class="custom-control-label" for="DisabledWorkerYes">Oui</label>
+					</div>
+
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" onclick="hideDiv('DetailDisabledWorker');" class="custom-control-input" id="DisabledWorkerNo" name="DisabledWorker" value="0">
+						<label class="custom-control-label" for="DisabledWorkerNo">Non</label>
+					</div>
 				</div>
 
 				<div class="form-group" id="DetailDisabledWorker" style="display: none;">
@@ -166,25 +198,34 @@
 					<input type="text" id="DetailDisabledWorker" class="form-control" name="DetailDisabledWorker">
 				</div>
 
-				<div class="form-check">
-					<label class="form-radio-inline" for="ForeignWorker">A-t-il le statut de travailleur étranger ?</label>
-					<input type="radio" onclick="displayDiv('DetailForeignWorker'); setRequiredDetailsForeignWorker();" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=1>Oui
-					<input type="radio" onclick="hideDiv('DetailForeignWorker'); removeRequiredDetailsForeignWorker();" id="ForeignWorker" class="form-radio-input" name="ForeignWorker" value=0>Non
+				<div class="form-group">
+					<label>A-t-il le statut de travailleur étranger ?</label>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" onclick="displayDiv('DetailForeignWorker'); setRequiredDetailsForeignWorker();" class="custom-control-input" id="ForeignWorkeYes" name="ForeignWorker" value="1" required>
+						<label class="custom-control-label" for="ForeignWorkeYes">Oui</label>
+					</div>
+
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" onclick="hideDiv('DetailForeignWorker'); removeRequiredDetailsForeignWorker();" class="custom-control-input" id="ForeignWorkerNo" name="ForeignWorker" value="0">
+						<label class="custom-control-label" for="ForeignWorkerNo">Non</label>
+					</div>
 				</div>
 
 				<div class="form-group" id="DetailForeignWorker" style="display: none;">
 					<label class="form-label" for="DetailForeignWorker">Renseignement du travailleur étranger</label>
 
-					<label for="PermitWorkYes">A-t-il une permission de travail ?</label>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="PermitWorkYes" name="PermitWork" value="1">
-						<label class="custom-control-label" for="PermitWorkYes">Oui</label>
-					</div>
+					<div class="form-group">
+						<label>A-t-il une permission de travail ?</label>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="PermitWorkYes" name="PermitWork" value="1">
+							<label class="custom-control-label" for="PermitWorkYes">Oui</label>
+						</div>
 
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="PermitWorkNo" name="PermitWork" value="0">
-						<label class="custom-control-label" for="PermitWorkNo">Non</label>
-						<div class="invalid-feedback">&nbsp;Veuillez sélectionner une réponse</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="PermitWorkNo" name="PermitWork" value="0">
+							<label class="custom-control-label" for="PermitWorkNo">Non</label>
+							<div class="invalid-feedback">&nbsp;Veuillez sélectionner une réponse</div>
+						</div>
 					</div>
 
 					<div class="form-group">

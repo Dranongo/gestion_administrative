@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 15 fév. 2019 à 16:08
+-- Généré le :  lun. 18 fév. 2019 à 08:24
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -263,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `type_contrat` (
   `libelle_type_contrat` varchar(255) NOT NULL,
   PRIMARY KEY (`id_type_contrat`),
   UNIQUE KEY `code_type_contrat` (`code_type_contrat`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `type_contrat`

@@ -1,6 +1,8 @@
 <?php
-require('../DAO/employeeDAO.php');
+require_once('../DAO/employeeDAO.php');
 $bdd = connectBDD();
+
+getSocialProfessionalGroup($bdd);
 
 $formValidated = true;
 

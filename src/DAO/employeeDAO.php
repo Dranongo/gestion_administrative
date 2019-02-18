@@ -2,7 +2,7 @@
 function connectBDD(){
 	try {
 		$bdd = new PDO('mysql:host=localhost;dbname=gestion_administrative;charset=utf8', 'root', '');
-		echo'Connecté';
+		//echo'Connecté';
 		return $bdd;
 	}
 	catch(Exception $e) {
@@ -150,7 +150,8 @@ function setStatusForeignWorker($idSalarie, $bdd){
 		:date_autorisation_embauche,
 		:num_carte_sejour,
 		:date_limite_validite,
-		:id_salarie)');
+		:id_salarie)'
+	);
 
 	$req->bindParam(':autorisation_travail', $autorisation_travail);
 	$req->bindParam(':date_autorisation_embauche', $date_autorisation_embauche);
@@ -162,6 +163,38 @@ function setStatusForeignWorker($idSalarie, $bdd){
 	$arr = $req->errorInfo();
 	print_r($arr);
 
+}
+
+function getSocialProfessionalGroup($bdd){
+	$req = $bdd->prepare('SELECT id_categorie_socio_professionnelle, nom_categorie FROM categorie_socio_professionnelle ORDER BY nom_categorie ASC');
+
+	$req->execute();
+
+	echo'<div class="form-group">';
+	echo'<select id="SocialProfessionalGroup" name="SocialProfessionalGroup" class="custom-select" required>';
+	echo'<option value="">Catégorie Socio-professionnelle</option>';
+
+	while($ligne = $req->fetch()){
+		echo"<option value=" .$ligne['id_categorie_socio_professionnelle']."> " .$ligne['nom_categorie']." </option>";
+	}
+	echo'</select>';
+	echo'</div>';
+}
+
+function getEmploymentContract($bdd){
+	$req = $bdd->prepare('SELECT id_type_contrat, libelle_type_contrat FROM type_contrat ORDER BY libelle_type_contrat ASC');
+
+	$req->execute();
+
+	echo'<div class="form-group">';
+	echo'<select id="EmploymentContract" name="EmploymentContract" class="custom-select" required>';
+	echo'<option value="">Type du contrat de travail</option>';
+
+	while($ligne = $req->fetch()){
+		echo"<option value=" .$ligne['id_type_contrat']."> " .$ligne['libelle_type_contrat']." </option>";
+	}
+	echo'</select>';
+	echo'</div>';	
 }
 
 ?>
