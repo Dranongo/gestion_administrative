@@ -165,36 +165,21 @@ function setStatusForeignWorker($idSalarie, $bdd){
 
 }
 
-function getSocialProfessionalGroup($bdd){
-	$req = $bdd->prepare('SELECT id_categorie_socio_professionnelle, nom_categorie FROM categorie_socio_professionnelle ORDER BY nom_categorie ASC');
+function getDataRepository($nameTable){
+	$table = array();
+
+	$bdd = new PDO('mysql:host=localhost;dbname=gestion_administrative;charset=utf8', 'root', '');
+	$req = $bdd->prepare("SELECT * FROM ".$nameTable);
+
+	$id = "id_" . $nameTable;
+	$name = "nom_" . $nameTable;
 
 	$req->execute();
 
-	echo'<div class="form-group">';
-	echo'<select id="SocialProfessionalGroup" name="SocialProfessionalGroup" class="custom-select" required>';
-	echo'<option value="">Catégorie Socio-professionnelle</option>';
-
-	while($ligne = $req->fetch()){
-		echo"<option value=" .$ligne['id_categorie_socio_professionnelle']."> " .$ligne['nom_categorie']." </option>";
+	while($rows = $req->fetch()){
+		$table[$rows[$id]] = $rows[$name];
 	}
-	echo'</select>';
-	echo'</div>';
+
+	return $table;
 }
-
-function getEmploymentContract($bdd){
-	$req = $bdd->prepare('SELECT id_type_contrat, libelle_type_contrat FROM type_contrat ORDER BY libelle_type_contrat ASC');
-
-	$req->execute();
-
-	echo'<div class="form-group">';
-	echo'<select id="EmploymentContract" name="EmploymentContract" class="custom-select" required>';
-	echo'<option value="">Type du contrat de travail</option>';
-
-	while($ligne = $req->fetch()){
-		echo"<option value=" .$ligne['id_type_contrat']."> " .$ligne['libelle_type_contrat']." </option>";
-	}
-	echo'</select>';
-	echo'</div>';	
-}
-
 ?>

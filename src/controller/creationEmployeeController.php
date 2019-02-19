@@ -10,6 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if ($_POST["Gender"] == "")
 		{$formValidated = false;}
 
+	if ($_POST["SocialProfessionalGroup"] == "")
+		{$formValidated = false;}
+	
+	if ($_POST["EmploymentContract"] == "")
+		{$formValidated = false;}
+
 	if (trim($_POST["LastName"]) == "")
 		{$formValidated = false;}
 

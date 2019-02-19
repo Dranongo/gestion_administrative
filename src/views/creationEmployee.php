@@ -110,9 +110,31 @@
 					<div class="invalid-feedback">Veuillez insérer un numéro de sécurité sociale valide</div>
 				</div>
 
-				<?php
-					require_once('../controller/insertDataForm.php');
-				?>
+				<div class="form-group">
+					<select id="SocialProfessionalGroup" name="SocialProfessionalGroup" class="custom-select" required>
+						<option value="">Catégorie Socio-professionnelle</option>
+						<?php require_once('../DAO/employeeDAO.php'); $table = getDataRepository("categorie_socio_professionnelle"); ?>
+						
+						<?php 
+						foreach ($table as $key => $value) {
+							print"<option value='".$key."'> ".$value."</option>";
+						}
+						?>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<select id="EmploymentContract" name="EmploymentContract" class="custom-select" required>
+						<option value="">Type de contrat</option>
+						<?php require_once('../DAO/employeeDAO.php'); $table = getDataRepository("type_contrat"); ?>
+
+						<?php 
+						foreach ($table as $key => $value) {
+							print"<option value='".$key."'> ".$value."</option>";
+						}
+						?>
+					</select>
+				</div>
 
 				<div class="form-group">
 					<label for="Salary">Rémunération</label>
