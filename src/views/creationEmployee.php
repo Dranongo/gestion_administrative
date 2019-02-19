@@ -1,3 +1,5 @@
+<?php require_once('../DAO/employeeDAO.php'); ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -112,26 +114,19 @@
 
 				<div class="form-group">
 					<select id="SocialProfessionalGroup" name="SocialProfessionalGroup" class="custom-select" required>
-						<option value="">Catégorie Socio-professionnelle</option>
-						<?php require_once('../DAO/employeeDAO.php'); $table = getDataRepository("categorie_socio_professionnelle"); ?>
-						
-						<?php 
-						foreach ($table as $key => $value) {
-							print"<option value='".$key."'> ".$value."</option>";
-						}
-						?>
+						<option value="">Catégorie Socio-professionnelle</option>						
+						<?php foreach (getDataRepository("categorie_socio_professionnelle") as $key => $value): ?>
+							<option value="<?= $key ?>"><?= $value ?></option>
+						<?php endforeach; ?>
 					</select>
 				</div>
 
 				<div class="form-group">
 					<select id="EmploymentContract" name="EmploymentContract" class="custom-select" required>
 						<option value="">Type de contrat</option>
-						<?php require_once('../DAO/employeeDAO.php'); $table = getDataRepository("type_contrat"); ?>
-
-						<?php 
-						foreach ($table as $key => $value) {
-							print"<option value='".$key."'> ".$value."</option>";
-						}
+						<?php foreach (getDataRepository("type_contrat") as $key => $value): ?>
+							<option value="<?= $key ?>"><?= $value ?></option>
+						<?php endforeach; ?>
 						?>
 					</select>
 				</div>
@@ -139,13 +134,9 @@
 				<div class="form-group">
 					<select id="InformationJob" name="InformationJob" class="custom-select" required>
 						<option value="">Renseignement du poste</option>
-						<?php require_once('../DAO/employeeDAO.php'); $table = getDataRepository("renseignement_poste"); ?>
-
-						<?php 
-						foreach ($table as $key => $value) {
-							print"<option value='".$key."'> ".$value."</option>";
-						}
-						?>
+						<?php foreach (getDataRepository("renseignement_poste") as $key => $value): ?>
+							<option value="<?= $key ?>"><?= $value ?></option>
+						<?php endforeach; ?>
 					</select>
 				</div>
 
