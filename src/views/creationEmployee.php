@@ -137,6 +137,19 @@
 				</div>
 
 				<div class="form-group">
+					<select id="InformationJob" name="InformationJob" class="custom-select" required>
+						<option value="">Renseignement du poste</option>
+						<?php require_once('../DAO/employeeDAO.php'); $table = getDataRepository("renseignement_poste"); ?>
+
+						<?php 
+						foreach ($table as $key => $value) {
+							print"<option value='".$key."'> ".$value."</option>";
+						}
+						?>
+					</select>
+				</div>
+
+				<div class="form-group">
 					<label for="Salary">Rémunération</label>
 					<input type="number" id="Salary" class="form-control" name="Salary" required>
 					<div class="invalid-feedback">Veuillez insérer une rémunération</div>
