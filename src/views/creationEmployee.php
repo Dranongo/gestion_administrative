@@ -113,7 +113,7 @@
 				</div>
 
 				<div class="form-group">
-					<select id="SocialProfessionalGroup" name="categorie_socio_professionnelle" class="custom-select" >
+					<select id="SocialProfessionalGroup" name="SocialProfessionalGroup" class="custom-select" >
 						<option value="">Catégorie Socio-professionnelle</option>						
 						<?php foreach (getDataRepository("categorie_socio_professionnelle") as $key => $value): ?>
 							<option value="<?= $key ?>"><?= $value ?></option>
@@ -122,7 +122,7 @@
 				</div>
 
 				<div class="form-group">
-					<select id="EmploymentContract" name="type_contrat" class="custom-select" >
+					<select id="EmploymentContract" name="EmploymentContract" class="custom-select" >
 						<option value="">Type de contrat</option>
 						<?php foreach (getDataRepository("type_contrat") as $key => $value): ?>
 							<option value="<?= $key ?>"><?= $value ?></option>
@@ -132,7 +132,7 @@
 				</div>
 
 				<div class="form-group">
-					<select id="InformationJob" name="renseignement_poste" class="custom-select" >
+					<select id="InformationJob" name="InformationJob" class="custom-select" >
 						<option value="">Renseignement du poste</option>
 						<?php foreach (getDataRepository("renseignement_poste") as $key => $value): ?>
 							<option value="<?= $key ?>"><?= $value ?></option>
@@ -169,6 +169,53 @@
 					</select>
 					<div class="invalid-feedback">Veuillez sélectionner votre situation familiale</div>
 				</div>
+
+				<!--<div class="form-group">
+					<label>A-t-il le statut de travailleur étranger ?</label>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" onclick="displayDiv('DetailForeignWorker'); setRequiredDetailsForeignWorker();" class="custom-control-input" id="ForeignWorkeYes" name="ForeignWorker" value="1" required>
+						<label class="custom-control-label" for="ForeignWorkeYes">Oui</label>
+					</div>
+
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" onclick="hideDiv('DetailForeignWorker'); removeRequiredDetailsForeignWorker();" class="custom-control-input" id="ForeignWorkerNo" name="ForeignWorker" value="0">
+						<label class="custom-control-label" for="ForeignWorkerNo">Non</label>
+					</div>
+				</div>
+
+				<div class="form-group" id="DetailForeignWorker" style="display: none;">
+					<label class="form-label" for="DetailForeignWorker">Renseignement des enfants</label>
+
+					<div class="form-group">
+						<label>A-t-il une permission de travail ?</label>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="PermitWorkYes" name="PermitWork" value="1">
+							<label class="custom-control-label" for="PermitWorkYes">Oui</label>
+						</div>
+
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="PermitWorkNo" name="PermitWork" value="0">
+							<label class="custom-control-label" for="PermitWorkNo">Non</label>
+							<div class="invalid-feedback">&nbsp;Veuillez sélectionner une réponse</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="PermitWorkDate">Date d'autorisation d'embauche</label>
+						<input type="date" id="PermitWorkDate" class="form-control" name="PermitWorkDate">
+						<div class="invalid-feedback">Veuillez insérer une date</div>
+					</div>
+					<div class="form-group">
+						<label for="ResidencePermitNumber">Numéro de carte de séjour</label>
+						<input type="number" id="ResidencePermitNumber" class="form-control" name="ResidencePermitNumber" min="1000000000" max="9999999999">
+						<div class="invalid-feedback">Veuillez insérer une numéro</div>
+					</div>
+					<div class="form-group">
+						<label for="DeadLinePermit">Date limite de validité du séjour</label>
+						<input type="date" id="DeadLinePermit" class="form-control" name="DeadLinePermit">
+						<div class="invalid-feedback">Veuillez insérer une date</div>
+					</div>
+				</div>-->
 
 				<div class="form-group">
 					<label for="Languages">Langues étrangères</label>

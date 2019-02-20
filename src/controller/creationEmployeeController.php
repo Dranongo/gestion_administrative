@@ -57,21 +57,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$formValidated = false;
 	}
 
-	if (checkDataRepository("categorie_socio_professionnelle")){
+	if (checkDataRepository($_POST["SocialProfessionalGroup"], "categorie_socio_professionnelle")){
 		echo 'la donnée est correct <br>';
 	}else {
 		echo 'La donnée est incorrect <br>';
 		$formValidated = false;
 	}
 
-	if (checkDataRepository("type_contrat")){
+	if (checkDataRepository($_POST["EmploymentContract"], "type_contrat")){
 		echo 'la donnée est correct <br>';
 	}else {
 		echo 'La donnée est incorrect <br>';
 		$formValidated = false;
 	}
 
-	if (checkDataRepository("renseignement_poste")){
+	if (checkDataRepository($_POST["InformationJob"], "renseignement_poste")){
 		echo 'la donnée est correct <br>';
 	}else {
 		echo 'La donnée est incorrect <br>';
@@ -146,14 +146,7 @@ function checkButtonRadio($radio){
 	}
 }
 
-function checkDataRepository($value){
-	if ($_POST[$value] != "" ){
-		foreach ((getDataRepository($value)) as $key => $value) {
-			if( $key == $_POST[$value]){
-				return true;
-			}
-		}
-	}
-	return false;
+function checkDataRepository($value, $tableName){
+	return array_key_exists($value, getDataRepository($tableName));
 }
 ?>
