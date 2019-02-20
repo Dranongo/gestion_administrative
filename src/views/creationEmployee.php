@@ -113,7 +113,7 @@
 				</div>
 
 				<div class="form-group">
-					<select id="SocialProfessionalGroup" name="SocialProfessionalGroup" class="custom-select" >
+					<select id="SocialProfessionalGroup" name="categorie_socio_professionnelle" class="custom-select" >
 						<option value="">Catégorie Socio-professionnelle</option>						
 						<?php foreach (getDataRepository("categorie_socio_professionnelle") as $key => $value): ?>
 							<option value="<?= $key ?>"><?= $value ?></option>
@@ -122,7 +122,7 @@
 				</div>
 
 				<div class="form-group">
-					<select id="EmploymentContract" name="EmploymentContract" class="custom-select" >
+					<select id="EmploymentContract" name="type_contrat" class="custom-select" >
 						<option value="">Type de contrat</option>
 						<?php foreach (getDataRepository("type_contrat") as $key => $value): ?>
 							<option value="<?= $key ?>"><?= $value ?></option>
@@ -132,7 +132,7 @@
 				</div>
 
 				<div class="form-group">
-					<select id="InformationJob" name="InformationJob" class="custom-select" >
+					<select id="InformationJob" name="renseignement_poste" class="custom-select" >
 						<option value="">Renseignement du poste</option>
 						<?php foreach (getDataRepository("renseignement_poste") as $key => $value): ?>
 							<option value="<?= $key ?>"><?= $value ?></option>

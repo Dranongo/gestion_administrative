@@ -8,15 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if ($_POST["Gender"] == "")
 		{$formValidated = false;}
 
-	if ($_POST["SocialProfessionalGroup"] == "")
-		{$formValidated = false;}
-	
-	if ($_POST["EmploymentContract"] == "")
-		{$formValidated = false;}
-
-	if ($_POST["InformationJob"] == "")
-		{$formValidated = false;}
-
 	if (trim($_POST["LastName"]) == "")
 		{$formValidated = false;}
 
@@ -63,6 +54,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		echo 'Le numéro de sécu est correct <br>';
 	} else {
 		echo 'Le numéro de sécu est incorrect <br>';
+		$formValidated = false;
+	}
+
+	if (checkDataRepository("categorie_socio_professionnelle")){
+		echo 'la donnée est correct <br>';
+	}else {
+		echo 'La donnée est incorrect <br>';
+		$formValidated = false;
+	}
+
+	if (checkDataRepository("type_contrat")){
+		echo 'la donnée est correct <br>';
+	}else {
+		echo 'La donnée est incorrect <br>';
+		$formValidated = false;
+	}
+
+	if (checkDataRepository("renseignement_poste")){
+		echo 'la donnée est correct <br>';
+	}else {
+		echo 'La donnée est incorrect <br>';
 		$formValidated = false;
 	}
 	if (checkSalary($_POST["Salary"])) {
@@ -132,5 +144,16 @@ function checkButtonRadio($radio){
 	if ($_POST[$radio] == null) {
 		$_POST[$radio] = 1;
 	}
+}
+
+function checkDataRepository($value){
+	if ($_POST[$value] != "" ){
+		foreach ((getDataRepository($value)) as $key => $value) {
+			if( $key == $_POST[$value]){
+				return true;
+			}
+		}
+	}
+	return false;
 }
 ?>
