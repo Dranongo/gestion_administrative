@@ -2,8 +2,6 @@
 require_once('../DAO/employeeDAO.php');
 $bdd = connectBDD();
 
-getSocialProfessionalGroup($bdd);
-
 $formValidated = true;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,6 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		{$formValidated = false;}
 	
 	if ($_POST["EmploymentContract"] == "")
+		{$formValidated = false;}
+
+	if ($_POST["InformationJob"] == "")
 		{$formValidated = false;}
 
 	if (trim($_POST["LastName"]) == "")
@@ -95,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if($formValidated == true){
 		createEmployee($bdd);
 	}
+	else { echo'le formulaire est incorrect'; }
 }
 
 function checkEmail($email, $required = true){
