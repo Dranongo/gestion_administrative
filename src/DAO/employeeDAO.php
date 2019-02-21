@@ -12,7 +12,6 @@ function connectBDD(){
 
 function createEmployee($bdd){
 
-	//var create = false;
 	$qualite_salarie = securite_bdd($_POST["Gender"], $bdd);
 	$nom_salarie = securite_bdd($_POST["LastName"], $bdd);
 	$prenom_salarie = securite_bdd($_POST["FirstName"], $bdd);
@@ -116,8 +115,18 @@ function createEmployee($bdd){
 	$arr = $req->errorInfo();
 	print_r($arr);
 
+	$lastInsertIdEmployee = $bdd->lastInsertId();
+
 	if ($_POST["ForeignWorker"] == 1){
-		setStatusForeignWorker($bdd->lastInsertId(), $bdd);
+		setStatusForeignWorker($lastInsertIdEmployee, $bdd);
+	}
+
+	if ($_POST["SocialProfessionalGroup"] != ""){
+		setSocialCategory($lastInsertIdEmployee, $bdd);
+	}
+
+	if ($_POST["InformationJob"] != "" && $_POST["EmploymentContract"] != ""){
+		setJobContract($lastInsertIdEmployee, $bdd);
 	}
 
 	echo'enregistré';
@@ -181,5 +190,63 @@ function getDataRepository($nameTable){
 	}
 
 	return $table;
+}
+
+function setSocialCategory($idSalarie, $bdd){
+	$id_salarie = securite_bdd($idSalarie, $bdd);
+	$id_categorie_socio_professionnelle = securite_bdd($_POST["SocialProfessionalGroup"], $bdd);;
+	$date_debut = securite_bdd($_POST["StartingDateStatus"], $bdd);
+	$date_fin = securite_bdd($_POST["EndingDateStatus"], $bdd);
+
+	$req = $bdd->prepare('INSERT into salarie_categorie_socio_professionnelle(id_salarie, 
+		id_categorie_socio_professionnelle,
+		date_debut,
+		date_fin) 
+		VALUES (:id_salarie, 
+		:id_categorie_socio_professionnelle,
+		:date_debut,
+		:date_fin)'
+	);
+
+	$req->bindParam(':id_salarie', $id_salarie);
+	$req->bindParam(':id_categorie_socio_professionnelle', $id_categorie_socio_professionnelle);
+	$req->bindParam(':date_debut', $date_debut);
+	$req->bindParam(':date_fin', $date_fin);
+
+	$req->execute();
+	echo'categorie';
+	$arr = $req->errorInfo();
+	print_r($arr);
+}
+
+function setJobContract($idSalarie, $bdd){
+	$id_salarie = securite_bdd($idSalarie, $bdd);
+	$id_renseignement_poste = securite_bdd($_POST["InformationJob"], $bdd);;
+	$id_type_contrat = securite_bdd($_POST["EmploymentContract"], $bdd);
+	$date_entree_entreprise = securite_bdd($_POST["StartingDateContract"], $bdd);
+	$date_fin_contrat = securite_bdd($_POST["EndingDateContract"], $bdd);
+
+	$req = $bdd->prepare('INSERT into salarie_renseignement_poste_type_contrat(id_salarie, 
+		id_renseignement_poste,
+		id_type_contrat,
+		date_entree_entreprise,
+		date_fin_contrat) 
+		VALUES (:id_salarie, 
+		:id_renseignement_poste,
+		:id_type_contrat,
+		:date_entree_entreprise,
+		:date_fin_contrat)'
+	);
+
+	$req->bindParam(':id_salarie', $id_salarie);
+	$req->bindParam(':id_renseignement_poste', $id_renseignement_poste);
+	$req->bindParam(':id_type_contrat', $id_type_contrat);
+	$req->bindParam(':date_entree_entreprise', $date_entree_entreprise);
+	$req->bindParam(':date_fin_contrat', $date_fin_contrat);
+
+	$req->execute();
+	echo'job=====';
+	$arr = $req->errorInfo();
+	print_r($arr);
 }
 ?>

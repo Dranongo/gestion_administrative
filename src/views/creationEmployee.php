@@ -122,6 +122,18 @@
 				</div>
 
 				<div class="form-group">
+					<label for="StartingDateStatus">Date de début du statut social</label>
+					<input type="date" id="StartingDateStatus" class="form-control" name="StartingDateStatus" required>
+					<div class="invalid-feedback">Veuillez insérer une date</div>
+				</div>
+
+				<div class="form-group">
+					<label for="EndingDateStatus">Date de fin du statut social</label>
+					<input type="date" id="EndingDateStatus" class="form-control" name="EndingDateStatus" required>
+					<div class="invalid-feedback">Veuillez insérer une date</div>
+				</div>
+
+				<div class="form-group">
 					<select id="EmploymentContract" name="EmploymentContract" class="custom-select" >
 						<option value="">Type de contrat</option>
 						<?php foreach (getDataRepository("type_contrat") as $key => $value): ?>
@@ -138,6 +150,18 @@
 							<option value="<?= $key ?>"><?= $value ?></option>
 						<?php endforeach; ?>
 					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="StartingDateContract">Date de début du contrat</label>
+					<input type="date" id="StartingDateContract" class="form-control" name="StartingDateContract" required>
+					<div class="invalid-feedback">Veuillez insérer une date</div>
+				</div>
+
+				<div class="form-group">
+					<label for="EndingDateContract">Date de fin du contrat</label>
+					<input type="date" id="EndingDateContract" class="form-control" name="EndingDateContract" required>
+					<div class="invalid-feedback">Veuillez insérer une date</div>
 				</div>
 
 				<div class="form-group">
