@@ -214,7 +214,6 @@ function setSocialCategory($idSalarie, $bdd){
 	$req->bindParam(':date_fin', $date_fin);
 
 	$req->execute();
-	echo'categorie';
 	$arr = $req->errorInfo();
 	print_r($arr);
 }
@@ -224,7 +223,7 @@ function setJobContract($idSalarie, $bdd){
 	$id_renseignement_poste = securite_bdd($_POST["InformationJob"], $bdd);;
 	$id_type_contrat = securite_bdd($_POST["EmploymentContract"], $bdd);
 	$date_entree_entreprise = securite_bdd($_POST["StartingDateContract"], $bdd);
-	$date_fin_contrat = securite_bdd($_POST["EndingDateContract"], $bdd);
+	$date_fin_contrat = "";
 
 	$req = $bdd->prepare('INSERT into salarie_renseignement_poste_type_contrat(id_salarie, 
 		id_renseignement_poste,
@@ -245,7 +244,32 @@ function setJobContract($idSalarie, $bdd){
 	$req->bindParam(':date_fin_contrat', $date_fin_contrat);
 
 	$req->execute();
-	echo'job=====';
+	$arr = $req->errorInfo();
+	print_r($arr);
+}
+
+function setChildren($idSalarie, $bdd){
+	$nom_enfant = securite_bdd($_POST["LastNameChildren"], $bdd);
+	$prenom_enfant = securite_bdd($_POST["FirstNameChildren"], $bdd);
+	$date_naissance_enfant = securite_bdd($_POST["BirthdateChildren"], $bdd);
+	$id_salarie = securite_bdd($idSalarie, $bdd);
+
+	$req = $bdd->prepare('INSERT into enfant(nom_enfant, 
+		prenom_enfant,
+		date_naissance_enfant,
+		id_salarie) 
+		VALUES (:nom_enfant, 
+		:prenom_enfant,
+		:date_naissance_enfant,
+		:id_salarie)'
+	);
+
+	$req->bindParam(':nom_enfant', $nom_enfant);
+	$req->bindParam(':prenom_enfant', $prenom_enfant);
+	$req->bindParam(':date_naissance_enfant', $date_naissance_enfant);
+	$req->bindParam(':id_salarie', $id_salarie);
+
+	$req->execute();
 	$arr = $req->errorInfo();
 	print_r($arr);
 }

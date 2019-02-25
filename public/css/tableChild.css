@@ -1,0 +1,15 @@
+.table-editable {
+	position: relative;
+}
+
+.table-add:before {
+  color: #070;
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 0;
+  
+  &:hover {
+    color: #0b0;
+  }
+}

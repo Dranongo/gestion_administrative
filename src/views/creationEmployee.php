@@ -5,11 +5,12 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Accueil</title>
-		<link href="../../public/css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="../../public/css/bootstrap.css" rel="stylesheet"/>
+		<link href="../../public/css/tableChild.css" rel="stylesheet"/>
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
 		<script src="../../public/js/jquery-3.3.1.min.js"></script>
 		<script src="../../public/js/bootstrap.min.js"></script>
 		<script src="../../public/js/creationEmployee.js"></script>
-
 	</head>
 	<body>
 		<?php
@@ -159,12 +160,6 @@
 				</div>
 
 				<div class="form-group">
-					<label for="EndingDateContract">Date de fin du contrat</label>
-					<input type="date" id="EndingDateContract" class="form-control" name="EndingDateContract" required>
-					<div class="invalid-feedback">Veuillez insérer une date</div>
-				</div>
-
-				<div class="form-group">
 					<label for="Salary">Rémunération</label>
 					<input type="number" id="Salary" class="form-control" name="Salary" required>
 					<div class="invalid-feedback">Veuillez insérer une rémunération</div>
@@ -193,53 +188,47 @@
 					</select>
 					<div class="invalid-feedback">Veuillez sélectionner votre situation familiale</div>
 				</div>
-
-				<!--<div class="form-group">
-					<label>A-t-il le statut de travailleur étranger ?</label>
+				<div class="form-group">
+					<label>Le salarié a-t-il des enfants ? </label>
 					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" onclick="displayDiv('DetailForeignWorker'); setRequiredDetailsForeignWorker();" class="custom-control-input" id="ForeignWorkeYes" name="ForeignWorker" value="1" required>
-						<label class="custom-control-label" for="ForeignWorkeYes">Oui</label>
+						<input type="radio" onclick="displayDiv('ListChildren');" class="custom-control-input" id="ChildrenYes" name="Children" value="1" required>
+						<label class="custom-control-label" for="ChildrenYes">Oui</label>
 					</div>
 
 					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" onclick="hideDiv('DetailForeignWorker'); removeRequiredDetailsForeignWorker();" class="custom-control-input" id="ForeignWorkerNo" name="ForeignWorker" value="0">
-						<label class="custom-control-label" for="ForeignWorkerNo">Non</label>
+						<input type="radio" onclick="hideDiv('ListChildren'); removeRequiredDetailsForeignWorker();" class="custom-control-input" id="ChildrenNo" name="Children" value="0">
+						<label class="custom-control-label" for="ChildrenNo">Non</label>
 					</div>
 				</div>
 
-				<div class="form-group" id="DetailForeignWorker" style="display: none;">
-					<label class="form-label" for="DetailForeignWorker">Renseignement des enfants</label>
+				<div class="form-group" id="ListChildren" style="display: none;">
+					<label class="form-label" for="ListChildren">Renseignement des enfants</label>
 
-					<div class="form-group">
-						<label>A-t-il une permission de travail ?</label>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="PermitWorkYes" name="PermitWork" value="1">
-							<label class="custom-control-label" for="PermitWorkYes">Oui</label>
-						</div>
+					<div id="table" class="table-editable">
+						<span class="table-add glyphicon glyphicon-plus"></span>
+						<table class="table text-center">			
+							<tr>
+								<th class="text-center">#</th>
+								<th class="text-center">Nom</th>
+								<th class="text-center">Prénom</th>
+								<th class="text-center">Date de naissance</th>
+							</tr>					
+							<tr>
+								<td>1</th>
+								<td contenteditable="true" id="LastName"></td>
+								<td contenteditable="true" id="FirstName"></td>
+								<td id="BirthDate"><input type="date"></td>
+							</tr>
+							<tr class="hide">
+								<td></td>
+								<td contenteditable="true" id="LastName"></td>
+								<td contenteditable="true" id="FirstName"></td>
+								<td id="Birthdate"><input type="date"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
 
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="PermitWorkNo" name="PermitWork" value="0">
-							<label class="custom-control-label" for="PermitWorkNo">Non</label>
-							<div class="invalid-feedback">&nbsp;Veuillez sélectionner une réponse</div>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="PermitWorkDate">Date d'autorisation d'embauche</label>
-						<input type="date" id="PermitWorkDate" class="form-control" name="PermitWorkDate">
-						<div class="invalid-feedback">Veuillez insérer une date</div>
-					</div>
-					<div class="form-group">
-						<label for="ResidencePermitNumber">Numéro de carte de séjour</label>
-						<input type="number" id="ResidencePermitNumber" class="form-control" name="ResidencePermitNumber" min="1000000000" max="9999999999">
-						<div class="invalid-feedback">Veuillez insérer une numéro</div>
-					</div>
-					<div class="form-group">
-						<label for="DeadLinePermit">Date limite de validité du séjour</label>
-						<input type="date" id="DeadLinePermit" class="form-control" name="DeadLinePermit">
-						<div class="invalid-feedback">Veuillez insérer une date</div>
-					</div>
-				</div>-->
 
 				<div class="form-group">
 					<label for="Languages">Langues étrangères</label>
@@ -344,5 +333,6 @@
 				<button class="btn btn-primary" type="submit">Enregistrer le salarié</button>
 			</form>
 		</div>
+		<script type="text/javascript" src="../../public/js/createRowTable.js"></script>
 	</body>
 </html>
