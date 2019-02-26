@@ -208,27 +208,23 @@
 						<span class="table-add glyphicon glyphicon-plus"></span>
 						<table class="table text-center">			
 							<tr>
-								<th class="text-center">#</th>
 								<th class="text-center">Nom</th>
 								<th class="text-center">Prénom</th>
 								<th class="text-center">Date de naissance</th>
 							</tr>					
 							<tr>
-								<td>1</th>
-								<td contenteditable="true" id="LastName"></td>
-								<td contenteditable="true" id="FirstName"></td>
-								<td id="BirthDate"><input type="date"></td>
+								<td><input type="text" name="LastNameChild[]"></td>
+								<td><input type="text" name="FirstNameChild[]"></td>
+								<td><input type="date" name="BirthdateChild[]"></td>
 							</tr>
 							<tr class="hide">
-								<td></td>
-								<td contenteditable="true" id="LastName"></td>
-								<td contenteditable="true" id="FirstName"></td>
-								<td id="Birthdate"><input type="date"></td>
+								<td><input type="text" name="LastNameChild[]"></td>
+								<td><input type="text" name="FirstNameChild[]"></td>
+								<td><input type="date" name="BirthdateChild[]"></td>
 							</tr>
 						</table>
 					</div>
 				</div>
-
 
 				<div class="form-group">
 					<label for="Languages">Langues étrangères</label>

@@ -32,6 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if ($_POST["FamilyStatus"] == "")
 		{$formValidated = false;}
 
+	$lastNameChild = $_POST['LastNameChild'];
+	$firstNameChild = $_POST['FirstNameChild'];
+	$birthdateChild = $_POST['BirthdateChild'];
+	
+	$child = array(
+		array(
+			'last_name' => $lastNameChild,
+			'first_name' => $firstNameChild,
+			'birthdate' => $birthdateChild
+		)
+	);
+
 	if (checkEmail($_POST["EmailProfessional"])) {
 		echo 'Le mail professionnel est correct <br>';
 	} else {
@@ -107,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	if($formValidated == true){
 		createEmployee($bdd);
+		setChildren($bdd);
 	}
 	else { echo'le formulaire est incorrect'; }
 }

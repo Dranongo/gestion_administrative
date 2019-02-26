@@ -248,7 +248,7 @@ function setJobContract($idSalarie, $bdd){
 	print_r($arr);
 }
 
-function setChildren($idSalarie, $bdd){
+function setChildren($idSalarie, $array, $bdd){
 	$nom_enfant = securite_bdd($_POST["LastNameChildren"], $bdd);
 	$prenom_enfant = securite_bdd($_POST["FirstNameChildren"], $bdd);
 	$date_naissance_enfant = securite_bdd($_POST["BirthdateChildren"], $bdd);
