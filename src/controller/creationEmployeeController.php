@@ -32,6 +32,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if ($_POST["FamilyStatus"] == "")
 		{$formValidated = false;}
 
+	$lastNameChild = $_POST["LastNameChild"];
+	$firstNameChild = $_POST["FirstNameChild"];
+	$birthdateChild = $_POST["BirthdateChild"];
+
+	$arrayChild = array( $lastNameChild, $firstNameChild, $birthdateChild );
+	
+	if (count($lastNameChild) == count($firstNameChild) && count($lastNameChild) == count($birthdateChild)) {
+		$count = count($lastNameChild);
+		for ($i = 0; $i < $count; $i++) {
+			if ($lastNameChild[$i] == "" || $firstNameChild[$i] == "" || $birthdateChild[$i] == "") {
+				$formValidated = false;
+			}
+			echo 'la ligne enfant est correct <br>';
+		}
+	}else {
+		$formValidated = false;
+	}
+
+
 	if (checkEmail($_POST["EmailProfessional"])) {
 		echo 'Le mail professionnel est correct <br>';
 	} else {
@@ -105,11 +124,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 	}
 
-	
+
 
 	if($formValidated == true){
 		createEmployee($bdd);
-		setChildren($bdd);
+		//setChildren($bdd);
 	}
 	else { echo'le formulaire est incorrect'; }
 }

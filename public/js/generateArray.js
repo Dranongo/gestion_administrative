@@ -1,7 +1,7 @@
 $("#suivant").button().bind("click", function(){
 	console.log("coucou");
 
-	$("tbody tr").each(function( index ){
+	$("tbody tr.child").each(function( index ){
 		var elem = $(this);
 		
 		replaceName(elem.find(".lastName"), index);

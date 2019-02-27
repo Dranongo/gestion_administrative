@@ -215,16 +215,10 @@
 								</tr>
 							</thead>
 							<tbody>					
-								<tr>
-									<td><input class="lastName" type="text" name="LastNameChild[]" data-name="LastNameChild[%%d%%]"></td>
-									<td><input class="firstName" type="text" name="FirstNameChild[]" data-name="FirstNameChild[%%d%%]"></td>
-									<td><input class="birthdate" type="date" name="BirthdateChild[]" data-name="BirthdateChild[%%d%%]"></td>
-									<td><span class="table-remove glyphicon glyphicon-remove"></span></td>
-								</tr>
 								<tr class="hide">
-									<td><input class="lastName" type="text" name="LastNameChild[]" data-name="LastNameChild[%%d%%]"></td>
-									<td><input class="firstName" type="text" name="FirstNameChild[]" data-name="FirstNameChild[%%d%%]"></td>
-									<td><input class="birthdate" type="date" name="BirthdateChild[]" data-name="BirthdateChild[%%d%%]"></td>
+									<td><input class="lastName" type="text" data-name="LastNameChild[%%d%%]"></td>
+									<td><input class="firstName" type="text" data-name="FirstNameChild[%%d%%]"></td>
+									<td><input class="birthdate" type="date" data-name="BirthdateChild[%%d%%]"></td>
 									<td><span class="table-remove glyphicon glyphicon-remove"></span></td>
 								</tr>
 							</tbody>

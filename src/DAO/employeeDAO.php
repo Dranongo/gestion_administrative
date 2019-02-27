@@ -129,6 +129,8 @@ function createEmployee($bdd){
 		setJobContract($lastInsertIdEmployee, $bdd);
 	}
 
+	getChild($lastInsertIdEmployee, $bdd);
+
 	echo'enregistré';
 }
 
@@ -223,7 +225,7 @@ function setJobContract($idSalarie, $bdd){
 	$id_renseignement_poste = securite_bdd($_POST["InformationJob"], $bdd);;
 	$id_type_contrat = securite_bdd($_POST["EmploymentContract"], $bdd);
 	$date_entree_entreprise = securite_bdd($_POST["StartingDateContract"], $bdd);
-	$date_fin_contrat = "";
+	$date_fin_contrat = null;
 
 	$req = $bdd->prepare('INSERT into salarie_renseignement_poste_type_contrat(id_salarie, 
 		id_renseignement_poste,
@@ -248,10 +250,26 @@ function setJobContract($idSalarie, $bdd){
 	print_r($arr);
 }
 
-function setChildren($idSalarie, $array, $bdd){
-	$nom_enfant = securite_bdd($_POST["LastNameChildren"], $bdd);
-	$prenom_enfant = securite_bdd($_POST["FirstNameChildren"], $bdd);
-	$date_naissance_enfant = securite_bdd($_POST["BirthdateChildren"], $bdd);
+function getChild($idSalarie, $bdd){
+	$lastNameChild = $_POST["LastNameChild"];
+	$firstNameChild = $_POST["FirstNameChild"];
+	$birthdateChild = $_POST["BirthdateChild"];
+
+	$count = count($lastNameChild);
+	for ($i = 0; $i < $count; $i++) {
+		if (array_key_exists($i, $lastNameChild)) {
+			$lastName = $lastNameChild[$i];				
+			$firstName = $firstNameChild[$i];
+			$birthdate = $birthdateChild[$i];
+			setChildren($idSalarie, $lastName, $firstName, $birthdate, $bdd);
+		}
+	}
+}
+
+function setChildren($idSalarie, $lastName, $firstName, $birthdate, $bdd){
+	$nom_enfant = securite_bdd($lastName, $bdd);
+	$prenom_enfant = securite_bdd($firstName, $bdd);
+	$date_naissance_enfant = securite_bdd($birthdate, $bdd);
 	$id_salarie = securite_bdd($idSalarie, $bdd);
 
 	$req = $bdd->prepare('INSERT into enfant(nom_enfant, 
