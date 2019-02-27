@@ -341,9 +341,9 @@
 								</thead>
 								<tbody>					
 									<tr class="contact">
-										<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]" required></td>
-										<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]" required></td>
-										<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]" required></td>
+										<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]"></td>
+										<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]" ></td>
+										<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]" ></td>
 										<td><span class="table-remove-contact glyphicon glyphicon-remove"></span></td>
 									</tr>
 								</tbody>
