@@ -206,22 +206,28 @@
 
 					<div id="table" class="table-editable">
 						<span class="table-add glyphicon glyphicon-plus"></span>
-						<table class="table text-center">			
-							<tr>
-								<th class="text-center">Nom</th>
-								<th class="text-center">Prénom</th>
-								<th class="text-center">Date de naissance</th>
-							</tr>					
-							<tr>
-								<td><input type="text" name="LastNameChild[]"></td>
-								<td><input type="text" name="FirstNameChild[]"></td>
-								<td><input type="date" name="BirthdateChild[]"></td>
-							</tr>
-							<tr class="hide">
-								<td><input type="text" name="LastNameChild[]"></td>
-								<td><input type="text" name="FirstNameChild[]"></td>
-								<td><input type="date" name="BirthdateChild[]"></td>
-							</tr>
+						<table class="table text-center">
+							<thead>	
+								<tr>
+									<th class="text-center">Nom</th>
+									<th class="text-center">Prénom</th>
+									<th class="text-center">Date de naissance</th>
+								</tr>
+							</thead>
+							<tbody>					
+								<tr>
+									<td><input class="lastName" type="text" name="LastNameChild[]" data-name="LastNameChild[%%d%%]"></td>
+									<td><input class="firstName" type="text" name="FirstNameChild[]" data-name="FirstNameChild[%%d%%]"></td>
+									<td><input class="birthdate" type="date" name="BirthdateChild[]" data-name="BirthdateChild[%%d%%]"></td>
+									<td><span class="table-remove glyphicon glyphicon-remove"></span></td>
+								</tr>
+								<tr class="hide">
+									<td><input class="lastName" type="text" name="LastNameChild[]" data-name="LastNameChild[%%d%%]"></td>
+									<td><input class="firstName" type="text" name="FirstNameChild[]" data-name="FirstNameChild[%%d%%]"></td>
+									<td><input class="birthdate" type="date" name="BirthdateChild[]" data-name="BirthdateChild[%%d%%]"></td>
+									<td><span class="table-remove glyphicon glyphicon-remove"></span></td>
+								</tr>
+							</tbody>
 						</table>
 					</div>
 				</div>
@@ -326,9 +332,10 @@
 						<div class="invalid-feedback">Veuillez insérer une date</div>
 					</div>
 				</div>
-				<button class="btn btn-primary" type="submit">Enregistrer le salarié</button>
+				<button id="suivant" class="btn btn-primary" type="submit">Enregistrer le salarié</button>
 			</form>
 		</div>
 		<script type="text/javascript" src="../../public/js/createRowTable.js"></script>
+		<script type="text/javascript" src="../../public/js/generateArray.js"></script>
 	</body>
 </html>
