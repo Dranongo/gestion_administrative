@@ -130,6 +130,7 @@ function createEmployee($bdd){
 	}
 
 	getChild($lastInsertIdEmployee, $bdd);
+	getContact($lastInsertIdEmployee, $bdd);
 
 	echo'enregistré';
 }
@@ -290,5 +291,47 @@ function setChildren($idSalarie, $lastName, $firstName, $birthdate, $bdd){
 	$req->execute();
 	$arr = $req->errorInfo();
 	print_r($arr);
+}
+
+function getContact($idSalarie, $bdd){
+	$lastNameContact = $_POST["LastNameContact"];
+	$firstNameContact = $_POST["FirstNameContact"];
+	$phoneNumberContact = $_POST["PhoneNumberContact"];
+
+	$count = count($lastNameContact);
+	for ($i = 0; $i < $count; $i++) {
+		if (array_key_exists($i, $lastNameContact)) {
+			$lastName = $lastNameContact[$i];				
+			$firstName = $firstNameContact[$i];
+			$phoneNumber = $phoneNumberContact[$i];
+			setContact($idSalarie, $lastName, $firstName, $phoneNumber, $bdd);
+		}
+	}	
+}
+
+function setContact($idSalarie, $lastName, $firstName, $phoneNumber, $bdd){
+	$nom_contact = securite_bdd($lastName, $bdd);
+	$prenom_contact = securite_bdd($firstName, $bdd);
+	$numero_telephone_contact = securite_bdd($phoneNumber, $bdd);
+	$id_salarie = securite_bdd($idSalarie, $bdd);
+
+	$req = $bdd->prepare('INSERT into contact_urgence(nom_contact_urgence, 
+		prenom_contact_urgence,
+		telephone_contact_urgence,
+		id_salarie) 
+		VALUES (:nom_contact, 
+		:prenom_contact,
+		:numero_telephone_contact,
+		:id_salarie)'
+	);
+
+	$req->bindParam(':nom_contact', $nom_contact);
+	$req->bindParam(':prenom_contact', $prenom_contact);
+	$req->bindParam(':numero_telephone_contact', $numero_telephone_contact);
+	$req->bindParam(':id_salarie', $id_salarie);
+
+	$req->execute();
+	$arr = $req->errorInfo();
+	print_r($arr);	
 }
 ?>

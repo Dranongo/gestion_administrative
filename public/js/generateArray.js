@@ -1,5 +1,4 @@
 $("#suivant").button().bind("click", function(){
-	console.log("coucou");
 
 	$("tbody tr.child").each(function( index ){
 		var elem = $(this);
@@ -7,7 +6,13 @@ $("#suivant").button().bind("click", function(){
 		replaceName(elem.find(".lastName"), index);
 		replaceName(elem.find(".firstName"), index);
 		replaceName(elem.find(".birthdate"), index);
+	});
+	$("tbody tr.contact").each(function( index ){
+		var elem = $(this);
 		
+		replaceName(elem.find(".lastName"), index);
+		replaceName(elem.find(".firstName"), index);
+		replaceName(elem.find(".phoneNumber"), index);
 	});
 });
 

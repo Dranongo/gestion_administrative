@@ -50,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$formValidated = false;
 	}
 
-
 	if (checkEmail($_POST["EmailProfessional"])) {
 		echo 'Le mail professionnel est correct <br>';
 	} else {
@@ -124,11 +123,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 	}
 
+	$lastNameContact = $_POST["LastNameContact"];
+	$firstNameContact = $_POST["FirstNameContact"];
+	$phoneNumberContact = $_POST["PhoneNumberContact"];
+
+	$arrayContact = array( $lastNameContact, $firstNameContact, $phoneNumberContact );
+	
+	if (count($lastNameContact) == count($firstNameContact) && count($lastNameContact) == count($phoneNumberContact)) {
+		$count = count($lastNameContact);
+		for ($i = 0; $i < $count; $i++) {
+			if ($lastNameContact[$i] == "" || $firstNameContact[$i] == "" || $phoneNumberContact[$i] == "") {
+				$formValidated = false;
+			}
+			echo 'la ligne contact est correct <br>';
+		}
+	}else {
+		$formValidated = false;
+	}
 
 
 	if($formValidated == true){
 		createEmployee($bdd);
-		//setChildren($bdd);
 	}
 	else { echo'le formulaire est incorrect'; }
 }

@@ -204,8 +204,8 @@
 				<div class="form-group" id="ListChildren" style="display: none;">
 					<label class="form-label" for="ListChildren">Renseignement des enfants</label>
 
-					<div id="table" class="table-editable">
-						<span class="table-add glyphicon glyphicon-plus"></span>
+					<div id="table-child" class="table-editable">
+						<span class="table-add-child glyphicon glyphicon-plus"></span>
 						<table class="table text-center">
 							<thead>	
 								<tr>
@@ -219,7 +219,7 @@
 									<td><input class="lastName" type="text" data-name="LastNameChild[%%d%%]"></td>
 									<td><input class="firstName" type="text" data-name="FirstNameChild[%%d%%]"></td>
 									<td><input class="birthdate" type="date" data-name="BirthdateChild[%%d%%]"></td>
-									<td><span class="table-remove glyphicon glyphicon-remove"></span></td>
+									<td><span class="table-remove-child glyphicon glyphicon-remove"></span></td>
 								</tr>
 							</tbody>
 						</table>
@@ -326,6 +326,30 @@
 						<div class="invalid-feedback">Veuillez insérer une date</div>
 					</div>
 				</div>
+				<div class="form-group" id="ListContact">
+						<label class="form-label" for="ListContact">Renseignement des contacts d'urgence</label>
+
+						<div id="table-contact" class="table-editable">
+							<span class="table-add-contact glyphicon glyphicon-plus"></span>
+							<table class="table text-center">
+								<thead>	
+									<tr>
+										<th class="text-center">Nom</th>
+										<th class="text-center">Prénom</th>
+										<th class="text-center">Numéro de téléphone</th>
+									</tr>
+								</thead>
+								<tbody>					
+									<tr class="contact">
+										<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]" required></td>
+										<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]" required></td>
+										<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]" required></td>
+										<td><span class="table-remove-contact glyphicon glyphicon-remove"></span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				<button id="suivant" class="btn btn-primary" type="submit">Enregistrer le salarié</button>
 			</form>
 		</div>
