@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		{$formValidated = false;}
 
 	if ($_POST["Children"] == 1){
-		if($_POST["LastNameChild"] != "" && $_POST["FirstNameChild"] != "" && $_POST["BirthdateChild"] != ""){
+		if($_POST["LastNameChild"] != "" && $_POST["FirstNameChild"] != "" && $_POST["BirthdateChild"]){
 			$lastNameChild = $_POST["LastNameChild"];
 			$firstNameChild = $_POST["FirstNameChild"];
 			$birthdateChild = $_POST["BirthdateChild"];
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			if (count($lastNameChild) == count($firstNameChild) && count($lastNameChild) == count($birthdateChild)) {
 				$count = count($lastNameChild);
 				for ($i = 0; $i < $count; $i++) {
-					if ($lastNameChild[$i] == "" || $firstNameChild[$i] == "" || $birthdateChild[$i] == "") {
+					if ($lastNameChild[$i] == "" || $firstNameChild[$i] == "" || !checkFormatDate($birthdateChild[$i])) {
 						$formValidated = false;
 						echo 'la ligne enfant est incorrect <br>';
 					}
@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 	}
 
-	if ($_POST["LastNameContact"] != "" && $_POST["FirstNameContact"] != "" && $_POST["PhoneNumberContact"] != ""){
+	if ($_POST["LastNameContact"] != "" && $_POST["FirstNameContact"] != "" && $_POST["PhoneNumberContact"]){
 		$lastNameContact = $_POST["LastNameContact"];
 		$firstNameContact = $_POST["FirstNameContact"];
 		$phoneNumberContact = $_POST["PhoneNumberContact"];
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if (count($lastNameContact) == count($firstNameContact) && count($lastNameContact) == count($phoneNumberContact)) {
 			$count = count($lastNameContact);
 			for ($i = 0; $i < $count; $i++) {
-				if ($lastNameContact[$i] == "" || $firstNameContact[$i] == "" || $phoneNumberContact[$i] == "") {
+				if ($lastNameContact[$i] == "" || $firstNameContact[$i] == "" || !checkPhone($phoneNumberContact[$i])) {
 					$formValidated = false;
 					echo 'la ligne contact est correct <br>';
 				}

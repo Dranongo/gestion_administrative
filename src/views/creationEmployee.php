@@ -189,7 +189,7 @@
 					<div class="invalid-feedback">Veuillez sélectionner votre situation familiale</div>
 				</div>
 				<div class="form-group">
-					<label>Le salarié a-t-il des enfants ? </label>
+					<label>Le salarié a-t-il des enfants ?</label>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" onclick="displayDiv('ListChildren');" class="custom-control-input" id="ChildrenYes" name="Children" value="1" required>
 						<label class="custom-control-label" for="ChildrenYes">Oui</label>
