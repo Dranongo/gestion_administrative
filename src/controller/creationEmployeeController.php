@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		{$formValidated = false;}
 
 	if ($_POST["Children"] == 1){
-		if($_POST["LastNameChild"] != "" && $_POST["FirstNameChild"] != "" && $_POST["BirthdateChild"] != ""){
+		if(count($_POST["LastNameChild"]) != 0 && count($_POST["FirstNameChild"]) != 0 && count($_POST["BirthdateChild"]) != 0){
 			$lastNameChild = $_POST["LastNameChild"];
 			$firstNameChild = $_POST["FirstNameChild"];
 			$birthdateChild = $_POST["BirthdateChild"];
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 
 	if($_POST["ForeignWorker"] == 1){
-		if ($_POST["PermitWork"] != "" && checkFormatDate($_POST["PermitWorkDate"]) && checkResidencePermitNumber($_POST["ResidencePermitNumber"]) && checkFormatDate($_POST["DeadLinePermit"])) {
+		if ($_POST["PermitWork"] != 0 && checkFormatDate($_POST["PermitWorkDate"]) && checkResidencePermitNumber($_POST["ResidencePermitNumber"]) && checkFormatDate($_POST["DeadLinePermit"])) {
 			echo 'le formulaire travailleur étranger est correct';
 		} else {
 			echo 'le formulaire est incorrect';
@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 	}
 
-	if ($_POST["LastNameContact"] != "" && $_POST["FirstNameContact"] != "" && $_POST["PhoneNumberContact"] != ""){
+	if (count($_POST["LastNameContact"]) != 0 && count($_POST["FirstNameContact"]) != 0 && count($_POST["PhoneNumberContact"]) != 0){
 		$lastNameContact = $_POST["LastNameContact"];
 		$firstNameContact = $_POST["FirstNameContact"];
 		$phoneNumberContact = $_POST["PhoneNumberContact"];
