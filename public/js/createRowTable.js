@@ -10,10 +10,20 @@ $('.table-add-contact').click(function () {
 	$TABLE.find('table').append($clone);
 });
 
+$('.table-add-education').click(function () {
+	var $TABLE = $('#table-education');
+	var $clone = $TABLE.find('tr.education').clone(true);
+	$TABLE.find('table').append($clone);
+});
+
 $('.table-remove-child').click(function () {
   $(this).parents('tr').detach();
 });
 
 $('.table-remove-contact').click(function () {
+  $(this).parents('tr').detach();
+});
+
+$('.table-remove-education').click(function () {
   $(this).parents('tr').detach();
 });

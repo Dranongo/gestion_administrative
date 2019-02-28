@@ -327,29 +327,59 @@
 					</div>
 				</div>
 				<div class="form-group" id="ListContact">
-						<label class="form-label" for="ListContact">Renseignement des contacts d'urgence</label>
+					<label class="form-label" for="ListContact">Renseignement des contacts d'urgence</label>
 
-						<div id="table-contact" class="table-editable">
-							<span class="table-add-contact glyphicon glyphicon-plus"></span>
-							<table class="table text-center">
-								<thead>	
-									<tr>
-										<th class="text-center">Nom</th>
-										<th class="text-center">Prénom</th>
-										<th class="text-center">Numéro de téléphone</th>
-									</tr>
-								</thead>
-								<tbody>					
-									<tr class="contact">
-										<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]"></td>
-										<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]" ></td>
-										<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]" ></td>
-										<td><span class="table-remove-contact glyphicon glyphicon-remove"></span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+					<div id="table-contact" class="table-editable">
+						<span class="table-add-contact glyphicon glyphicon-plus"></span>
+						<table class="table text-center">
+							<thead>	
+								<tr>
+									<th class="text-center">Nom</th>
+									<th class="text-center">Prénom</th>
+									<th class="text-center">Numéro de téléphone</th>
+								</tr>
+							</thead>
+							<tbody>					
+								<tr class="contact">
+									<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]"></td>
+									<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]" ></td>
+									<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]" ></td>
+									<td><span class="table-remove-contact glyphicon glyphicon-remove"></span></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
+				</div>
+
+				<div class="form-group" id="ListEducation">
+					<label class="form-label" for="ListEducation">Renseignement des contacts d'urgence</label>
+
+					<div id="table-education" class="table-editable">
+						<span class="table-add-education glyphicon glyphicon-plus"></span>
+						<table class="table text-center">
+							<thead>	
+								<tr>
+									<th class="text-center">Formation et Niveau</th>
+									<th class="text-center">Organisme et Lieu</th>
+									<th class="text-center">Début de la formation</th>
+									<th class="text-center">Fin de la formation</th>
+									<th class="text-center">Obtenu</th>
+								</tr>
+							</thead>
+							<tbody>					
+								<tr class="education">
+									<td><input class="course" type="text" data-name="Course[%%d%%]"></td>
+									<td><input class="coursePlace" type="text" data-name="CoursePlace[%%d%%]"></td>
+									<td><input class="courseBeginning" type="month" data-name="CourseBeginning[%%d%%]"></td>
+									<td><input class="courseEnding" type="month" data-name="CourseEnding[%%d%%]"></td>
+									<td><input class="graduate" type="checkbox" data-name="Graduate[%%d%%]"></td>
+									<td><span class="table-remove-education glyphicon glyphicon-remove"></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
 				<button id="suivant" class="btn btn-primary" type="submit">Enregistrer le salarié</button>
 			</form>
 		</div>
