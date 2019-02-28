@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 
 	if($_POST["ForeignWorker"] == 1){
-		if ($_POST["PermitWork"] == 1 && checkFormatDate($_POST["PermitWorkDate"]) && checkResidencePermitNumber($_POST["ResidencePermitNumber"]) && checkFormatDate($_POST["DeadLinePermit"])) {
+		if ($_POST["PermitWork"] != "" && checkFormatDate($_POST["PermitWorkDate"]) && checkResidencePermitNumber($_POST["ResidencePermitNumber"]) && checkFormatDate($_POST["DeadLinePermit"])) {
 			echo 'le formulaire travailleur étranger est correct';
 		} else {
 			echo 'le formulaire est incorrect';
@@ -138,7 +138,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			for ($i = 0; $i < $count; $i++) {
 				if (trim($lastNameContact[$i]) == "" || trim($firstNameContact[$i]) == "" || !checkPhone($phoneNumberContact[$i])) {
 					$formValidated = false;
-					echo 'la ligne contact est correct <br>';
+					echo 'la ligne contact est incorrect <br>';
+				}
+			}
+		}else {
+			$formValidated = false;
+		}
+	}
+	else {
+		$formValidated = false;
+	}
+
+	if (count($_POST["Course"]) != 0 && count($_POST["CoursePlace"]) != 0 && count($_POST["CourseBeginning"]) != 0 && count($_POST["CourseEnding"]) != 0 && count($_POST["Graduate"]) != 0){
+		$course = $_POST["Course"];
+		$coursePlace = $_POST["CoursePlace"];
+		$courseBeginning = $_POST["CourseBeginning"];
+		$courseEnding = $_POST["CourseEnding"];
+		$graduate = $_POST["Graduate"];
+	
+		if (count($course) == count($coursePlace) && count($course) == count($courseBeginning) && count($course) == count($courseEnding) && count($course) == count($graduate)) {
+			$count = count($course);
+			for ($i = 0; $i < $count; $i++) {
+				if (trim($course[$i]) == "" || trim($coursePlace[$i]) == "" || !checkFormatDate($courseBeginning[$i]) || !checkFormatDate($courseEnding[$i])) {
+					$formValidated = false;
+					echo 'la ligne formation est incorrect <br>';
 				}
 			}
 		}else {

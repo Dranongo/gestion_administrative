@@ -352,7 +352,7 @@
 				</div>
 
 				<div class="form-group" id="ListEducation">
-					<label class="form-label" for="ListEducation">Renseignement des contacts d'urgence</label>
+					<label class="form-label" for="ListEducation">Formation et Expériences profesionnelles</label>
 
 					<div id="table-education" class="table-editable">
 						<span class="table-add-education glyphicon glyphicon-plus"></span>
@@ -370,9 +370,9 @@
 								<tr class="education">
 									<td><input class="course" type="text" data-name="Course[%%d%%]"></td>
 									<td><input class="coursePlace" type="text" data-name="CoursePlace[%%d%%]"></td>
-									<td><input class="courseBeginning" type="month" data-name="CourseBeginning[%%d%%]"></td>
-									<td><input class="courseEnding" type="month" data-name="CourseEnding[%%d%%]"></td>
-									<td><input class="graduate" type="checkbox" data-name="Graduate[%%d%%]"></td>
+									<td><input class="courseBeginning" type="date" data-name="CourseBeginning[%%d%%]"></td>
+									<td><input class="courseEnding" type="date" data-name="CourseEnding[%%d%%]"></td>
+									<td><input class="graduate" type="checkbox" data-name="Graduate[%%d%%]" value="1"></td>
 									<td><span class="table-remove-education glyphicon glyphicon-remove"></span></td>
 								</tr>
 							</tbody>

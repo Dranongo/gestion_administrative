@@ -129,8 +129,11 @@ function createEmployee($bdd){
 		setJobContract($lastInsertIdEmployee, $bdd);
 	}
 
-	getChild($lastInsertIdEmployee, $bdd);
+	if ($_POST["Children"] == 1){
+		getChild($lastInsertIdEmployee, $bdd);
+	}
 	getContact($lastInsertIdEmployee, $bdd);
+	getEducation($lastInsertIdEmployee, $bdd);
 
 	echo'enregistré';
 }
@@ -333,5 +336,59 @@ function setContact($idSalarie, $lastName, $firstName, $phoneNumber, $bdd){
 	$req->execute();
 	$arr = $req->errorInfo();
 	print_r($arr);	
+}
+
+function getEducation($idSalarie, $bdd){
+	$course = $_POST["Course"];
+	$coursePlace = $_POST["CoursePlace"];
+	$courseBeginning = $_POST["CourseBeginning"];
+	$courseEnding = $_POST["CourseEnding"];
+	$graduate = $_POST["Graduate"];
+
+	$count = count($course);
+	for ($i = 0; $i < $count; $i++) {
+		if (array_key_exists($i, $course)) {
+			$name = $course[$i];				
+			$place = $coursePlace[$i];
+			$beginning = $courseBeginning[$i];
+			$ending = $courseEnding[$i];
+			$qualify = $graduate[$i];
+			setEducation($idSalarie, $name, $place, $beginning, $ending, $qualify, $bdd);
+		}
+	}
+}
+
+function setEducation($idSalarie, $name, $place, $beginning, $ending, $qualify, $bdd){
+	$nom_formation = securite_bdd($name, $bdd);
+	$organisme_lieu = securite_bdd($place, $bdd);
+	$annee_formation_debut = securite_bdd($beginning, $bdd);
+	$annee_formation_fin = securite_bdd($ending, $bdd);
+	$obtenu = securite_bdd($qualify, $bdd);
+	$id_salarie = securite_bdd($idSalarie, $bdd);
+
+	$req = $bdd->prepare('INSERT into formation(formation_niveau, 
+		organisme_lieu,
+		annee_formation_debut,
+		annee_formation_fin,
+		obtenu,
+		id_salarie) 
+		VALUES (:nom_formation, 
+		:organisme_lieu,
+		:annee_formation_debut,
+		:annee_formation_fin,
+		:obtenu,
+		:id_salarie)'
+	);
+
+	$req->bindParam(':nom_formation', $nom_formation);
+	$req->bindParam(':organisme_lieu', $organisme_lieu);
+	$req->bindParam(':annee_formation_debut', $annee_formation_debut);
+	$req->bindParam(':annee_formation_fin', $annee_formation_fin);
+	$req->bindParam(':obtenu', $obtenu);
+	$req->bindParam(':id_salarie', $id_salarie);
+
+	$req->execute();
+	$arr = $req->errorInfo();
+	print_r($arr);
 }
 ?>

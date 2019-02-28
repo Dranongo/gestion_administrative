@@ -14,6 +14,15 @@ $("#suivant").button().bind("click", function(){
 		replaceName(elem.find(".firstName"), index);
 		replaceName(elem.find(".phoneNumber"), index);
 	});
+	$("tbody tr.education").each(function( index ){
+		var elem = $(this);
+		
+		replaceName(elem.find(".course"), index);
+		replaceName(elem.find(".coursePlace"), index);
+		replaceName(elem.find(".courseBeginning"), index);
+		replaceName(elem.find(".courseEnding"), index);
+		replaceName(elem.find(".graduate"), index);
+	});
 });
 
 function replaceName(elem, index){
