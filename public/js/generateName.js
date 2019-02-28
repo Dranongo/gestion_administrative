@@ -17,6 +17,6 @@ $("#suivant").button().bind("click", function(){
 });
 
 function replaceName(elem, index){
-	var _name = elem.data("name").replace("%%d%%", index.toString()).prop('required', true);
-	elem.prop("name", _name);
+	var _name = elem.data("name").replace("%%d%%", index.toString());
+	elem.prop("name", _name).attr("required", true);
 }

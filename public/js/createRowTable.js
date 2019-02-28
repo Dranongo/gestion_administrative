@@ -1,7 +1,6 @@
 $('.table-add-child').click(function () {
 	var $TABLE = $('#table-child');
 	var $clone = $TABLE.find('tr.hide').clone(true).removeClass('hide table-line').addClass('child');
-	$clone.attr("required", true);
 	$TABLE.find('table').append($clone);
 });
 

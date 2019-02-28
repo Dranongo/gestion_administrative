@@ -354,6 +354,6 @@
 			</form>
 		</div>
 		<script type="text/javascript" src="../../public/js/createRowTable.js"></script>
-		<script type="text/javascript" src="../../public/js/generateArray.js"></script>
+		<script type="text/javascript" src="../../public/js/generateName.js"></script>
 	</body>
 </html>

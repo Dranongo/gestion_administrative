@@ -32,27 +32,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if ($_POST["FamilyStatus"] == "")
 		{$formValidated = false;}
 
-	if ($_POST["Children"] == 1 && $_POST["LastNameChild"] != "" && $_POST["FirstNameChild"] != "" && $_POST["BirthdateChild"] != ""){
-		$lastNameChild = $_POST["LastNameChild"];
-		$firstNameChild = $_POST["FirstNameChild"];
-		$birthdateChild = $_POST["BirthdateChild"];
+	if ($_POST["Children"] == 1){
+		if($_POST["LastNameChild"] != "" && $_POST["FirstNameChild"] != "" && $_POST["BirthdateChild"] != ""){
+			$lastNameChild = $_POST["LastNameChild"];
+			$firstNameChild = $_POST["FirstNameChild"];
+			$birthdateChild = $_POST["BirthdateChild"];
 
-		$arrayChild = array( $lastNameChild, $firstNameChild, $birthdateChild );
+			$arrayChild = array( $lastNameChild, $firstNameChild, $birthdateChild );
 	
-		if (count($lastNameChild) == count($firstNameChild) && count($lastNameChild) == count($birthdateChild)) {
-			$count = count($lastNameChild);
-			for ($i = 0; $i < $count; $i++) {
-				if ($lastNameChild[$i] == "" || $firstNameChild[$i] == "" || $birthdateChild[$i] == "") {
-					$formValidated = false;
-				}
-				echo 'la ligne enfant est correct <br>';
+			if (count($lastNameChild) == count($firstNameChild) && count($lastNameChild) == count($birthdateChild)) {
+				$count = count($lastNameChild);
+				for ($i = 0; $i < $count; $i++) {
+					if ($lastNameChild[$i] == "" || $firstNameChild[$i] == "" || $birthdateChild[$i] == "") {
+						$formValidated = false;
+						echo 'la ligne enfant est incorrect <br>';
+					}
+				}	
+			}else {
+				$formValidated = false;
 			}
-		}else {
+		}
+		else {
 			$formValidated = false;
 		}
-	}
-	else {
-		$formValidated = false;
 	}
 
 	if (checkEmail($_POST["EmailProfessional"])) {
@@ -128,21 +130,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 	}
 
-	$lastNameContact = $_POST["LastNameContact"];
-	$firstNameContact = $_POST["FirstNameContact"];
-	$phoneNumberContact = $_POST["PhoneNumberContact"];
+	if ($_POST["LastNameContact"] != "" && $_POST["FirstNameContact"] != "" && $_POST["PhoneNumberContact"] != ""){
+		$lastNameContact = $_POST["LastNameContact"];
+		$firstNameContact = $_POST["FirstNameContact"];
+		$phoneNumberContact = $_POST["PhoneNumberContact"];
 
-	$arrayContact = array( $lastNameContact, $firstNameContact, $phoneNumberContact );
+		$arrayContact = array( $lastNameContact, $firstNameContact, $phoneNumberContact );
 	
-	if (count($lastNameContact) == count($firstNameContact) && count($lastNameContact) == count($phoneNumberContact)) {
-		$count = count($lastNameContact);
-		for ($i = 0; $i < $count; $i++) {
-			if ($lastNameContact[$i] == "" || $firstNameContact[$i] == "" || $phoneNumberContact[$i] == "") {
-				$formValidated = false;
+		if (count($lastNameContact) == count($firstNameContact) && count($lastNameContact) == count($phoneNumberContact)) {
+			$count = count($lastNameContact);
+			for ($i = 0; $i < $count; $i++) {
+				if ($lastNameContact[$i] == "" || $firstNameContact[$i] == "" || $phoneNumberContact[$i] == "") {
+					$formValidated = false;
+					echo 'la ligne contact est correct <br>';
+				}
 			}
-			echo 'la ligne contact est correct <br>';
+		}else {
+			$formValidated = false;
 		}
-	}else {
+	}
+	else {
 		$formValidated = false;
 	}
 
