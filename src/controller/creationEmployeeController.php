@@ -173,6 +173,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 	}
 
+	if( isset($_POSt["Attachment"]) && isset($_POST["ListAttachment"])){
+		if (count($_POST["Course"]) != 0 && count($_POST["CoursePlace"]) != 0 && count($_POST["CourseBeginning"]) != 0 && count($_POST["CourseEnding"]) != 0 && count($_POST["Graduate"]) != 0){
+			$course = $_POST["Course"];
+			$coursePlace = $_POST["CoursePlace"];
+			$courseBeginning = $_POST["CourseBeginning"];
+			$courseEnding = $_POST["CourseEnding"];
+			$graduate = $_POST["Graduate"];
+		
+			if (count($course) == count($coursePlace) && count($course) == count($courseBeginning) && count($course) == count($courseEnding) && count($course) == count($graduate)) {
+				$count = count($course);
+				for ($i = 0; $i < $count; $i++) {
+					if (trim($course[$i]) == "" || trim($coursePlace[$i]) == "" || !checkFormatDate($courseBeginning[$i]) || !checkFormatDate($courseEnding[$i])) {
+						$formValidated = false;
+						echo 'la ligne formation est incorrect <br>';
+					}
+				}
+			}else {
+				$formValidated = false;
+			}
+		}
+		else {
+			$formValidated = false;
+		}
+	}
+
 	if($formValidated == true){
 		createEmployee($bdd);
 	}

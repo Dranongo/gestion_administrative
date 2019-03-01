@@ -386,11 +386,11 @@
 					</div>
 				</div>
 
-				<div class="form-group" id="ListAttachments">
-					<label class="form-label" for="ListAttachments">Document et pièces à fournir</label>
+				<div class="form-group" id="LabelAttachments">
+					<label class="form-label" for="LabelAttachments">Document et pièces à fournir</label>
 
-					<div id="table-education" class="table-editable">
-						<span class="table-add-education glyphicon glyphicon-plus"></span>
+					<div id="table-attachment" class="table-editable">
+						<span class="table-add-attachment glyphicon glyphicon-plus"></span>
 						<table class="table text-center">
 							<thead>	
 								<tr>
@@ -399,10 +399,10 @@
 								</tr>
 							</thead>
 							<tbody>					
-								<tr>
-									<td><input class="attachment" type="file" data-name="Attachment[%%d%%]"></td>
+								<tr class="hide">
+									<td><input type="file" class="attachment" data-name="Attachment[%%d%%]"></td>
 									<td>
-										<select id="FamilyStatus" name="FamilyStatus" class="custom-select" required>
+										<select class="listAttachment" data-name="ListAttachment[%%d%%]">
 											<option value="">Document</option>
 											<option value="Carte d'itentité">Carte d'itentité</option>
 											<option value="CV">CV</option>
@@ -425,6 +425,7 @@
 										</select>
 										<div class="invalid-feedback">Veuillez sélectionner un type de document</div>
 									</td>
+									<td><span class="table-remove-attachment glyphicon glyphicon-remove"></span></td>
 								</tr>
 							</tbody>
 						</table>

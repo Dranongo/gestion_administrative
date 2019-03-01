@@ -16,6 +16,12 @@ $('.table-add-education').click(function () {
 	$TABLE.find('table').append($clone);
 });
 
+$('.table-add-attachment').click(function () {
+	var $TABLE = $('#table-attachment');
+	var $clone = $TABLE.find('tr.hide').clone(true).removeClass('hide table-line').addClass('attachment');
+	$TABLE.find('table').append($clone);
+});
+
 $('.table-remove-child').click(function () {
   $(this).parents('tr').detach();
 });
@@ -25,5 +31,9 @@ $('.table-remove-contact').click(function () {
 });
 
 $('.table-remove-education').click(function () {
+  $(this).parents('tr').detach();
+});
+
+$('.table-remove-attachment').click(function () {
   $(this).parents('tr').detach();
 });
