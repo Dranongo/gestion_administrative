@@ -386,6 +386,50 @@
 					</div>
 				</div>
 
+				<div class="form-group" id="ListAttachments">
+					<label class="form-label" for="ListAttachments">Document et pièces à fournir</label>
+
+					<div id="table-education" class="table-editable">
+						<span class="table-add-education glyphicon glyphicon-plus"></span>
+						<table class="table text-center">
+							<thead>	
+								<tr>
+									<th class="text-center">Document</th>
+									<th class="text-center">Type de Document</th>
+								</tr>
+							</thead>
+							<tbody>					
+								<tr>
+									<td><input class="attachment" type="file" data-name="Attachment[%%d%%]"></td>
+									<td>
+										<select id="FamilyStatus" name="FamilyStatus" class="custom-select" required>
+											<option value="">Document</option>
+											<option value="Carte d'itentité">Carte d'itentité</option>
+											<option value="CV">CV</option>
+											<option value="Diplôme">Diplôme</option>
+											<option value="RIB">RIB</option>
+											<option value="DPAE">DPAE</option>
+											<option value="CERFA">CERFA</option>
+											<option value="Contrat de travail">Contrat de travail</option>
+											<option value="Contrat de professionnalisation">Contrat de professionnalisation</option>
+											<option value="Affiliation mutuelle et prévoyance">Affiliation mutuelle et prévoyance</option>
+											<option value="Fiche de poste">Fiche de poste</option>
+											<option value="Attestation carte vitale">Attestation carte vitale</option>
+											<option value="Carte de séjour">Carte de séjour</option>
+											<option value="Autorisation de travail">Autorisation de travail</option>
+											<option value="Convention de formation">Convention de formation</option>
+											<option value="Programme de formation">Programme de formation</option>
+											<option value="Calendrier de formation">Calendrier de formation</option>
+											<option value="Convention de formation">Convention de formation</option>
+											<option value="Visite Médicale">Visite Médicale</option>
+										</select>
+										<div class="invalid-feedback">Veuillez sélectionner un type de document</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
 				<button id="suivant" class="btn btn-primary" type="submit">Enregistrer le salarié</button>
 			</form>
 		</div>
