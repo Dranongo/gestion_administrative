@@ -134,7 +134,7 @@ function createEmployee($bdd){
 	}
 	getContact($lastInsertIdEmployee, $bdd);
 
-	if ($_POST["Course"] != ""){
+	if( isset($_POST["Course"]) && isset($_POST["CoursePlace"]) && isset($_POST["CourseBeginning"]) && isset($_POST["CourseEnding"]) && isset($_POST["Graduate"])){
 		getEducation($lastInsertIdEmployee, $bdd);		
 	}
 

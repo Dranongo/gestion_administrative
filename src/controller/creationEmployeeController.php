@@ -148,30 +148,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	else {
 		$formValidated = false;
 	}
-
-	if (count($_POST["Course"]) != 0 && count($_POST["CoursePlace"]) != 0 && count($_POST["CourseBeginning"]) != 0 && count($_POST["CourseEnding"]) != 0 && count($_POST["Graduate"]) != 0){
-		$course = $_POST["Course"];
-		$coursePlace = $_POST["CoursePlace"];
-		$courseBeginning = $_POST["CourseBeginning"];
-		$courseEnding = $_POST["CourseEnding"];
-		$graduate = $_POST["Graduate"];
-	
-		if (count($course) == count($coursePlace) && count($course) == count($courseBeginning) && count($course) == count($courseEnding) && count($course) == count($graduate)) {
-			$count = count($course);
-			for ($i = 0; $i < $count; $i++) {
-				if (trim($course[$i]) == "" || trim($coursePlace[$i]) == "" || !checkFormatDate($courseBeginning[$i]) || !checkFormatDate($courseEnding[$i])) {
-					$formValidated = false;
-					echo 'la ligne formation est incorrect <br>';
+	if( isset($_POST["Course"]) && isset($_POST["CoursePlace"]) && isset($_POST["CourseBeginning"]) && isset($_POST["CourseEnding"]) && isset($_POST["Graduate"])){
+		if (count($_POST["Course"]) != 0 && count($_POST["CoursePlace"]) != 0 && count($_POST["CourseBeginning"]) != 0 && count($_POST["CourseEnding"]) != 0 && count($_POST["Graduate"]) != 0){
+			$course = $_POST["Course"];
+			$coursePlace = $_POST["CoursePlace"];
+			$courseBeginning = $_POST["CourseBeginning"];
+			$courseEnding = $_POST["CourseEnding"];
+			$graduate = $_POST["Graduate"];
+		
+			if (count($course) == count($coursePlace) && count($course) == count($courseBeginning) && count($course) == count($courseEnding) && count($course) == count($graduate)) {
+				$count = count($course);
+				for ($i = 0; $i < $count; $i++) {
+					if (trim($course[$i]) == "" || trim($coursePlace[$i]) == "" || !checkFormatDate($courseBeginning[$i]) || !checkFormatDate($courseEnding[$i])) {
+						$formValidated = false;
+						echo 'la ligne formation est incorrect <br>';
+					}
 				}
+			}else {
+				$formValidated = false;
 			}
-		}else {
+		}
+		else {
 			$formValidated = false;
 		}
 	}
-	else {
-		$formValidated = false;
-	}
-
 
 	if($formValidated == true){
 		createEmployee($bdd);
