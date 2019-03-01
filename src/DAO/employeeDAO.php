@@ -133,7 +133,10 @@ function createEmployee($bdd){
 		getChild($lastInsertIdEmployee, $bdd);
 	}
 	getContact($lastInsertIdEmployee, $bdd);
-	getEducation($lastInsertIdEmployee, $bdd);
+
+	if ($_POST["Course"] != ""){
+		getEducation($lastInsertIdEmployee, $bdd);		
+	}
 
 	echo'enregistré';
 }

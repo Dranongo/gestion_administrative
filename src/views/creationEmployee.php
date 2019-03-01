@@ -344,15 +344,21 @@
 									<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]"></td>
 									<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]" ></td>
 									<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]" ></td>
+								</tr>
+								<tr class="hide">
+									<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]"></td>
+									<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]" ></td>
+									<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]" ></td>
 									<td><span class="table-remove-contact glyphicon glyphicon-remove"></span></td>
 								</tr>
+
 							</tbody>
 						</table>
 					</div>
 				</div>
 
 				<div class="form-group" id="ListEducation">
-					<label class="form-label" for="ListEducation">Formation et Expériences profesionnelles</label>
+					<label class="form-label" for="ListEducation">Formation et Expériences professionnelles</label>
 
 					<div id="table-education" class="table-editable">
 						<span class="table-add-education glyphicon glyphicon-plus"></span>
@@ -367,7 +373,7 @@
 								</tr>
 							</thead>
 							<tbody>					
-								<tr class="education">
+								<tr class="hide">
 									<td><input class="course" type="text" data-name="Course[%%d%%]"></td>
 									<td><input class="coursePlace" type="text" data-name="CoursePlace[%%d%%]"></td>
 									<td><input class="courseBeginning" type="date" data-name="CourseBeginning[%%d%%]"></td>

@@ -6,13 +6,13 @@ $('.table-add-child').click(function () {
 
 $('.table-add-contact').click(function () {
 	var $TABLE = $('#table-contact');
-	var $clone = $TABLE.find('tr.contact').clone(true).removeAttr("required");
+	var $clone = $TABLE.find('tr.hide').clone(true).removeClass('hide table-line').addClass('contact');
 	$TABLE.find('table').append($clone);
 });
 
 $('.table-add-education').click(function () {
 	var $TABLE = $('#table-education');
-	var $clone = $TABLE.find('tr.education').clone(true);
+	var $clone = $TABLE.find('tr.hide').clone(true).removeClass('hide table-line').addClass('education');
 	$TABLE.find('table').append($clone);
 });
 
