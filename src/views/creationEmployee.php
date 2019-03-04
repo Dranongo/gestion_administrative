@@ -216,9 +216,9 @@
 							</thead>
 							<tbody>					
 								<tr class="hide">
-									<td><input class="lastName" type="text" data-name="LastNameChild[%%d%%]"></td>
-									<td><input class="firstName" type="text" data-name="FirstNameChild[%%d%%]"></td>
-									<td><input class="birthdate" type="date" data-name="BirthdateChild[%%d%%]"></td>
+									<td><input class="lastName form-control" type="text" data-name="LastNameChild[%%d%%]"></td>
+									<td><input class="firstName form-control" type="text" data-name="FirstNameChild[%%d%%]"></td>
+									<td><input class="birthdate form-control" type="date" data-name="BirthdateChild[%%d%%]"></td>
 									<td><span class="table-remove-child glyphicon glyphicon-remove"></span></td>
 								</tr>
 							</tbody>
@@ -342,16 +342,16 @@
 							</thead>
 							<tbody>					
 								<tr class="contact">
-									<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]"></td>
-									<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]"></td>
-									<td><input class="relationship" type="text" data-name="RelationshipContact[%%d%%]"></td>
-									<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]"></td>
+									<td><input class="lastName form-control" type="text" data-name="LastNameContact[%%d%%]"></td>
+									<td><input class="firstName form-control" type="text" data-name="FirstNameContact[%%d%%]"></td>
+									<td><input class="relationship form-control" type="text" data-name="RelationshipContact[%%d%%]"></td>
+									<td><input class="phoneNumber form-control" type="number" data-name="PhoneNumberContact[%%d%%]"></td>
 								</tr>
 								<tr class="hide">
-									<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]"></td>
-									<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]"></td>
-									<td><input class="relationship" type="text" data-name="RelationshipContact[%%d%%]"></td>
-									<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]"></td>
+									<td><input class="lastName form-control" type="text" data-name="LastNameContact[%%d%%]"></td>
+									<td><input class="firstName form-control" type="text" data-name="FirstNameContact[%%d%%]"></td>
+									<td><input class="relationship form-control" type="text" data-name="RelationshipContact[%%d%%]"></td>
+									<td><input class="phoneNumber form-control" type="number" data-name="PhoneNumberContact[%%d%%]"></td>
 									<td><span class="table-remove-contact glyphicon glyphicon-remove"></span></td>
 								</tr>
 
@@ -374,14 +374,14 @@
 									<th class="text-center">Lieu</th>
 									<th class="text-center">Début de la formation</th>
 									<th class="text-center">Fin de la formation</th>
-									<th class="text-center">Obtenu</th>
+									<th class="text-center">Diplôme obtenu</th>
 								</tr>
 							</thead>
 							<tbody>					
 								<tr class="hide">
-									<td><input class="course" type="text" data-name="Course[%%d%%]"></td>
+									<td><input class="course form-control" type="text" data-name="Course[%%d%%]"></td>
 									<td>
-										<select class="courseListLevel" data-name="CourseListLevel[%%d%%]">
+										<select class="courseListLevel form-control" data-name="CourseListLevel[%%d%%]">
 											<option value="">Niveau</option>
 											<option value="Niveau I">Niveau I</option>
 											<option value="Niveau II">Niveau II</option>
@@ -391,11 +391,11 @@
 											<option value="Niveau V bis et VI">Niveau V bis et VI</option>
 										</select>
 									</td>
-									<td><input class="courseInstitution" type="text" data-name="CourseInstitution[%%d%%]"></td>
-									<td><input class="coursePlace" type="text" data-name="CoursePlace[%%d%%]"></td>
-									<td><input class="courseBeginning" type="date" data-name="CourseBeginning[%%d%%]"></td>
-									<td><input class="courseEnding" type="date" data-name="CourseEnding[%%d%%]"></td>
-									<td><input class="graduate" type="checkbox" data-name="Graduate[%%d%%]" value="1"></td>
+									<td><input class="courseInstitution form-control" type="text" data-name="CourseInstitution[%%d%%]"></td>
+									<td><input class="coursePlace form-control" type="text" data-name="CoursePlace[%%d%%]"></td>
+									<td><input class="courseBeginning form-control" type="date" data-name="CourseBeginning[%%d%%]"></td>
+									<td><input class="courseEnding form-control" type="date" data-name="CourseEnding[%%d%%]"></td>
+									<td><input class="graduate form-check-input" type="checkbox" data-name="Graduate[%%d%%]" value="1"></td>
 									<td><span class="table-remove-education glyphicon glyphicon-remove"></span></td>
 								</tr>
 							</tbody>
@@ -417,9 +417,9 @@
 							</thead>
 							<tbody>					
 								<tr class="hide">
-									<td><input type="file" class="fileAttachment"data-name="FileAttachment[%%d%%]"></td>
+									<td><input type="file" class="fileAttachment form-control" data-name="FileAttachment[%%d%%]"></td>
 									<td>
-										<select class="listAttachment" data-name="ListAttachment[%%d%%]">
+										<select class="listAttachment form-control" data-name="ListAttachment[%%d%%]">
 											<option value="">Document</option>
 											<option value="Carte d'itentité">Carte d'itentité</option>
 											<option value="CV">CV</option>
