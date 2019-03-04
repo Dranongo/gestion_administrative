@@ -30,7 +30,8 @@ $("#suivant").button().bind("click", function(){
 		var elem = $(this);
 		
 		replaceName(elem.find(".fileAttachment"), index);
-		replaceName(elem.find(".listAttachment"), index);
+		replaceName(elem.find(".nameAttachment"), index);
+		replaceName(elem.find(".typeAttachment"), index);
 	});
 });
 

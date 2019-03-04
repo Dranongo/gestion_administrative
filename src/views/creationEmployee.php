@@ -18,7 +18,7 @@
 		?>
 
 		<div class="container">
-			<form class="needs-validation" method="POST" action="../controller/creationEmployeeController.php" novalidate>
+			<form class="needs-validation" method="POST" action="../controller/creationEmployeeController.php" enctype="multipart/form-data" novalidate>
 
 				<div class="custom-control custom-radio custom-control-inline">
 					<input type="radio" class="custom-control-input" id="GenderMale" name="Gender" value="Monsieur" required>
@@ -412,33 +412,20 @@
 							<thead>	
 								<tr>
 									<th class="text-center">Document</th>
+									<th class="text-center">Nom du document</th>
 									<th class="text-center">Type de Document</th>
 								</tr>
 							</thead>
 							<tbody>					
 								<tr class="hide">
 									<td><input type="file" class="fileAttachment form-control" data-name="FileAttachment[%%d%%]"></td>
+									<td><input type="text" class="nameAttachment form-control" data-name="NameAttachment[%%d%%]"></td>
 									<td>
-										<select class="listAttachment form-control" data-name="ListAttachment[%%d%%]">
-											<option value="">Document</option>
-											<option value="Carte d'itentité">Carte d'itentité</option>
-											<option value="CV">CV</option>
-											<option value="Diplôme">Diplôme</option>
-											<option value="RIB">RIB</option>
-											<option value="DPAE">DPAE</option>
-											<option value="CERFA">CERFA</option>
-											<option value="Contrat de travail">Contrat de travail</option>
-											<option value="Contrat de professionnalisation">Contrat de professionnalisation</option>
-											<option value="Affiliation mutuelle et prévoyance">Affiliation mutuelle et prévoyance</option>
-											<option value="Fiche de poste">Fiche de poste</option>
-											<option value="Attestation carte vitale">Attestation carte vitale</option>
-											<option value="Carte de séjour">Carte de séjour</option>
-											<option value="Autorisation de travail">Autorisation de travail</option>
-											<option value="Convention de formation">Convention de formation</option>
-											<option value="Programme de formation">Programme de formation</option>
-											<option value="Calendrier de formation">Calendrier de formation</option>
-											<option value="Convention de formation">Convention de formation</option>
-											<option value="Visite Médicale">Visite Médicale</option>
+										<select class="typeAttachement custom-select" data-name="TypeAttachment[%%d%%]" >
+											<option value="">Type de Document</option>
+												<?php foreach (getDataRepository("type_document") as $key => $value): ?>
+													<option value="<?= $key ?>"><?= $value ?></option>
+												<?php endforeach; ?>
 										</select>
 									</td>
 									<td><span class="table-remove-attachment glyphicon glyphicon-remove"></span></td>
