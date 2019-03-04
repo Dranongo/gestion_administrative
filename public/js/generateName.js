@@ -23,11 +23,11 @@ $("#suivant").button().bind("click", function(){
 		replaceName(elem.find(".courseEnding"), index);
 		replaceName(elem.find(".graduate"), index);
 	});
-	("tbody tr.attachment").each(function( index ){
+	$("tbody tr.attachment").each(function( index ){
 		var elem = $(this);
 		
-		replaceName(elem.find(".attachment"), index);
-		//replaceName(elem.find(".listAttachment"), index);
+		replaceName(elem.find(".fileAttachment"), index);
+		replaceName(elem.find(".listAttachment"), index);
 	});
 });
 

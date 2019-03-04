@@ -400,7 +400,7 @@
 							</thead>
 							<tbody>					
 								<tr class="hide">
-									<td><input type="file" class="attachment" data-name="Attachment[%%d%%]"></td>
+									<td><input type="file" class="fileAttachment"data-name="FileAttachment[%%d%%]"></td>
 									<td>
 										<select class="listAttachment" data-name="ListAttachment[%%d%%]">
 											<option value="">Document</option>
@@ -423,7 +423,6 @@
 											<option value="Convention de formation">Convention de formation</option>
 											<option value="Visite Médicale">Visite Médicale</option>
 										</select>
-										<div class="invalid-feedback">Veuillez sélectionner un type de document</div>
 									</td>
 									<td><span class="table-remove-attachment glyphicon glyphicon-remove"></span></td>
 								</tr>
