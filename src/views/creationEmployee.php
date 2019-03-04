@@ -368,8 +368,10 @@
 						<table class="table text-center">
 							<thead>	
 								<tr>
-									<th class="text-center">Formation et Niveau</th>
-									<th class="text-center">Organisme et Lieu</th>
+									<th class="text-center">Formation</th>
+									<th class="text-center">Niveau</th>
+									<th class="text-center">Organisme</th>
+									<th class="text-center">Lieu</th>
 									<th class="text-center">Début de la formation</th>
 									<th class="text-center">Fin de la formation</th>
 									<th class="text-center">Obtenu</th>
@@ -378,6 +380,18 @@
 							<tbody>					
 								<tr class="hide">
 									<td><input class="course" type="text" data-name="Course[%%d%%]"></td>
+									<td>
+										<select class="courseListLevel" data-name="CourseListLevel[%%d%%]">
+											<option value="">Niveau</option>
+											<option value="Niveau I">Niveau I</option>
+											<option value="Niveau II">Niveau II</option>
+											<option value="Niveau III">Niveau III</option>
+											<option value="Niveau IV">Niveau IV</option>
+											<option value="Niveau V">Niveau V</option>
+											<option value="Niveau V bis et VI">Niveau V bis et VI</option>
+										</select>
+									</td>
+									<td><input class="courseInstitution" type="text" data-name="CourseInstitution[%%d%%]"></td>
 									<td><input class="coursePlace" type="text" data-name="CoursePlace[%%d%%]"></td>
 									<td><input class="courseBeginning" type="date" data-name="CourseBeginning[%%d%%]"></td>
 									<td><input class="courseEnding" type="date" data-name="CourseEnding[%%d%%]"></td>

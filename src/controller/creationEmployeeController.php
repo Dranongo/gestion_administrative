@@ -149,18 +149,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	else {
 		$formValidated = false;
 	}
-	if( isset($_POST["Course"]) && isset($_POST["CoursePlace"]) && isset($_POST["CourseBeginning"]) && isset($_POST["CourseEnding"]) && isset($_POST["Graduate"])){
-		if (count($_POST["Course"]) != 0 && count($_POST["CoursePlace"]) != 0 && count($_POST["CourseBeginning"]) != 0 && count($_POST["CourseEnding"]) != 0 && count($_POST["Graduate"]) != 0){
+	if( isset($_POST["Course"]) && isset($_POST["CourseListLevel"]) && isset($_POST["CourseInstitution"]) && isset($_POST["CoursePlace"]) && isset($_POST["CourseBeginning"]) && isset($_POST["CourseEnding"]) && isset($_POST["Graduate"])){
+		if (count($_POST["Course"]) != 0 && count($_POST["CourseListLevel"]) != 0 && count($_POST["CourseInstitution"]) != 0 && count($_POST["CoursePlace"]) != 0 && count($_POST["CourseBeginning"]) != 0 && count($_POST["CourseEnding"]) != 0 && count($_POST["Graduate"]) != 0){
 			$course = $_POST["Course"];
+			$courseListLevel = $_POST["CourseListLevel"];
+			$courseInstitution = $_POST["CourseInstitution"];
 			$coursePlace = $_POST["CoursePlace"];
 			$courseBeginning = $_POST["CourseBeginning"];
 			$courseEnding = $_POST["CourseEnding"];
 			$graduate = $_POST["Graduate"];
 		
-			if (count($course) == count($coursePlace) && count($course) == count($courseBeginning) && count($course) == count($courseEnding) && count($course) == count($graduate)) {
+			if (count($course) == count($courseListLevel) && count($course) == count($courseInstitution) && count($course) == count($coursePlace) && count($course) == count($courseBeginning) && count($course) == count($courseEnding) && count($course) == count($graduate)) {
 				$count = count($course);
 				for ($i = 0; $i < $count; $i++) {
-					if (trim($course[$i]) == "" || trim($coursePlace[$i]) == "" || !checkFormatDate($courseBeginning[$i]) || !checkFormatDate($courseEnding[$i])) {
+					if (trim($course[$i]) == "" || trim($courseListLevel[$i]) == "" || trim($courseInstitution[$i]) == "" || trim($coursePlace[$i]) == "" || !checkFormatDate($courseBeginning[$i]) || !checkFormatDate($courseEnding[$i])) {
 						$formValidated = false;
 						echo 'la ligne formation est incorrect <br>';
 					}

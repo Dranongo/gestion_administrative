@@ -19,6 +19,8 @@ $("#suivant").button().bind("click", function(){
 		var elem = $(this);
 		
 		replaceName(elem.find(".course"), index);
+		replaceName(elem.find(".courseListLevel"), index);
+		replaceName(elem.find(".courseInstitution"), index);
 		replaceName(elem.find(".coursePlace"), index);
 		replaceName(elem.find(".courseBeginning"), index);
 		replaceName(elem.find(".courseEnding"), index);
