@@ -128,15 +128,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 	}
 
-	if (count($_POST["LastNameContact"]) != 0 && count($_POST["FirstNameContact"]) != 0 && count($_POST["PhoneNumberContact"]) != 0){
+	if (count($_POST["LastNameContact"]) != 0 && count($_POST["FirstNameContact"]) != 0 && count($_POST["RelationshipContact"]) != 0 && count($_POST["PhoneNumberContact"]) != 0){
 		$lastNameContact = $_POST["LastNameContact"];
 		$firstNameContact = $_POST["FirstNameContact"];
+		$relationshipContact = $_POST["RelationshipContact"];
 		$phoneNumberContact = $_POST["PhoneNumberContact"];
 	
-		if (count($lastNameContact) == count($firstNameContact) && count($lastNameContact) == count($phoneNumberContact)) {
+		if (count($lastNameContact) == count($firstNameContact) && count($lastNameContact) == count($relationshipContact) && count($lastNameContact) == count($phoneNumberContact)) {
 			$count = count($lastNameContact);
 			for ($i = 0; $i < $count; $i++) {
-				if (trim($lastNameContact[$i]) == "" || trim($firstNameContact[$i]) == "" || !checkPhone($phoneNumberContact[$i])) {
+				if (trim($lastNameContact[$i]) == "" || trim($firstNameContact[$i]) == "" || trim($relationshipContact[$i]) == "" || !checkPhone($phoneNumberContact[$i])) {
 					$formValidated = false;
 					echo 'la ligne contact est incorrect <br>';
 				}
@@ -173,20 +174,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 	}
 
-	if( isset($_POSt["Attachment"]) && isset($_POST["ListAttachment"])){
-		if (count($_POST["Course"]) != 0 && count($_POST["CoursePlace"]) != 0 && count($_POST["CourseBeginning"]) != 0 && count($_POST["CourseEnding"]) != 0 && count($_POST["Graduate"]) != 0){
-			$course = $_POST["Course"];
-			$coursePlace = $_POST["CoursePlace"];
-			$courseBeginning = $_POST["CourseBeginning"];
-			$courseEnding = $_POST["CourseEnding"];
-			$graduate = $_POST["Graduate"];
+	/*if( isset($_POST["FileAttachment"]) && isset($_POST["ListAttachment"])){
+		if (count($_POST["FileAttachment"]) != 0 && count($_POST["ListAttachment"]) != 0 ){
+			$fileAttachment = $_POST["FileAttachment"];
+			$listAttachment = $_POST["ListAttachment"];
 		
-			if (count($course) == count($coursePlace) && count($course) == count($courseBeginning) && count($course) == count($courseEnding) && count($course) == count($graduate)) {
-				$count = count($course);
+			if (count($fileAttachment) == count($listAttachment)){
+				$count = count($fileAttachment);
 				for ($i = 0; $i < $count; $i++) {
-					if (trim($course[$i]) == "" || trim($coursePlace[$i]) == "" || !checkFormatDate($courseBeginning[$i]) || !checkFormatDate($courseEnding[$i])) {
+					if (trim($fileAttachment[$i]) == "" || trim($listAttachment[$i]) == "") {
 						$formValidated = false;
-						echo 'la ligne formation est incorrect <br>';
+						echo 'la ligne pièce jointe est incorrect <br>';
 					}
 				}
 			}else {
@@ -196,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		else {
 			$formValidated = false;
 		}
-	}
+	}*/
 
 	if($formValidated == true){
 		createEmployee($bdd);

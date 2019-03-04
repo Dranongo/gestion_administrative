@@ -12,6 +12,7 @@ $("#suivant").button().bind("click", function(){
 		
 		replaceName(elem.find(".lastName"), index);
 		replaceName(elem.find(".firstName"), index);
+		replaceName(elem.find(".relationship"), index);
 		replaceName(elem.find(".phoneNumber"), index);
 	});
 	$("tbody tr.education").each(function( index ){

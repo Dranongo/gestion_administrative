@@ -336,19 +336,22 @@
 								<tr>
 									<th class="text-center">Nom</th>
 									<th class="text-center">Prénom</th>
+									<th class="text-center">Lien</th>
 									<th class="text-center">Numéro de téléphone</th>
 								</tr>
 							</thead>
 							<tbody>					
 								<tr class="contact">
 									<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]"></td>
-									<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]" ></td>
-									<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]" ></td>
+									<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]"></td>
+									<td><input class="relationship" type="text" data-name="RelationshipContact[%%d%%]"></td>
+									<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]"></td>
 								</tr>
 								<tr class="hide">
 									<td><input class="lastName" type="text" data-name="LastNameContact[%%d%%]"></td>
-									<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]" ></td>
-									<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]" ></td>
+									<td><input class="firstName" type="text" data-name="FirstNameContact[%%d%%]"></td>
+									<td><input class="relationship" type="text" data-name="RelationshipContact[%%d%%]"></td>
+									<td><input class="phoneNumber" type="number" data-name="PhoneNumberContact[%%d%%]"></td>
 									<td><span class="table-remove-contact glyphicon glyphicon-remove"></span></td>
 								</tr>
 
