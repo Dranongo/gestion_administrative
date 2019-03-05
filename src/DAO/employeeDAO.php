@@ -138,7 +138,7 @@ function createEmployee($bdd){
 		getEducation($lastInsertIdEmployee, $bdd);		
 	}
 
-	setAttachment($lastInsertIdEmployee, $bdd);
+	getAttachment($lastInsertIdEmployee, $bdd);
 
 	echo'enregistré';
 }
@@ -207,7 +207,7 @@ function getUniqueCode($nameTable, $idValue){
 	$bdd = new PDO('mysql:host=localhost;dbname=gestion_administrative;charset=utf8', 'root', '');
 	$id = "id_" . $nameTable;
 	$code = "code_".$nameTable;
-	$req = $bdd->prepare("SELECT ".$code." FROM ".$nameTable. " WHERE " .$id. "=" .$idValue);
+	$req = $bdd->prepare("SELECT $code FROM $nameTable WHERE $id = $idValue");
 
 	$req->execute();
 	return $req->fetchColumn();
@@ -427,6 +427,7 @@ function setEducation($idSalarie, $name, $level, $institution, $place, $beginnin
 
 function getAttachment($idSalarie, $bdd){
 	$nameAttachment = $_FILES["FileAttachment"]["name"];
+	$fileTmpAttachment = $_FILES["FileAttachment"]["tmp_name"];
 	$typeAttachment = $_POST["TypeAttachment"];
 
 	$count = count($nameAttachment);
@@ -434,12 +435,13 @@ function getAttachment($idSalarie, $bdd){
 		if (array_key_exists($i, $nameAttachment)) {
 			$name = $nameAttachment[$i];
 			$type = $typeAttachment[$i];
-			setAttachment($idSalarie, $name, $type, $bdd);
+			$fileTmp = $fileTmpAttachment[$i];
+			setAttachment($idSalarie, $name, $type, $fileTmp, $bdd);
 		}
 	}
 }
 
-function setAttachment($idSalarie, $name, $type, $bdd){
+function setAttachment($idSalarie, $name, $type, $fileTmp, $bdd){
 	$name_attachment = $name;
 	$type_attachment = $type;
 
@@ -447,7 +449,6 @@ function setAttachment($idSalarie, $name, $type, $bdd){
 		id_salarie,
 		id_type_document) 
 		VALUES (:nom_document,
-		:content_document, 
 		:id_salarie,
 		:id_type_document)'
 	);
@@ -462,7 +463,7 @@ function setAttachment($idSalarie, $name, $type, $bdd){
 
 	$lastInsertIdAttachment = $bdd->lastInsertId();
 	echo $bdd->lastInsertId();
-	$nameFile = updateFileName($lastInsertIdAttachment,$type);
+	$nameFile = updateFileName($lastInsertIdAttachment, $name, $type);
 
 	$req = $bdd->prepare('UPDATE document SET nom_document = :nom_document WHERE id_document = '. $lastInsertIdAttachment);
 	$req->bindParam(':nom_document', $nameFile);
@@ -471,12 +472,12 @@ function setAttachment($idSalarie, $name, $type, $bdd){
 	$arr = $req->errorInfo();
 	print_r($arr);
 
-	uploadAttachment($nameFile, $idSalarie);
+	uploadAttachment($nameFile, $idSalarie, $fileTmp);
 }
 
-function updateFileName($lastInsertIdAttachment, $type){
+function updateFileName($lastInsertIdAttachment, $name, $type){
 	if(isset($_FILES["FileAttachment"])){
-		$dataFile = pathinfo($_FILES["FileAttachment"]["name"]);
+		$dataFile = pathinfo($name);
 		$type_file = $dataFile['extension'];
 		$code_type_file = getUniqueCode("type_document", $type);
 
@@ -488,7 +489,7 @@ function updateFileName($lastInsertIdAttachment, $type){
 	}
 }
 
-function uploadAttachment($nameFile, $idSalarie){
+function uploadAttachment($nameFile, $idSalarie, $fileTmp){
 	if(isset($_FILES["FileAttachment"])){
 		$dir = "../../public/pieces_jointes/". $idSalarie;
 
@@ -498,7 +499,7 @@ function uploadAttachment($nameFile, $idSalarie){
 
 		$dir = $dir . "/";
 
-		$tmp_file = $_FILES["FileAttachment"]["tmp_name"]; 
+		$tmp_file = $fileTmp; 
 
 		if(move_uploaded_file($tmp_file, $dir . $nameFile)){
 			echo'Fichier Upload';

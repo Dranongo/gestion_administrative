@@ -176,47 +176,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 	}
 
-	/*if(isset($_FILES["FilesAttachment"])){
-		$dossier = "../../public/pieces_jointes/";
-		$files = $_FILES["FilesAttachment"];
-
-		$count = count($file);
-		for($i = 0; $i <$count; $i++){
-			$tmp_file = $_FILES["FileAttachment"]["tmp_name"];
-
-			$name_file = $_FILES["FileAttachment"]["name"];
-
-			if(move_uploaded_file($tmp_file, $dossier . $name_file)){
-				echo'fonctionne';
-			}
-			else {
-				echo'marche pas';
-			}
-		}
-	} else {
-		echo'pas de fichier';
-	}*/
-
-	/*if(isset($_FILES["FileAttachment"])){
-		//$dir = "../../public/pieces_jointes/";
-		//$tmp_file = $_FILES["FileAttachment"]["tmp_name"];
-
-		$dataFile = pathinfo($_FILES["FileAttachment"]["name"]);
-		$type_file = $dataFile['extension'];
-		$code_type_file = getUniqueCode("type_document", $type);
-
-		$name_file = $code_type_file. '_' .time(). '.' .$type_file; 
-
-		if(move_uploaded_file($tmp_file, $dir . $name_file)){
-			echo'fonctionne';
-		}
-		else {
-			echo'marche pas';
-		}
-	} else {
-		echo'pas de fichier';
-	}*/
-
 	/*if( isset($_POST["FileAttachment"]) && isset($_POST["ListAttachment"])){
 		if (count($_POST["FileAttachment"]) != 0 && count($_POST["ListAttachment"]) != 0 ){
 			$fileAttachment = $_POST["FileAttachment"];
