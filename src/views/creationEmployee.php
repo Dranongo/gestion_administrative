@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Accueil</title>
+		<title>Création d'une fiche</title>
 		<link href="../../public/css/bootstrap.css" rel="stylesheet"/>
 		<link href="../../public/css/tableChild.css" rel="stylesheet"/>
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
@@ -421,7 +421,7 @@
 									<td><input type="file" class="fileAttachment form-control" data-name="FileAttachment[%%d%%]"></td>
 									<td><input type="text" class="nameAttachment form-control" data-name="NameAttachment[%%d%%]"></td>
 									<td>
-										<select class="typeAttachement custom-select" data-name="TypeAttachment[%%d%%]" >
+										<select class="typeAttachment custom-select" data-name="TypeAttachment[%%d%%]">
 											<option value="">Type de Document</option>
 												<?php foreach (getDataRepository("type_document") as $key => $value): ?>
 													<option value="<?= $key ?>"><?= $value ?></option>

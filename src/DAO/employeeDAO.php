@@ -138,6 +138,8 @@ function createEmployee($bdd){
 		getEducation($lastInsertIdEmployee, $bdd);		
 	}
 
+	setAttachment($lastInsertIdEmployee, $bdd);
+
 	echo'enregistré';
 }
 
@@ -199,6 +201,16 @@ function getDataRepository($nameTable){
 	}
 
 	return $table;
+}
+
+function getUniqueCode($nameTable, $idValue){
+	$bdd = new PDO('mysql:host=localhost;dbname=gestion_administrative;charset=utf8', 'root', '');
+	$id = "id_" . $nameTable;
+	$code = "code_".$nameTable;
+	$req = $bdd->prepare("SELECT ".$code." FROM ".$nameTable. " WHERE " .$id. "=" .$idValue);
+
+	$req->execute();
+	return $req->fetchColumn();
 }
 
 function setSocialCategory($idSalarie, $bdd){
@@ -411,5 +423,91 @@ function setEducation($idSalarie, $name, $level, $institution, $place, $beginnin
 	$req->execute();
 	$arr = $req->errorInfo();
 	print_r($arr);
+}
+
+function getAttachment($idSalarie, $bdd){
+	$nameAttachment = $_FILES["FileAttachment"]["name"];
+	$typeAttachment = $_POST["TypeAttachment"];
+
+	$count = count($nameAttachment);
+	for ($i = 0; $i < $count; $i++) {
+		if (array_key_exists($i, $nameAttachment)) {
+			$name = $nameAttachment[$i];
+			$type = $typeAttachment[$i];
+			setAttachment($idSalarie, $name, $type, $bdd);
+		}
+	}
+}
+
+function setAttachment($idSalarie, $name, $type, $bdd){
+	$name_attachment = $name;
+	$type_attachment = $type;
+
+	$req = $bdd->prepare('INSERT into document(nom_document,
+		id_salarie,
+		id_type_document) 
+		VALUES (:nom_document,
+		:content_document, 
+		:id_salarie,
+		:id_type_document)'
+	);
+
+	$req->bindParam(':nom_document', $name_attachment);
+	$req->bindParam(':id_salarie', $idSalarie);
+	$req->bindParam(':id_type_document', $type_attachment);
+
+	$req->execute();
+	$arr = $req->errorInfo();
+	print_r($arr);
+
+	$lastInsertIdAttachment = $bdd->lastInsertId();
+	echo $bdd->lastInsertId();
+	$nameFile = updateFileName($lastInsertIdAttachment,$type);
+
+	$req = $bdd->prepare('UPDATE document SET nom_document = :nom_document WHERE id_document = '. $lastInsertIdAttachment);
+	$req->bindParam(':nom_document', $nameFile);
+
+	$req->execute();
+	$arr = $req->errorInfo();
+	print_r($arr);
+
+	uploadAttachment($nameFile, $idSalarie);
+}
+
+function updateFileName($lastInsertIdAttachment, $type){
+	if(isset($_FILES["FileAttachment"])){
+		$dataFile = pathinfo($_FILES["FileAttachment"]["name"]);
+		$type_file = $dataFile['extension'];
+		$code_type_file = getUniqueCode("type_document", $type);
+
+		$name_file = $code_type_file. '_' .time(). '_' .$lastInsertIdAttachment. '.' .$type_file;
+
+		return $name_file;
+	} else {
+		echo'pas de fichier';
+	}
+}
+
+function uploadAttachment($nameFile, $idSalarie){
+	if(isset($_FILES["FileAttachment"])){
+		$dir = "../../public/pieces_jointes/". $idSalarie;
+
+		if(!is_dir($dir)){
+			mkdir($dir);
+		}
+
+		$dir = $dir . "/";
+
+		$tmp_file = $_FILES["FileAttachment"]["tmp_name"]; 
+
+		if(move_uploaded_file($tmp_file, $dir . $nameFile)){
+			echo'Fichier Upload';
+		}
+		else {
+			echo'Fichier Non Upload';
+		}
+	} else {
+		echo'Pas de fichier';
+	}
 }
 ?>
