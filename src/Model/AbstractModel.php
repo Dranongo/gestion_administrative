@@ -35,7 +35,7 @@ abstract class AbstractModel
      * @param string $value
      * @return bool
      */
-    final public function checkChoixPossibles(array $parameter, string $value): bool
+    final public function isInPossibleChoices(array $parameter, string $value): bool
     {
         $method = 'get' . ucfirst($parameter);
         if (method_exists($this, $method)) {

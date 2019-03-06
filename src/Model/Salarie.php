@@ -128,6 +128,11 @@ class Salarie extends AbstractModel
     protected $tauxInvalidite;
 
     /**
+     * @var bool
+     */
+    protected $etranger;
+
+    /**
      * @param string $qualite
      * @return Salarie
      */
@@ -529,5 +534,22 @@ class Salarie extends AbstractModel
     public function getTauxInvalidite(): ?string
     {
         return $this->tauxInvalidite;
+    }
+
+
+    /**
+     * @param bool $etranger
+     * @return Salarie
+     */
+    public function setEtranger(bool $etranger): Salarie
+    {
+        $this->etranger = $etranger;
+
+        return $this;
+    }
+
+    public function getEtranger() : bool
+    {
+    	return $this->etranger;
     }
 }
