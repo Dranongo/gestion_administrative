@@ -1,5 +1,13 @@
 <?php
 
+define('__SRC_DIR__', __DIR__ . DIRECTORY_SEPARATOR);
+
+define('__CONFIG_DIR__', __SRC_DIR__ . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR);
+
+define('__PUBLIC_DIR__', __SRC_DIR__ . '..' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
+
+define('__ATTACHMENT_DIR__', __PUBLIC_DIR__ . 'pieces_jointes' . DIRECTORY_SEPARATOR);
+
 try {
 
     // Autoload
@@ -15,14 +23,15 @@ try {
     // You have to init the session after the classes are loaded
     session_start();
 
-    $template = \Utils\Route::dispatchRoute();
+    //$template = \Utils\Route::dispatchRoute();
 } catch (Exception $e) {
-    $errorVariables = [
+    /*$errorVariables = [
         'title' => 'Error ' . $e->getCode(),
         'template' => \Utils\Template::getErrorTemplateName(),
         'error' => $e->getMessage()
     ];
-    $template = \Utils\Template::getTemplateVariables($errorVariables);
+    $template = \Utils\Template::getTemplateVariables($errorVariables);*/
 }
 
-require_once __VIEWS_DIR__ . DIRECTORY_SEPARATOR . 'base.html.php';
+//require_once __VIEWS_DIR__ . DIRECTORY_SEPARATOR . 'base.html.php';
+var_dump(\Utils\DatabaseConnection::getInstance());
