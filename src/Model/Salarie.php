@@ -128,7 +128,12 @@ class Salarie extends AbstractModel
     protected $tauxInvalidite;
 
     /**
-     * @var bool
+     * @var array<Formation>
+     */
+    protected $formations = [];
+
+    /**
+     * @var TravailleurEtranger
      */
     protected $etranger;
 
@@ -540,17 +545,79 @@ class Salarie extends AbstractModel
     }
 
     /**
-     * @param bool $etranger
+     * @param array $formations
      * @return Salarie
      */
-    public function setEtranger(bool $etranger): Salarie
+    public function setFormations(array $formations): Salarie
+    {
+        $this->removeAllFormations();
+        foreach ($formations as $formation) {
+            if ($formation instanceof Formation) {
+                $this->formations[$formation->getId()] = $formation;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Salarie
+     */
+    public function removeAllFormations(): Salarie
+    {
+        $this->formations = [];
+
+        return $this;
+    }
+
+    /**
+     * @param formation $formation
+     * @return Salarie
+     */
+    public function addFormation(formation $formation): Salarie
+    {
+        $this->formations[$formation->getId()] = $formation;
+
+        return $this;
+    }
+
+    /**
+     * @param formation $formation
+     * @return Salarie
+     */
+    public function removeFormation(formation $formation): Salarie
+    {
+        $formation = $this->getFormations();
+        if (array_key_exists($formation->getId(), $formations)) {
+            unset($formations[$formation->getId()]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<Formation>
+     */
+    public function getFormations(): array
+    {
+        return $this->formations;
+    }
+
+    /**
+     * @param TravailleurEtranger $etranger
+     * @return Salarie
+     */
+    public function setEtranger(TravailleurEtranger $etranger): Salarie
     {
         $this->etranger = $etranger;
 
         return $this;
     }
 
-    public function getEtranger() : bool
+    /**
+     * @return TravailleurEtranger
+     */
+    public function getEtranger() : TravailleurEtranger
     {
     	return $this->etranger;
     }

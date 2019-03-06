@@ -15,7 +15,7 @@ class Formation extends AbstractModel
     protected $niveau;
 
     /**
-     * @var string
+     * @var array
      */
     protected $niveauxPossibles = [
         'Niveau I',
@@ -94,6 +94,9 @@ class Formation extends AbstractModel
         return $this->niveau;
     }
 
+    /**
+     * @return array
+     */
     public function getNiveauxPossibles() : array
     {
         return $this->niveauxPossibles;
