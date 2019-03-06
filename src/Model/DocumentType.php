@@ -25,6 +25,63 @@ class DocumentType extends AbstractModel
     protected $documents = [];
 
     /**
+     * @param string $label
+     * @return DocumentType
+     */
+    public function setLabel(string $label): DocumentType
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $uniqueCode
+     * @return DocumentType
+     */
+    public function setUniqueCode(string $uniqueCode): DocumentType
+    {   
+        $this->uniqueCode = $uniqueCode;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUniqueCode() : string
+    {
+        return $this->uniqueCode;
+    }
+
+    /**
+     * @param bool $statutEtranger
+     * @return DocumentType
+     */
+    public function setStatutEtranger(bool $statutEtranger): DocumentType
+    {
+        $this->statutEtranger = $statutEtranger;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getStatutEtranger(): bool
+    {
+        return $this->statutEtranger;
+    }
+
+    /**
      * @param array $documents
      * @return DocumentType
      */

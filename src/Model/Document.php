@@ -25,6 +25,11 @@ class Document extends AbstractModel
     protected $salarie;
 
     /**
+     * @var string
+     */
+    protected $extension;
+
+    /**
      * @param string $nom
      * @return Document
      */
@@ -63,6 +68,25 @@ class Document extends AbstractModel
     }
 
     /**
+     * @param string $extension
+     * @return Document
+     */
+    public function setExtension(string $extension): Document
+    {
+        $this->extension = $extension;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtension(): ?string
+    {
+        return $this->extension;
+    }
+
+    /**
      * @param DocumentType $documentType
      * @return Document
      */
@@ -95,8 +119,34 @@ class Document extends AbstractModel
     /**
      * @return Salarie
      */
-    public function getSalarie(): ?Salarie
+    public function getSalarie(): Salarie
     {
         return $this->salarie;
+    }
+
+    /**
+     * @return Document
+     */
+    public function generateNom(): Document
+    {
+        $this->nom = $this->getDocumentType()->getUniqueCode(). '_' .time(). '_' .$this->getId(). '.' .$this->getExtension();
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDirectoryPath(): string
+    {
+        return __ATTACHMENT_DIR__ . $this->getSalarie()->getId() . DIRECTORY_SEPARATOR;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getFilePath(): string
+    {
+        return $this->getDirectoryPath() . $this->nom;
     }
 }
