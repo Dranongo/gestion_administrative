@@ -151,6 +151,9 @@ class Salarie extends AbstractModel
         return $this->qualite;
     }
 
+    /**
+     * @return array
+     */
     public function getQualitesPossibles() : array
     {
     	return $this->qualitesPossibles;
@@ -535,7 +538,6 @@ class Salarie extends AbstractModel
     {
         return $this->tauxInvalidite;
     }
-
 
     /**
      * @param bool $etranger

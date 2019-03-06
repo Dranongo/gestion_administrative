@@ -25,7 +25,7 @@ class DatabaseConnection
 
     final public static function getInstance()
     {
-        if(is_null(self::$_instance)) {
+        if (is_null(self::$_instance)) {
             self::$_instance = new DatabaseConnection();
             $config = require __CONFIG_DIR__ . 'database.php';
             $dsn = $config['driver'] . ':dbname=' . $config['dbname'] . ';host=' . $config['host'] . ';charset=' . $config['charset'];

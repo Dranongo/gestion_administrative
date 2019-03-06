@@ -22,7 +22,7 @@ class TravailleurEtranger extends AbstractModel
     /**
      * @var int
      */
-    protected $numCarteSejour;
+    protected $numeroCarteSejour;
 
     /**
      * @var Salarie
@@ -87,12 +87,12 @@ class TravailleurEtranger extends AbstractModel
     }
 
     /**
-     * @param int $numCarteSejour
+     * @param int $numeroCarteSejour
      * @return TravailleurEtranger
      */
-    public function setNumCarteSejour(int $numCarteSejour): TravailleurEtranger
+    public function setNumeroCarteSejour(int $numeroCarteSejour): TravailleurEtranger
     {
-        $this->numCarteSejour = $numCarteSejour;
+        $this->numeroCarteSejour = $numeroCarteSejour;
 
         return $this;
     }
@@ -100,9 +100,9 @@ class TravailleurEtranger extends AbstractModel
     /**
      * @return int
      */
-    public function getNumCarteSejour(): int
+    public function getNumeroCarteSejour(): int
     {
-        return $this->numCarteSejour;
+        return $this->numeroCarteSejour;
     }
 
     /**
