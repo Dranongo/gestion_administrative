@@ -17,6 +17,18 @@ class Formation extends AbstractModel
     /**
      * @var string
      */
+    protected $niveauxPossibles = [
+        'Niveau I',
+        'Niveau II',
+        'Niveau III',
+        'Niveau IV',
+        'Niveau V',
+        'Niveau V bis et VI'
+    ];  
+
+    /**
+     * @var string
+     */
     protected $organisme;
 
     /**
@@ -80,6 +92,11 @@ class Formation extends AbstractModel
     public function getNiveau(): string
     {
         return $this->niveau;
+    }
+
+    public function getNiveauxPossibles() : array
+    {
+        return $this->niveauxPossibles;
     }
 
     /**

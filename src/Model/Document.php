@@ -129,7 +129,7 @@ class Document extends AbstractModel
      */
     public function generateNom(): Document
     {
-        $this->nom = $this->getDocumentType()->getUniqueCode(). '_' .time(). '_' .$this->getId(). '.' .$this->getExtension();
+        $this->nom = $this->getDocumentType()->getUniqueCode() . '_' . time() . '_' . $this->getId() . '.' . $this->getExtension();
 
         return $this;
     }

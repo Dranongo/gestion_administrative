@@ -29,4 +29,19 @@ abstract class AbstractModel
     {
         return $this->id;
     }
+
+    /**
+     * @param string $parameter
+     * @param string $value
+     * @return bool
+     */
+    final public function checkChoixPossibles(array $parameter, string $value): bool
+    {
+        $method = 'get' . ucfirst($parameter);
+        if (method_exists($this, $method)) {
+            $possibleValues = $this->{method}();
+            return is_array($possibleValues) && in_array($value, $possibleValues);
+        }
+        return false;
+    }    
 }

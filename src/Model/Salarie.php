@@ -9,6 +9,14 @@ class Salarie extends AbstractModel
      */
     protected $qualite;
 
+	/**
+     * @var string
+     */
+    protected $qualitesPossibles = [
+    	'Monsieur',
+    	'Madame'
+    ];    
+
     /**
      * @var string
      */
@@ -136,6 +144,11 @@ class Salarie extends AbstractModel
     public function getQualite(): string
     {
         return $this->qualite;
+    }
+
+    public function getQualitesPossibles() : array
+    {
+    	return $this->qualitesPossibles;
     }
 
     /**
