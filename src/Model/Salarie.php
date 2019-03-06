@@ -5,7 +5,7 @@ namespace Model;
 class Salarie extends AbstractModel
 {
 	/**
-     * @var bool
+     * @var string
      */
     protected $qualite;
 
@@ -119,6 +119,24 @@ class Salarie extends AbstractModel
      */
     protected $tauxInvalidite;
 
+    /**
+     * @param string $qualite
+     * @return Salarie
+     */
+    public function setQualite(string $qualite): Salarie
+    {
+        $this->qualite = $qualite;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQualite(): string
+    {
+        return $this->qualite;
+    }
 
     /**
      * @param string $nom
