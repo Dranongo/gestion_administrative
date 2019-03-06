@@ -215,7 +215,7 @@ function getUniqueCode($nameTable, $idValue){
 
 function setSocialCategory($idSalarie, $bdd){
 	$id_salarie = securite_bdd($idSalarie, $bdd);
-	$id_categorie_socio_professionnelle = securite_bdd($_POST["SocialProfessionalGroup"], $bdd);;
+	$id_categorie_socio_professionnelle = securite_bdd($_POST["SocialProfessionalGroup"], $bdd);
 	$date_debut = securite_bdd($_POST["StartingDateStatus"], $bdd);
 	$date_fin = securite_bdd($_POST["EndingDateStatus"], $bdd);
 
@@ -465,8 +465,9 @@ function setAttachment($idSalarie, $name, $type, $fileTmp, $bdd){
 	echo $bdd->lastInsertId();
 	$nameFile = updateFileName($lastInsertIdAttachment, $name, $type);
 
-	$req = $bdd->prepare('UPDATE document SET nom_document = :nom_document WHERE id_document = '. $lastInsertIdAttachment);
+	$req = $bdd->prepare('UPDATE document SET nom_document = :nom_document WHERE id_document = :id_attachment');
 	$req->bindParam(':nom_document', $nameFile);
+	$req->bindParam(':id_attachment', $lastInsertIdAttachment);
 
 	$req->execute();
 	$arr = $req->errorInfo();
