@@ -203,5 +203,4 @@ class DocumentType extends AbstractModel
     {
         return $this->typesContrat;
     }
-
 }

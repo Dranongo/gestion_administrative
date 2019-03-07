@@ -17,7 +17,12 @@ class TypeContrat extends AbstractModel
     /**
      * @var array<DocumentType>
      */
-    protected $documentTypes;
+    protected $documentTypes = [];
+
+    /**
+     * @var array<Contrat>
+     */
+    protected $contrats = [];
 
     /**
      * @param string $code
@@ -114,5 +119,64 @@ class TypeContrat extends AbstractModel
     public function getDocumentTypes(): array
     {
         return $this->documentTypes;
+    }
+
+    /**
+     * @param array $contrats
+     * @return TypeContrat
+     */
+    public function setContrats(array $contrats): TypeContrat
+    {
+        $this->removeAllContrats();
+        foreach ($contrats as $contrat) {
+            if ($contrat instanceof Contrat) {
+                $this->contrats[$contrat->getId()] = $contrat;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return TypeContrat
+     */
+    public function removeAllContrats(): TypeContrat
+    {
+        $this->contrats = [];
+
+        return $this;
+    }
+
+    /**
+     * @param Contrat $contrat
+     * @return TypeContrat
+     */
+    public function addContrat(Contrat $contrat): TypeContrat
+    {
+        $this->contrats[$contrat->getId()] = $contrat;
+
+        return $this;
+    }
+
+    /**
+     * @param Contrat $contrat
+     * @return TypeContrat
+     */
+    public function removeContrat(Contrat $contrat): TypeContrat
+    {
+        $contrat = $this->getContrats();
+        if (array_key_exists($contrat->getId(), $contrats)) {
+            unset($contrats[$contrat->getId()]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<Contrat>
+     */
+    public function getContrats(): array
+    {
+        return $this->contrats;
     }
 }

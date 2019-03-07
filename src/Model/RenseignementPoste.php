@@ -15,6 +15,11 @@ class RenseignementPoste extends AbstractModel
     protected $nom;
 
     /**
+     * @var array<Contrat>
+     */
+    protected $contrats = [];
+
+    /**
      * @param string $code
      * @return RenseignementPoste
      */
@@ -50,5 +55,64 @@ class RenseignementPoste extends AbstractModel
     public function getNom(): string
     {
         return $this->nom;
+    }
+
+    /**
+     * @param array $contrats
+     * @return RenseignementPoste
+     */
+    public function setContrats(array $contrats): RenseignementPoste
+    {
+        $this->removeAllContrats();
+        foreach ($contrats as $contrat) {
+            if ($contrat instanceof Contrat) {
+                $this->contrats[$contrat->getId()] = $contrat;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return RenseignementPoste
+     */
+    public function removeAllContrats(): RenseignementPoste
+    {
+        $this->contrats = [];
+
+        return $this;
+    }
+
+    /**
+     * @param Contrat $contrat
+     * @return RenseignementPoste
+     */
+    public function addContrat(Contrat $contrat): RenseignementPoste
+    {
+        $this->contrats[$contrat->getId()] = $contrat;
+
+        return $this;
+    }
+
+    /**
+     * @param Contrat $contrat
+     * @return RenseignementPoste
+     */
+    public function removeContrat(Contrat $contrat): RenseignementPoste
+    {
+        $contrat = $this->getContrats();
+        if (array_key_exists($contrat->getId(), $contrats)) {
+            unset($contrats[$contrat->getId()]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<Contrat>
+     */
+    public function getContrats(): array
+    {
+        return $this->contrats;
     }
 }

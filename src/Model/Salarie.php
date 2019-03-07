@@ -168,6 +168,11 @@ class Salarie extends AbstractModel
     protected $categoriesSocioProfessionnelles = [];
 
     /**
+     * @var array<Contrat>
+     */
+    protected $contrats = [];
+
+    /**
      * @param string $qualite
      * @return Salarie
      */
@@ -814,5 +819,64 @@ class Salarie extends AbstractModel
     public function getCategoriesSocioProfessionnelles(): array
     {
         return $this->categoriesSocioProfessionnelles;
+    }
+
+    /**
+     * @param array $contrats
+     * @return Salarie
+     */
+    public function setContrats(array $contrats): Salarie
+    {
+        $this->removeAllContrats();
+        foreach ($contrats as $contrat) {
+            if ($contrat instanceof Contrat) {
+                $this->contrats[$contrat->getId()] = $contrat;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Salarie
+     */
+    public function removeAllContrats(): Salarie
+    {
+        $this->contrats = [];
+
+        return $this;
+    }
+
+    /**
+     * @param Contrat $contrat
+     * @return Salarie
+     */
+    public function addContrat(Contrat $contrat): Salarie
+    {
+        $this->contrats[$contrat->getId()] = $contrat;
+
+        return $this;
+    }
+
+    /**
+     * @param Contrat $contrat
+     * @return Salarie
+     */
+    public function removeContrat(Contrat $contrat): Salarie
+    {
+        $contrat = $this->getContrats();
+        if (array_key_exists($contrat->getId(), $contrats)) {
+            unset($contrats[$contrat->getId()]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<Contrat>
+     */
+    public function getContrats(): array
+    {
+        return $this->contrats;
     }
 }
