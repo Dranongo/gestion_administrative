@@ -33,4 +33,12 @@ class DatabaseConnection
         }
         return self::$_instance;
     }
+
+    /**
+     * @var \PDO
+     */
+    public function getConnection(): \PDO
+    {
+        return self::$_connection;
+    }
 }

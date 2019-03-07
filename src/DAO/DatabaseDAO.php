@@ -21,5 +21,8 @@ abstract class DatabaseDAO
     /**
      * DatabaseDAO constructor.
      */
-    public function __construct() {}
+    public function __construct() 
+    {
+        $this->connection = DatabaseConnection::getInstance()->getConnection();
+    }
 }
