@@ -11,7 +11,7 @@ abstract class DatabaseDAO
     /**
      * @var \PDO
      */
-    protected $connection;
+    private $connection;
 
     /**
      * @var string
@@ -21,8 +21,13 @@ abstract class DatabaseDAO
     /**
      * DatabaseDAO constructor.
      */
-    public function __construct() 
+    final public function __construct() 
     {
         $this->connection = DatabaseConnection::getInstance()->getConnection();
+    }
+
+    protected function getConnection()
+    {
+
     }
 }
