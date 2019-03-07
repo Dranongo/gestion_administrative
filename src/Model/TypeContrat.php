@@ -15,6 +15,11 @@ class TypeContrat extends AbstractModel
     protected $nom;
 
     /**
+     * @var array<DocumentType>
+     */
+    protected $documentTypes;
+
+    /**
      * @param string $code
      * @return TypeContrat
      */
@@ -50,5 +55,64 @@ class TypeContrat extends AbstractModel
     public function getNom(): string
     {
         return $this->nom;
+    }
+
+    /**
+     * @param array $documentTypes
+     * @return TypeContrat
+     */
+    public function setDocumentTypes(array $documentTypes): TypeContrat
+    {
+        $this->removeAllDocumentTypes();
+        foreach ($documentTypes as $documentType) {
+            if ($documentType instanceof DocumentType) {
+                $this->documentTypes[$documentType->getId()] = $documentType;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return TypeContrat
+     */
+    public function removeAllDocumentTypes(): TypeContrat
+    {
+        $this->documentTypes = [];
+
+        return $this;
+    }
+
+    /**
+     * @param DocumentType $documentType
+     * @return TypeContrat
+     */
+    public function addDocumentType(DocumentType $documentType): TypeContrat
+    {
+        $this->documentTypes[$documentType->getId()] = $documentType;
+
+        return $this;
+    }
+
+    /**
+     * @param DocumentType $documentType
+     * @return TypeContrat
+     */
+    public function removeDocumentType(DocumentType $documentType): TypeContrat
+    {
+        $documentType = $this->getDocumentTypes();
+        if (array_key_exists($documentType->getId(), $documentTypes)) {
+            unset($documentTypes[$documentType->getId()]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<DocumentType>
+     */
+    public function getDocumentTypes(): array
+    {
+        return $this->documentTypes;
     }
 }

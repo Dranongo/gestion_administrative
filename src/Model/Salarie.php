@@ -153,6 +153,21 @@ class Salarie extends AbstractModel
     protected $contactsUrgence = [];
 
     /**
+     * @var \DateTime
+     */
+    protected $dateDebutCategorieSocioProfessionnelle;
+
+    /**
+     * @var \DateTime
+     */
+    protected $dateFinCategorieSocioProfessionnelle;
+
+    /**
+     * @var array<CategorieSocioProfessionnelle>
+     */
+    protected $categoriesSocioProfessionnelles = [];
+
+    /**
      * @param string $qualite
      * @return Salarie
      */
@@ -702,5 +717,102 @@ class Salarie extends AbstractModel
     public function getContactsUrgence(): array
     {
         return $this->contactsUrgence;
+    }
+
+    /**
+     * @param \DateTime $dateDebutCategorieSocioProfessionnelle
+     * @return Salarie
+     */
+    public function setDateDebutCategorieSocioProfessionnelle(\DateTime $dateDebutCategorieSocioProfessionnelle): Salarie
+    {
+        $this->dateDebutCategorieSocioProfessionnelle = $dateDebutCategorieSocioProfessionnelle;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateDebutCategorieSocioProfessionnelle(): ?\DateTime
+    {
+        return $this->dateDebutCategorieSocioProfessionnelle;
+    }
+
+    /**
+     * @param \DateTime $dateFinCategorieSocioProfessionnelle
+     * @return Salarie
+     */
+    public function setDateFinCategorieSocioProfessionnelle(\DateTime $dateFinCategorieSocioProfessionnelle): Salarie
+    {
+        $this->dateFinCategorieSocioProfessionnelle = $dateFinCategorieSocioProfessionnelle;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateFinCategorieSocioProfessionnelle(): ?\DateTime
+    {
+        return $this->dateFinCategorieSocioProfessionnelle;
+    }
+
+    /**
+     * @param array $categoriesSocioProfessionnelles
+     * @return Salarie
+     */
+    public function setCategoriesSocioProfessionnelles(array $categoriesSocioProfessionnelles): Salarie
+    {
+        $this->removeAllSalaries();
+        foreach ($categoriesSocioProfessionnelles as $categorieSocioProfessionnelle) {
+            if ($categorieSocioProfessionnelle instanceof CategorieSocioProfessionnelle) {
+                $this->categoriesSocioProfessionnelles[$categorieSocioProfessionnelle->getId()] = $categorieSocioProfessionnelle;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Salarie
+     */
+    public function removeAllCategoriesSocioProfessionnelles(): Salarie
+    {
+        $this->categoriesSocioProfessionnelles = [];
+
+        return $this;
+    }
+
+    /**
+     * @param CategorieSocioProfessionnelle $categorieSocioProfessionnelle
+     * @return Salarie
+     */
+    public function addCategorieSocioProfessionnelle(CategorieSocioProfessionnelle $categorieSocioProfessionnelle): Salarie
+    {
+        $this->categoriesSocioProfessionnelles[$categorieSocioProfessionnelle->getId()] = $categorieSocioProfessionnelle;
+
+        return $this;
+    }
+
+    /*
+     * @param CategorieSocioProfessionnelle $categorieSocioProfessionnelle
+     * @return Salarie
+     */
+    public function removeCategorieSocioProfessionnelle(CategorieSocioProfessionnelle $categorieSocioProfessionnelle): Salarie
+    {
+        $categorieSocioProfessionnelle = $this->getCategoriesSocioProfessionnelles();
+        if (array_key_exists($categorieSocioProfessionnelle->getId(), $categoriesSocioProfessionnelles)) {
+            unset($categoriesSocioProfessionnelles[$categorieSocioProfessionnelle->getId()]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<CategorieSocioProfessionnelle>
+     */
+    public function getCategoriesSocioProfessionnelles(): array
+    {
+        return $this->categoriesSocioProfessionnelles;
     }
 }

@@ -132,10 +132,10 @@ class CategorieSocioProfessionnelle extends AbstractModel
     }
 
     /**
-     * @param salarie $salarie
+     * @param Salarie $salarie
      * @return CategorieSocioProfessionnelle
      */
-    public function addSalarie(salarie $salarie): CategorieSocioProfessionnelle
+    public function addSalarie(Salarie $salarie): CategorieSocioProfessionnelle
     {
         $this->salaries[$salarie->getId()] = $salarie;
 
@@ -143,10 +143,10 @@ class CategorieSocioProfessionnelle extends AbstractModel
     }
 
     /**
-     * @param salarie $salarie
+     * @param Salarie $salarie
      * @return CategorieSocioProfessionnelle
      */
-    public function removeSalarie(salarie $salarie): CategorieSocioProfessionnelle
+    public function removeSalarie(Salarie $salarie): CategorieSocioProfessionnelle
     {
         $salarie = $this->getSalaries();
         if (array_key_exists($salarie->getId(), $salaries)) {

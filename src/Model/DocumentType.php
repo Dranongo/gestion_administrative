@@ -25,6 +25,11 @@ class DocumentType extends AbstractModel
     protected $documents = [];
 
     /**
+     * @var array<TypeContrat>
+     */
+    protected $typesContrat = [];    
+
+    /**
      * @param string $label
      * @return DocumentType
      */
@@ -138,6 +143,65 @@ class DocumentType extends AbstractModel
     public function getDocuments(): array
     {
         return $this->documents;
+    }
+
+    /**
+     * @param array $typesContrat
+     * @return DocumentType
+     */
+    public function setTypesContrat(array $typesContrat): DocumentType
+    {
+        $this->removeAllTypesContrat();
+        foreach ($typesContrat as $typeContrat) {
+            if ($typeContrat instanceof TypeContrat) {
+                $this->typesContrat[$typeContrat->getId()] = $typeContrat;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return DocumentType
+     */
+    public function removeAllTypesContrat(): DocumentType
+    {
+        $this->typesContrat = [];
+
+        return $this;
+    }
+
+    /**
+     * @param TypeContrat $typeContrat
+     * @return DocumentType
+     */
+    public function addTypeContrat(TypeContrat $typeContrat): DocumentType
+    {
+        $this->typesContrat[$typeContrat->getId()] = $typeContrat;
+
+        return $this;
+    }
+
+    /**
+     * @param TypeContrat $typeContrat
+     * @return DocumentType
+     */
+    public function removeTypeContrat(TypeContrat $typeContrat): DocumentType
+    {
+        $typeContrat = $this->getTypesContrat();
+        if (array_key_exists($typeContrat->getId(), $typesContrat)) {
+            unset($typesContrat[$typeContrat->getId()]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<TypeContrat>
+     */
+    public function getTypesContrat(): array
+    {
+        return $this->typesContrat;
     }
 
 }
