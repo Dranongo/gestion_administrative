@@ -37,12 +37,12 @@ class Formation extends AbstractModel
     protected $lieu;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $dateDebut;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $dateFin;
 
@@ -141,10 +141,10 @@ class Formation extends AbstractModel
     }
 
     /**
-     * @param DateTime $dateDebut
+     * @param \DateTime $dateDebut
      * @return Formation
      */
-    public function setDateDebut(DateTime $dateDebut): Formation
+    public function setDateDebut(\DateTime $dateDebut): Formation
     {
         $this->dateDebut = $dateDebut;
 
@@ -152,18 +152,18 @@ class Formation extends AbstractModel
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getDateDebut(): DateTime
+    public function getDateDebut(): \DateTime
     {
         return $this->dateDebut;
     }
 
     /**
-     * @param DateTime $dateFin
+     * @param \DateTime $dateFin
      * @return Formation
      */
-    public function setDateFin(DateTime $dateFin): Formation
+    public function setDateFin(\DateTime $dateFin): Formation
     {
         $this->dateFin = $dateFin;
 
@@ -171,9 +171,9 @@ class Formation extends AbstractModel
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getDateFin(): DateTime
+    public function getDateFin(): \DateTime
     {
         return $this->dateFin;
     }

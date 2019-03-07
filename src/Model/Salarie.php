@@ -100,7 +100,7 @@ class Salarie extends AbstractModel
     /**
      * @var array
      */
-    protected $situationFamilialePossibles = [
+    protected $situationsFamilialesPossibles = [
         'Célibataire',
         'Concubin(e)',
         'Pacsé(e)',
@@ -469,7 +469,7 @@ class Salarie extends AbstractModel
      */
     public function getSituationFamilialePossibles() : array
     {
-        return $this->situationFamilialePossibles;
+        return $this->situationsFamilialesPossibles;
     }
 
     /**
