@@ -26,8 +26,18 @@ abstract class DatabaseDAO
         $this->connection = DatabaseConnection::getInstance()->getConnection();
     }
 
-    protected function getConnection()
+    /**
+     * @return \PDO
+     */
+    protected function getConnection() : \PDO
     {
-
+        return $this->connection;
     }
+
+    /**
+     * @param array $data
+     * @param bool $recursive
+     * @return AbstractModel
+     */
+    protected abstract function buildDomainObject(array $data, bool $recursive = false): AbstractModel;
 }
