@@ -114,7 +114,7 @@ class CategorieSocioProfessionnelle extends AbstractModel
         $this->removeAllSalaries();
         foreach ($salaries as $salarie) {
             if ($salarie instanceof Salarie) {
-                $this->salaries[$salarie->getId()] = $salarie;
+                $this->addSalarie($salarie);
             }
         }
 
@@ -137,7 +137,7 @@ class CategorieSocioProfessionnelle extends AbstractModel
      */
     public function addSalarie(Salarie $salarie): CategorieSocioProfessionnelle
     {
-        $this->salaries[$salarie->getId()] = $salarie;
+        $this->salaries[] = $salarie;
 
         return $this;
     }
@@ -148,9 +148,9 @@ class CategorieSocioProfessionnelle extends AbstractModel
      */
     public function removeSalarie(Salarie $salarie): CategorieSocioProfessionnelle
     {
-        $salarie = $this->getSalaries();
-        if (array_key_exists($salarie->getId(), $salaries)) {
-            unset($salaries[$salarie->getId()]);
+        $key = array_search($salarie, this->getSalaries(), true);
+        if ($key !== false) {
+            unset($this->salaries[$key]);
         }
 
         return $this;

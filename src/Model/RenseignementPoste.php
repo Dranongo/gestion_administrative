@@ -66,7 +66,7 @@ class RenseignementPoste extends AbstractModel
         $this->removeAllContrats();
         foreach ($contrats as $contrat) {
             if ($contrat instanceof Contrat) {
-                $this->contrats[$contrat->getId()] = $contrat;
+                $this->addContrat($contrat);
             }
         }
 
@@ -89,7 +89,7 @@ class RenseignementPoste extends AbstractModel
      */
     public function addContrat(Contrat $contrat): RenseignementPoste
     {
-        $this->contrats[$contrat->getId()] = $contrat;
+        $this->contrats[] = $contrat;
 
         return $this;
     }
@@ -100,9 +100,9 @@ class RenseignementPoste extends AbstractModel
      */
     public function removeContrat(Contrat $contrat): RenseignementPoste
     {
-        $contrat = $this->getContrats();
-        if (array_key_exists($contrat->getId(), $contrats)) {
-            unset($contrats[$contrat->getId()]);
+        $key = array_search($contrat, this->getContrats(), true);
+        if ($key !== false) {
+            unset($this->contrats[$key]);
         }
 
         return $this;

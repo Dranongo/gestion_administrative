@@ -173,6 +173,11 @@ class Salarie extends AbstractModel
     protected $contrats = [];
 
     /**
+     * @var array<Document>
+     */
+    protected $documents = [];
+
+    /**
      * @param string $qualite
      * @return Salarie
      */
@@ -596,7 +601,7 @@ class Salarie extends AbstractModel
         $this->removeAllFormations();
         foreach ($formations as $formation) {
             if ($formation instanceof Formation) {
-                $this->formations[$formation->getId()] = $formation;
+                $this->addFormation($formation);
             }
         }
 
@@ -619,7 +624,7 @@ class Salarie extends AbstractModel
      */
     public function addFormation(formation $formation): Salarie
     {
-        $this->formations[$formation->getId()] = $formation;
+        $this->formations[] = $formation;
 
         return $this;
     }
@@ -630,9 +635,9 @@ class Salarie extends AbstractModel
      */
     public function removeFormation(formation $formation): Salarie
     {
-        $formation = $this->getFormations();
-        if (array_key_exists($formation->getId(), $formations)) {
-            unset($formations[$formation->getId()]);
+        $key = array_search($formation, this->getFormations(), true);
+        if ($key !== false) {
+            unset($this->formations[$key]);
         }
 
         return $this;
@@ -674,7 +679,7 @@ class Salarie extends AbstractModel
         $this->removeAllContactsUrgence();
         foreach ($contactsUrgence as $contactUrgence) {
             if ($contactUrgence instanceof ContactUrgence) {
-                $this->contactsUrgence[$contactUrgence->getId()] = $contactUrgence;
+                $this->addContactUrgence($contactUrgence);
             }
         }
 
@@ -697,7 +702,7 @@ class Salarie extends AbstractModel
      */
     public function addContactUrgence(ContactUrgence $contactUrgence): Salarie
     {
-        $this->contactsUrgence[$contactUrgence->getId()] = $contactUrgence;
+        $this->contactsUrgence[] = $contactUrgence;
 
         return $this;
     }
@@ -708,9 +713,9 @@ class Salarie extends AbstractModel
      */
     public function removeContactUrgence(ContactUrgence $contactUrgence): Salarie
     {
-        $contactUrgence = $this->getContactsUrgence();
-        if (array_key_exists($contactUrgence->getId(), $contactsUrgence)) {
-            unset($contactsUrgence[$contactUrgence->getId()]);
+        $key = array_search($contactUrgence, this->getContactsUrgence(), true);
+        if ($key !== false) {
+            unset($this->contactsUrgence[$key]);
         }
 
         return $this;
@@ -771,7 +776,7 @@ class Salarie extends AbstractModel
         $this->removeAllSalaries();
         foreach ($categoriesSocioProfessionnelles as $categorieSocioProfessionnelle) {
             if ($categorieSocioProfessionnelle instanceof CategorieSocioProfessionnelle) {
-                $this->categoriesSocioProfessionnelles[$categorieSocioProfessionnelle->getId()] = $categorieSocioProfessionnelle;
+                $this->addCategorieSocioProfessionnelle($categorieSocioProfessionnelle);
             }
         }
 
@@ -794,7 +799,7 @@ class Salarie extends AbstractModel
      */
     public function addCategorieSocioProfessionnelle(CategorieSocioProfessionnelle $categorieSocioProfessionnelle): Salarie
     {
-        $this->categoriesSocioProfessionnelles[$categorieSocioProfessionnelle->getId()] = $categorieSocioProfessionnelle;
+        $this->categoriesSocioProfessionnelles[] = $categorieSocioProfessionnelle;
 
         return $this;
     }
@@ -805,9 +810,9 @@ class Salarie extends AbstractModel
      */
     public function removeCategorieSocioProfessionnelle(CategorieSocioProfessionnelle $categorieSocioProfessionnelle): Salarie
     {
-        $categorieSocioProfessionnelle = $this->getCategoriesSocioProfessionnelles();
-        if (array_key_exists($categorieSocioProfessionnelle->getId(), $categoriesSocioProfessionnelles)) {
-            unset($categoriesSocioProfessionnelles[$categorieSocioProfessionnelle->getId()]);
+        $key = array_search($categorieSocioProfessionnelle, this->getCategoriesSocioProfessionnelles(), true);
+        if ($key !== false) {
+            unset($this->categoriesSocioProfessionnelles[$key]);
         }
 
         return $this;
@@ -830,7 +835,7 @@ class Salarie extends AbstractModel
         $this->removeAllContrats();
         foreach ($contrats as $contrat) {
             if ($contrat instanceof Contrat) {
-                $this->contrats[$contrat->getId()] = $contrat;
+                $this->addContrat($contrat);
             }
         }
 
@@ -853,7 +858,7 @@ class Salarie extends AbstractModel
      */
     public function addContrat(Contrat $contrat): Salarie
     {
-        $this->contrats[$contrat->getId()] = $contrat;
+        $this->contrats[] = $contrat;
 
         return $this;
     }
@@ -864,9 +869,9 @@ class Salarie extends AbstractModel
      */
     public function removeContrat(Contrat $contrat): Salarie
     {
-        $contrat = $this->getContrats();
-        if (array_key_exists($contrat->getId(), $contrats)) {
-            unset($contrats[$contrat->getId()]);
+        $key = array_search($contrat, this->getContrats(), true);
+        if ($key !== false) {
+            unset($this->contrats[$key]);
         }
 
         return $this;
@@ -878,5 +883,64 @@ class Salarie extends AbstractModel
     public function getContrats(): array
     {
         return $this->contrats;
+    }
+
+    /**
+     * @param array $documents
+     * @return Salarie
+     */
+    public function setDocuments(array $documents): Salarie
+    {
+        $this->removeAllDocuments();
+        foreach ($documents as $document) {
+            if ($document instanceof Document) {
+                $this->addDocument($document);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Salarie
+     */
+    public function removeAllDocuments(): Salarie
+    {
+        $this->documents = [];
+
+        return $this;
+    }
+
+    /**
+     * @param Document $document
+     * @return Salarie
+     */
+    public function addDocument(Document $document): Salarie
+    {
+        $this->documents[] = $document;
+
+        return $this;
+    }
+
+    /**
+     * @param Document $document
+     * @return Salarie
+     */
+    public function removeDocument(Document $document): Salarie
+    {
+        $key = array_search($document, this->getDocuments(), true);
+        if ($key !== false) {
+            unset($this->documents[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<Document>
+     */
+    public function getDocuments(): array
+    {
+        return $this->documents;
     }
 }

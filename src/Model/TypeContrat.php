@@ -71,7 +71,7 @@ class TypeContrat extends AbstractModel
         $this->removeAllDocumentTypes();
         foreach ($documentTypes as $documentType) {
             if ($documentType instanceof DocumentType) {
-                $this->documentTypes[$documentType->getId()] = $documentType;
+                $this->addDocumentType($documentType);
             }
         }
 
@@ -94,7 +94,7 @@ class TypeContrat extends AbstractModel
      */
     public function addDocumentType(DocumentType $documentType): TypeContrat
     {
-        $this->documentTypes[$documentType->getId()] = $documentType;
+        $this->documentTypes[] = $documentType;
 
         return $this;
     }
@@ -105,9 +105,9 @@ class TypeContrat extends AbstractModel
      */
     public function removeDocumentType(DocumentType $documentType): TypeContrat
     {
-        $documentType = $this->getDocumentTypes();
-        if (array_key_exists($documentType->getId(), $documentTypes)) {
-            unset($documentTypes[$documentType->getId()]);
+        $key = array_search($documentType, this->getDocumentTypes(), true);
+        if ($key !== false) {
+            unset($this->documentTypes[$key]);
         }
 
         return $this;
@@ -130,7 +130,7 @@ class TypeContrat extends AbstractModel
         $this->removeAllContrats();
         foreach ($contrats as $contrat) {
             if ($contrat instanceof Contrat) {
-                $this->contrats[$contrat->getId()] = $contrat;
+                $this->addContrat($contrat);
             }
         }
 
@@ -153,7 +153,7 @@ class TypeContrat extends AbstractModel
      */
     public function addContrat(Contrat $contrat): TypeContrat
     {
-        $this->contrats[$contrat->getId()] = $contrat;
+        $this->contrats[] = $contrat;
 
         return $this;
     }
@@ -164,9 +164,9 @@ class TypeContrat extends AbstractModel
      */
     public function removeContrat(Contrat $contrat): TypeContrat
     {
-        $contrat = $this->getContrats();
-        if (array_key_exists($contrat->getId(), $contrats)) {
-            unset($contrats[$contrat->getId()]);
+        $key = array_search($contrat, this->getContrats(), true);
+        if ($key !== false) {
+            unset($this->contrats[$key]);
         }
 
         return $this;

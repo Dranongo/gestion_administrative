@@ -76,7 +76,7 @@ class Contrat extends AbstractModel
         $this->removeAllSalaries();
         foreach ($salaries as $salarie) {
             if ($salarie instanceof Salarie) {
-                $this->salaries[$salarie->getId()] = $salarie;
+                $this->addSalarie($salarie);
             }
         }
 
@@ -99,7 +99,7 @@ class Contrat extends AbstractModel
      */
     public function addSalarie(Salarie $salarie): Contrat
     {
-        $this->salaries[$salarie->getId()] = $salarie;
+        $this->salaries[] = $salarie;
 
         return $this;
     }
@@ -113,6 +113,11 @@ class Contrat extends AbstractModel
         $salarie = $this->getSalaries();
         if (array_key_exists($salarie->getId(), $salaries)) {
             unset($salaries[$salarie->getId()]);
+        }
+
+        $key = array_search($salarie, this->getSalaries(), true);
+        if ($key !== false) {
+            unset($this->salaries[$key]);
         }
 
         return $this;
@@ -135,7 +140,7 @@ class Contrat extends AbstractModel
         $this->removeAllRenseignementsPoste();
         foreach ($renseignementsPoste as $renseignementPoste) {
             if ($renseignementPoste instanceof RenseignementPoste) {
-                $this->renseignementsPoste[$renseignementPoste->getId()] = $renseignementPoste;
+                $this->addRenseignementPoste($renseignementPoste);
             }
         }
 
@@ -158,7 +163,7 @@ class Contrat extends AbstractModel
      */
     public function addRenseignementPoste(RenseignementPoste $renseignementPoste): Contrat
     {
-        $this->renseignementsPoste[$renseignementPoste->getId()] = $renseignementPoste;
+        $this->renseignementsPoste[] = $renseignementPoste;
 
         return $this;
     }
@@ -169,9 +174,9 @@ class Contrat extends AbstractModel
      */
     public function removeRenseignementPoste(RenseignementPoste $renseignementPoste): Contrat
     {
-        $renseignementPoste = $this->getSalaries();
-        if (array_key_exists($renseignementPoste->getId(), $renseignementsPoste)) {
-            unset($renseignementsPoste[$renseignementPoste->getId()]);
+        $key = array_search($renseignementPoste, this->getRenseignementsPoste(), true);
+        if ($key !== false) {
+            unset($this->renseignementsPoste[$key]);
         }
 
         return $this;
@@ -180,7 +185,7 @@ class Contrat extends AbstractModel
     /**
      * @return array<RenseignementPoste>
      */
-    public function getRenseignementPoste(): array
+    public function getRenseignementsPoste(): array
     {
         return $this->renseignementsPoste;
     }
@@ -194,7 +199,7 @@ class Contrat extends AbstractModel
         $this->removeAllTypesContrat();
         foreach ($typesContrat as $typeContrat) {
             if ($typeContrat instanceof TypeContrat) {
-                $this->typesContrat[$typeContrat->getId()] = $typeContrat;
+                $this->addTypeContrat($typeContrat);
             }
         }
 
@@ -217,7 +222,7 @@ class Contrat extends AbstractModel
      */
     public function addTypeContrat(TypeContrat $typeContrat): Contrat
     {
-        $this->typesContrat[$typeContrat->getId()] = $typeContrat;
+        $this->typesContrat[] = $typeContrat;
 
         return $this;
     }
@@ -228,9 +233,9 @@ class Contrat extends AbstractModel
      */
     public function removeTypeContrat(TypeContrat $typeContrat): Contrat
     {
-        $typeContrat = $this->getTypesContrat();
-        if (array_key_exists($typeContrat->getId(), $typesContrat)) {
-            unset($typesContrat[$typeContrat->getId()]);
+        $key = array_search($typeContrat, this->getTypesContrat(), true);
+        if ($key !== false) {
+            unset($this->typesContrat[$key]);
         }
 
         return $this;
