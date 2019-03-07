@@ -708,7 +708,7 @@ class Salarie extends AbstractModel
      */
     public function removeContactUrgence(ContactUrgence $contactUrgence): Salarie
     {
-        $contactUrgence = $this->getFormations();
+        $contactUrgence = $this->getContactsUrgence();
         if (array_key_exists($contactUrgence->getId(), $contactsUrgence)) {
             unset($contactsUrgence[$contactUrgence->getId()]);
         }

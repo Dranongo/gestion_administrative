@@ -5,6 +5,16 @@ namespace Model;
 class Contrat extends AbstractModel
 {
 	/**
+     * @var \DateTime
+     */
+    protected $dateDebut;
+
+    /**
+     * @var \DateTime
+     */
+    protected $dateFin;
+
+	/**
      * @var array<Salarie>
      */
     protected $salaries = [];
@@ -20,14 +30,42 @@ class Contrat extends AbstractModel
     protected $typesContrat = [];
 
     /**
-     * @var \DateTime
+     * @param \DateTime $dateDebut
+     * @return Contrat
      */
-    protected $dateDebutContrat;
+    public function setDateDebut(\DateTime $dateDebut): Contrat
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
 
     /**
-     * @var \DateTime
+     * @return \DateTime
      */
-    protected $dateFinContrat;
+    public function getDateDebut(): ?\DateTime
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * @param \DateTime $dateFin
+     * @return Contrat
+     */
+    public function setDateFin(\DateTime $dateFin): Contrat
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateFin(): ?\DateTime
+    {
+        return $this->dateFin;
+    }
 
     /**
      * @param array $salaries
@@ -201,46 +239,8 @@ class Contrat extends AbstractModel
     /**
      * @return array<TypeContrat>
      */
-    public function getTypesContrat(): array
+	public function getTypesContrat(): array
     {
         return $this->typesContrat;
-    }
-
-    /**
-     * @param \DateTime $dateDebutContrat
-     * @return Contrat
-     */
-    public function setDateDebutContrat(\DateTime $dateDebutContrat): Contrat
-    {
-        $this->dateDebutContrat = $dateDebutContrat;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDateDebutContrat(): ?\DateTime
-    {
-        return $this->dateDebutContrat;
-    }
-
-    /**
-     * @param \DateTime $dateFinContrat
-     * @return Contrat
-     */
-    public function setDateFinContrat(\DateTime $dateFinContrat): Contrat
-    {
-        $this->dateFinContrat = $dateFinContrat;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDateFinContrat(): ?\DateTime
-    {
-        return $this->dateFinContrat;
     }
 }
