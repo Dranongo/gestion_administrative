@@ -135,7 +135,7 @@ class Salarie extends AbstractModel
     /**
      * @var TravailleurEtranger
      */
-    protected $etranger;
+    protected $travailleurEtranger;
 
     /**
      * @param string $qualite
@@ -604,12 +604,12 @@ class Salarie extends AbstractModel
     }
 
     /**
-     * @param TravailleurEtranger $etranger
+     * @param TravailleurEtranger $travailleurEtranger
      * @return Salarie
      */
-    public function setEtranger(TravailleurEtranger $etranger): Salarie
+    public function setTravailleurEtranger(TravailleurEtranger $travailleurEtranger): Salarie
     {
-        $this->etranger = $etranger;
+        $this->travailleurEtranger = $travailleurEtranger;
 
         return $this;
     }
@@ -617,8 +617,8 @@ class Salarie extends AbstractModel
     /**
      * @return TravailleurEtranger
      */
-    public function getEtranger() : TravailleurEtranger
+    public function getTravailleurEtranger() : TravailleurEtranger
     {
-    	return $this->etranger;
+    	return $this->travailleurEtranger;
     }
 }
