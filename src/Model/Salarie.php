@@ -138,6 +138,11 @@ class Salarie extends AbstractModel
     protected $travailleurEtranger;
 
     /**
+     * @var array<ContactUrgence>
+     */
+    protected $contactsUrgence = [];
+
+    /**
      * @param string $qualite
      * @return Salarie
      */
@@ -620,5 +625,64 @@ class Salarie extends AbstractModel
     public function getTravailleurEtranger() : TravailleurEtranger
     {
     	return $this->travailleurEtranger;
+    }
+
+    /**
+     * @param array $contactsUrgence
+     * @return Salarie
+     */
+    public function setContactsUrgence(array $contactsUrgence): Salarie
+    {
+        $this->removeAllContactsUrgence();
+        foreach ($contactsUrgence as $contactUrgence) {
+            if ($contactUrgence instanceof ContactUrgence) {
+                $this->contactsUrgence[$contactUrgence->getId()] = $contactUrgence;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Salarie
+     */
+    public function removeAllContactsUrgence(): Salarie
+    {
+        $this->contactsUrgence = [];
+
+        return $this;
+    }
+
+    /**
+     * @param ContactUrgence $contactUrgence
+     * @return Salarie
+     */
+    public function addContactUrgence(ContactUrgence $contactUrgence): Salarie
+    {
+        $this->contactsUrgence[$contactUrgence->getId()] = $contactUrgence;
+
+        return $this;
+    }
+
+    /**
+     * @param ContactUrgence $contactUrgence
+     * @return Salarie
+     */
+    public function removeContactUrgence(ContactUrgence $contactUrgence): Salarie
+    {
+        $contactUrgence = $this->getFormations();
+        if (array_key_exists($contactUrgence->getId(), $contactsUrgence)) {
+            unset($contactsUrgence[$contactUrgence->getId()]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<ContactUrgence>
+     */
+    public function getContactsUrgence(): array
+    {
+        return $this->contactsUrgence;
     }
 }
