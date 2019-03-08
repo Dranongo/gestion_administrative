@@ -148,7 +148,7 @@ class CategorieSocioProfessionnelle extends AbstractModel
      */
     public function removeSalarie(Salarie $salarie): CategorieSocioProfessionnelle
     {
-        $key = array_search($salarie, this->getSalaries(), true);
+        $key = array_search($salarie, $this->getSalaries(), true);
         if ($key !== false) {
             unset($this->salaries[$key]);
         }
