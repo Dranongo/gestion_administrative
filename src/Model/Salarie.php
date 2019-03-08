@@ -70,17 +70,17 @@ class Salarie extends AbstractModel
     /**
      * @var string
      */
-    protected $mailPro;
+    protected $mailProfessionnel;
 
     /**
      * @var string
      */
-    protected $mailPerso;
+    protected $mailPersonnel;
 
     /**
      * @var int
      */
-    protected $numSecu;
+    protected $numeroSecuriteSociale;
 
     /**
      * @var int
@@ -395,12 +395,12 @@ class Salarie extends AbstractModel
     }
 
     /**
-     * @param string $mailPro
+     * @param string $mailProfessionnel
      * @return Salarie
      */
-    public function setMailPro(string $mailPro): Salarie
+    public function setMailProfessionnel(string $mailProfessionnel): Salarie
     {
-        $this->mailPro = $mailPro;
+        $this->mailProfessionnel = $mailProfessionnel;
 
         return $this;
     }
@@ -408,18 +408,18 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getMailPro(): string
+    public function getMailProfessionnel(): string
     {
-        return $this->mailPro;
+        return $this->mailProfessionnel;
     }
 
     /**
-     * @param string $mailPerso
+     * @param string $mailPersonnel
      * @return Salarie
      */
-    public function setMailPerso(string $mailPerso): Salarie
+    public function setMailPersonnel(string $mailPersonnel): Salarie
     {
-        $this->mailPerso = $mailPerso;
+        $this->mailPersonnel = $mailPersonnel;
 
         return $this;
     }
@@ -427,18 +427,18 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getMailPerso(): string
+    public function getMailPersonnel(): string
     {
-        return $this->mailPerso;
+        return $this->mailPersonnel;
     }
 
     /**
-     * @param int $numSecu
+     * @param int $numeroSecuriteSociale
      * @return Salarie
      */
-    public function setNumSecu(int $numSecu): Salarie
+    public function setNumeroSecuriteSociale(int $numeroSecuriteSociale): Salarie
     {
-        $this->numSecu = $numSecu;
+        $this->numeroSecuriteSociale = $numeroSecuriteSociale;
 
         return $this;
     }
@@ -446,9 +446,9 @@ class Salarie extends AbstractModel
     /**
      * @return int
      */
-    public function getNumSecu(): int
+    public function getNumeroSecuriteSociale(): int
     {
-        return $this->numSecu;
+        return $this->numeroSecuriteSociale;
     }
 
     /**

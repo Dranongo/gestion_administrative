@@ -32,11 +32,11 @@ class SalarieDAO extends DatabaseDAO
                 ->setCodePostal($data['code_postal'])
                 ->setVille($data['ville'])
                 ->setTelephone($data['telephone'])
-                ->setMailPro($data['mail_professionnel'])
-                ->setMailPerso($data['mail_personnel'])
-                ->setNumSecu($data['num_secu'])
+                ->setMailProfessionnel($data['mail_professionnel'])
+                ->setMailPersonnel($data['mail_personnel'])
+                ->setNumeroSecuriteSociale($data['numero_securite_sociale'])
                 ->setRemuneration($data['remuneration'])
-                ->setEnPoste($data['salarie_en_poste'])
+                ->setEnPoste($data['en_poste'])
                 ->setSituationFamiliale($data['situation_familiale'])
                 ->setLangues($data['langues_etrangeres'])
                 ->setAutreActivite($data['autre_activite'])
@@ -67,9 +67,9 @@ class SalarieDAO extends DatabaseDAO
             'telephone' => 'telephone',
             'mailProfessionnel' => 'mail_professionnel',
             'mailPersonnel' => 'mail_personnel',
-            'numSecu' => 'num_secu',
+            'numSecu' => 'numero_securite_sociale',
             'remuneration' => 'remuneration',
-            'enPoste' => 'salarie_en_poste',
+            'enPoste' => 'en_poste',
             'situationFamiliale' => 'situation_familiale',
             'langues' => 'langues_etrangeres',
             'autreActivite' => 'autre_activite',
