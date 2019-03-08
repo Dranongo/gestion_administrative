@@ -17,7 +17,7 @@ class Enfant extends AbstractModel
     /**
      * @var \Datetime
      */
-    protected $date;
+    protected $dateNaissance;
 
     /**
      * @var Salarie
@@ -63,12 +63,12 @@ class Enfant extends AbstractModel
     }
 
     /**
-     * @param \Datetime $date
+     * @param \Datetime $dateNaissance
      * @return Enfant
      */
-    public function setDate(\Datetime $date): Enfant
+    public function setDateNaissance(\Datetime $dateNaissance): Enfant
     {
-        $this->date = $date;
+        $this->dateNaissance = $dateNaissance;
 
         return $this;
     }
@@ -76,9 +76,9 @@ class Enfant extends AbstractModel
     /**
      * @return \Datetime
      */
-    public function getDate(): \Datetime
+    public function getDateNaissance(): \Datetime
     {
-        return $this->date;
+        return $this->dateNaissance;
     }
 
     /**
