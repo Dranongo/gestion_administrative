@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 08 mars 2019 à 15:01
+-- Généré le :  ven. 08 mars 2019 à 15:19
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -292,9 +292,9 @@ CREATE TABLE IF NOT EXISTS `salarie` (
   `telephone` varchar(10) NOT NULL,
   `mail_professionnel` varchar(255) NOT NULL,
   `mail_personnel` varchar(255) NOT NULL,
-  `num_secu` varchar(15) NOT NULL,
+  `numero_securite_sociale` varchar(15) NOT NULL,
   `remuneration` int(6) NOT NULL,
-  `salarie_en_poste` tinyint(1) NOT NULL,
+  `en_poste` tinyint(1) NOT NULL,
   `situation_familiale` varchar(255) NOT NULL,
   `langues_etrangeres` text NOT NULL,
   `autre_activite` tinyint(1) NOT NULL,
@@ -309,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `salarie` (
 -- Déchargement des données de la table `salarie`
 --
 
-INSERT INTO `salarie` (`id`, `qualite`, `nom`, `prenom`, `nom_jeune_fille`, `nationalite`, `date_naissance`, `lieu_naissance`, `adresse`, `adresse2`, `code_postal`, `ville`, `telephone`, `mail_professionnel`, `mail_personnel`, `num_secu`, `remuneration`, `salarie_en_poste`, `situation_familiale`, `langues_etrangeres`, `autre_activite`, `details_autre_activite`, `autorisation_travail_mineur`, `statut_handicap`, `taux_invalidite`) VALUES
+INSERT INTO `salarie` (`id`, `qualite`, `nom`, `prenom`, `nom_jeune_fille`, `nationalite`, `date_naissance`, `lieu_naissance`, `adresse`, `adresse2`, `code_postal`, `ville`, `telephone`, `mail_professionnel`, `mail_personnel`, `numero_securite_sociale`, `remuneration`, `en_poste`, `situation_familiale`, `langues_etrangeres`, `autre_activite`, `details_autre_activite`, `autorisation_travail_mineur`, `statut_handicap`, `taux_invalidite`) VALUES
 (12, 'Monsieur', 'Clenche', 'Jean', 'Fonteyn', 'France', '1998-02-01 00:00:00', 'Vernon', '36 bis bidule', '', '27200', 'Vernon', '232210388', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 10, 0, 'Concubin(e)', 'eefefe', 0, 'Vidéo', 1, 0, 'Fou'),
 (13, 'Monsieur', 'Clenche', 'Jean', 'Fonteyn', 'France', '1998-02-01 00:00:00', 'Vernon', '36 bis bidule', '', '27200', 'Vernon', '232210388', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 10, 0, 'Concubin(e)', 'eefefe', 0, 'Vidéo', 1, 0, 'Fou'),
 (14, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15 00:00:00', 'la', '36 bis bidule', '', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
