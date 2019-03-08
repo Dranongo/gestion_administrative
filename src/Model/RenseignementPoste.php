@@ -100,7 +100,7 @@ class RenseignementPoste extends AbstractModel
      */
     public function removeContrat(Contrat $contrat): RenseignementPoste
     {
-        $key = array_search($contrat, this->getContrats(), true);
+        $key = array_search($contrat, $this->getContrats(), true);
         if ($key !== false) {
             unset($this->contrats[$key]);
         }

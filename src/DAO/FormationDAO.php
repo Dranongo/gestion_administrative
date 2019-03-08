@@ -52,7 +52,6 @@ class FormationDAO extends DatabaseDAO
             'dateDebut' => 'date_debut',
             'dateFin' => 'date_fin',
             'obtenu' => 'obtenu',
-            'idSalarie' => 'id_salarie'
         ];
     }
 }
