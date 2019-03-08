@@ -25,8 +25,8 @@ class FormationDAO extends DatabaseDAO
                   ->setNiveau($data['niveau'])
                   ->setOrganisme($data['organisme'])
                   ->setLieu($data['lieu'])
-                  ->setDateDebut(new \DateTime($data['dateDebut']))
-                  ->setDateFin(new \DateTime($data['dateFin']))
+                  ->setDateDebut(new \DateTime($data['date_debut']))
+                  ->setDateFin(new \DateTime($data['date_fin']))
                   ->setObtenu($data['obtenu']);
 
         if ($recursive) {
