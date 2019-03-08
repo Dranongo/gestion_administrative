@@ -25,8 +25,8 @@ class FormationDAO extends DatabaseDAO
                   ->setNiveau($data['niveau'])
                   ->setOrganisme($data['organisme'])
                   ->setLieu($data['lieu'])
-                  ->setDateDebut(new \DateTime($data['date_debut']))
-                  ->setDateFin(new \DateTime($data['date_fin']))
+                  ->setDateDebut(new \DateTime($data['dateDebut']))
+                  ->setDateFin(new \DateTime($data['dateFin']))
                   ->setObtenu($data['obtenu']);
 
         if ($recursive) {
@@ -44,24 +44,15 @@ class FormationDAO extends DatabaseDAO
     protected function modelToDatabaseFields(): array
     {
         return [
-            'id' => 'id_formation',
-            'nom' => '',
-            'niveau' => 'formation_niveau',
-            'organisme' => 'organisme_lieu',
-            'lieu' => '',
-            'dateDebut' => 'annee_formation_debut',
-            'dateFin' => 'annee_formation_fin',
-            'obtenu' => 'obtenu'
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function modelToDatabaseForeignKeys(): array
-    {
-        return [
-            'salarie' => 'id_salarie'
+            'id' => 'id',
+            'nom' => 'nom',
+            'niveau' => 'formation',
+            'organisme' => 'organisme',
+            'lieu' => 'lieu',
+            'dateDebut' => 'date_debut',
+            'dateFin' => 'date_fin',
+            'obtenu' => 'obtenu',
+            'idSalarie' => 'id_salarie'
         ];
     }
 }

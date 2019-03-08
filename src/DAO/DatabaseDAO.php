@@ -62,28 +62,28 @@ abstract class DatabaseDAO
     }
 
     /**
-     * @param AbstractModel $entity
+     * @param AbstractModel $model
      * @return bool
      */
-    public function save(AbstractModel $entity): bool
+    public function save(AbstractModel $model): bool
     {
         
     }
 
     /**
-     * @param AbstractModel $entity
+     * @param AbstractModel $model
      * @return bool
      */
-    protected function insert(AbstractModel $entity): bool
+    protected function insert(AbstractModel $model): bool
     {
         
     }
 
     /**
-     * @param AbstractModel $entity
+     * @param AbstractModel $model
      * @return bool
      */
-    protected function update(AbstractModel $entity): bool
+    protected function update(AbstractModel $model): bool
     {
 
     }
@@ -99,13 +99,13 @@ abstract class DatabaseDAO
     /**
      * @return array
      */
-    protected function modelValuesToDatabase(AbstractModel $entity): array
+    protected function modelValuesToDatabase(AbstractModel $model): array
     {
         $fieldsArray = [];
         foreach ($this->modelToDatabaseFields() as $param => $field) {
             $getter = 'get' . ucfirst($param);
-            if (method_exists($entity, $getter)) {
-                $value = $entity->{$getter}();
+            if (method_exists($model, $getter)) {
+                $value = $model->{$getter}();
                 if ($value instanceof \DateTime) {
                     $value = $value->format('Y-m-d H:i:s');
                 } elseif ($value instanceof AbstractModel) {

@@ -125,7 +125,7 @@ class Salarie extends AbstractModel
     /**
      * @var bool
      */
-    protected $autorisationMineur;
+    protected $autorisationTravailMineur;
 
     /**
      * @var bool
@@ -265,7 +265,7 @@ class Salarie extends AbstractModel
      * @param string $nationalite
      * @return Salarie
      */
-    public function setNationnalite(string $nationalite): Salarie
+    public function setNationalite(string $nationalite): Salarie
     {
         $this->nationalite = $nationalite;
 
@@ -275,7 +275,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getNationnalite(): string
+    public function getNationalite(): string
     {
         return $this->nationalite;
     }
@@ -408,9 +408,28 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getMailPro()): string
+    public function getMailPro(): string
     {
         return $this->mailPro;
+    }
+
+    /**
+     * @param string $mailPerso
+     * @return Salarie
+     */
+    public function setMailPerso(string $mailPerso): Salarie
+    {
+        $this->mailPerso = $mailPerso;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMailPerso(): string
+    {
+        return $this->mailPerso;
     }
 
     /**
@@ -555,6 +574,25 @@ class Salarie extends AbstractModel
     }
 
     /**
+     * @param string $autorisationTravailMineur
+     * @return Salarie
+     */
+    public function setAutorisationTravailMineur(string $autorisationTravailMineur): Salarie
+    {
+        $this->autorisationTravailMineur = $autorisationTravailMineur;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAutorisationTravailMineur(): bool
+    {
+        return $this->autorisationTravailMineur;
+    }    
+
+    /**
      * @param bool $statutHandicap
      * @return Salarie
      */
@@ -568,7 +606,7 @@ class Salarie extends AbstractModel
     /**
      * @return bool
      */
-    public function getStatutHandicap()): bool
+    public function getStatutHandicap(): bool
     {
         return $this->statutHandicap;
     }
@@ -635,7 +673,7 @@ class Salarie extends AbstractModel
      */
     public function removeFormation(formation $formation): Salarie
     {
-        $key = array_search($formation, this->getFormations(), true);
+        $key = array_search($formation, $this->getFormations(), true);
         if ($key !== false) {
             unset($this->formations[$key]);
         }
@@ -713,7 +751,7 @@ class Salarie extends AbstractModel
      */
     public function removeContactUrgence(ContactUrgence $contactUrgence): Salarie
     {
-        $key = array_search($contactUrgence, this->getContactsUrgence(), true);
+        $key = array_search($contactUrgence, $this->getContactsUrgence(), true);
         if ($key !== false) {
             unset($this->contactsUrgence[$key]);
         }
@@ -810,7 +848,7 @@ class Salarie extends AbstractModel
      */
     public function removeCategorieSocioProfessionnelle(CategorieSocioProfessionnelle $categorieSocioProfessionnelle): Salarie
     {
-        $key = array_search($categorieSocioProfessionnelle, this->getCategoriesSocioProfessionnelles(), true);
+        $key = array_search($categorieSocioProfessionnelle, $this->getCategoriesSocioProfessionnelles(), true);
         if ($key !== false) {
             unset($this->categoriesSocioProfessionnelles[$key]);
         }
@@ -869,7 +907,7 @@ class Salarie extends AbstractModel
      */
     public function removeContrat(Contrat $contrat): Salarie
     {
-        $key = array_search($contrat, this->getContrats(), true);
+        $key = array_search($contrat, $this->getContrats(), true);
         if ($key !== false) {
             unset($this->contrats[$key]);
         }
@@ -928,7 +966,7 @@ class Salarie extends AbstractModel
      */
     public function removeDocument(Document $document): Salarie
     {
-        $key = array_search($document, this->getDocuments(), true);
+        $key = array_search($document, $this->getDocuments(), true);
         if ($key !== false) {
             unset($this->documents[$key]);
         }
