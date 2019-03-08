@@ -22,7 +22,7 @@ class ContactUrgence extends AbstractModel
     /**
      * @var string
      */
-    protected $telephone
+    protected $telephone;
 
     /**
      * @var Salarie
