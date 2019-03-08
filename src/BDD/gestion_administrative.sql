@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 08 mars 2019 à 09:41
+-- Généré le :  ven. 08 mars 2019 à 15:01
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -223,6 +223,7 @@ CREATE TABLE IF NOT EXISTS `formation` (
   `nom` varchar(255) NOT NULL,
   `niveau` varchar(255) NOT NULL,
   `organisme` varchar(255) NOT NULL,
+  `lieu` varchar(255) NOT NULL,
   `formation` varchar(255) NOT NULL,
   `date_debut` datetime NOT NULL,
   `date_fin` datetime NOT NULL,
@@ -236,9 +237,9 @@ CREATE TABLE IF NOT EXISTS `formation` (
 -- Déchargement des données de la table `formation`
 --
 
-INSERT INTO `formation` (`id`, `nom`, `niveau`, `organisme`, `formation`, `date_debut`, `date_fin`, `obtenu`, `id_salarie`) VALUES
-(3, 'BAC', 'Niveau V bis et VI', 'Lycee', 'Vernon', '2014-03-04 00:00:00', '2018-07-05 00:00:00', 1, 129),
-(4, 'bac', 'Niveau I', 'Lycee', 'Vernon', '2014-03-30 00:00:00', '2018-08-05 00:00:00', 1, 130);
+INSERT INTO `formation` (`id`, `nom`, `niveau`, `organisme`, `lieu`, `formation`, `date_debut`, `date_fin`, `obtenu`, `id_salarie`) VALUES
+(3, 'BAC', 'Niveau V bis et VI', 'Lycee', '', 'Vernon', '2014-03-04 00:00:00', '2018-07-05 00:00:00', 1, 129),
+(4, 'bac', 'Niveau I', 'Lycee', '', 'Vernon', '2014-03-30 00:00:00', '2018-08-05 00:00:00', 1, 130);
 
 -- --------------------------------------------------------
 
@@ -287,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `salarie` (
   `adresse` varchar(255) NOT NULL,
   `adresse2` varchar(255) NOT NULL,
   `code_postal` varchar(5) NOT NULL,
-  `ville_habitat` varchar(255) NOT NULL,
+  `ville` varchar(255) NOT NULL,
   `telephone` varchar(10) NOT NULL,
   `mail_professionnel` varchar(255) NOT NULL,
   `mail_personnel` varchar(255) NOT NULL,
@@ -298,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `salarie` (
   `langues_etrangeres` text NOT NULL,
   `autre_activite` tinyint(1) NOT NULL,
   `details_autre_activite` varchar(255) NOT NULL,
-  `autorisation_travail_responsable_legaux` tinyint(1) NOT NULL,
+  `autorisation_travail_mineur` tinyint(1) NOT NULL,
   `statut_handicap` tinyint(1) NOT NULL,
   `taux_invalidite` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -308,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `salarie` (
 -- Déchargement des données de la table `salarie`
 --
 
-INSERT INTO `salarie` (`id`, `qualite`, `nom`, `prenom`, `nom_jeune_fille`, `nationalite`, `date_naissance`, `lieu_naissance`, `adresse`, `adresse2`, `code_postal`, `ville_habitat`, `telephone`, `mail_professionnel`, `mail_personnel`, `num_secu`, `remuneration`, `salarie_en_poste`, `situation_familiale`, `langues_etrangeres`, `autre_activite`, `details_autre_activite`, `autorisation_travail_responsable_legaux`, `statut_handicap`, `taux_invalidite`) VALUES
+INSERT INTO `salarie` (`id`, `qualite`, `nom`, `prenom`, `nom_jeune_fille`, `nationalite`, `date_naissance`, `lieu_naissance`, `adresse`, `adresse2`, `code_postal`, `ville`, `telephone`, `mail_professionnel`, `mail_personnel`, `num_secu`, `remuneration`, `salarie_en_poste`, `situation_familiale`, `langues_etrangeres`, `autre_activite`, `details_autre_activite`, `autorisation_travail_mineur`, `statut_handicap`, `taux_invalidite`) VALUES
 (12, 'Monsieur', 'Clenche', 'Jean', 'Fonteyn', 'France', '1998-02-01 00:00:00', 'Vernon', '36 bis bidule', '', '27200', 'Vernon', '232210388', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 10, 0, 'Concubin(e)', 'eefefe', 0, 'Vidéo', 1, 0, 'Fou'),
 (13, 'Monsieur', 'Clenche', 'Jean', 'Fonteyn', 'France', '1998-02-01 00:00:00', 'Vernon', '36 bis bidule', '', '27200', 'Vernon', '232210388', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 10, 0, 'Concubin(e)', 'eefefe', 0, 'Vidéo', 1, 0, 'Fou'),
 (14, 'Monsieur', 'Fonteyn', 'Maximilien', 'Fonteyn', 'nanana', '2008-02-15 00:00:00', 'la', '36 bis bidule', '', '27200', 'idiot', '123654789', 'maximilien.fonteyn@gmail.com', 'maximilien.fonteyn@gmail.com', '100000000000000', 65, 0, 'Célibataire', 'hello', 1, '', 1, 1, ''),
