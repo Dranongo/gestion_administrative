@@ -45,7 +45,8 @@ class ContactUrgenceDAO extends DatabaseDAO
             'nom' => 'nom',
             'prenom' => 'prenom',
             'lien' => 'lien',
-            'telephone' => 'telephone'
+            'telephone' => 'telephone',
+            'salarie' => 'id_salarie'
         ];
     }
 }

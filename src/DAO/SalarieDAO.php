@@ -67,7 +67,7 @@ class SalarieDAO extends DatabaseDAO
             'telephone' => 'telephone',
             'mailProfessionnel' => 'mail_professionnel',
             'mailPersonnel' => 'mail_personnel',
-            'numSecu' => 'numero_securite_sociale',
+            'numeroSecuriteSociale' => 'numero_securite_sociale',
             'remuneration' => 'remuneration',
             'enPoste' => 'en_poste',
             'situationFamiliale' => 'situation_familiale',

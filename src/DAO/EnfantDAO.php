@@ -43,7 +43,8 @@ class EnfantDAO extends DatabaseDAO
             'id' => 'id',
             'nom' => 'nom',
             'prenom' => 'prenom',
-            'dateNaissance' => 'date_naissance'
+            'dateNaissance' => 'date_naissance',
+            'salarie' => 'id_salarie'
         ];
     }
 }

@@ -16,6 +16,9 @@ class DatabaseConnection
 
     final private function __construct()
     {
+        $config = require __CONFIG_DIR__ . 'database.php';
+        $dsn = $config['driver'] . ':dbname=' . $config['dbname'] . ';host=' . $config['host'] . ';charset=' . $config['charset'];
+        self::$_connection = new \PDO($dsn, $config['user'], $config['password']);
     }
 
     final private function __clone()
@@ -27,9 +30,6 @@ class DatabaseConnection
     {
         if (is_null(self::$_instance)) {
             self::$_instance = new DatabaseConnection();
-            $config = require __CONFIG_DIR__ . 'database.php';
-            $dsn = $config['driver'] . ':dbname=' . $config['dbname'] . ';host=' . $config['host'] . ';charset=' . $config['charset'];
-            self::$_connection = new \PDO($dsn, $config['user'], $config['password']);
         }
         return self::$_instance;
     }
