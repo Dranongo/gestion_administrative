@@ -28,7 +28,7 @@ class EnfantDAO extends DatabaseDAO
         if ($recursive) {
             $salarieDAO = new SalarieDAO();
             $salarie = $salarieDAO->find($data['id_salarie'], false);
-            $formation->setSalarie($salarie);
+            $enfant->setSalarie($salarie);
         }
 
         return $enfant;

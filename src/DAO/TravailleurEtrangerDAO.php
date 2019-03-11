@@ -28,7 +28,7 @@ class TravailleurEtrangerDAO extends DatabaseDAO
         if ($recursive) {
             $salarieDAO = new SalarieDAO();
             $salarie = $salarieDAO->find($data['id_salarie'], false);
-            $formation->setSalarie($salarie);
+            $travailleurEtranger->setSalarie($salarie);
         }
 
         return $travailleurEtranger;

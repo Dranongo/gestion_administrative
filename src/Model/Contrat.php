@@ -115,7 +115,7 @@ class Contrat extends AbstractModel
             unset($salaries[$salarie->getId()]);
         }
 
-        $key = array_search($salarie, this->getSalaries(), true);
+        $key = array_search($salarie, $this->getSalaries(), true);
         if ($key !== false) {
             unset($this->salaries[$key]);
         }
@@ -174,7 +174,7 @@ class Contrat extends AbstractModel
      */
     public function removeRenseignementPoste(RenseignementPoste $renseignementPoste): Contrat
     {
-        $key = array_search($renseignementPoste, this->getRenseignementsPoste(), true);
+        $key = array_search($renseignementPoste, $this->getRenseignementsPoste(), true);
         if ($key !== false) {
             unset($this->renseignementsPoste[$key]);
         }
@@ -233,7 +233,7 @@ class Contrat extends AbstractModel
      */
     public function removeTypeContrat(TypeContrat $typeContrat): Contrat
     {
-        $key = array_search($typeContrat, this->getTypesContrat(), true);
+        $key = array_search($typeContrat, $this->getTypesContrat(), true);
         if ($key !== false) {
             unset($this->typesContrat[$key]);
         }
