@@ -12,12 +12,12 @@ class TravailleurEtranger extends AbstractModel
     /**
      * @var \DateTime
      */
-    protected $dateAutorisation;
+    protected $dateAutorisationEmbauche;
 
     /**
      * @var \DateTime
      */
-    protected $dateLimite;
+    protected $dateLimiteValidite;
 
     /**
      * @var int
@@ -49,12 +49,12 @@ class TravailleurEtranger extends AbstractModel
     }
 
     /**
-     * @param \DateTime $dateAutorisation
+     * @param \DateTime $dateAutorisationEmbauche
      * @return TravailleurEtranger
      */
-    public function setDateAutorisation(\DateTime $dateAutorisation): TravailleurEtranger
+    public function setDateAutorisationEmbauche(\DateTime $dateAutorisationEmbauche): TravailleurEtranger
     {
-        $this->dateAutorisation = $dateAutorisation;
+        $this->dateAutorisationEmbauche = $dateAutorisationEmbauche;
 
         return $this;
     }
@@ -62,28 +62,9 @@ class TravailleurEtranger extends AbstractModel
     /**
      * @return \DateTime
      */
-    public function getDateAutorisation(): \DateTime
+    public function getDateAutorisationEmbauche(): \DateTime
     {
-        return $this->dateAutorisation;
-    }
-
-    /**
-     * @param \DateTime $dateLimite
-     * @return TravailleurEtranger
-     */
-    public function setDateLimite(\DateTime $dateLimite): TravailleurEtranger
-    {
-        $this->dateLimite = $dateLimite;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDateLimite(): \DateTime
-    {
-        return $this->dateLimite;
+        return $this->dateAutorisationEmbauche;
     }
 
     /**
@@ -103,6 +84,25 @@ class TravailleurEtranger extends AbstractModel
     public function getNumeroCarteSejour(): int
     {
         return $this->numeroCarteSejour;
+    }
+
+    /**
+     * @param \DateTime $dateLimiteValidite
+     * @return TravailleurEtranger
+     */
+    public function setDateLimiteValidite(\DateTime $dateLimiteValidite): TravailleurEtranger
+    {
+        $this->dateLimiteValidite = $dateLimiteValidite;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateLimiteValidite(): \DateTime
+    {
+        return $this->dateLimiteValidite;
     }
 
     /**
