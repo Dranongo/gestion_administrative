@@ -105,7 +105,7 @@ class TypeContrat extends AbstractModel
      */
     public function removeDocumentType(DocumentType $documentType): TypeContrat
     {
-        $key = array_search($documentType, this->getDocumentTypes(), true);
+        $key = array_search($documentType, $this->getDocumentTypes(), true);
         if ($key !== false) {
             unset($this->documentTypes[$key]);
         }
@@ -164,7 +164,7 @@ class TypeContrat extends AbstractModel
      */
     public function removeContrat(Contrat $contrat): TypeContrat
     {
-        $key = array_search($contrat, this->getContrats(), true);
+        $key = array_search($contrat, $this->getContrats(), true);
         if ($key !== false) {
             unset($this->contrats[$key]);
         }
