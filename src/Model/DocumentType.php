@@ -7,12 +7,12 @@ class DocumentType extends AbstractModel
     /**
      * @var string
      */
-    protected $label;
+    protected $nom;
 
     /**
      * @var string
      */
-    protected $uniqueCode;
+    protected $code;
 
     /**
      * @var bool
@@ -30,12 +30,12 @@ class DocumentType extends AbstractModel
     protected $typesContrat = [];    
 
     /**
-     * @param string $label
+     * @param string $nom
      * @return DocumentType
      */
-    public function setLabel(string $label): DocumentType
+    public function setNom(string $nom): DocumentType
     {
-        $this->label = $label;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -43,18 +43,18 @@ class DocumentType extends AbstractModel
     /**
      * @return string
      */
-    public function getLabel(): string
+    public function getNom(): string
     {
-        return $this->label;
+        return $this->nom;
     }
 
     /**
-     * @param string $uniqueCode
+     * @param string $code
      * @return DocumentType
      */
-    public function setUniqueCode(string $uniqueCode): DocumentType
+    public function setCode(string $code): DocumentType
     {   
-        $this->uniqueCode = $uniqueCode;
+        $this->code = $code;
 
         return $this;
     }
@@ -62,9 +62,9 @@ class DocumentType extends AbstractModel
     /**
      * @return string
      */
-    public function getUniqueCode() : string
+    public function getCode() : string
     {
-        return $this->uniqueCode;
+        return $this->code;
     }
 
     /**
@@ -81,7 +81,7 @@ class DocumentType extends AbstractModel
     /**
      * @return bool
      */
-    public function getStatutEtranger(): bool
+    public function getStatutEtranger(): ?bool
     {
         return $this->statutEtranger;
     }
@@ -129,7 +129,7 @@ class DocumentType extends AbstractModel
      */
     public function removeDocument(Document $document): DocumentType
     {
-        $key = array_search($document, this->getDocuments(), true);
+        $key = array_search($document, $this->getDocuments(), true);
         if ($key !== false) {
             unset($this->documents[$key]);
         }
@@ -188,7 +188,7 @@ class DocumentType extends AbstractModel
      */
     public function removeTypeContrat(TypeContrat $typeContrat): DocumentType
     {
-        $key = array_search($typeContrat, this->getTypesContrat(), true);
+        $key = array_search($typeContrat, $this->getTypesContrat(), true);
         if ($key !== false) {
             unset($this->typesContrat[$key]);
         }
