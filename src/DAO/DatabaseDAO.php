@@ -31,7 +31,14 @@ abstract class DatabaseDAO
      */
     public function findAll(): array
     {
-        
+        $sql = "SELECT * 
+                FROM $this->tableName";
+
+        $stmt = $this->connection->query($sql);
+
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return is_array($result) ? $this->buildDomainObject($result, $recursive) : null;
     }
 
     /**
@@ -76,7 +83,14 @@ abstract class DatabaseDAO
      */
     protected function insert(AbstractModel $model): bool
     {
-        
+        foreach ($model->modelValuesToDatabase() as $key => $value) {
+            
+        }
+
+        /*$sql = "INSERT INTO $this->tableName
+                VALUES 
+                "
+        $stmt = $this->connection->query($sql);*/
     }
 
     /**
@@ -85,7 +99,8 @@ abstract class DatabaseDAO
      */
     protected function update(AbstractModel $model): bool
     {
-
+        $sql = "UPDATE $this->tableName
+                SET"
     }
 
     /**

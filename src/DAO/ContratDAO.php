@@ -34,7 +34,7 @@ class ContratDAO extends DatabaseDAO
 
             $typeContratDAO = new TypeContratDAO();
             $typeContrat = $typeContratDAO->find($data['id_type_contrat'], false);
-            $contrat->setTypeContrat($typeContrat);            
+            $contrat->setTypeContrat($typeContrat);
         }
 
         return $contrat;
@@ -48,9 +48,9 @@ class ContratDAO extends DatabaseDAO
         return [
             'dateDebut' => 'date_debut',
             'dateFin' => 'date_fin'
-            'salarie' => 'id_salarie',
-            'renseignement' => 'id_renseignement_poste',
-            'typeContrat' => 'id_type_contrat'
+            'salaries' => 'id_salarie',
+            'renseignementsPoste' => 'id_renseignement_poste',
+            'typesContrat' => 'id_type_contrat'
         ];
     }
 }
