@@ -36,9 +36,15 @@ abstract class DatabaseDAO
 
         $stmt = $this->connection->query($sql);
 
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $fetchResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        return is_array($result) ? $this->buildDomainObject($result, $recursive) : null;
+        $arrayResult=[];
+
+        for ($i=0; $i < count($fetchResult); $i++) { 
+            $arrayResult[] = $this->buildDomainObject($fetchResult[$i], true);
+        }
+
+        return $arrayResult;
     }
 
     /**
@@ -84,12 +90,12 @@ abstract class DatabaseDAO
     protected function insert(AbstractModel $model): bool
     {
         foreach ($model->modelValuesToDatabase() as $key => $value) {
-            
+            $sql = "INSERT INTO $this->tableName ($key)
+                    VALUES ($value)
+                    ";
         }
 
-        /*$sql = "INSERT INTO $this->tableName
-                VALUES 
-                "
+        /*
         $stmt = $this->connection->query($sql);*/
     }
 
@@ -100,7 +106,7 @@ abstract class DatabaseDAO
     protected function update(AbstractModel $model): bool
     {
         $sql = "UPDATE $this->tableName
-                SET"
+                SET";
     }
 
     /**
