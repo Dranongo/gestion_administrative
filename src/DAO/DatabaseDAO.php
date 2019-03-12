@@ -80,7 +80,13 @@ abstract class DatabaseDAO
      */
     public function save(AbstractModel $model): bool
     {
-        
+        if ($model->getId() === null){
+           return $this->insert($model);
+        }
+        else
+        {
+            return $this->update($model);
+        }
     }
 
     /**
@@ -89,14 +95,17 @@ abstract class DatabaseDAO
      */
     protected function insert(AbstractModel $model): bool
     {
-        foreach ($model->modelValuesToDatabase() as $key => $value) {
-            $sql = "INSERT INTO $this->tableName ($key)
-                    VALUES ($value)
-                    ";
-        }
+        $fieldsArray = $this->modelValuesToDatabase($model);
 
-        /*
-        $stmt = $this->connection->query($sql);*/
+        $dataBaseFields = implode(", ", array_keys($fieldsArray));
+        $valueModel = implode(", ", array_values($fieldsArray));
+
+        $sql = "INSERT INTO $this->tableName 
+                ($dataBaseFields) 
+                VALUES 
+                ($valueModel)";
+
+        return $this->connection->query($sql);
     }
 
     /**
@@ -105,8 +114,19 @@ abstract class DatabaseDAO
      */
     protected function update(AbstractModel $model): bool
     {
-        $sql = "UPDATE $this->tableName
-                SET";
+        $fieldsArray = $this->modelValuesToDatabase($model);
+        $modelId = $model->getId();
+
+        $dataBaseFields = implode(", ", array_keys($fieldsArray));
+        $valueModel = implode(", ", array_values($fieldsArray));
+
+        /*$sql = "UPDATE $this->tableName 
+                SET 
+                $dataBaseFields = $valueModel
+                WHERE
+                id = $modelId";*/
+
+        return $stmt = $this->connection->query($sql);
     }
 
     /**
