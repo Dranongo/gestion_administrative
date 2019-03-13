@@ -71,7 +71,32 @@ abstract class DatabaseDAO
      */
     public function findBy(array $criteria, array $orderBy = []): array
     {
-        
+        //$modelDatabase = $this->modelToDatabaseFields();
+        //$criteria = $this->keyModelToDataBase($modelDatabase, $criteria);
+
+        $stringCriteria = $this->valuesToDatabaseFormat($criteria);
+        $stringOrderBy = $this->valuesToDatabaseFormat($orderBy);
+
+        $b = array("=", "'");
+        $stringOrderBy = str_replace($b, "", $stringOrderBy);
+
+        $sql = "SELECT * 
+                FROM $this->tableName
+                WHERE $stringCriteria 
+                ORDER BY $stringOrderBy";
+        var_dump($sql);
+
+        $stmt = $this->connection->query($sql);
+
+        $fetchResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $arrayResult=[];
+
+        for ($i=0; $i < count($fetchResult); $i++) { 
+            $arrayResult[] = $this->buildDomainObject($fetchResult[$i], false);
+        }
+
+        return $arrayResult;
     }
 
     /**
@@ -83,7 +108,9 @@ abstract class DatabaseDAO
         if ($model->getId() === null) {
            return $this->insert($model);
         }
-        else { return $this->update($model); }
+        else { 
+            return $this->update($model); 
+        }
     }
 
     /**
@@ -102,7 +129,6 @@ abstract class DatabaseDAO
                 ($dataBaseFields) 
                 VALUES 
                 ($valueModel)";
-        var_dump($sql);
 
         return $this->query($sql);
     }
@@ -114,7 +140,7 @@ abstract class DatabaseDAO
     protected function update(AbstractModel $model): bool
     {
         $fieldsArray = $this->modelValuesToDatabase($model);
-        $fields = $this->valuesToDatabaseFormatUpdate($fieldsArray);
+        $fields = $this->valuesToDatabaseFormat($fieldsArray);
         $modelId = $model->getId();       
 
         $sql = "UPDATE $this->tableName 
@@ -122,7 +148,6 @@ abstract class DatabaseDAO
                 $fields
                 WHERE
                 id = $modelId";
-        var_dump($sql);
 
         return $this->query($sql);
     }
@@ -136,6 +161,7 @@ abstract class DatabaseDAO
     }
 
     /**
+     * @param AbstractModel $model
      * @return array
      */
     protected function modelValuesToDatabase(AbstractModel $model): array
@@ -154,34 +180,40 @@ abstract class DatabaseDAO
                 $fieldsArray[$field] = $value;
             }
         }
-
         return $fieldsArray;
     }
 
+    /**
+     * @param array $fieldsArray
+     * @return array
+     */
     protected function valuesToDatabaseFormatInsert(array $fieldsArray) : array
     {
         foreach ($fieldsArray as $key => $value) {
             if (is_string($value)) {
                 $fieldsArray[$key] = "'" . addslashes($value) . "'";
             }
-            if (is_bool($value)) {
+            elseif (is_bool($value)) {
                 $fieldsArray[$key] = intval($value);
             }
-            if ($value == null) {
+            elseif ($value == null) {
                 $fieldsArray[$key] = 'null';
             }
         }
-
         return $fieldsArray;
     }
 
-    protected function valuesToDatabaseFormatUpdate(array $fieldsArray) : string
+    /**
+     * @param array $fieldsArray
+     * @return string
+     */
+    protected function valuesToDatabaseFormat(array $fieldsArray) : string
     {
         $cpt = 1;
         $fields = "";
         foreach ($fieldsArray as $key => $value) {
             $fields .= addslashes($key) . " = '" . addslashes($value) . "'";
-            if ($cpt < count($fieldsArray)){
+            if ($cpt < count($fieldsArray)) {
                 $fields .= ", ";
             }
             $cpt++;
@@ -189,7 +221,12 @@ abstract class DatabaseDAO
         return $fields;
     }
 
-    protected function query(string $requestSql){
+    /**
+     * @param string $requestSql
+     * @return bool
+     */
+    protected function query(string $requestSql): bool
+    {
         try {
             $result = $this->connection->query($requestSql);
             if (! $result) {
@@ -202,6 +239,22 @@ abstract class DatabaseDAO
         }
 
         return boolval($result);
+    }
+
+    /**
+     * @param array $modelDatabase
+     * @param array $dataModel
+     * @return array
+     */
+    protected function keyModelToDataBase(array $modelDatabase, array $dataModel): array
+    {
+        foreach ($dataModel as $key => $value) {
+            $keyModelToDataBase = $modelDatabase[$key];
+            $dataModel[$keyModelToDataBase] = $dataModel[$key];
+            
+            unset($dataModel[$key]);
+        }
+        return $dataModel;
     }
 
     /**
