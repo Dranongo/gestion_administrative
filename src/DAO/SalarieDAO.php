@@ -76,7 +76,14 @@ class SalarieDAO extends DatabaseDAO
             'detailActivite' => 'details_autre_activite',
             'autorisationTravailMineur' => 'autorisation_travail_mineur',
             'statutHandicap' => 'statut_handicap',
-            'tauxInvalidite' => 'taux_invalidite'
+            'tauxInvalidite' => 'taux_invalidite',
+            'formations' => [
+                'tableName' => 'enfant',
+                'foreignKey' => 'id_salarie',
+                'orderBy' => [
+                    'dateNaissance' => 'ASC'
+                ]
+            ]
         ];
     }
 }

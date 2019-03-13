@@ -9,6 +9,11 @@ abstract class AbstractModel
      */
     protected $id;
 
+    /**
+     * @var string
+     */
+    protected $DAOClassName;
+
     public function __construct() {}
 
     /**
@@ -28,6 +33,24 @@ abstract class AbstractModel
     final public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    final public function getDAOClassName(): string
+    {
+        return $this->DAOClassName;
+    }
+
+    final public function getDAOInstance(): \DAO\DatabaseDAO
+    {
+        $DAOClassName = '\\DAO\\' . $this->getDAOClassName();
+        if (class_exists($DAOClassName)) {
+            return $DAOClassName::getInstance();
+        } else {
+            throw new \Exception(self::class . ' DAO not found');
+        }
     }
 
     /**

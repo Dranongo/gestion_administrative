@@ -8,6 +8,11 @@ use Model\Formation;
 class FormationDAO extends DatabaseDAO
 {
     /**
+     * 
+     */
+    protected $configFileName = 'formation';
+
+    /**
      * @var string
      */
     protected $tableName = 'formation';
@@ -36,23 +41,5 @@ class FormationDAO extends DatabaseDAO
         }
 
         return $formation;
-    }
-
-    /**
-     * @return array
-     */
-    protected function modelToDatabaseFields(): array
-    {
-        return [
-            'id' => 'id',
-            'nom' => 'nom',
-            'niveau' => 'formation',
-            'organisme' => 'organisme',
-            'lieu' => 'lieu',
-            'dateDebut' => 'date_debut',
-            'dateFin' => 'date_fin',
-            'obtenu' => 'obtenu',
-            'salarie' => 'id_salarie'
-        ];
     }
 }

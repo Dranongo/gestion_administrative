@@ -14,6 +14,9 @@ class DatabaseConnection
      */
     protected static $_connection = null;
 
+    /**
+     * DatabaseConnection constructor.
+     */
     final private function __construct()
     {
         $config = require __CONFIG_DIR__ . 'database.php';
@@ -21,12 +24,18 @@ class DatabaseConnection
         self::$_connection = new \PDO($dsn, $config['user'], $config['password']);
     }
 
+    /**
+     * Clone method is not allowed
+     */
     final private function __clone()
     {
-        trigger_error("Le clonage n'est pas autorisé", E_USER_ERROR);
+        throw new \Exception("Le clonage n'est pas autorisé");
     }
 
-    final public static function getInstance()
+    /**
+     * @return DatabaseConnection
+     */
+    final public static function getInstance(): DatabaseConnection
     {
         if (is_null(self::$_instance)) {
             self::$_instance = new DatabaseConnection();

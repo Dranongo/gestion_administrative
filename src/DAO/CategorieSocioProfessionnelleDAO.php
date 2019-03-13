@@ -8,6 +8,11 @@ use Model\CategorieSocioProfessionnelle;
 class CategorieSocioProfessionnelleDAO extends DatabaseDAO
 {
     /**
+     * 
+     */
+    protected $configFileName = 'categorie_socio_professionnelle';
+
+    /**
      * @var string
      */
     protected $tableName = 'categorie_socio_professionnelle';
@@ -32,10 +37,6 @@ class CategorieSocioProfessionnelleDAO extends DatabaseDAO
      */
     protected function modelToDatabaseFields(): array
     {
-        return [
-            'id' => 'id',
-            'code' => 'code',
-            'nom' => 'nom',
-        ];
+        
     }
 }

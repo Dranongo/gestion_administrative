@@ -9,6 +9,21 @@ use Utils\DatabaseConnection;
 abstract class DatabaseDAO
 {
     /**
+     * @var string
+     */
+    const __DATABASE_CONFIG_DIR__ = __SRC_DIR__ . 'database' . DIRECTORY_SEPARATOR;
+
+    /**
+     * @var string
+     */
+    protected $configFileName;
+
+    /**
+     * @var string
+     */
+    protected $config;
+
+    /**
      * @var \PDO
      */
     private $connection;
@@ -19,17 +34,51 @@ abstract class DatabaseDAO
     protected $tableName;
 
     /**
+     * @var DatabaseDAO
+     */
+    protected static $_instance = null;
+
+    /**
      * DatabaseDAO constructor.
      */
-    final public function __construct() 
+    final private function __construct()
     {
         $this->connection = DatabaseConnection::getInstance()->getConnection();
+        $this->modelToDatabaseFields();
+    }
+
+    /**
+     * Clone method is not allowed
+     */
+    final private function __clone()
+    {
+        throw new \Exception("Le clonage n'est pas autorisé");
+    }
+
+    /**
+     * @return DatabaseDAO
+     */
+    public static function getInstance(): DatabaseDAO
+    {
+        if (! self::$_instance instanceof DatabaseDAO) {
+            self::$_instance = new static();
+        }
+
+        return self::$_instance;
     }
 
     /**
      * @return array
      */
-    public function findAll(): array
+    final public function getConfig(): array
+    {
+        return $this->config;
+    }
+
+    /**
+     * @return array
+     */
+    public function findAll(array $orderBy = [], bool $recursive = false, ?int $limit = null, ?int $offset = null): array
     {
         $sql = "SELECT * 
                 FROM $this->tableName";
@@ -38,7 +87,7 @@ abstract class DatabaseDAO
 
         $fetchResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        $arrayResult=[];
+        $arrayResult = [];
 
         for ($i=0; $i < count($fetchResult); $i++) { 
             $arrayResult[] = $this->buildDomainObject($fetchResult[$i], false);
@@ -69,7 +118,13 @@ abstract class DatabaseDAO
      * @param array $order
      * @return array
      */
-    public function findBy(array $criteria, array $orderBy = []): array
+    public function findBy(
+        array $criteria,
+        array $orderBy = [],
+        bool $recursive = false,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array
     {
         //$modelDatabase = $this->modelToDatabaseFields();
         //$criteria = $this->keyModelToDataBase($modelDatabase, $criteria);
@@ -153,7 +208,7 @@ abstract class DatabaseDAO
     /**
      * @return \PDO
      */
-    protected function getConnection() : \PDO
+    protected function getConnection(): \PDO
     {
         return $this->connection;
     }
@@ -205,10 +260,10 @@ abstract class DatabaseDAO
      */
     protected function valuesToDatabaseFormat(array $fieldsArray) : string
     {
-        $cpt = 1;
+        $cpt = 0;
         $fields = "";
         foreach ($fieldsArray as $key => $value) {
-            $fields .= addslashes($key) . " = '" . addslashes($value) . "'" . ($cpt++ < count($fieldsArray) ? ", " : "");
+            $fields .= ($cpt++ ? ", " : "") . addslashes($key) . " = '" . addslashes($value) . "'";
         }
         return $fields;
     }
@@ -246,14 +301,24 @@ abstract class DatabaseDAO
     }
 
     /**
+     * @return void
+     * @throw \Exception 
+     */
+    final protected function modelToDatabaseFields(): void
+    {
+        $filePath = self::__DATABASE_CONFIG_DIR__ . $this->configFileName . '.php';
+
+        if (is_file($filePath)) {
+            $this->config = require $filePath;
+        } else {
+            throw new \Exception(get_class($this) . ' Config File not found');
+        }
+    }
+
+    /**
      * @param array $data
      * @param bool $recursive
      * @return AbstractModel
      */
     protected abstract function buildDomainObject(array $data, bool $recursive = false): AbstractModel;
-
-    /**
-     * @return array
-     */
-    protected abstract function modelToDatabaseFields(): array;
 }
