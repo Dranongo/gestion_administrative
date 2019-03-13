@@ -41,7 +41,7 @@ abstract class DatabaseDAO
         $arrayResult=[];
 
         for ($i=0; $i < count($fetchResult); $i++) { 
-            $arrayResult[] = $this->buildDomainObject($fetchResult[$i], true);
+            $arrayResult[] = $this->buildDomainObject($fetchResult[$i], false);
         }
 
         return $arrayResult;
@@ -80,13 +80,10 @@ abstract class DatabaseDAO
      */
     public function save(AbstractModel $model): bool
     {
-        if ($model->getId() === null){
+        if ($model->getId() === null) {
            return $this->insert($model);
         }
-        else
-        {
-            return $this->update($model);
-        }
+        else { return $this->update($model); }
     }
 
     /**
@@ -96,6 +93,7 @@ abstract class DatabaseDAO
     protected function insert(AbstractModel $model): bool
     {
         $fieldsArray = $this->modelValuesToDatabase($model);
+        $fieldsArray = $this->valuesToDatabaseFormatInsert($fieldsArray);
 
         $dataBaseFields = implode(", ", array_keys($fieldsArray));
         $valueModel = implode(", ", array_values($fieldsArray));
@@ -104,8 +102,9 @@ abstract class DatabaseDAO
                 ($dataBaseFields) 
                 VALUES 
                 ($valueModel)";
+        var_dump($sql);
 
-        return $this->connection->query($sql);
+        return $this->query($sql);
     }
 
     /**
@@ -115,18 +114,17 @@ abstract class DatabaseDAO
     protected function update(AbstractModel $model): bool
     {
         $fieldsArray = $this->modelValuesToDatabase($model);
-        $modelId = $model->getId();
+        $fields = $this->valuesToDatabaseFormatUpdate($fieldsArray);
+        $modelId = $model->getId();       
 
-        $dataBaseFields = implode(", ", array_keys($fieldsArray));
-        $valueModel = implode(", ", array_values($fieldsArray));
-
-        /*$sql = "UPDATE $this->tableName 
-                SET 
-                $dataBaseFields = $valueModel
+        $sql = "UPDATE $this->tableName 
+                SET
+                $fields
                 WHERE
-                id = $modelId";*/
+                id = $modelId";
+        var_dump($sql);
 
-        return $stmt = $this->connection->query($sql);
+        return $this->query($sql);
     }
 
     /**
@@ -158,6 +156,52 @@ abstract class DatabaseDAO
         }
 
         return $fieldsArray;
+    }
+
+    protected function valuesToDatabaseFormatInsert(array $fieldsArray) : array
+    {
+        foreach ($fieldsArray as $key => $value) {
+            if (is_string($value)) {
+                $fieldsArray[$key] = "'" . addslashes($value) . "'";
+            }
+            if (is_bool($value)) {
+                $fieldsArray[$key] = intval($value);
+            }
+            if ($value == null) {
+                $fieldsArray[$key] = 'null';
+            }
+        }
+
+        return $fieldsArray;
+    }
+
+    protected function valuesToDatabaseFormatUpdate(array $fieldsArray) : string
+    {
+        $cpt = 1;
+        $fields = "";
+        foreach ($fieldsArray as $key => $value) {
+            $fields .= addslashes($key) . " = '" . addslashes($value) . "'";
+            if ($cpt < count($fieldsArray)){
+                $fields .= ", ";
+            }
+            $cpt++;
+        }
+        return $fields;
+    }
+
+    protected function query(string $requestSql){
+        try {
+            $result = $this->connection->query($requestSql);
+            if (! $result) {
+                throw new \Exception(implode($this->connection->errorInfo(), ','));   
+            }
+        }
+        catch(\Exception $e) {
+            echo '<pre>';
+            print_r($e->getMessage());
+        }
+
+        return boolval($result);
     }
 
     /**
