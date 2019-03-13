@@ -77,20 +77,19 @@ abstract class DatabaseDAO
         $stringCriteria = $this->valuesToDatabaseFormat($criteria);
         $stringOrderBy = $this->valuesToDatabaseFormat($orderBy);
 
-        $b = array("=", "'");
-        $stringOrderBy = str_replace($b, "", $stringOrderBy);
+        $search = array("=", "'");
+        $stringOrderBy = str_replace($search, "", $stringOrderBy);
 
         $sql = "SELECT * 
                 FROM $this->tableName
                 WHERE $stringCriteria 
                 ORDER BY $stringOrderBy";
-        var_dump($sql);
 
         $stmt = $this->connection->query($sql);
 
         $fetchResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        $arrayResult=[];
+        $arrayResult = [];
 
         for ($i=0; $i < count($fetchResult); $i++) { 
             $arrayResult[] = $this->buildDomainObject($fetchResult[$i], false);
@@ -107,8 +106,7 @@ abstract class DatabaseDAO
     {
         if ($model->getId() === null) {
            return $this->insert($model);
-        }
-        else { 
+        } else { 
             return $this->update($model); 
         }
     }
@@ -192,11 +190,9 @@ abstract class DatabaseDAO
         foreach ($fieldsArray as $key => $value) {
             if (is_string($value)) {
                 $fieldsArray[$key] = "'" . addslashes($value) . "'";
-            }
-            elseif (is_bool($value)) {
+            } elseif (is_bool($value)) {
                 $fieldsArray[$key] = intval($value);
-            }
-            elseif ($value == null) {
+            } elseif ($value == null) {
                 $fieldsArray[$key] = 'null';
             }
         }
@@ -212,11 +208,7 @@ abstract class DatabaseDAO
         $cpt = 1;
         $fields = "";
         foreach ($fieldsArray as $key => $value) {
-            $fields .= addslashes($key) . " = '" . addslashes($value) . "'";
-            if ($cpt < count($fieldsArray)) {
-                $fields .= ", ";
-            }
-            $cpt++;
+            $fields .= addslashes($key) . " = '" . addslashes($value) . "'" . ($cpt++ < count($fieldsArray) ? ", " : "");
         }
         return $fields;
     }
@@ -246,15 +238,11 @@ abstract class DatabaseDAO
      * @param array $dataModel
      * @return array
      */
-    protected function keyModelToDataBase(array $modelDatabase, array $dataModel): array
+    protected function keyModelToDataBase(string $key): string
     {
-        foreach ($dataModel as $key => $value) {
-            $keyModelToDataBase = $modelDatabase[$key];
-            $dataModel[$keyModelToDataBase] = $dataModel[$key];
-            
-            unset($dataModel[$key]);
-        }
-        return $dataModel;
+        $tableau = $this->modelToDatabaseFields();
+
+        return array_key_exists($key, $tableau) ? $tableau[$key] : "";
     }
 
     /**
