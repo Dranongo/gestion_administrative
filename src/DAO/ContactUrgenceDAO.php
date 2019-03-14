@@ -32,9 +32,7 @@ class ContactUrgenceDAO extends DatabaseDAO
                        ->setTelephone($data['telephone']);
 
         if ($recursive) {
-            $salarieDAO = new SalarieDAO();
-            $salarie = $salarieDAO->find($data['id_salarie'], false);
-            $contactUrgence->setSalarie($salarie);
+            
         }
 
         return $contactUrgence;

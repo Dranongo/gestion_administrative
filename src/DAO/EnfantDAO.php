@@ -32,9 +32,7 @@ class EnfantDAO extends DatabaseDAO
                ->setDateNaissance(new \DateTime($data['date_naissance']));
 
         if ($recursive) {
-            $salarieDAO = new SalarieDAO();
-            $salarie = $salarieDAO->find($data['id_salarie'], false);
-            $enfant->setSalarie($salarie);
+            
         }
 
         return $enfant;

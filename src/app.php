@@ -35,27 +35,16 @@ try {
 
 //require_once __VIEWS_DIR__ . DIRECTORY_SEPARATOR . 'base.html.php';
 
-var_dump(\Model\Formation::getDAOInstance());
+echo'<pre>';
+/*var_dump(\Model\Formation::getDAOInstance());
 $formationDAO = \DAO\FormationDAO::getInstance();
-var_dump($formationDAO->find(1, false));
+var_dump($formationDAO->find(3, true));*/
 
-/*$travailleurEtrangerDAO = new \DAO\TravailleurEtrangerDAO();
-var_dump($travailleurEtrangerDAO->find(20, false));*/
-/*$salarie = new\Model\Salarie();
-$salarie->setId(127);
+var_dump(\Model\TravailleurEtranger::getDAOInstance());
+$travailleurEtrangerDAO = \DAO\TravailleurEtrangerDAO::getInstance();
+var_dump($travailleurEtrangerDAO->find(20, true));
 
-$enfant = new\Model\Enfant();
-$enfant->setId(27);
-$enfant->setNom("Biniou");
-$enfant->setPrenom("Jean");
-$enfant->setDateNaissance(new \DateTime("1999-09-12 00:00:00"));
-$enfant->setSalarie($salarie);
-
-$enfantDAO = new \DAO\EnfantDAO();
-echo '<pre>';
-var_dump($enfantDAO->save($enfant));
-
-var_dump($enfantDAO->findAll());
+/*var_dump($enfantDAO->findAll());
 
 $criteria = array(
     "dateNaissance" => "1999-09-12 00:00:00");

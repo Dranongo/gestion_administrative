@@ -31,9 +31,7 @@ class TravailleurEtrangerDAO extends DatabaseDAO
                             ->setNumeroCarteSejour($data['num_carte_sejour'])
                             ->setDateLimiteValidite(new \DateTime($data['date_limite_validite']));
         if ($recursive) {
-            $salarieDAO = new SalarieDAO();
-            $salarie = $salarieDAO->find($data['id_salarie'], false);
-            $travailleurEtranger->setSalarie($salarie);
+            
         }
 
         return $travailleurEtranger;

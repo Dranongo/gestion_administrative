@@ -31,13 +31,12 @@ class DocumentDAO extends DatabaseDAO
         if ($recursive) {
             $salarieDAO = new SalarieDAO();
             $salarie = $salarieDAO->find($data['id_salarie'], false);
-            $contrat->setSalarie($salarie);
+            $document->setSalarie($salarie);
 
             $documentTypeDAO = new DocumentTypeDAO();
             $documentType = $documentTypeDAO->find($data['id_type_document'], false);
             $document->setDocumentType($documentType);
         }
-
         return $document;
     }
 }

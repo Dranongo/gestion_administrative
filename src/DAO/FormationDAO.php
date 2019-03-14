@@ -35,9 +35,7 @@ class FormationDAO extends DatabaseDAO
                   ->setObtenu($data['obtenu']);
 
         if ($recursive) {
-            $salarieDAO = new SalarieDAO();
-            $salarie = $salarieDAO->find($data['id_salarie'], false);
-            $formation->setSalarie($salarie);
+          
         }
 
         return $formation;
