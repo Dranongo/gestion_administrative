@@ -34,7 +34,6 @@ try {
 }
 
 //require_once __VIEWS_DIR__ . DIRECTORY_SEPARATOR . 'base.html.php';
-$formation = new \Model\Formation();
-var_dump($formation->getDAOInstance());
+var_dump(\Model\Formation::getDAOInstance());
 $formationDAO = \DAO\FormationDAO::getInstance();
 var_dump($formationDAO->find(1, false));

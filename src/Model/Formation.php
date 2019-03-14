@@ -7,7 +7,7 @@ class Formation extends AbstractModel
     /**
      * @var string
      */
-    protected $DAOClassName = 'FormationDAO';
+    protected static $DAOClassName = 'FormationDAO';
 
     /**
      * @var string

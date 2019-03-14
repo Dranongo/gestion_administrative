@@ -12,7 +12,7 @@ abstract class AbstractModel
     /**
      * @var string
      */
-    protected $DAOClassName;
+    protected static $DAOClassName = '';
 
     public function __construct() {}
 
@@ -38,18 +38,18 @@ abstract class AbstractModel
     /**
      * @return string
      */
-    final public function getDAOClassName(): string
+    final public static function getDAOClassName(): string
     {
-        return $this->DAOClassName;
+        return static::$DAOClassName;
     }
 
-    final public function getDAOInstance(): \DAO\DatabaseDAO
+    final public static function getDAOInstance(): \DAO\DatabaseDAO
     {
-        $DAOClassName = '\\DAO\\' . $this->getDAOClassName();
+        $DAOClassName = '\\DAO\\' . static::getDAOClassName();
         if (class_exists($DAOClassName)) {
             return $DAOClassName::getInstance();
         } else {
-            throw new \Exception(self::class . ' DAO not found');
+            throw new \Exception(static::class . ' DAO not found');
         }
     }
 
