@@ -10,6 +10,11 @@ class TravailleurEtrangerDAO extends DatabaseDAO
     /**
      * @var string
      */
+    protected $configFileName = 'travailleur_etranger';
+
+    /**
+     * @var string
+     */
     protected $tableName = 'travailleur_etranger';
 
     /**
@@ -32,20 +37,5 @@ class TravailleurEtrangerDAO extends DatabaseDAO
         }
 
         return $travailleurEtranger;
-    }
-
-    /**
-     * @return array
-     */
-    protected function modelToDatabaseFields(): array
-    {
-        return [
-            'id' => 'id',
-            'autorisationTravail' => 'autorisation_travail',
-            'dateAutorisationEmbauche' => 'date_autorisation_embauche',
-            'numeroCarteSejour' => 'num_carte_sejour',
-            'dateLimiteValidite' => 'date_limite_validite',
-            'salarie' => 'id_salarie'
-        ];
     }
 }

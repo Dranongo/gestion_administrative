@@ -10,6 +10,11 @@ class RenseignementPosteDAO extends DatabaseDAO
     /**
      * @var string
      */
+    protected $configFileName = 'renseignement_poste';
+
+    /**
+     * @var string
+     */
     protected $tableName = 'renseignement_poste';
 
     /**
@@ -25,17 +30,5 @@ class RenseignementPosteDAO extends DatabaseDAO
                            ->setNom($data['nom']);
 
         return $renseignementPoste;
-    }
-
-    /**
-     * @return array
-     */
-    protected function modelToDatabaseFields(): array
-    {
-        return [
-            'id' => 'id',
-            'code' => 'code',
-            'nom' => 'nom',
-        ];
     }
 }

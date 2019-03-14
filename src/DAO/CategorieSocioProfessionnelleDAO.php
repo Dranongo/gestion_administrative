@@ -8,7 +8,7 @@ use Model\CategorieSocioProfessionnelle;
 class CategorieSocioProfessionnelleDAO extends DatabaseDAO
 {
     /**
-     * 
+     * @var string
      */
     protected $configFileName = 'categorie_socio_professionnelle';
 

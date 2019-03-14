@@ -10,6 +10,11 @@ class ContratDAO extends DatabaseDAO
     /**
      * @var string
      */
+    protected $configFileName = 'contrat';
+
+    /**
+     * @var string
+     */
     protected $tableName = 'contrat';
 
     /**

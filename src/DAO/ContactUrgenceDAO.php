@@ -10,6 +10,11 @@ class ContactUrgenceDAO extends DatabaseDAO
     /**
      * @var string
      */
+    protected $configFileName = 'contact_urgence';
+
+    /**
+     * @var string
+     */
     protected $tableName = 'contact_urgence';
 
     /**

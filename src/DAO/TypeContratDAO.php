@@ -10,6 +10,11 @@ class TypeContratDAO extends DatabaseDAO
     /**
      * @var string
      */
+    protected $configFileName = 'type_contrat';
+
+    /**
+     * @var string
+     */
     protected $tableName = 'type_contrat';
 
     /**
@@ -25,17 +30,5 @@ class TypeContratDAO extends DatabaseDAO
                     ->setNom($data['nom']);
 
         return $typeContrat;
-    }
-
-    /**
-     * @return array
-     */
-    protected function modelToDatabaseFields(): array
-    {
-        return [
-            'id' => 'id',
-            'code' => 'code',
-            'nom' => 'nom',
-        ];
     }
 }

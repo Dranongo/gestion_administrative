@@ -7,6 +7,12 @@ use Model\Enfant;
 
 class EnfantDAO extends DatabaseDAO
 {
+
+    /**
+     * @var string
+     */
+    protected $configFileName = 'enfant';
+
     /**
      * @var string
      */
@@ -32,19 +38,5 @@ class EnfantDAO extends DatabaseDAO
         }
 
         return $enfant;
-    }
-
-    /**
-     * @return array
-     */
-    protected function modelToDatabaseFields(): array
-    {
-        return [
-            'id' => 'id',
-            'nom' => 'nom',
-            'prenom' => 'prenom',
-            'dateNaissance' => 'date_naissance',
-            'salarie' => 'id_salarie'
-        ];
     }
 }
