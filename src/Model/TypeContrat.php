@@ -7,6 +7,11 @@ class TypeContrat extends AbstractModel
     /**
      * @var string
      */
+    protected static $DAOClassName = 'TypeContratDAO';
+
+    /**
+     * @var string
+     */
     protected $code;
 
     /**

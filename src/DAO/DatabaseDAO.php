@@ -78,8 +78,8 @@ abstract class DatabaseDAO
     /**
      * @param array $orderBy
      * @param bool $recursive
-     * @param ?int $limit
-     * @param ?int $offset
+     * @param int|null $limit
+     * @param int|null $offset
      * @return array
      */
     public function findAll(array $orderBy = [], bool $recursive = false, ?int $limit = null, ?int $offset = null): array
@@ -122,8 +122,8 @@ abstract class DatabaseDAO
      * @param array $criteria
      * @param array $orderBy
      * @param bool $recursive
-     * @param ?int $limit
-     * @param ?int $offset
+     * @param int|null $limit
+     * @param int|null $offset
      * @return array
      */
     public function findBy(

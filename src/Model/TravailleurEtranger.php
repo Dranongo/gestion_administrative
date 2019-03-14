@@ -5,6 +5,11 @@ namespace Model;
 class TravailleurEtranger extends AbstractModel
 {
     /**
+     * @var string
+     */
+    protected static $DAOClassName = 'TravailleurEtrangerDAO';
+
+    /**
      * @var bool
      */
     protected $autorisationTravail;

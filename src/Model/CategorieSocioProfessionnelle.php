@@ -7,6 +7,11 @@ class CategorieSocioProfessionnelle extends AbstractModel
     /**
      * @var string
      */
+    protected static $DAOClassName = 'CategorieSocioProfessionnelleDAO';
+
+    /**
+     * @var string
+     */
     protected $code;
 
     /**

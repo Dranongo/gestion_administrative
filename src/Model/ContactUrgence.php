@@ -7,6 +7,11 @@ class ContactUrgence extends AbstractModel
     /**
      * @var string
      */
+    protected static $DAOClassName = 'ContactUrgenceDAO';
+
+    /**
+     * @var string
+     */
     protected $nom;
 
     /**

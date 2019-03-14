@@ -7,6 +7,11 @@ class Enfant extends AbstractModel
     /**
      * @var string
      */
+    protected static $DAOClassName = 'EnfantDAO';
+
+    /**
+     * @var string
+     */
     protected $nom;
 
     /**

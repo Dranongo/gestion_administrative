@@ -4,6 +4,11 @@ namespace Model;
 
 class Contrat extends AbstractModel
 {
+    /**
+     * @var string
+     */
+    protected static $DAOClassName = 'ContratDAO';
+
 	/**
      * @var \DateTime
      */

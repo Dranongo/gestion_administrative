@@ -7,6 +7,11 @@ class DocumentType extends AbstractModel
     /**
      * @var string
      */
+    protected static $DAOClassName = 'DocumentTypeDAO';
+
+    /**
+     * @var string
+     */
     protected $nom;
 
     /**

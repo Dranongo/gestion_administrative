@@ -4,6 +4,11 @@ namespace Model;
 
 class Salarie extends AbstractModel
 {
+    /**
+     * @var string
+     */
+    protected static $DAOClassName = 'SalarieDAO';
+
 	/**
      * @var string
      */

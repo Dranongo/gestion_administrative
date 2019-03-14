@@ -7,6 +7,11 @@ class RenseignementPoste extends AbstractModel
     /**
      * @var string
      */
+    protected static $DAOClassName = 'RenseignementPosteDAO';
+
+    /**
+     * @var string
+     */
     protected $code;
 
     /**
