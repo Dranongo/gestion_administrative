@@ -34,19 +34,4 @@ class ContactUrgenceDAO extends DatabaseDAO
 
         return $contactUrgence;
     }
-
-    /**
-     * @return array
-     */
-    protected function modelToDatabaseFields(): array
-    {
-        return [
-            'id' => 'id',
-            'nom' => 'nom',
-            'prenom' => 'prenom',
-            'lien' => 'lien',
-            'telephone' => 'telephone',
-            'salarie' => 'id_salarie'
-        ];
-    }
 }

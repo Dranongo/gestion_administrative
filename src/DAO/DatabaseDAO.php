@@ -76,6 +76,10 @@ abstract class DatabaseDAO
     }
 
     /**
+     * @param array $orderBy
+     * @param bool $recursive
+     * @param ?int $limit
+     * @param ?int $offset
      * @return array
      */
     public function findAll(array $orderBy = [], bool $recursive = false, ?int $limit = null, ?int $offset = null): array
@@ -98,6 +102,7 @@ abstract class DatabaseDAO
 
     /**
      * @param int $id
+     * @param bool $recursive
      * @return AbstractModel|null
      */
     public function find(int $id, bool $recursive = true): ?AbstractModel
@@ -115,7 +120,10 @@ abstract class DatabaseDAO
 
     /**
      * @param array $criteria
-     * @param array $order
+     * @param array $orderBy
+     * @param bool $recursive
+     * @param ?int $limit
+     * @param ?int $offset
      * @return array
      */
     public function findBy(
@@ -289,8 +297,7 @@ abstract class DatabaseDAO
     }
 
     /**
-     * @param array $modelDatabase
-     * @param array $dataModel
+     * @param string $key
      * @return array
      */
     protected function keyModelToDataBase(string $key): string

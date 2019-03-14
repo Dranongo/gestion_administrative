@@ -31,12 +31,4 @@ class CategorieSocioProfessionnelleDAO extends DatabaseDAO
 
         return $categorieSocioProfessionnelle;
     }
-
-    /**
-     * @return array
-     */
-    protected function modelToDatabaseFields(): array
-    {
-        
-    }
 }
