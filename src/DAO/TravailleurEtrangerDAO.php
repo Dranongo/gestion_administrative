@@ -18,6 +18,11 @@ class TravailleurEtrangerDAO extends DatabaseDAO
     protected $tableName = 'travailleur_etranger';
 
     /**
+     * @var DatabaseDAO
+     */
+    protected static $_instance = null;
+
+    /**
      * @param array $data
      * @param bool $recursive
      * @return AbstractModel
@@ -31,7 +36,9 @@ class TravailleurEtrangerDAO extends DatabaseDAO
                             ->setNumeroCarteSejour($data['num_carte_sejour'])
                             ->setDateLimiteValidite(new \DateTime($data['date_limite_validite']));
         if ($recursive) {
-            
+            $salarieDAO = \Model\Salarie::getDAOInstance();
+            $salarie = $salarieDAO->find($data['id_salarie'], false);
+            $travailleur_etranger->setSalarie($salarie);
         }
 
         return $travailleurEtranger;

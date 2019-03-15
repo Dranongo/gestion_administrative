@@ -34,11 +34,6 @@ abstract class DatabaseDAO
     protected $tableName;
 
     /**
-     * @var DatabaseDAO
-     */
-    protected static $_instance = null;
-
-    /**
      * DatabaseDAO constructor.
      */
     final private function __construct()
@@ -60,11 +55,11 @@ abstract class DatabaseDAO
      */
     public static function getInstance(): DatabaseDAO
     {
-        if (! self::$_instance instanceof DatabaseDAO) {
-            self::$_instance = new static();
+        if (! static::$_instance instanceof DatabaseDAO) {
+            static::$_instance = new static();
         }
 
-        return self::$_instance;
+        return static::$_instance;
     }
 
     /**
@@ -94,7 +89,7 @@ abstract class DatabaseDAO
         $arrayResult = [];
 
         for ($i=0; $i < count($fetchResult); $i++) { 
-            $arrayResult[] = $this->buildDomainObject($fetchResult[$i], false);
+            $arrayResult[] = $this->buildDomainObject($fetchResult[$i], $recursive);
         }
 
         return $arrayResult;
@@ -155,7 +150,7 @@ abstract class DatabaseDAO
         $arrayResult = [];
 
         for ($i=0; $i < count($fetchResult); $i++) { 
-            $arrayResult[] = $this->buildDomainObject($fetchResult[$i], false);
+            $arrayResult[] = $this->buildDomainObject($fetchResult[$i], $recursive);
         }
 
         return $arrayResult;

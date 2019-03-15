@@ -18,6 +18,11 @@ class RenseignementPosteDAO extends DatabaseDAO
     protected $tableName = 'renseignement_poste';
 
     /**
+     * @var DatabaseDAO
+     */
+    protected static $_instance = null;
+
+    /**
      * @param array $data
      * @param bool $recursive
      * @return AbstractModel

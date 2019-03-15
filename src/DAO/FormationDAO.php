@@ -8,7 +8,7 @@ use Model\Formation;
 class FormationDAO extends DatabaseDAO
 {
     /**
-     * 
+     * @var string
      */
     protected $configFileName = 'formation';
 
@@ -16,6 +16,11 @@ class FormationDAO extends DatabaseDAO
      * @var string
      */
     protected $tableName = 'formation';
+
+    /**
+     * @var DatabaseDAO
+     */
+    protected static $_instance = null;
 
     /**
      * @param array $data
@@ -35,7 +40,9 @@ class FormationDAO extends DatabaseDAO
                   ->setObtenu($data['obtenu']);
 
         if ($recursive) {
-          
+          $salarieDAO = \Model\Salarie::getDAOInstance();
+          $salarie = $salarieDAO->find($data['id_salarie'], false);
+          $formation->setSalarie($salarie);
         }
 
         return $formation;

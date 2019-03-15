@@ -18,6 +18,11 @@ class DocumentTypeDAO extends DatabaseDAO
     protected $tableName = 'type_document';
 
     /**
+     * @var DatabaseDAO
+     */
+    protected static $_instance = null;
+
+    /**
      * @param array $data
      * @param bool $recursive
      * @return AbstractModel

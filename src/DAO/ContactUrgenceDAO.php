@@ -18,6 +18,11 @@ class ContactUrgenceDAO extends DatabaseDAO
     protected $tableName = 'contact_urgence';
 
     /**
+     * @var DatabaseDAO
+     */
+    protected static $_instance = null;
+
+    /**
      * @param array $data
      * @param bool $recursive
      * @return AbstractModel
@@ -32,7 +37,9 @@ class ContactUrgenceDAO extends DatabaseDAO
                        ->setTelephone($data['telephone']);
 
         if ($recursive) {
-            
+            $salarieDAO = \Model\Salarie::getDAOInstance();
+            $salarie = $salarieDAO->find($data['id_salarie'], false);
+            $contactUrgence->setSalarie($salarie);   
         }
 
         return $contactUrgence;

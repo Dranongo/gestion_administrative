@@ -19,6 +19,11 @@ class EnfantDAO extends DatabaseDAO
     protected $tableName = 'enfant';
 
     /**
+     * @var DatabaseDAO
+     */
+    protected static $_instance = null;
+
+    /**
      * @param array $data
      * @param bool $recursive
      * @return AbstractModel
@@ -32,7 +37,9 @@ class EnfantDAO extends DatabaseDAO
                ->setDateNaissance(new \DateTime($data['date_naissance']));
 
         if ($recursive) {
-            
+            $salarieDAO = \Model\Salarie::getDAOInstance();
+            $salarie = $salarieDAO->find($data['id_salarie'], false);
+            $enfant->setSalarie($salarie);
         }
 
         return $enfant;

@@ -18,6 +18,11 @@ class CategorieSocioProfessionnelleDAO extends DatabaseDAO
     protected $tableName = 'categorie_socio_professionnelle';
 
     /**
+     * @var DatabaseDAO
+     */
+    protected static $_instance = null;
+
+    /**
      * @param array $data
      * @param bool $recursive
      * @return AbstractModel

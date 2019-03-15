@@ -18,6 +18,11 @@ class SalarieDAO extends DatabaseDAO
     protected $tableName = 'salarie';
 
     /**
+     * @var DatabaseDAO
+     */
+    protected static $_instance = null;
+
+    /**
      * @param array $data
      * @param bool $recursive
      * @return AbstractModel
