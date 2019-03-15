@@ -82,6 +82,8 @@ abstract class DatabaseDAO
         $sql = "SELECT * 
                 FROM $this->tableName";
 
+        $sql .= $this->addRestrictionsRequest([], $orderBy, $limit, $offset);
+
         $stmt = $this->connection->query($sql);
 
         $fetchResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -129,19 +131,10 @@ abstract class DatabaseDAO
         ?int $offset = null
     ): array
     {
-        //$modelDatabase = $this->modelToDatabaseFields();
-        //$criteria = $this->keyModelToDataBase($modelDatabase, $criteria);
-
-        $stringCriteria = $this->valuesToDatabaseFormat($criteria);
-        $stringOrderBy = $this->valuesToDatabaseFormat($orderBy);
-
-        $search = array("=", "'");
-        $stringOrderBy = str_replace($search, "", $stringOrderBy);
-
         $sql = "SELECT * 
-                FROM $this->tableName
-                WHERE $stringCriteria 
-                ORDER BY $stringOrderBy";
+                FROM $this->tableName";
+
+        $sql .= addRestrictionsRequest($criteria, $orderBy, $limit, $offset);
 
         $stmt = $this->connection->query($sql);
 
@@ -243,7 +236,7 @@ abstract class DatabaseDAO
      * @param array $fieldsArray
      * @return array
      */
-    protected function valuesToDatabaseFormatInsert(array $fieldsArray) : array
+    protected function valuesToDatabaseFormatInsert(array $fieldsArray): array
     {
         foreach ($fieldsArray as $key => $value) {
             if (is_string($value)) {
@@ -261,7 +254,7 @@ abstract class DatabaseDAO
      * @param array $fieldsArray
      * @return string
      */
-    protected function valuesToDatabaseFormat(array $fieldsArray) : string
+    protected function valuesToDatabaseFormat(array $fieldsArray): string
     {
         $cpt = 0;
         $fields = "";
@@ -269,6 +262,33 @@ abstract class DatabaseDAO
             $fields .= ($cpt++ ? ", " : "") . addslashes($key) . " = '" . addslashes($value) . "'";
         }
         return $fields;
+    }
+
+    /**
+     * @param array $criteria
+     * @param array $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return string
+     */
+    protected function addRestrictionsRequest(array $criteria = [], array $orderBy = [], ?int $limit = null, ?int $offset = null): string
+    {
+        $restrictions = "";
+        if ($criteria != []) {
+            $restrictions .= " WHERE " . $this->valuesToDatabaseFormat($criteria);
+        }
+        if ($orderBy != []) {
+            $search = array("=", "'");
+            $restrictions .= " ORDER BY " . str_replace($search, "", $this->valuesToDatabaseFormat($orderBy));
+        }
+        if ($limit != null) {
+            $restrictions .= " LIMIT " . $limit;
+        }
+        if ($offset != null) {
+            $restrictions .= " OFFSET " . $offset;
+        }
+
+        return $restrictions;
     }
 
     /**
