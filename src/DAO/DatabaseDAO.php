@@ -134,7 +134,7 @@ abstract class DatabaseDAO
         $sql = "SELECT * 
                 FROM $this->tableName";
 
-        $sql .= addRestrictionsRequest($criteria, $orderBy, $limit, $offset);
+        $sql .= $this->addRestrictionsRequest($criteria, $orderBy, $limit, $offset);
 
         $stmt = $this->connection->query($sql);
 
@@ -259,7 +259,7 @@ abstract class DatabaseDAO
         $cpt = 0;
         $fields = "";
         foreach ($fieldsArray as $key => $value) {
-            $fields .= ($cpt++ ? ", " : "") . addslashes($key) . " = '" . addslashes($value) . "'";
+            $fields .= ($cpt++ ? ", " : "") . $this->keyModelToDataBase(addslashes($key)) . " = '" . addslashes($value) . "'";
         }
         return $fields;
     }
@@ -274,17 +274,17 @@ abstract class DatabaseDAO
     protected function addRestrictionsRequest(array $criteria = [], array $orderBy = [], ?int $limit = null, ?int $offset = null): string
     {
         $restrictions = "";
-        if ($criteria != []) {
+        if (count($criteria) != 0) {
             $restrictions .= " WHERE " . $this->valuesToDatabaseFormat($criteria);
         }
-        if ($orderBy != []) {
-            $search = array("=", "'");
+        if (count($orderBy) != 0) {
+            $search = ["=", "'"];
             $restrictions .= " ORDER BY " . str_replace($search, "", $this->valuesToDatabaseFormat($orderBy));
         }
         if ($limit != null) {
             $restrictions .= " LIMIT " . $limit;
         }
-        if ($offset != null) {
+        if ($limit != null && $offset != null) {
             $restrictions .= " OFFSET " . $offset;
         }
 
@@ -317,7 +317,7 @@ abstract class DatabaseDAO
      */
     protected function keyModelToDataBase(string $key): string
     {
-        $tableau = $this->modelToDatabaseFields();
+        $tableau = $this->config;
 
         return array_key_exists($key, $tableau) ? $tableau[$key] : "";
     }
