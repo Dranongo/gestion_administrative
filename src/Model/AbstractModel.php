@@ -43,6 +43,9 @@ abstract class AbstractModel
         return static::$DAOClassName;
     }
 
+    /**
+     * @return \DAO\DatabaseDAO
+     */
     final public static function getDAOInstance(): \DAO\DatabaseDAO
     {
         $DAOClassName = '\\DAO\\' . static::getDAOClassName();
@@ -66,5 +69,14 @@ abstract class AbstractModel
             return is_array($possibleValues) && in_array($value, $possibleValues);
         }
         return false;
-    }    
+    }
+
+    /**
+     * @return \DAO\DatabaseDAO
+     */
+    final public function save(): \DAO\DatabaseDAO
+    {
+        return static::getDAOInstance()->save($this);
+    }
+
 }
