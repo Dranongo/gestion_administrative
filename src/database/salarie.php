@@ -24,10 +24,21 @@
         'statutHandicap' => 'statut_handicap',
         'tauxInvalidite' => 'taux_invalidite',
         'formations' => [
-            'tableName' => 'enfant',
+            'tableName' => 'formation',
             'foreignKey' => 'id_salarie',
             'orderBy' => [
                 'dateNaissance' => 'ASC'
-            ]
+            ],
+            'mapped' => false
+        ],
+        'categoriesSocioProfessionnelles' => [
+            'tableName' => 'salarie_categorie_socio_professionnelle',
+            'foreignKey' => 'id_salarie',
+            'otherForeignKey' => 'id_categorie_socio_professionnelle',
+            'otherFields' => [
+                'dateDebutCategorieSocioProfessionnelle' => 'date_debut',
+                'dateFinCategorieSocioProfessionnelle' => 'date_fin'
+            ],
+            'mapped' => true
         ]
     ];

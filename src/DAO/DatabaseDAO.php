@@ -216,7 +216,7 @@ abstract class DatabaseDAO
     protected function modelValuesToDatabase(AbstractModel $model): array
     {
         $fieldsArray = [];
-        foreach ($this->modelToDatabaseFields() as $param => $field) {
+        foreach ($this->getConfig() as $param => $field) {
             $getter = 'get' . ucfirst($param);
             if (method_exists($model, $getter)) {
                 $value = $model->{$getter}();
@@ -259,7 +259,7 @@ abstract class DatabaseDAO
         $cpt = 0;
         $fields = "";
         foreach ($fieldsArray as $key => $value) {
-            $fields .= ($cpt++ ? ", " : "") . $this->keyModelToDataBase(addslashes($key)) . " = '" . addslashes($value) . "'";
+            $fields .= ($cpt++ ? ", " : "") . addslashes($key) . " = '" . addslashes($value) . "'";
         }
         return $fields;
     }
@@ -312,12 +312,21 @@ abstract class DatabaseDAO
     }
 
     /**
+     * @param string $sqlRequest
+     * @return false|\PDOStatement
+     */
+    public function querySql(string $sqlRequest)
+    {
+        return $this->connection->query($sqlRequest);
+    }
+
+    /**
      * @param string $key
      * @return array
      */
     protected function keyModelToDataBase(string $key): string
     {
-        $tableau = $this->config;
+        $tableau = $this->modelToDatabaseFields();
 
         return array_key_exists($key, $tableau) ? $tableau[$key] : "";
     }
@@ -343,4 +352,9 @@ abstract class DatabaseDAO
      * @return AbstractModel
      */
     protected abstract function buildDomainObject(array $data, bool $recursive = false): AbstractModel;
+
+    protected function getManyToManyRelationFromObject(array $relation): array
+    {
+
+    }
 }

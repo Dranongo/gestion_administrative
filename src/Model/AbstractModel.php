@@ -45,11 +45,12 @@ abstract class AbstractModel
 
     /**
      * @return \DAO\DatabaseDAO
+     * @throws \Exception
      */
     final public static function getDAOInstance(): \DAO\DatabaseDAO
     {
         $DAOClassName = '\\DAO\\' . static::getDAOClassName();
-        if (class_exists($DAOClassName)) {
+        if (class_exists($DAOClassName) && $DAOClassName instanceof \DAO\DatabaseDAO) {
             return $DAOClassName::getInstance();
         } else {
             throw new \Exception(static::class . ' DAO not found');
@@ -65,7 +66,7 @@ abstract class AbstractModel
     {
         $method = 'get' . ucfirst($parameter);
         if (method_exists($this, $method)) {
-            $possibleValues = $this->{method}();
+            $possibleValues = $this->{$method}();
             return is_array($possibleValues) && in_array($value, $possibleValues);
         }
         return false;
