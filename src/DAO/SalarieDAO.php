@@ -55,6 +55,16 @@ class SalarieDAO extends DatabaseDAO
                 ->setStatutHandicap($data['statut_handicap'])
                 ->setTauxInvalidite($data['taux_invalidite']);
 
+        if ($recursive == true) {
+            $config = $this->getConfig();
+            $tableFormations = $config['formations'];
+            $id = ['salarie' => $salarie->getId()];
+            $formation = \Model\Formation::getDAOInstance();
+            $listFormations = $formation->findBy($id, $tableFormations['orderBy']);
+
+            $salarie->setFormations($listFormations);
+        }
+
         return $salarie;
     }
 }

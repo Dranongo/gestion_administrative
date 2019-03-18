@@ -44,7 +44,7 @@ class ContratDAO extends DatabaseDAO
 
             $typeContratDAO = \Model\TypeContrat::getDAOInstance();
             $typeContrat = $typeContratDAO->find($data['id_type_contrat'], false);
-            $contrat->setTypesContrat($salarie);
+            $contrat->setTypeContrat($salarie);
 
             $motifFinContratDAO = \Model\MotifFinContrat::getDAOInstance();
             $motifFinContrat = $motifFinContratDAO->find($data['id_motif_fin_contrat'], false);

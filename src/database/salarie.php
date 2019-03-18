@@ -27,7 +27,7 @@
             'tableName' => 'formation',
             'foreignKey' => 'id_salarie',
             'orderBy' => [
-                'dateNaissance' => 'ASC'
+                'dateFin' => 'DESC'
             ],
             'mapped' => false
         ],

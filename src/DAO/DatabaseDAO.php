@@ -131,6 +131,9 @@ abstract class DatabaseDAO
         ?int $offset = null
     ): array
     {
+        $criteria = $this->nameToKeyConfig($criteria);
+        $orderBy = $this->nameToKeyConfig($orderBy);
+
         $sql = "SELECT * 
                 FROM $this->tableName";
 
@@ -321,14 +324,20 @@ abstract class DatabaseDAO
     }
 
     /**
-     * @param string $key
+     * @param array $arrayParam
      * @return array
      */
-    protected function keyModelToDataBase(string $key): string
+    protected function nameToKeyConfig(array $arrayParam): array
     {
-        $tableau = $this->modelToDatabaseFields();
+        $config = $this->getConfig();
 
-        return array_key_exists($key, $tableau) ? $tableau[$key] : "";
+        foreach ($arrayParam as $key => $value) {
+            if (array_key_exists($key, $config) && $config[$key] != $key) {
+                $arrayParam[$config[$key]] = $arrayParam[$key];
+                unset($arrayParam[$key]);
+            }
+        }
+        return $arrayParam;
     }
 
     /**

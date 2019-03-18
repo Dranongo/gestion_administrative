@@ -50,7 +50,7 @@ abstract class AbstractModel
     final public static function getDAOInstance(): \DAO\DatabaseDAO
     {
         $DAOClassName = '\\DAO\\' . static::getDAOClassName();
-        if (class_exists($DAOClassName) && $DAOClassName instanceof \DAO\DatabaseDAO) {
+        if (class_exists($DAOClassName)) {
             return $DAOClassName::getInstance();
         } else {
             throw new \Exception(static::class . ' DAO not found');
