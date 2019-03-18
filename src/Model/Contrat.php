@@ -30,9 +30,9 @@ class Contrat extends AbstractModel
     protected $renseignementsPoste = [];
 
     /**
-     * @var array<TypeContrat>
+     * @var TypeContrat
      */
-    protected $typesContrat = [];
+    protected $typeContrat;
 
     /**
      * @var MotifFinContrat
@@ -201,62 +201,22 @@ class Contrat extends AbstractModel
     }
 
     /**
-     * @param array $typesContrat
-     * @return Contrat
-     */
-    public function setTypesContrat(array $typesContrat): Contrat
-    {
-        $this->removeAllTypesContrat();
-        foreach ($typesContrat as $typeContrat) {
-            if ($typeContrat instanceof TypeContrat) {
-                $this->addTypeContrat($typeContrat);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Contrat
-     */
-    public function removeAllTypesContrat(): Contrat
-    {
-        $this->typesContrat = [];
-
-        return $this;
-    }
-
-    /**
      * @param TypeContrat $typeContrat
      * @return Contrat
      */
-    public function addTypeContrat(TypeContrat $typeContrat): Contrat
+    public function setTypeContrat(TypeContrat $typeContrat): Contrat
     {
-        $this->typesContrat[] = $typeContrat;
+        $this->typeContrat = $typeContrat;
 
         return $this;
     }
 
     /**
-     * @param TypeContrat $typeContrat
-     * @return Contrat
+     * @return TypeContrat
      */
-    public function removeTypeContrat(TypeContrat $typeContrat): Contrat
+	public function getTypeContrat(): TypeContrat
     {
-        $key = array_search($typeContrat, $this->getTypesContrat(), true);
-        if ($key !== false) {
-            unset($this->typesContrat[$key]);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return array<TypeContrat>
-     */
-	public function getTypesContrat(): array
-    {
-        return $this->typesContrat;
+        return $this->typeContrat;
     }
 
     /**
