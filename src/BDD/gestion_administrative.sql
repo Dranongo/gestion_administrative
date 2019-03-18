@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 08 mars 2019 à 15:19
+-- Généré le :  lun. 18 mars 2019 à 09:46
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -140,6 +140,129 @@ INSERT INTO `contact_urgence` (`id`, `nom`, `prenom`, `lien`, `telephone`, `id_s
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `contrat`
+--
+
+DROP TABLE IF EXISTS `contrat`;
+CREATE TABLE IF NOT EXISTS `contrat` (
+  `id_salarie` int(11) NOT NULL,
+  `id_renseignement_poste` int(11) NOT NULL,
+  `id_type_contrat` int(11) NOT NULL,
+  `date_debut` datetime NOT NULL,
+  `date_fin` datetime DEFAULT NULL,
+  `id_motif_fin_contrat` int(11) DEFAULT NULL,
+  KEY `id_salarie` (`id_salarie`) USING BTREE,
+  KEY `id_renseignement_poste` (`id_renseignement_poste`) USING BTREE,
+  KEY `id_type_contrat` (`id_type_contrat`) USING BTREE,
+  KEY `id_motif_fin_contrat` (`id_motif_fin_contrat`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `contrat`
+--
+
+INSERT INTO `contrat` (`id_salarie`, `id_renseignement_poste`, `id_type_contrat`, `date_debut`, `date_fin`, `id_motif_fin_contrat`) VALUES
+(12, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00', NULL),
+(13, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00', NULL),
+(14, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00', NULL),
+(35, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00', NULL),
+(36, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00', NULL),
+(37, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00', NULL),
+(38, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00', NULL),
+(101, 3, 2, '8986-06-07 00:00:00', NULL, NULL),
+(102, 4, 3, '2019-02-28 00:00:00', NULL, NULL),
+(103, 3, 2, '0767-08-09 00:00:00', NULL, NULL),
+(104, 3, 2, '0767-08-09 00:00:00', NULL, NULL),
+(105, 3, 2, '0767-08-09 00:00:00', NULL, NULL),
+(106, 5, 5, '2004-10-08 00:00:00', NULL, NULL),
+(107, 5, 5, '2004-10-08 00:00:00', NULL, NULL),
+(108, 5, 5, '2004-10-08 00:00:00', NULL, NULL),
+(109, 5, 5, '2004-10-08 00:00:00', NULL, NULL),
+(110, 6, 4, '2015-04-26 00:00:00', NULL, NULL),
+(111, 7, 5, '2017-09-12 00:00:00', NULL, NULL),
+(112, 7, 5, '2017-09-12 00:00:00', NULL, NULL),
+(113, 7, 5, '2017-09-12 00:00:00', NULL, NULL),
+(114, 7, 5, '2017-09-12 00:00:00', NULL, NULL),
+(115, 7, 5, '2017-09-12 00:00:00', NULL, NULL),
+(116, 7, 5, '2017-09-12 00:00:00', NULL, NULL),
+(117, 3, 5, '2025-08-01 00:00:00', NULL, NULL),
+(118, 3, 5, '2025-08-01 00:00:00', NULL, NULL),
+(119, 3, 3, '2022-03-03 00:00:00', NULL, NULL),
+(120, 5, 3, '2022-11-06 00:00:00', NULL, NULL),
+(121, 5, 3, '2022-11-06 00:00:00', NULL, NULL),
+(122, 5, 3, '2022-11-06 00:00:00', NULL, NULL),
+(123, 3, 6, '2023-10-05 00:00:00', NULL, NULL),
+(124, 3, 3, '2022-10-03 00:00:00', NULL, NULL),
+(125, 3, 3, '2022-10-03 00:00:00', NULL, NULL),
+(126, 3, 3, '2022-10-03 00:00:00', NULL, NULL),
+(127, 3, 3, '2022-10-03 00:00:00', NULL, NULL),
+(128, 4, 2, '2021-10-04 00:00:00', NULL, NULL),
+(129, 4, 2, '2021-10-04 00:00:00', NULL, NULL),
+(130, 3, 3, '2022-03-04 00:00:00', NULL, NULL),
+(131, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(132, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(133, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(134, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(135, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(136, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(137, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(138, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(139, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(140, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(141, 2, 2, '2017-02-02 00:00:00', NULL, NULL),
+(142, 1, 2, '2018-03-05 00:00:00', NULL, NULL),
+(143, 1, 2, '2018-03-05 00:00:00', NULL, NULL),
+(144, 1, 2, '2018-03-05 00:00:00', NULL, NULL),
+(145, 1, 2, '2018-03-05 00:00:00', NULL, NULL),
+(146, 4, 3, '2022-10-03 00:00:00', NULL, NULL),
+(147, 4, 3, '2022-10-03 00:00:00', NULL, NULL),
+(148, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(149, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(150, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(151, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(152, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(153, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(154, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(155, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(156, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(157, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(158, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(159, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(160, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(161, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(162, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(163, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(164, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(165, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(166, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(167, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(168, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(169, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(170, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(171, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(172, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(173, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(174, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(175, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(176, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(177, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(178, 2, 2, '2023-07-04 00:00:00', NULL, NULL),
+(179, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(180, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(181, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(182, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(183, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(184, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(185, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(186, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(187, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(188, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(189, 4, 4, '2015-08-11 00:00:00', NULL, NULL),
+(190, 4, 4, '2015-08-11 00:00:00', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `document`
 --
 
@@ -198,18 +321,20 @@ CREATE TABLE IF NOT EXISTS `enfant` (
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
   `date_naissance` datetime NOT NULL,
-  `id_salarie` int(11) NOT NULL,
+  `id_salarie` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_salarie` (`id_salarie`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `enfant`
 --
 
 INSERT INTO `enfant` (`id`, `nom`, `prenom`, `date_naissance`, `id_salarie`) VALUES
-(27, 'nom1', 'prenom1', '2021-02-01 00:00:00', 130),
-(28, 'enfant2', 'bonjour2', '2016-05-02 00:00:00', 130);
+(27, 'L\'Alenche', 'Jean', '1999-09-12 00:00:00', 127),
+(28, 'enfant2', 'bonjour2', '2016-05-02 00:00:00', 130),
+(29, 'Clenche', 'Jean', '1999-09-12 00:00:00', 130),
+(50, 'Biniou', 'Jean', '1999-09-12 00:00:00', 127);
 
 -- --------------------------------------------------------
 
@@ -240,6 +365,36 @@ CREATE TABLE IF NOT EXISTS `formation` (
 INSERT INTO `formation` (`id`, `nom`, `niveau`, `organisme`, `lieu`, `formation`, `date_debut`, `date_fin`, `obtenu`, `id_salarie`) VALUES
 (3, 'BAC', 'Niveau V bis et VI', 'Lycee', '', 'Vernon', '2014-03-04 00:00:00', '2018-07-05 00:00:00', 1, 129),
 (4, 'bac', 'Niveau I', 'Lycee', '', 'Vernon', '2014-03-30 00:00:00', '2018-08-05 00:00:00', 1, 130);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `motif_fin_contrat`
+--
+
+DROP TABLE IF EXISTS `motif_fin_contrat`;
+CREATE TABLE IF NOT EXISTS `motif_fin_contrat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `motif_fin_contrat`
+--
+
+INSERT INTO `motif_fin_contrat` (`id`, `nom`, `code`) VALUES
+(1, 'FIN_CDD_STAGE_ALTERNANCE', 'Fin CDD/stage/alternance'),
+(2, 'DEMISSION_SALARIE', 'Démission du salarié'),
+(3, 'RUPTURE_CONVENTION', 'Rupture conventionnelle'),
+(4, 'LICENCIEMENT', 'Licenciement'),
+(5, 'RUPTURE_PERIODE_ESSAI', 'Rupture période d’essai'),
+(6, 'FIN_CDD_STAGE_ALTERNANCE', 'Fin CDD/stage/alternance'),
+(7, 'DEMISSION_SALARIE', 'Démission du salarié'),
+(8, 'RUPTURE_CONVENTION', 'Rupture conventionnelle'),
+(9, 'LICENCIEMENT', 'Licenciement'),
+(10, 'RUPTURE_PERIODE_ESSAI', 'Rupture période d’essai');
 
 -- --------------------------------------------------------
 
@@ -669,139 +824,18 @@ INSERT INTO `salarie_categorie_socio_professionnelle` (`id_salarie`, `id_categor
 -- --------------------------------------------------------
 
 --
--- Structure de la table `salarie_renseignement_poste_type_contrat`
---
-
-DROP TABLE IF EXISTS `salarie_renseignement_poste_type_contrat`;
-CREATE TABLE IF NOT EXISTS `salarie_renseignement_poste_type_contrat` (
-  `id_salarie` int(11) NOT NULL,
-  `id_renseignement_poste` int(11) NOT NULL,
-  `id_type_contrat` int(11) NOT NULL,
-  `date_debut` datetime NOT NULL,
-  `date_fin` datetime DEFAULT NULL,
-  KEY `id_salarie` (`id_salarie`) USING BTREE,
-  KEY `id_renseignement_poste` (`id_renseignement_poste`) USING BTREE,
-  KEY `id_type_contrat` (`id_type_contrat`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `salarie_renseignement_poste_type_contrat`
---
-
-INSERT INTO `salarie_renseignement_poste_type_contrat` (`id_salarie`, `id_renseignement_poste`, `id_type_contrat`, `date_debut`, `date_fin`) VALUES
-(12, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00'),
-(13, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00'),
-(14, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00'),
-(35, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00'),
-(36, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00'),
-(37, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00'),
-(38, 4, 4, '2009-05-20 00:00:00', '2013-04-26 00:00:00'),
-(101, 3, 2, '8986-06-07 00:00:00', NULL),
-(102, 4, 3, '2019-02-28 00:00:00', NULL),
-(103, 3, 2, '0767-08-09 00:00:00', NULL),
-(104, 3, 2, '0767-08-09 00:00:00', NULL),
-(105, 3, 2, '0767-08-09 00:00:00', NULL),
-(106, 5, 5, '2004-10-08 00:00:00', NULL),
-(107, 5, 5, '2004-10-08 00:00:00', NULL),
-(108, 5, 5, '2004-10-08 00:00:00', NULL),
-(109, 5, 5, '2004-10-08 00:00:00', NULL),
-(110, 6, 4, '2015-04-26 00:00:00', NULL),
-(111, 7, 5, '2017-09-12 00:00:00', NULL),
-(112, 7, 5, '2017-09-12 00:00:00', NULL),
-(113, 7, 5, '2017-09-12 00:00:00', NULL),
-(114, 7, 5, '2017-09-12 00:00:00', NULL),
-(115, 7, 5, '2017-09-12 00:00:00', NULL),
-(116, 7, 5, '2017-09-12 00:00:00', NULL),
-(117, 3, 5, '2025-08-01 00:00:00', NULL),
-(118, 3, 5, '2025-08-01 00:00:00', NULL),
-(119, 3, 3, '2022-03-03 00:00:00', NULL),
-(120, 5, 3, '2022-11-06 00:00:00', NULL),
-(121, 5, 3, '2022-11-06 00:00:00', NULL),
-(122, 5, 3, '2022-11-06 00:00:00', NULL),
-(123, 3, 6, '2023-10-05 00:00:00', NULL),
-(124, 3, 3, '2022-10-03 00:00:00', NULL),
-(125, 3, 3, '2022-10-03 00:00:00', NULL),
-(126, 3, 3, '2022-10-03 00:00:00', NULL),
-(127, 3, 3, '2022-10-03 00:00:00', NULL),
-(128, 4, 2, '2021-10-04 00:00:00', NULL),
-(129, 4, 2, '2021-10-04 00:00:00', NULL),
-(130, 3, 3, '2022-03-04 00:00:00', NULL),
-(131, 2, 2, '2017-02-02 00:00:00', NULL),
-(132, 2, 2, '2017-02-02 00:00:00', NULL),
-(133, 2, 2, '2017-02-02 00:00:00', NULL),
-(134, 2, 2, '2017-02-02 00:00:00', NULL),
-(135, 2, 2, '2017-02-02 00:00:00', NULL),
-(136, 2, 2, '2017-02-02 00:00:00', NULL),
-(137, 2, 2, '2017-02-02 00:00:00', NULL),
-(138, 2, 2, '2017-02-02 00:00:00', NULL),
-(139, 2, 2, '2017-02-02 00:00:00', NULL),
-(140, 2, 2, '2017-02-02 00:00:00', NULL),
-(141, 2, 2, '2017-02-02 00:00:00', NULL),
-(142, 1, 2, '2018-03-05 00:00:00', NULL),
-(143, 1, 2, '2018-03-05 00:00:00', NULL),
-(144, 1, 2, '2018-03-05 00:00:00', NULL),
-(145, 1, 2, '2018-03-05 00:00:00', NULL),
-(146, 4, 3, '2022-10-03 00:00:00', NULL),
-(147, 4, 3, '2022-10-03 00:00:00', NULL),
-(148, 2, 2, '2023-07-04 00:00:00', NULL),
-(149, 2, 2, '2023-07-04 00:00:00', NULL),
-(150, 2, 2, '2023-07-04 00:00:00', NULL),
-(151, 2, 2, '2023-07-04 00:00:00', NULL),
-(152, 2, 2, '2023-07-04 00:00:00', NULL),
-(153, 2, 2, '2023-07-04 00:00:00', NULL),
-(154, 2, 2, '2023-07-04 00:00:00', NULL),
-(155, 2, 2, '2023-07-04 00:00:00', NULL),
-(156, 2, 2, '2023-07-04 00:00:00', NULL),
-(157, 2, 2, '2023-07-04 00:00:00', NULL),
-(158, 2, 2, '2023-07-04 00:00:00', NULL),
-(159, 2, 2, '2023-07-04 00:00:00', NULL),
-(160, 2, 2, '2023-07-04 00:00:00', NULL),
-(161, 2, 2, '2023-07-04 00:00:00', NULL),
-(162, 2, 2, '2023-07-04 00:00:00', NULL),
-(163, 2, 2, '2023-07-04 00:00:00', NULL),
-(164, 2, 2, '2023-07-04 00:00:00', NULL),
-(165, 2, 2, '2023-07-04 00:00:00', NULL),
-(166, 2, 2, '2023-07-04 00:00:00', NULL),
-(167, 2, 2, '2023-07-04 00:00:00', NULL),
-(168, 2, 2, '2023-07-04 00:00:00', NULL),
-(169, 2, 2, '2023-07-04 00:00:00', NULL),
-(170, 2, 2, '2023-07-04 00:00:00', NULL),
-(171, 2, 2, '2023-07-04 00:00:00', NULL),
-(172, 2, 2, '2023-07-04 00:00:00', NULL),
-(173, 2, 2, '2023-07-04 00:00:00', NULL),
-(174, 2, 2, '2023-07-04 00:00:00', NULL),
-(175, 2, 2, '2023-07-04 00:00:00', NULL),
-(176, 2, 2, '2023-07-04 00:00:00', NULL),
-(177, 2, 2, '2023-07-04 00:00:00', NULL),
-(178, 2, 2, '2023-07-04 00:00:00', NULL),
-(179, 4, 4, '2015-08-11 00:00:00', NULL),
-(180, 4, 4, '2015-08-11 00:00:00', NULL),
-(181, 4, 4, '2015-08-11 00:00:00', NULL),
-(182, 4, 4, '2015-08-11 00:00:00', NULL),
-(183, 4, 4, '2015-08-11 00:00:00', NULL),
-(184, 4, 4, '2015-08-11 00:00:00', NULL),
-(185, 4, 4, '2015-08-11 00:00:00', NULL),
-(186, 4, 4, '2015-08-11 00:00:00', NULL),
-(187, 4, 4, '2015-08-11 00:00:00', NULL),
-(188, 4, 4, '2015-08-11 00:00:00', NULL),
-(189, 4, 4, '2015-08-11 00:00:00', NULL),
-(190, 4, 4, '2015-08-11 00:00:00', NULL);
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `travailleur_etranger`
 --
 
 DROP TABLE IF EXISTS `travailleur_etranger`;
 CREATE TABLE IF NOT EXISTS `travailleur_etranger` (
-  `id_travailleur_etranger` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `autorisation_travail` tinyint(1) NOT NULL,
   `date_autorisation_embauche` datetime NOT NULL,
   `num_carte_sejour` varchar(10) NOT NULL,
   `date_limite_validite` datetime NOT NULL,
   `id_salarie` int(11) NOT NULL,
-  PRIMARY KEY (`id_travailleur_etranger`),
+  PRIMARY KEY (`id`),
   KEY `id_salarie` (`id_salarie`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
@@ -809,7 +843,7 @@ CREATE TABLE IF NOT EXISTS `travailleur_etranger` (
 -- Déchargement des données de la table `travailleur_etranger`
 --
 
-INSERT INTO `travailleur_etranger` (`id_travailleur_etranger`, `autorisation_travail`, `date_autorisation_embauche`, `num_carte_sejour`, `date_limite_validite`, `id_salarie`) VALUES
+INSERT INTO `travailleur_etranger` (`id`, `autorisation_travail`, `date_autorisation_embauche`, `num_carte_sejour`, `date_limite_validite`, `id_salarie`) VALUES
 (20, 1, '2016-05-06 00:00:00', '1000000003', '2020-09-30 00:00:00', 130);
 
 -- --------------------------------------------------------
@@ -853,33 +887,36 @@ CREATE TABLE IF NOT EXISTS `type_document` (
   `nom` varchar(255) NOT NULL,
   `statut_etranger` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `type_document`
 --
 
 INSERT INTO `type_document` (`id`, `code`, `nom`, `statut_etranger`) VALUES
-(1, 'CI', 'Carte d\'identité', NULL),
-(2, 'CV', 'CV', NULL),
-(3, 'DIPLOME', 'Diplôme', NULL),
-(4, 'RIB', 'Relevé d\'Identité Bancaire', NULL),
-(5, 'DPAE', 'Déclaration Préalable à l\'Embauche', NULL),
-(6, 'CERFA', 'Formulaire administratif réglementé', NULL),
-(7, 'CDT', 'Contrat de Travail', NULL),
+(1, 'CI', 'Carte d\'identité', 0),
+(2, 'CV', 'CV', 0),
+(3, 'DIPLOME', 'Diplôme', 0),
+(4, 'RIB', 'Relevé d\'Identité Bancaire', 0),
+(5, 'DPAE', 'Déclaration Préalable à l\'Embauche', 0),
+(6, 'CERFA', 'Formulaire administratif réglementé', 0),
+(7, 'CDT', 'Contrat de Travail', 0),
 (8, 'CDP', 'Contrat de professionnalisation', 0),
-(9, 'AMP', 'Affiliation Mutuelle et Prévoyance', NULL),
-(10, 'FP', 'Fiche de Poste', NULL),
-(11, 'ACV', 'Attestation Carte Vitale', NULL),
-(12, 'CDS', 'Carte de Séjour', NULL),
-(13, 'ADT', 'Autorisation de Travail', NULL),
-(14, 'CONTRAT_FORMA', 'Contrat de Formation', NULL),
-(15, 'PROG_FORMA', 'Programme de Formation', NULL),
-(16, 'CONV_FORMA', 'Convention de Formation', NULL),
-(17, 'CAL_FORMA', 'Calendrier de Formation', NULL),
-(18, 'VM', 'Visite Médicale', NULL),
-(19, 'PASS', 'Passeport', NULL),
-(20, 'PERM_CONDUIRE', 'Permis de Conduire', NULL);
+(9, 'AMP', 'Affiliation Mutuelle et Prévoyance', 0),
+(10, 'FP', 'Fiche de Poste', 0),
+(11, 'ACV', 'Attestation Carte Vitale', 0),
+(12, 'CDS', 'Carte de Séjour', 0),
+(13, 'ADT', 'Autorisation de Travail', 0),
+(14, 'CONTRAT_FORMA', 'Contrat de Formation', 0),
+(15, 'PROG_FORMA', 'Programme de Formation', 0),
+(16, 'CONV_FORMA', 'Convention de Formation', 0),
+(17, 'CAL_FORMA', 'Calendrier de Formation', 0),
+(18, 'VM', 'Visite Médicale', 0),
+(19, 'PASS', 'Passeport', 0),
+(20, 'PERM_CONDUIRE', 'Permis de Conduire', 0),
+(21, 'LETTRE_DEMISSION', 'Lettre de démission', 0),
+(22, 'RUPTURE_CONVENTION', 'Rupture conventionnelle', 0),
+(23, 'FIN_CDD', 'Fin de CDD', 0);
 
 -- --------------------------------------------------------
 
@@ -906,6 +943,15 @@ ALTER TABLE `contact_urgence`
   ADD CONSTRAINT `contact_urgence_ibfk_1` FOREIGN KEY (`id_salarie`) REFERENCES `salarie` (`id`);
 
 --
+-- Contraintes pour la table `contrat`
+--
+ALTER TABLE `contrat`
+  ADD CONSTRAINT `contrat_ibfk_1` FOREIGN KEY (`id_renseignement_poste`) REFERENCES `renseignement_poste` (`id`),
+  ADD CONSTRAINT `contrat_ibfk_2` FOREIGN KEY (`id_salarie`) REFERENCES `salarie` (`id`),
+  ADD CONSTRAINT `contrat_ibfk_3` FOREIGN KEY (`id_type_contrat`) REFERENCES `type_contrat` (`id`),
+  ADD CONSTRAINT `contrat_ibfk_4` FOREIGN KEY (`id_motif_fin_contrat`) REFERENCES `motif_fin_contrat` (`id`);
+
+--
 -- Contraintes pour la table `document`
 --
 ALTER TABLE `document`
@@ -930,14 +976,6 @@ ALTER TABLE `formation`
 ALTER TABLE `salarie_categorie_socio_professionnelle`
   ADD CONSTRAINT `salarie_categorie_socio_professionnelle_ibfk_1` FOREIGN KEY (`id_salarie`) REFERENCES `salarie` (`id`),
   ADD CONSTRAINT `salarie_categorie_socio_professionnelle_ibfk_2` FOREIGN KEY (`id_categorie_socio_professionnelle`) REFERENCES `categorie_socio_professionnelle` (`id`);
-
---
--- Contraintes pour la table `salarie_renseignement_poste_type_contrat`
---
-ALTER TABLE `salarie_renseignement_poste_type_contrat`
-  ADD CONSTRAINT `salarie_renseignement_poste_type_contrat_ibfk_1` FOREIGN KEY (`id_renseignement_poste`) REFERENCES `renseignement_poste` (`id`),
-  ADD CONSTRAINT `salarie_renseignement_poste_type_contrat_ibfk_2` FOREIGN KEY (`id_salarie`) REFERENCES `salarie` (`id`),
-  ADD CONSTRAINT `salarie_renseignement_poste_type_contrat_ibfk_3` FOREIGN KEY (`id_type_contrat`) REFERENCES `type_contrat` (`id`);
 
 --
 -- Contraintes pour la table `travailleur_etranger`
