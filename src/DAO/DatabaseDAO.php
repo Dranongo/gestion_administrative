@@ -283,10 +283,11 @@ abstract class DatabaseDAO
         }
         if ($limit != null) {
             $restrictions .= " LIMIT " . $limit;
+            if ($offset != null) {
+                $restrictions .= " OFFSET " . $offset;
+            }
         }
-        if ($limit != null && $offset != null) {
-            $restrictions .= " OFFSET " . $offset;
-        }
+        
 
         return $restrictions;
     }
@@ -317,7 +318,7 @@ abstract class DatabaseDAO
      */
     protected function keyModelToDataBase(string $key): string
     {
-        $tableau = $this->config;
+        $tableau = $this->getConfig();
 
         return array_key_exists($key, $tableau) ? $tableau[$key] : "";
     }
