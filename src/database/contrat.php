@@ -4,5 +4,6 @@
         'dateFin' => 'date_fin'
         'salaries' => 'id_salarie',
         'renseignementsPoste' => 'id_renseignement_poste',
-        'typesContrat' => 'id_type_contrat'
+        'typesContrat' => 'id_type_contrat',
+        'motifFinContrat' => 'id_motif_fin_contrat'
     ];

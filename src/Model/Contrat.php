@@ -35,6 +35,11 @@ class Contrat extends AbstractModel
     protected $typesContrat = [];
 
     /**
+     * @var MotifFinContrat
+     */
+    protected $motifFinContrat;
+
+    /**
      * @param \DateTime $dateDebut
      * @return Contrat
      */
@@ -252,5 +257,24 @@ class Contrat extends AbstractModel
 	public function getTypesContrat(): array
     {
         return $this->typesContrat;
+    }
+
+    /**
+     * @param MotifFinContrat $motifFinContrat
+     * @return Contrat
+     */
+     public function setMotifFinContrat(MotifFinContrat $motifFinContrat): Contrat
+     {
+         $this->motifFinContrat = $motifFinContrat;
+
+        return $this;
+     } 
+
+    /**
+     * @return MotifFinContrat
+     */
+    public function getMotifFinContrat(): MotifFinContrat
+    {
+        return $this->motifFinContrat;
     }
 }
