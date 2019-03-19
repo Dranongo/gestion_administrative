@@ -3,6 +3,8 @@
 namespace DAO;
 
 use Model\AbstractModel;
+use Model\CategorieSocioProfessionnelle;
+use Model\Formation;
 use Model\Salarie;
 
 class SalarieDAO extends DatabaseDAO
@@ -60,7 +62,7 @@ class SalarieDAO extends DatabaseDAO
             $id = ['salarie' => $salarie->getId()];
             
             $tableFormations = $config['formations'];
-            $formationDAO = \Model\Formation::getDAOInstance();
+            $formationDAO = Formation::getDAOInstance();
             $listFormations = $formationDAO->findBy($id, $tableFormations['orderBy']);
             $salarie->setFormations($listFormations);            
 
@@ -84,10 +86,13 @@ class SalarieDAO extends DatabaseDAO
             $listDocuments = $documentDAO->findBy($id, []);
             $salarie->setDocuments($listDocuments);
 
-            /*$tableCategorieSocioProfessionnelle = $config['categoriesSocioProfessionnelles'];
-            $categoriesSocioProfessionnelleDAO = \Model\CategorieSocioProfessionnelle::getDAOInstance();
-            $listCategorieSocioProfessionnelle = $categoriesSocioProfessionnelleDAO->findBy($id, []);
-            $salarie->setCategoriesSocioProfessionnelles($listCategorieSocioProfessionnelle);*/
+            foreach ($this->getManyToManyRelationFromObject($salarie, 'categoriesSocioProfessionnelles') as $data) {
+                /** @var CategorieSocioProfessionnelle $categorieSocioProfessionnelle */
+                $categorieSocioProfessionnelle = CategorieSocioProfessionnelleDAO::getInstance()->find($data['id_categorie_socio_professionnelle'], false);
+                $categorieSocioProfessionnelle->setDateDebutSalarie(new \DateTime($data['date_debut']))
+                    ->setDateFinSalarie(new \DateTime($data['date_debut']));
+                $salarie->addCategorieSocioProfessionnelle($categorieSocioProfessionnelle);
+            }
         }
 
         return $salarie;

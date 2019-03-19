@@ -40,9 +40,9 @@ echo'<pre>';
 $formationDAO = \DAO\FormationDAO::getInstance();
 var_dump($formationDAO->find(3, true));*/
 
-var_dump(\Model\TravailleurEtranger::getDAOInstance());
-$travailleurEtrangerDAO = \DAO\TravailleurEtrangerDAO::getInstance();
-var_dump($travailleurEtrangerDAO->find(20, true));
+//var_dump(\Model\TravailleurEtranger::getDAOInstance());
+$salarieDAO = \DAO\SalarieDAO::getInstance();
+var_dump($salarieDAO->find(95, true));
 
 /*var_dump($enfantDAO->findAll());
 

@@ -59,6 +59,7 @@
         ],
         'categoriesSocioProfessionnelles' => [
             'tableName' => 'salarie_categorie_socio_professionnelle',
+            'className' => 'CategorieSocioProfessionnelle',
             'foreignKey' => 'id_salarie',
             'otherForeignKey' => 'id_categorie_socio_professionnelle',
             'otherFields' => [

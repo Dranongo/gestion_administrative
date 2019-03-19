@@ -316,11 +316,18 @@ abstract class DatabaseDAO
 
     /**
      * @param string $sqlRequest
-     * @return false|\PDOStatement
+     * @return array
      */
-    public function querySql(string $sqlRequest)
+    public function querySql(string $sqlRequest): array
     {
-        return $this->connection->query($sqlRequest);
+        $stmt = $this->connection->query($sqlRequest);
+
+        $results = [];
+
+        if ($stmt !== false) {
+            $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        }
+        return $results;
     }
 
     /**
@@ -362,8 +369,21 @@ abstract class DatabaseDAO
      */
     protected abstract function buildDomainObject(array $data, bool $recursive = false): AbstractModel;
 
-    protected function getManyToManyRelationFromObject(array $relation): array
+    /**
+     * @param AbstractModel $model
+     * @param string $parameter
+     * @return array
+     */
+    protected function getManyToManyRelationFromObject(AbstractModel $model, string $parameter): array
     {
+        $config = $this->getConfig();
+        if (array_key_exists($parameter, $config)) {
+            $table = $config[$parameter];
+            $sql = "SELECT *
+                    FROM $table[tableName]
+                    WHERE $table[foreignKey] = {$model->getId()}";
+        }
 
+        return $this->querySql($sql);
     }
 }
