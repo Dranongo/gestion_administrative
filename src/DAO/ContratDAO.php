@@ -29,9 +29,14 @@ class ContratDAO extends DatabaseDAO
      */
     protected function buildDomainObject(array $data, bool $recursive = false): AbstractModel
     {
+
         $contrat = new Contrat();
-        $contrat->setDateDebut($data['date_debut'])
-                ->setDateFin($data['date_fin']);
+        $contrat->setId($data['id'])
+                ->setDateDebut(new \DateTime($data['date_debut']));
+
+        if ($data['date_fin'] != null) {
+            $contrat->setDateFin(new \DateTime($data['date_fin']));
+        }
 
         if ($recursive) {
             $salarieDAO = \Model\Salarie::getDAOInstance();

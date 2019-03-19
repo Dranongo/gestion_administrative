@@ -67,7 +67,12 @@ class SalarieDAO extends DatabaseDAO
             $tableEnfants = $config['enfants'];
             $enfantDAO = \Model\Enfant::getDAOInstance();
             $listEnfants = $enfantDAO->findBy($id, $tableEnfants['orderBy']);
-            $salarie->setEnfants($listEnfants);            
+            $salarie->setEnfants($listEnfants);          
+
+            $tableContrats = $config['contrats'];
+            $contratDAO = \Model\Contrat::getDAOInstance();
+            $listContrats = $contratDAO->findBy($id, $tableContrats['orderBy']);
+            $salarie->setContrats($listContrats);
 
             $tableContactsUrgence = $config['contactsUrgence'];
             $contactsUrgenceDAO = \Model\ContactUrgence::getDAOInstance();

@@ -39,6 +39,14 @@
             ],
             'mapped' => false
         ],
+        'contrats' => [
+            'tableName' => 'contrat',
+            'foreignKey' => 'id_salarie',
+            'orderBy' => [
+                'date_debut' => 'DESC'
+            ],
+            'mapped' => false
+        ],
         'contactsUrgence' => [
             'tableName' => 'contact_urgence',
             'foreignKey' => 'id_salarie',
@@ -47,19 +55,6 @@
         'documents' => [
             'tableName' => 'document',
             'foreignKey' => 'id_salarie',
-            'mapped' => false
-        ],
-        'contrats' => [
-            'tableName' => 'contrat',
-            'foreignKey' => 'id_salarie',
-            'otherForeignKey' => [
-                'id_renseignement_poste',
-                'id_type_contrat'
-            ],
-            'otherFields' => [
-                'dateDebutContrat' => 'date_debut',
-                'dateDebutContrat' => 'date_fin'
-            ],
             'mapped' => false
         ],
         'categoriesSocioProfessionnelles' => [

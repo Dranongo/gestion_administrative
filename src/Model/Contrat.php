@@ -15,14 +15,14 @@ class Contrat extends AbstractModel
     protected $dateDebut;
 
     /**
-     * @var \DateTime
+     * @var ?\DateTime
      */
     protected $dateFin;
 
 	/**
-     * @var array<Salarie>
+     * @var Salarie
      */
-    protected $salaries = [];
+    protected $salarie;
 
     /**
      * @var array<RenseignementPoste>
@@ -62,7 +62,7 @@ class Contrat extends AbstractModel
      * @param \DateTime $dateFin
      * @return Contrat
      */
-    public function setDateFin(\DateTime $dateFin): Contrat
+    public function setDateFin(?\DateTime $dateFin): Contrat
     {
         $this->dateFin = $dateFin;
 
@@ -78,67 +78,22 @@ class Contrat extends AbstractModel
     }
 
     /**
-     * @param array $salaries
-     * @return Contrat
-     */
-    public function setSalaries(array $salaries): Contrat
-    {
-        $this->removeAllSalaries();
-        foreach ($salaries as $salarie) {
-            if ($salarie instanceof Salarie) {
-                $this->addSalarie($salarie);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Contrat
-     */
-    public function removeAllSalaries(): Contrat
-    {
-        $this->salaries = [];
-
-        return $this;
-    }
-
-    /**
      * @param Salarie $salarie
      * @return Contrat
      */
-    public function addSalarie(Salarie $salarie): Contrat
+    public function setSalarie(Salarie $salarie): Contrat
     {
-        $this->salaries[] = $salarie;
+        $this->salarie = $salarie;
 
         return $this;
     }
 
     /**
-     * @param Salarie $salarie
-     * @return Contrat
+     * @return Salarie
      */
-    public function removeSalarie(Salarie $salarie): Contrat
+    public function getSalarie(): Salarie
     {
-        $salarie = $this->getSalaries();
-        if (array_key_exists($salarie->getId(), $salaries)) {
-            unset($salaries[$salarie->getId()]);
-        }
-
-        $key = array_search($salarie, $this->getSalaries(), true);
-        if ($key !== false) {
-            unset($this->salaries[$key]);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return array<Salarie>
-     */
-    public function getSalaries(): array
-    {
-        return $this->salaries;
+        return $this->salarie;
     }
 
     /**

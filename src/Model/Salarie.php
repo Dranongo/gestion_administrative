@@ -148,6 +148,11 @@ class Salarie extends AbstractModel
     protected $formations = [];
 
     /**
+     * @var array<Enfant>
+     */
+    protected $enfants = [];
+
+    /**
      * @var TravailleurEtranger
      */
     protected $travailleurEtranger;
@@ -692,6 +697,65 @@ class Salarie extends AbstractModel
     public function getFormations(): array
     {
         return $this->formations;
+    }
+
+    /**
+     * @param array $enfants
+     * @return Salarie
+     */
+    public function setEnfants(array $enfants): Salarie
+    {
+        $this->removeAllenfants();
+        foreach ($enfants as $enfant) {
+            if ($enfant instanceof Enfant) {
+                $this->addEnfant($enfant);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Salarie
+     */
+    public function removeAllEnfants(): Salarie
+    {
+        $this->enfants = [];
+
+        return $this;
+    }
+
+    /**
+     * @param Enfant $enfant
+     * @return Salarie
+     */
+    public function addEnfant(Enfant $enfant): Salarie
+    {
+        $this->enfants[] = $enfant;
+
+        return $this;
+    }
+
+    /**
+     * @param Enfant $enfant
+     * @return Salarie
+     */
+    public function removeEnfant(Enfant $enfant): Salarie
+    {
+        $key = array_search($enfant, $this->getEnfants(), true);
+        if ($key !== false) {
+            unset($this->enfants[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<Enfant>
+     */
+    public function getEnfants(): array
+    {
+        return $this->enfants;
     }
 
     /**

@@ -34,6 +34,16 @@ class RenseignementPosteDAO extends DatabaseDAO
                            ->setCode($data['code'])
                            ->setNom($data['nom']);
 
+        if ($recursive == true) {
+            $config = $this->getConfig();
+            $id = ['renseignementsPoste' => $renseignementPoste->getId()];
+
+            $tableContrats = $config['contrats'];
+            $contratDAO = \Model\Contrat::getDAOInstance();
+            $listContrats = $contratDAO->findBy($id, $tableContrats['orderBy']);
+            $renseignementPoste->setContrats($listContrats);
+        }
+
         return $renseignementPoste;
     }
 }

@@ -34,6 +34,16 @@ class TypeContratDAO extends DatabaseDAO
                     ->setCode($data['code'])
                     ->setNom($data['nom']);
 
+        if ($recursive == true) {
+            $config = $this->getConfig();
+            $id = ['typeContrat' => $typeContrat->getId()];
+
+            $tableContrats = $config['contrats'];
+            $contratDAO = \Model\Contrat::getDAOInstance();
+            $listContrats = $contratDAO->findBy($id, $tableContrats['orderBy']);
+            $typeContrat->setContrats($listContrats);
+        }
+
         return $typeContrat;
     }
 }
