@@ -86,11 +86,8 @@ class SalarieDAO extends DatabaseDAO
             $listDocuments = $documentDAO->findBy($id, []);
             $salarie->setDocuments($listDocuments);
 
-            foreach ($this->getManyToManyRelationFromObject($salarie, 'categoriesSocioProfessionnelles') as $data) {
-                /** @var CategorieSocioProfessionnelle $categorieSocioProfessionnelle */
-                $categorieSocioProfessionnelle = CategorieSocioProfessionnelleDAO::getInstance()->find($data['id_categorie_socio_professionnelle'], false);
-                $categorieSocioProfessionnelle->setDateDebutSalarie(new \DateTime($data['date_debut']))
-                    ->setDateFinSalarie(new \DateTime($data['date_debut']));
+            /** @var CategorieSocioProfessionnelle $categorieSocioProfessionnelle */
+            foreach ($this->getManyToManyRelationFromObject($salarie, 'categoriesSocioProfessionnelles') as $categorieSocioProfessionnelle) {
                 $salarie->addCategorieSocioProfessionnelle($categorieSocioProfessionnelle);
             }
         }

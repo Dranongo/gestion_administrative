@@ -42,7 +42,7 @@ var_dump($formationDAO->find(3, true));*/
 
 //var_dump(\Model\TravailleurEtranger::getDAOInstance());
 $salarieDAO = \DAO\SalarieDAO::getInstance();
-var_dump($salarieDAO->find(95, true));
+var_dump($salarieDAO->findBy(['id' => [95, 96]], [], true));
 
 /*var_dump($enfantDAO->findAll());
 

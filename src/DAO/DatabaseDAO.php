@@ -246,7 +246,7 @@ abstract class DatabaseDAO
                 $fieldsArray[$key] = "'" . addslashes($value) . "'";
             } elseif (is_bool($value)) {
                 $fieldsArray[$key] = intval($value);
-            } elseif ($value == null) {
+            } elseif ($value === null) {
                 $fieldsArray[$key] = 'null';
             }
         }
@@ -262,7 +262,11 @@ abstract class DatabaseDAO
         $cpt = 0;
         $fields = "";
         foreach ($fieldsArray as $key => $value) {
-            $fields .= ($cpt++ ? ", " : "") . addslashes($key) . " = '" . addslashes($value) . "'";
+            if (is_array($value)) {
+                $fields .= ($cpt++ ? ", " : "") . addslashes($key) . ' IN (' . implode(',', $value) . ')';
+            } else {
+                $fields .= ($cpt++ ? ", " : "") . addslashes($key) . " = '" . addslashes($value) . "'";
+            }
         }
         return $fields;
     }
@@ -376,14 +380,58 @@ abstract class DatabaseDAO
      */
     protected function getManyToManyRelationFromObject(AbstractModel $model, string $parameter): array
     {
+        // TODO: Add $limit and $offset parameters
         $config = $this->getConfig();
-        if (array_key_exists($parameter, $config)) {
+        if (array_key_exists($parameter, $config) && is_array($config[$parameter])) {
             $table = $config[$parameter];
             $sql = "SELECT *
                     FROM $table[tableName]
                     WHERE $table[foreignKey] = {$model->getId()}";
+        } else {
+            return [];
         }
 
-        return $this->querySql($sql);
+        if (array_key_exists('className', $config[$parameter])) {
+            /** @var AbstractModel $relationModel */
+            $relationModel = '\\Model\\' . $config[$parameter]['className'];
+            /** @var DatabaseDAO $relationDAO */
+            $relationDAO = $relationModel::getDAOInstance();
+        } else {
+            return [];
+        }
+
+        $results = [];
+
+        // If the relation table has some additional fields
+        if (array_key_exists('otherFields', $config[$parameter])) {
+            if (is_array($config[$parameter]['otherFields'])) {
+                foreach ($this->querySql($sql) as $result) {
+                    $relation = $relationDAO->find($result[$config[$parameter]['otherForeignKey']]);
+                    foreach ($config[$parameter]['otherFields'] as $modelParameter => $field) {
+                        $method = 'set' . ucfirst($modelParameter);
+                        if (method_exists($relationModel, $method)) {
+                            if (substr($modelParameter, 0, 4) === 'date') {
+                                $field = $result[$field] !== null ? new \DateTime($result[$field]) : null;
+                            } else {
+                                $field = $result[$field];
+                            }
+                            $relation->$method($field);
+                        }
+                    }
+                    $results[] = $relation;
+                }
+            }
+        } else {
+            // Initialize an array to set all the Ids
+            $idsResults = [];
+            foreach ($this->querySql($sql) as $result) {
+                $idsResults[] = $result[$config[$parameter]['otherForeignKey']];
+            }
+            $orderBy = array_key_exists('orderBy', $config[$parameter]) && is_array($config[$parameter]['orderBy']) ?
+                $config[$parameter]['orderBy'] : [];
+            $results = $relationDAO->findBy(['id' => $idsResults], $orderBy, false);
+        }
+
+        return $results;
     }
 }

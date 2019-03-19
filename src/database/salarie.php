@@ -63,9 +63,12 @@
             'foreignKey' => 'id_salarie',
             'otherForeignKey' => 'id_categorie_socio_professionnelle',
             'otherFields' => [
-                'dateDebutCategorieSocioProfessionnelle' => 'date_debut',
-                'dateFinCategorieSocioProfessionnelle' => 'date_fin'
+                'dateDebutSalarie' => 'date_debut',
+                'dateFinSalarie' => 'date_fin'
             ],
+            //'orderBy' => [
+            //    'dateDebutSalarie' => 'DESC'
+            //],
             'mapped' => true
         ]
     ];
