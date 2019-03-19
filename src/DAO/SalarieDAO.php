@@ -64,6 +64,11 @@ class SalarieDAO extends DatabaseDAO
             $listFormations = $formationDAO->findBy($id, $tableFormations['orderBy']);
             $salarie->setFormations($listFormations);            
 
+            $tableEnfants = $config['enfants'];
+            $enfantDAO = \Model\Enfant::getDAOInstance();
+            $listEnfants = $enfantDAO->findBy($id, $tableEnfants['orderBy']);
+            $salarie->setEnfants($listEnfants);            
+
             $tableContactsUrgence = $config['contactsUrgence'];
             $contactsUrgenceDAO = \Model\ContactUrgence::getDAOInstance();
             $listContactsUrgence = $contactsUrgenceDAO->findBy($id, []);
@@ -77,7 +82,7 @@ class SalarieDAO extends DatabaseDAO
             /*$tableCategorieSocioProfessionnelle = $config['categoriesSocioProfessionnelles'];
             $categoriesSocioProfessionnelleDAO = \Model\CategorieSocioProfessionnelle::getDAOInstance();
             $listCategorieSocioProfessionnelle = $categoriesSocioProfessionnelleDAO->findBy($id, []);
-            $salarie->setCategoriesSocioProfessionnelles($listCategorieSocioProfessionnelle); */
+            $salarie->setCategoriesSocioProfessionnelles($listCategorieSocioProfessionnelle);*/
         }
 
         return $salarie;

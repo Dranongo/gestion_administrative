@@ -35,6 +35,16 @@ class DocumentTypeDAO extends DatabaseDAO
                            ->setNom($data['nom'])
                            ->setStatutEtranger($data['statut_etranger']);
 
+        if ($recursive = true) {
+            $config = $this->getConfig();
+            $id = ['documentType' => $documentType->getId()];
+            
+            $tableDocument = $config['documents'];
+            $documentDAO = \Model\Document::getDAOInstance();
+            $listDocuments = $documentDAO->findBy($id, []);
+            $documentType->setDocuments($listDocuments);
+        }
+
         return $documentType;
     }
 }

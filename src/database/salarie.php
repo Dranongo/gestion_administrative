@@ -31,6 +31,14 @@
             ],
             'mapped' => false
         ],
+        'enfants' => [
+            'tableName' => 'enfant',
+            'foreignKey' => 'id_salarie',
+            'orderBy' => [
+                'dateNaissance' => 'DESC'
+            ],
+            'mapped' => false
+        ],
         'contactsUrgence' => [
             'tableName' => 'contact_urgence',
             'foreignKey' => 'id_salarie',
