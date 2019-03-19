@@ -1,5 +1,4 @@
 <?php
-
 	return [
         'id' => 'id',
         'code' => 'code',
@@ -10,4 +9,4 @@
             'otherForeignKey' => 'id_salarie',
             'mapped' => false
         ]
-        ];
+    ];
