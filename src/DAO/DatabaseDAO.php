@@ -316,6 +316,7 @@ abstract class DatabaseDAO
      */
     protected function query(string $requestSql): bool
     {
+        var_dump($requestSql);
         try {
             $result = $this->connection->query($requestSql);
             if (! $result) {
@@ -336,6 +337,7 @@ abstract class DatabaseDAO
      */
     public function querySql(string $sqlRequest): array
     {
+        var_dump($sqlRequest);
         $stmt = $this->connection->query($sqlRequest);
 
         $results = [];
@@ -418,7 +420,7 @@ abstract class DatabaseDAO
         if (array_key_exists('otherFields', $config[$parameter])) {
             if (is_array($config[$parameter]['otherFields'])) {
                 foreach ($this->querySql($sql) as $result) {
-                    $relation = $relationDAO->find($result[$config[$parameter]['otherForeignKey']]);
+                    $relation = $relationDAO->find($result[$config[$parameter]['otherForeignKey']], false);
                     foreach ($config[$parameter]['otherFields'] as $modelParameter => $field) {
                         $method = 'set' . ucfirst($modelParameter);
                         if (method_exists($relationModel, $method)) {
