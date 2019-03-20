@@ -6,6 +6,11 @@ namespace DAO;
 use Model\AbstractModel;
 use Utils\DatabaseConnection;
 
+/**
+ * This class is used as Repository for each Model class to make the link between them and the database
+ * Class DatabaseDAO
+ * @package DAO
+ */
 abstract class DatabaseDAO
 {
     /**
@@ -14,12 +19,7 @@ abstract class DatabaseDAO
     const __DATABASE_CONFIG_DIR__ = __SRC_DIR__ . 'database' . DIRECTORY_SEPARATOR;
 
     /**
-     * @var string
-     */
-    protected $configFileName;
-
-    /**
-     * @var string
+     * @var array
      */
     protected $config;
 
@@ -29,32 +29,38 @@ abstract class DatabaseDAO
     private $connection;
 
     /**
-     * @var string
-     */
-    protected $tableName;
-
-    /**
      * DatabaseDAO constructor.
+     * @throws \Exception
      */
     final private function __construct()
     {
+        if (! property_exists(static::class, 'configFileName') ||
+            ! property_exists(static::class, 'tableName')
+        ) {
+            throw new \Exception(static::class . ' needs configFileName and tableName properties');
+        }
         $this->connection = DatabaseConnection::getInstance()->getConnection();
         $this->modelToDatabaseFields();
     }
 
     /**
      * Clone method is not allowed
+     * @throws \Exception
      */
     final private function __clone()
     {
-        throw new \Exception("Le clonage n'est pas autorisé");
+        throw new \Exception('Clone method is not allowed');
     }
 
     /**
      * @return DatabaseDAO
+     * @throws \Exception
      */
     public static function getInstance(): DatabaseDAO
     {
+        if (! property_exists(static::class, '_instance')) {
+            throw new \Exception(static::class . ' needs static $_instance property');
+        }
         if (! static::$_instance instanceof DatabaseDAO) {
             static::$_instance = new static();
         }
