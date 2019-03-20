@@ -5,6 +5,7 @@ namespace DAO;
 
 use Model\AbstractModel;
 use Utils\DatabaseConnection;
+use Utils\DateHelper;
 
 /**
  * This class is used as Repository for each Model class to make the link between them and the database
@@ -230,7 +231,7 @@ abstract class DatabaseDAO
             if (method_exists($model, $getter)) {
                 $value = $model->{$getter}();
                 if ($value instanceof \DateTime) {
-                    $value = $value->format('Y-m-d H:i:s');
+                    $value = DateHelper::convertDateTimeToDatabaseFormat($value);
                 } elseif ($value instanceof AbstractModel) {
                     $value = $value->getId();
                 }
@@ -284,7 +285,12 @@ abstract class DatabaseDAO
      * @param int|null $offset
      * @return string
      */
-    protected function addRestrictionsRequest(array $criteria = [], array $orderBy = [], ?int $limit = null, ?int $offset = null): string
+    protected function addRestrictionsRequest(
+        array $criteria = [], 
+        array $orderBy = [], 
+        ?int $limit = null, 
+        ?int $offset = null
+    ): string
     {
         $restrictions = "";
         if (count($criteria) != 0) {

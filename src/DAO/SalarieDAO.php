@@ -57,7 +57,7 @@ class SalarieDAO extends DatabaseDAO
                 ->setStatutHandicap($data['statut_handicap'])
                 ->setTauxInvalidite($data['taux_invalidite']);
 
-        if ($recursive == true) {
+        if ($recursive) {
             $config = $this->getConfig();
             $id = ['salarie' => $salarie->getId()];
             

@@ -34,6 +34,13 @@ class CategorieSocioProfessionnelleDAO extends DatabaseDAO
                                       ->setCode($data['code'])
                                       ->setNom($data['nom']);
 
+        if ($recursive) {
+            /** @var Salarie $salarie */
+            foreach ($this->getManyToManyRelationFromObject($categorieSocioProfessionnelle, 'salaries') as $salarie) {
+                $categorieSocioProfessionnelle->setSalarie($salarie);
+            }
+        }
+        
         return $categorieSocioProfessionnelle;
     }
 }
