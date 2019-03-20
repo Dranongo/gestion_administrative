@@ -3,7 +3,7 @@
 namespace Utils;
 
 /**
- * This class contains method to convert and format the dates in the application.
+ * This class contains method to convert and compare the dates in the application.
  * This is a singleton with static methods. 
  * Class DateHelper
  * @package Utils
@@ -65,25 +65,62 @@ class DateHelper
     }
 
     /**
-     * Check if the current date is between the start date and the end date.
-     * If one of the two parameters is null then it will compare the current date just with it.
+     * Check if the $dateToCompare parameter is between the start date and the end date.
+     * If one of the two parameters is null then it will compare the $dateToCompare just with the one that is not null.
+     * @param \DateTime $dateToCompare
      * @param \DateTime|null $startDate
      * @param \DateTime|null $endDate
      * @return bool
      * @throws \Exception
      */
-    public static function isCurrentDate(?\DateTime $startDate, ?\DateTime $endDate): bool
+    public static function isDateInInterval(
+        \DateTime $dateToCompare,
+        ?\DateTime $startDate = null,
+        ?\DateTime $endDate = null
+    ): bool
     {
-        if (is_null($startDate) && is_null($endDate)) {
+        if ($startDate === null && $endDate === null) {
             return false;
         }
 
-        $currentDate = new \DateTime();
-
-        if (is_null($startDate) xor is_null($endDate)) {
-            return is_null($startDate) ? $currentDate < $endDate : $currentDate > $startDate;
+        if ($startDate === null xor $endDate === null) {
+            return $startDate === null ? $dateToCompare < $endDate : $dateToCompare > $startDate;
         } else {
-            return $currentDate > $startDate && $currentDate < $endDate;
+            return $dateToCompare > $startDate && $dateToCompare < $endDate;
         }
+    }
+
+    /**
+     * Check if the $dateToCompare parameter is before the $dateEnd parameter.
+     * If the $dateEnd parameter is null, then $dateToCompare will be compared with the current date.
+     * @param \DateTime $dateToCompare
+     * @param \DateTime|null $dateEnd
+     * @return bool
+     * @throws \Exception
+     */
+    public static function isDateBefore(\DateTime $dateToCompare, ?\DateTime $dateEnd = null): bool
+    {
+        if ($dateEnd === null) {
+            $dateEnd = new \DateTime();
+        }
+
+        return $dateToCompare < $dateEnd;
+    }
+
+    /**
+     * Check if the $dateToCompare parameter is after the $dateStart parameter.
+     * If the $dateStart parameter is null, then $dateToCompare will be compared with the current date.
+     * @param \DateTime $dateToCompare
+     * @param \DateTime|null $dateStart
+     * @return bool
+     * @throws \Exception
+     */
+    public static function isDateAfter(\DateTime $dateToCompare, ?\DateTime $dateStart = null): bool
+    {
+        if ($dateStart === null) {
+            $dateStart = new \DateTime();
+        }
+
+        return $dateToCompare < $dateStart;
     }
 }
