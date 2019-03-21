@@ -6,6 +6,7 @@ namespace DAO;
 use Model\AbstractModel;
 use Utils\DatabaseConnection;
 use Utils\DateHelper;
+use Utils\SqlHelper;
 
 /**
  * This class is used as Repository for each Model class to make the link between them and the database
@@ -86,12 +87,9 @@ abstract class DatabaseDAO
      */
     public function findAll(array $orderBy = [], bool $recursive = false, ?int $limit = null, ?int $offset = null): array
     {
-        $sql = "SELECT * 
-                FROM $this->tableName";
+        $sqlRequest = SqlHelper::convertDataToSqlRequest($this->tableName, $criteria, $orderBy, $limit, $offset);
 
-        $sql .= $this->addRestrictionsRequest([], $orderBy, $limit, $offset);
-
-        $stmt = $this->connection->query($sql);
+        $stmt = $this->connection->query($sqlRequest);
 
         $fetchResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -141,12 +139,9 @@ abstract class DatabaseDAO
         $criteria = $this->nameToKeyConfig($criteria);
         $orderBy = $this->nameToKeyConfig($orderBy);
 
-        $sql = "SELECT * 
-                FROM $this->tableName";
-
-        $sql .= $this->addRestrictionsRequest($criteria, $orderBy, $limit, $offset);
-
-        $stmt = $this->connection->query($sql);
+        $sqlRequest = SqlHelper::convertDataToSqlRequest($this->tableName, $criteria, $orderBy, $limit, $offset);
+        
+        $stmt = $this->connection->query($sqlRequest);
 
         $fetchResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -260,10 +255,6 @@ abstract class DatabaseDAO
         return $fieldsArray;
     }
 
-    /**
-     * @param array $fieldsArray
-     * @return string
-     */
     protected function valuesToDatabaseFormat(array $fieldsArray): string
     {
         $cpt = 0;
