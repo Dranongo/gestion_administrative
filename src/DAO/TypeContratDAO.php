@@ -34,7 +34,7 @@ class TypeContratDAO extends DatabaseDAO
                     ->setCode($data['code'])
                     ->setNom($data['nom']);
 
-        if ($recursive == true) {
+        if ($recursive) {
             $config = $this->getConfig();
             $id = ['typeContrat' => $typeContrat->getId()];
 

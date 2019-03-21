@@ -15,11 +15,6 @@ class Document extends AbstractModel
     protected $nom;
 
     /**
-     * @var string
-     */
-    protected $content;
-
-    /**
      * @var DocumentType
      */
     protected $documentType;
@@ -28,11 +23,6 @@ class Document extends AbstractModel
      * @var Salarie
      */
     protected $salarie;
-
-    /**
-     * @var string
-     */
-    protected $extension;
 
     /**
      * @param string $nom
@@ -70,25 +60,6 @@ class Document extends AbstractModel
     public function getContent(): ?string
     {
         return $this->content;
-    }
-
-    /**
-     * @param string $extension
-     * @return Document
-     */
-    public function setExtension(string $extension): Document
-    {
-        $this->extension = $extension;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getExtension(): ?string
-    {
-        return $this->extension;
     }
 
     /**

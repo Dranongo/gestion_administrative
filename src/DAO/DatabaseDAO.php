@@ -161,7 +161,7 @@ abstract class DatabaseDAO
 
     /**
      * @param AbstractModel $model
-     * @return bool
+     * @return boolean
      */
     public function save(AbstractModel $model): bool
     {

@@ -45,15 +45,17 @@ class ContratDAO extends DatabaseDAO
 
             $renseignementPosteDAO = \Model\RenseignementPoste::getDAOInstance();
             $renseignementPoste = $renseignementPosteDAO->find($data['id_renseignement_poste'], false);
-            $contrat->setRenseignementsPoste($renseignementPoste);
+            $contrat->setRenseignementPoste($renseignementPoste);
 
             $typeContratDAO = \Model\TypeContrat::getDAOInstance();
             $typeContrat = $typeContratDAO->find($data['id_type_contrat'], false);
-            $contrat->setTypeContrat($salarie);
+            $contrat->setTypeContrat($typeContrat);
 
-            $motifFinContratDAO = \Model\MotifFinContrat::getDAOInstance();
-            $motifFinContrat = $motifFinContratDAO->find($data['id_motif_fin_contrat'], false);
-            $contrat->setMotifFinContrat($motifFinContrat);
+            if ($data['id_motif_fin_contrat'] != null) {
+                $motifFinContratDAO = \Model\MotifFinContrat::getDAOInstance();
+                $motifFinContrat = $motifFinContratDAO->find($data['id_motif_fin_contrat'], false);
+                $contrat->setMotifFinContrat($motifFinContrat);
+            }
         }
 
         return $contrat;

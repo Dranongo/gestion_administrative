@@ -29,7 +29,7 @@ class MotifFinContratDAO extends DatabaseDAO
      */
     protected function buildDomainObject(array $data, bool $recursive = false): AbstractModel
     {
-        $motifFinContrat = new RenseignementPoste();
+        $motifFinContrat = new MotifFinContrat();
         $motifFinContrat->setId($data['id'])
                         ->setCode($data['code'])
                         ->setNom($data['nom']);
@@ -44,6 +44,6 @@ class MotifFinContratDAO extends DatabaseDAO
             $motifFinContrat->setContrats($listContrats);
         }
 
-        return $motif_fin_contrat;
+        return $motifFinContrat;
     }
 }

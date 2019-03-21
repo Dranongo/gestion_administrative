@@ -25,9 +25,9 @@ class Contrat extends AbstractModel
     protected $salarie;
 
     /**
-     * @var array<RenseignementPoste>
+     * @var RenseignementPoste
      */
-    protected $renseignementsPoste = [];
+    protected $renseignementPoste;
 
     /**
      * @var TypeContrat
@@ -97,62 +97,22 @@ class Contrat extends AbstractModel
     }
 
     /**
-     * @param array $renseignementsPoste
-     * @return Contrat
-     */
-    public function setRenseignementsPoste(array $renseignementsPoste): Contrat
-    {
-        $this->removeAllRenseignementsPoste();
-        foreach ($renseignementsPoste as $renseignementPoste) {
-            if ($renseignementPoste instanceof RenseignementPoste) {
-                $this->addRenseignementPoste($renseignementPoste);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Contrat
-     */
-    public function removeAllRenseignementsPoste(): Contrat
-    {
-        $this->renseignementsPoste = [];
-
-        return $this;
-    }
-
-    /**
      * @param RenseignementPoste $renseignementPoste
      * @return Contrat
      */
-    public function addRenseignementPoste(RenseignementPoste $renseignementPoste): Contrat
+    public function setRenseignementPoste(RenseignementPoste $renseignementPoste): Contrat
     {
-        $this->renseignementsPoste[] = $renseignementPoste;
+        $this->renseignementPoste = $renseignementPoste;
 
-        return $this;
+        return $this;   
     }
 
     /**
-     * @param RenseignementPoste $renseignementPoste
-     * @return Contrat
+     * @return RenseignementPoste
      */
-    public function removeRenseignementPoste(RenseignementPoste $renseignementPoste): Contrat
+    public function getRenseignementPoste(): RenseignementPoste
     {
-        $key = array_search($renseignementPoste, $this->getRenseignementsPoste(), true);
-        if ($key !== false) {
-            unset($this->renseignementsPoste[$key]);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return array<RenseignementPoste>
-     */
-    public function getRenseignementsPoste(): array
-    {
-        return $this->renseignementsPoste;
+        return $this->renseignementPoste;
     }
 
     /**

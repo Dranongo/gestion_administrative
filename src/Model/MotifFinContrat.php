@@ -64,9 +64,9 @@ class MotifFinContrat extends AbstractModel
 
     /**
      * @param array $contrats
-     * @return TypeContrat
+     * @return MotifFinContrat
      */
-    public function setContrats(array $contrats): TypeContrat
+    public function setContrats(array $contrats): MotifFinContrat
     {
         $this->removeAllContrats();
         foreach ($contrats as $contrat) {
@@ -81,7 +81,7 @@ class MotifFinContrat extends AbstractModel
     /**
      * @return TypeContrat
      */
-    public function removeAllContrats(): TypeContrat
+    public function removeAllContrats(): MotifFinContrat
     {
         $this->contrats = [];
 
@@ -90,9 +90,9 @@ class MotifFinContrat extends AbstractModel
 
     /**
      * @param Contrat $contrat
-     * @return TypeContrat
+     * @return MotifFinContrat
      */
-    public function addContrat(Contrat $contrat): TypeContrat
+    public function addContrat(Contrat $contrat): MotifFinContrat
     {
         $this->contrats[] = $contrat;
 
@@ -101,9 +101,9 @@ class MotifFinContrat extends AbstractModel
 
     /**
      * @param Contrat $contrat
-     * @return TypeContrat
+     * @return MotifFinContrat
      */
-    public function removeContrat(Contrat $contrat): TypeContrat
+    public function removeContrat(Contrat $contrat): MotifFinContrat
     {
         $key = array_search($contrat, $this->getContrats(), true);
         if ($key !== false) {
