@@ -4,6 +4,7 @@ namespace DAO;
 
 use Model\AbstractModel;
 use Model\TravailleurEtranger;
+use Utils\DateHelper;
 
 class TravailleurEtrangerDAO extends DatabaseDAO
 {
@@ -32,9 +33,9 @@ class TravailleurEtrangerDAO extends DatabaseDAO
         $travailleurEtranger = new TravailleurEtranger();
         $travailleurEtranger->setId($data['id'])
                             ->setAutorisationTravail($data['autorisation_travail'])
-                            ->setDateAutorisationEmbauche(new \DateTime($data['date_autorisation_embauche']))
+                            ->setDateAutorisationEmbauche(DateHelper::convertDatabaseDateToDateTime($data['date_autorisation_embauche']))
                             ->setNumeroCarteSejour($data['num_carte_sejour'])
-                            ->setDateLimiteValidite(new \DateTime($data['date_limite_validite']));
+                            ->setDateLimiteValidite(DateHelper::convertDatabaseDateToDateTime($data['date_limite_validite']));
         if ($recursive) {
             $salarieDAO = \Model\Salarie::getDAOInstance();
             $salarie = $salarieDAO->find($data['id_salarie'], false);

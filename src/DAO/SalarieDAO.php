@@ -6,6 +6,7 @@ use Model\AbstractModel;
 use Model\CategorieSocioProfessionnelle;
 use Model\Formation;
 use Model\Salarie;
+use Utils\DateHelper;
 
 class SalarieDAO extends DatabaseDAO
 {
@@ -38,7 +39,7 @@ class SalarieDAO extends DatabaseDAO
                 ->setPrenom($data['prenom'])
                 ->setNomJeuneFille($data['nom_jeune_fille'])
                 ->setNationalite($data['nationalite'])
-                ->setDateNaissance(new \DateTime($data['date_naissance']))
+                ->setDateNaissance(DateHelper::convertDatabaseDateToDateTime($data['date_naissance']))
                 ->setLieuNaissance($data['lieu_naissance'])
                 ->setAdresse($data['adresse'])
                 ->setCodePostal($data['code_postal'])

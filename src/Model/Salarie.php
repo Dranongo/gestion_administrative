@@ -859,7 +859,7 @@ class Salarie extends AbstractModel
      * @param \DateTime $dateFinCategorieSocioProfessionnelle
      * @return Salarie
      */
-    public function setDateFinCategorieSocioProfessionnelle(\DateTime $dateFinCategorieSocioProfessionnelle): Salarie
+    public function setDateFinCategorieSocioProfessionnelle(\DateTime $dateFinCategorieSocioProfessionnelle): Salarie 
     {
         $this->dateFinCategorieSocioProfessionnelle = $dateFinCategorieSocioProfessionnelle;
 

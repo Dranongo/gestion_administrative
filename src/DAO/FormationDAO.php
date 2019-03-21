@@ -4,6 +4,7 @@ namespace DAO;
 
 use Model\AbstractModel;
 use Model\Formation;
+use Utils\DateHelper;
 
 class FormationDAO extends DatabaseDAO
 {
@@ -35,8 +36,8 @@ class FormationDAO extends DatabaseDAO
                   ->setNiveau($data['niveau'])
                   ->setOrganisme($data['organisme'])
                   ->setLieu($data['lieu'])
-                  ->setDateDebut(new \DateTime($data['date_debut']))
-                  ->setDateFin(new \DateTime($data['date_fin']))
+                  ->setDateDebut(DateHelper::convertDatabaseDateToDateTime($data['date_debut']))
+                  ->setDateFin(DateHelper::convertDatabaseDateToDateTime($data['date_fin']))
                   ->setObtenu($data['obtenu']);
 
         if ($recursive) {

@@ -316,7 +316,6 @@ abstract class DatabaseDAO
      */
     protected function query(string $requestSql): bool
     {
-        var_dump($requestSql);
         try {
             $result = $this->connection->query($requestSql);
             if (! $result) {
@@ -337,7 +336,6 @@ abstract class DatabaseDAO
      */
     public function querySql(string $sqlRequest): array
     {
-        var_dump($sqlRequest);
         $stmt = $this->connection->query($sqlRequest);
 
         $results = [];
@@ -425,7 +423,8 @@ abstract class DatabaseDAO
                         $method = 'set' . ucfirst($modelParameter);
                         if (method_exists($relationModel, $method)) {
                             if (substr($modelParameter, 0, 4) === 'date') {
-                                $field = $result[$field] !== null ? new \DateTime($result[$field]) : null;
+                                $field = $result[$field] !== null ? 
+                                    DateHelper::convertDatabaseDateToDateTime($result[$field]) : null;
                             } else {
                                 $field = $result[$field];
                             }

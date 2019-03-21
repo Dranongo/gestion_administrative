@@ -41,8 +41,11 @@ $formationDAO = \DAO\FormationDAO::getInstance();
 var_dump($formationDAO->find(3, true));*/
 
 //var_dump(\Model\TravailleurEtranger::getDAOInstance());
-$salarieDAO = \DAO\SalarieDAO::getInstance();
-var_dump($salarieDAO->findBy(['id' => [95, 96]], [], true));
+//$salarieDAO = \DAO\SalarieDAO::getInstance();
+//var_dump($salarieDAO->findBy(['id' => [95, 96]], [], true));
+
+$categorieSocioProDAO = \DAO\CategorieSocioProfessionnelleDAO::getInstance();
+var_dump($categorieSocioProDAO->findBy(['id' => [3]], [], true));
 
 /*var_dump($enfantDAO->findAll());
 

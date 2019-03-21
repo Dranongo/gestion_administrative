@@ -4,6 +4,7 @@ namespace DAO;
 
 use Model\AbstractModel;
 use Model\Enfant;
+use \Utils\DateHelper;
 
 class EnfantDAO extends DatabaseDAO
 {
@@ -34,7 +35,7 @@ class EnfantDAO extends DatabaseDAO
         $enfant->setId($data['id'])
                ->setNom($data['nom'])
                ->setPrenom($data['prenom'])
-               ->setDateNaissance(new \DateTime($data['date_naissance']));
+               ->setDateNaissance(DateHelper::convertDatabaseDateToDateTime($data['date_naissance']));
 
         if ($recursive) {
             $salarieDAO = \Model\Salarie::getDAOInstance();

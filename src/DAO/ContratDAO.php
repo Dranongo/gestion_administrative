@@ -4,6 +4,7 @@ namespace DAO;
 
 use Model\AbstractModel;
 use Model\Contrat;
+use Utils\DateHelper;
 
 class ContratDAO extends DatabaseDAO
 {
@@ -29,13 +30,12 @@ class ContratDAO extends DatabaseDAO
      */
     protected function buildDomainObject(array $data, bool $recursive = false): AbstractModel
     {
-
         $contrat = new Contrat();
         $contrat->setId($data['id'])
-                ->setDateDebut(new \DateTime($data['date_debut']));
+                ->setDateDebut(DateHelper::convertDatabaseDateToDateTime($data['date_debut']));
 
         if ($data['date_fin'] != null) {
-            $contrat->setDateFin(new \DateTime($data['date_fin']));
+            $contrat->setDateFin(DateHelper::convertDatabaseDateToDateTime($data['date_fin']));
         }
 
         if ($recursive) {
