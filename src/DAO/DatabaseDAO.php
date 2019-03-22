@@ -87,11 +87,11 @@ abstract class DatabaseDAO
      */
     public function findAll(array $orderBy = [], bool $recursive = false, ?int $limit = null, ?int $offset = null): array
     {
-        $sqlRequest = "SELECT *
+        $sqlQuery = "SELECT *
                        FROM $this->tableName";
-        $sqlRequest .= SqlHelper::convertDataToSqlRequest($criteria, $orderBy, $limit, $offset);
+        $sqlQuery .= SqlHelper::convertDataToSqlQuery($criteria, $orderBy, $limit, $offset);
 
-        $stmt = $this->connection->query($sqlRequest);
+        $stmt = $this->connection->query($sqlQuery);
 
         $fetchResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -141,12 +141,11 @@ abstract class DatabaseDAO
         $criteria = $this->nameToKeyConfig($criteria);
         $orderBy = $this->nameToKeyConfig($orderBy);
 
-        $sqlRequest = "SELECT *
+        $sqlQuery = "SELECT *
                        FROM $this->tableName";
-        $sqlRequest .= SqlHelper::convertDataToSqlRequest($criteria, $orderBy, $limit, $offset);
-        var_dump($sqlRequest);
+        $sqlQuery .= SqlHelper::convertDataToSqlQuery($criteria, $orderBy, $limit, $offset);
         
-        $stmt = $this->connection->query($sqlRequest);
+        $stmt = $this->connection->query($sqlQuery);
 
         $fetchResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -180,10 +179,10 @@ abstract class DatabaseDAO
     {
         $fieldsArray = $this->modelValuesToDatabase($model);
         
-        $requestSql = "INSERT INTO $this->tableName";
-        $requestSql .= SqlHelper::convertDataToInsertRequest($fieldsArray);
+        $sqlQuery = "INSERT INTO $this->tableName";
+        $sqlQuery .= SqlHelper::convertDataToInsertQuery($fieldsArray);
         
-        return $this->query($requestSql);
+        return $this->query($sqlQuery);
     }
 
     /**
@@ -195,10 +194,10 @@ abstract class DatabaseDAO
         $fieldsArray = $this->modelValuesToDatabase($model);
         $modelId = $model->getId();
 
-        $requestSql = "UPDATE $this->tableName";
-        $requestSql .= SqlHelper::convertDataToUpdateRequest($fieldsArray, $modelId);
+        $sqlQuery = "UPDATE $this->tableName";
+        $sqlQuery .= SqlHelper::convertDataToUpdateQuery($fieldsArray, $modelId);
 
-        return $this->query($requestSql);
+        return $this->query($sqlQuery);
     }
 
     /**
@@ -233,13 +232,13 @@ abstract class DatabaseDAO
     }
 
     /**
-     * @param string $requestSql
+     * @param string $sqlQuery
      * @return bool
      */
-    protected function query(string $requestSql): bool
+    protected function query(string $sqlQuery): bool
     {
         try {
-            $result = $this->connection->query($requestSql);
+            $result = $this->connection->query($sqlQuery);
             if (! $result) {
                 throw new \Exception(implode($this->connection->errorInfo(), ','));   
             }
@@ -253,12 +252,12 @@ abstract class DatabaseDAO
     }
 
     /**
-     * @param string $sqlRequest
+     * @param string $sqlQuery
      * @return array
      */
-    public function querySql(string $sqlRequest): array
+    public function querySql(string $sqlQuery): array
     {
-        $stmt = $this->connection->query($sqlRequest);
+        $stmt = $this->connection->query($sqlQuery);
 
         $results = [];
 

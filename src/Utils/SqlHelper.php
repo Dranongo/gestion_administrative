@@ -3,7 +3,7 @@
 namespace Utils;
 
 /**
- * This class contains method to convert data into request sql in the application.
+ * This class contains method to convert data into sql query in the application.
  * This is a singleton with static methods. 
  * Class SqlHelper
  * @package Utils
@@ -41,15 +41,15 @@ class SqlHelper
     }
 
     /**
-     * Undocumented function
-     *
+     * It will call functions to create the sql query from the parameters
+     * and return the sql query as a string
      * @param array $criteria
      * @param array $orderBy
      * @param int|null $limit
      * @param int|null $offset
      * @return string
      */
-    public static function convertDataToSqlRequest(array $criteria, 
+    public static function convertDataToSqlQuery(array $criteria, 
         array $orderBy, 
         ?int $limit, 
         ?int $offset)
@@ -61,12 +61,12 @@ class SqlHelper
     }
 
     /**
-     * Undocumented function
-     *
+     * Convert the data in the array into the correct syntax for a sql query
+     * return all the converted data as a string
      * @param array $fieldsArray
      * @return string|null
      */
-    public static function convertValuesToRequestFormat(array $fieldsArray): ?string
+    public static function convertValuesToQueryFormat(array $fieldsArray): ?string
     {
         $cpt = 0;
         $fields = "";
@@ -81,10 +81,12 @@ class SqlHelper
     }
 
     /**
+     * Convert the values in the array into the correct syntax for a sql insert into statement
+     * return the converted array
      * @param array $fieldsArray
      * @return array
      */
-    protected function convertValuesToInsertRequestFormat(array $fieldsArray): array
+    protected function convertValuesToInsertQueryFormat(array $fieldsArray): array
     {
         foreach ($fieldsArray as $key => $value) {
             if (is_string($value)) {
@@ -99,14 +101,14 @@ class SqlHelper
     }
 
     /**
-     * Undocumented function
-     *
+     * Convert the data into the correct syntax for a sql insert into statement
+     * return the data we need to insert as a string
      * @param array $fieldsArray
      * @return string
      */
-    public static function convertDataToInsertRequest(array $fieldsArray): string
+    public static function convertDataToInsertQuery(array $fieldsArray): string
     {
-        $fieldsArray = self::convertValuesToInsertRequestFormat($fieldsArray);
+        $fieldsArray = self::convertValuesToInsertQueryFormat($fieldsArray);
 
         $dataBaseFields = implode(", ", array_keys($fieldsArray));
         $valueModel = implode(", ", array_values($fieldsArray));
@@ -115,45 +117,53 @@ class SqlHelper
     }
 
     /**
-     * Undocumented function
-     *
+     * Convert the data into the correct syntax for a sql update statement
+     * return the data we need to update as a string
      * @param array $fieldsArray
      * @param integer $id
      * @return string
      */
-    public static function convertDataToUpdateRequest(array $fieldsArray, int $id): string
+    public static function convertDataToUpdateQuery(array $fieldsArray, int $id): string
     {
-        $fields = convertValuesToRequestFormat($fieldsArray);
+        $fields = convertValuesToQueryFormat($fieldsArray);
         
         return "SET $fields WHERE id = $id";
     }
 
     /**
-     * Undocumented function
-     *
+     * Check if the table is empty or not.
+     * If it is a string, then it will call another function to convert the data, in the table,
+     * into the correct format for the sql WHERE clause in a query
+     * and return a string for the sql query
+     * else null
      * @param array $criteria
      * @return string|null
      */
     public static function addWhereClause(array $criteria): ?string
     {
-        return count($criteria) == 0 ? "" : " WHERE " . str_replace(",", "AND", self::convertValuesToRequestFormat($criteria));
+        return count($criteria) == 0 ? "" : " WHERE " . self::convertValuesToQueryFormat($criteria);
     }
 
     /**
-     * Undocumented function
-     *
+     * Check if the table is empty or not.
+     * If it isn't, then it will call another function to convert the data, in the table,
+     * into the correct format for the sql ORDER BY keyword in a query
+     * and return a string for the sql query
+     * else null
      * @param array $orderBy
      * @return string|null
      */
     public static function addOrderByKeyword(array $orderBy): ?string
     {
         $string = ["=", "'"];
-        return count($orderBy) == 0 ? "" : " ORDER BY " . str_replace($string, "", self::convertValuesToRequestFormat($orderBy));
+        return count($orderBy) == 0 ? "" : " ORDER BY " . str_replace($string, "", self::convertValuesToQueryFormat($orderBy));
     }
 
     /**
-     * Undocumented function
-     *
+     * Check if the first parameter is null or a string.
+     * If it is a integer, then it will call another function to check the second parameter 
+     * and return a string for the sql query
+     * else null
      * @param int|null $limit
      * @param int|null $offset
      * @return string|null
@@ -164,8 +174,9 @@ class SqlHelper
     }
 
     /**
-     * Undocumented function
-     *
+     * Check if the parameter is null or a string.
+     * If it is a integer, then it will return a string for the sql query
+     * else null
      * @param int|null $offset
      * @return string
      */
