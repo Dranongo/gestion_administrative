@@ -87,7 +87,9 @@ abstract class DatabaseDAO
      */
     public function findAll(array $orderBy = [], bool $recursive = false, ?int $limit = null, ?int $offset = null): array
     {
-        $sqlRequest = SqlHelper::convertDataToSqlRequest($this->tableName, $criteria, $orderBy, $limit, $offset);
+        $sqlRequest = "SELECT *
+                       FROM $this->tableName";
+        $sqlRequest .= SqlHelper::convertDataToSqlRequest($criteria, $orderBy, $limit, $offset);
 
         $stmt = $this->connection->query($sqlRequest);
 
@@ -139,7 +141,10 @@ abstract class DatabaseDAO
         $criteria = $this->nameToKeyConfig($criteria);
         $orderBy = $this->nameToKeyConfig($orderBy);
 
-        $sqlRequest = SqlHelper::convertDataToSqlRequest($this->tableName, $criteria, $orderBy, $limit, $offset);
+        $sqlRequest = "SELECT *
+                       FROM $this->tableName";
+        $sqlRequest .= SqlHelper::convertDataToSqlRequest($criteria, $orderBy, $limit, $offset);
+        var_dump($sqlRequest);
         
         $stmt = $this->connection->query($sqlRequest);
 
@@ -174,17 +179,11 @@ abstract class DatabaseDAO
     protected function insert(AbstractModel $model): bool
     {
         $fieldsArray = $this->modelValuesToDatabase($model);
-        $fieldsArray = $this->valuesToDatabaseFormatInsert($fieldsArray);
-
-        $dataBaseFields = implode(", ", array_keys($fieldsArray));
-        $valueModel = implode(", ", array_values($fieldsArray));
-
-        $sql = "INSERT INTO $this->tableName 
-                ($dataBaseFields) 
-                VALUES 
-                ($valueModel)";
-
-        return $this->query($sql);
+        
+        $requestSql = "INSERT INTO $this->tableName";
+        $requestSql .= SqlHelper::convertDataToInsertRequest($fieldsArray);
+        
+        return $this->query($requestSql);
     }
 
     /**
@@ -194,16 +193,12 @@ abstract class DatabaseDAO
     protected function update(AbstractModel $model): bool
     {
         $fieldsArray = $this->modelValuesToDatabase($model);
-        $fields = $this->valuesToDatabaseFormat($fieldsArray);
-        $modelId = $model->getId();       
+        $modelId = $model->getId();
 
-        $sql = "UPDATE $this->tableName 
-                SET
-                $fields
-                WHERE
-                id = $modelId";
+        $requestSql = "UPDATE $this->tableName";
+        $requestSql .= SqlHelper::convertDataToUpdateRequest($fieldsArray, $modelId);
 
-        return $this->query($sql);
+        return $this->query($requestSql);
     }
 
     /**
@@ -235,70 +230,6 @@ abstract class DatabaseDAO
             }
         }
         return $fieldsArray;
-    }
-
-    /**
-     * @param array $fieldsArray
-     * @return array
-     */
-    protected function valuesToDatabaseFormatInsert(array $fieldsArray): array
-    {
-        foreach ($fieldsArray as $key => $value) {
-            if (is_string($value)) {
-                $fieldsArray[$key] = "'" . addslashes($value) . "'";
-            } elseif (is_bool($value)) {
-                $fieldsArray[$key] = intval($value);
-            } elseif ($value === null) {
-                $fieldsArray[$key] = 'null';
-            }
-        }
-        return $fieldsArray;
-    }
-
-    protected function valuesToDatabaseFormat(array $fieldsArray): string
-    {
-        $cpt = 0;
-        $fields = "";
-        foreach ($fieldsArray as $key => $value) {
-            if (is_array($value)) {
-                $fields .= ($cpt++ ? ", " : "") . addslashes($key) . ' IN (' . implode(',', $value) . ')';
-            } else {
-                $fields .= ($cpt++ ? ", " : "") . addslashes($key) . " = '" . addslashes($value) . "'";
-            }
-        }
-        return $fields;
-    }
-
-    /**
-     * @param array $criteria
-     * @param array $orderBy
-     * @param int|null $limit
-     * @param int|null $offset
-     * @return string
-     */
-    protected function addRestrictionsRequest(
-        array $criteria = [], 
-        array $orderBy = [], 
-        ?int $limit = null, 
-        ?int $offset = null
-    ): string
-    {
-        $restrictions = "";
-        if (count($criteria) != 0) {
-            $restrictions .= " WHERE " . $this->valuesToDatabaseFormat($criteria);
-        }
-        if (count($orderBy) != 0) {
-            $search = ["=", "'"];
-            $restrictions .= " ORDER BY " . str_replace($search, "", $this->valuesToDatabaseFormat($orderBy));
-        }
-        if ($limit != null) {
-            $restrictions .= " LIMIT " . $limit;
-        }
-        if ($limit != null && $offset != null) {
-            $restrictions .= " OFFSET " . $offset;
-        }
-
-        return $restrictions;
     }
 
     /**
