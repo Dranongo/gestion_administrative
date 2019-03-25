@@ -66,7 +66,7 @@ class SqlHelper
      * @param array $fieldsArray
      * @return string
      */
-    public static function convertValuesToQueryFormat(array $fieldsArray): ?string
+    protected function convertValuesToQueryFormat(array $fieldsArray): ?string
     {
         $cpt = 0;
         $fields = "";
@@ -86,7 +86,7 @@ class SqlHelper
      * @param array $fieldsArray
      * @return string
      */
-    public static function convertValuesToQueryWhereFormat(array $fieldsArray): ?string
+    protected function convertValuesToQueryWhereFormat(array $fieldsArray): ?string
     {
         $cpt = 0;
         $fields = "";
@@ -106,7 +106,7 @@ class SqlHelper
      * @param array $fieldsArray
      * @return array
      */
-    public static function convertValuesToInsertQueryFormat(array $fieldsArray): array
+    protected function convertValuesToInsertQueryFormat(array $fieldsArray): array
     {
         foreach ($fieldsArray as $key => $value) {
             if (is_string($value)) {
@@ -128,7 +128,7 @@ class SqlHelper
      */
     public static function convertDataToInsertQuery(array $fieldsArray): string
     {
-        $fieldsArray = self::convertValuesToInsertQueryFormat($fieldsArray);
+        $fieldsArray = self::getInstance()->convertValuesToInsertQueryFormat($fieldsArray);
 
         $dataBaseFields = implode(", ", array_keys($fieldsArray));
         $valueModel = implode(", ", array_values($fieldsArray));
@@ -145,7 +145,7 @@ class SqlHelper
      */
     public static function convertDataToUpdateQuery(array $fieldsArray, int $id): string
     {
-        $fields = self::convertValuesToQueryFormat($fieldsArray);
+        $fields = self::getInstance()->convertValuesToQueryFormat($fieldsArray);
         
         return " SET $fields WHERE id = $id";
     }
@@ -158,9 +158,9 @@ class SqlHelper
      * @param array $criteria
      * @return string
      */
-    public static function addWhereClause(array $criteria): ?string
+    public static function addWhereClause(array $criteria): string
     {
-        return count($criteria) == 0 ? "" : " WHERE " . self::convertValuesToQueryWhereFormat($criteria);
+        return count($criteria) == 0 ? "" : " WHERE " . self::getInstance()->convertValuesToQueryWhereFormat($criteria);
     }
 
     /**
@@ -171,10 +171,10 @@ class SqlHelper
      * @param array $orderBy
      * @return string
      */
-    public static function addOrderByKeyword(array $orderBy): ?string
+    public static function addOrderByKeyword(array $orderBy): string
     {
         $string = ["=", "'"];
-        return count($orderBy) == 0 ? "" : " ORDER BY " . str_replace($string, "", self::convertValuesToQueryFormat($orderBy));
+        return count($orderBy) == 0 ? "" : " ORDER BY " . str_replace($string, "", self::getInstance()->convertValuesToQueryFormat($orderBy));
     }
 
     /**
@@ -185,7 +185,7 @@ class SqlHelper
      * @param int|null $offset
      * @return string
      */
-    public static function addLimitRestrictions(?int $limit, ?int $offset): ?string
+    public static function addLimitRestrictions(?int $limit, ?int $offset): string
     {
         return $limit == null ? "" : " LIMIT " . $limit . self::addOffset($offset);
     }
