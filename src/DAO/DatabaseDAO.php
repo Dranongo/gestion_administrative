@@ -85,11 +85,15 @@ abstract class DatabaseDAO
      * @param int|null $offset
      * @return array
      */
-    public function findAll(array $orderBy = [], bool $recursive = false, ?int $limit = null, ?int $offset = null): array
+    public function findAll(array $orderBy = [], 
+        bool $recursive = false, 
+        ?int $limit = null, 
+        ?int $offset = null)
+    : array
     {
         $sqlQuery = "SELECT *
                        FROM $this->tableName";
-        $sqlQuery .= SqlHelper::convertDataToSqlQuery([], $orderBy, $limit, $offset);
+        $sqlQuery .= SqlHelper::getInstance()->convertDataToSqlQuery([], $orderBy, $limit, $offset);
 
         $stmt = $this->connection->query($sqlQuery);
 
@@ -143,7 +147,7 @@ abstract class DatabaseDAO
 
         $sqlQuery = "SELECT *
                        FROM $this->tableName";
-        $sqlQuery .= SqlHelper::convertDataToSqlQuery($criteria, $orderBy, $limit, $offset);
+        $sqlQuery .= SqlHelper::getInstance()->convertDataToSqlQuery($criteria, $orderBy, $limit, $offset);
         
         $stmt = $this->connection->query($sqlQuery);
 
@@ -180,7 +184,7 @@ abstract class DatabaseDAO
         $fieldsArray = $this->modelValuesToDatabase($model);
         
         $sqlQuery = "INSERT INTO $this->tableName";
-        $sqlQuery .= SqlHelper::convertDataToInsertQuery($fieldsArray);
+        $sqlQuery .= SqlHelper::getInstace()->convertDataToInsertQuery($fieldsArray);
         
         return $this->query($sqlQuery);
     }
@@ -195,7 +199,7 @@ abstract class DatabaseDAO
         $modelId = $model->getId();
 
         $sqlQuery = "UPDATE $this->tableName";
-        $sqlQuery .= SqlHelper::convertDataToUpdateQuery($fieldsArray, $modelId);
+        $sqlQuery .= SqlHelper::getInstance()->convertDataToUpdateQuery($fieldsArray, $modelId);
 
         return $this->query($sqlQuery);
     }

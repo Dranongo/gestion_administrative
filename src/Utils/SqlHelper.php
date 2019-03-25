@@ -49,24 +49,25 @@ class SqlHelper
      * @param int|null $offset
      * @return string
      */
-    public static function convertDataToSqlQuery(array $criteria = [], 
+    public function convertDataToSqlQuery(array $criteria = [], 
         array $orderBy = [], 
         ?int $limit, 
         ?int $offset)
     : string
     {
-        return static::addWhereClause($criteria) 
-             . static::addOrderByKeyword($orderBy) 
-             . static::addLimitRestrictions($limit, $offset);
+        return $this->addWhereClause($criteria) 
+             . $this->addOrderByKeyword($orderBy) 
+             . $this->addLimitRestrictions($limit, $offset);
     }
 
     /**
      * Convert the data in the array into the correct syntax for a sql query
      * return all the converted data as a string
+     * or a empty string
      * @param array $fieldsArray
      * @return string
      */
-    protected function convertValuesToQueryFormat(array $fieldsArray): ?string
+    protected function convertValuesToQueryFormat(array $fieldsArray): string
     {
         $cpt = 0;
         $fields = "";
@@ -83,10 +84,11 @@ class SqlHelper
     /**
      * Convert the data in the array into the correct syntax for a sql query with a where clause
      * return all the converted data as a string
+     * or a empty string
      * @param array $fieldsArray
      * @return string
      */
-    protected function convertValuesToQueryWhereFormat(array $fieldsArray): ?string
+    protected function convertValuesToQueryWhereFormat(array $fieldsArray): string
     {
         $cpt = 0;
         $fields = "";
@@ -126,9 +128,9 @@ class SqlHelper
      * @param array $fieldsArray
      * @return string
      */
-    public static function convertDataToInsertQuery(array $fieldsArray): string
+    public function convertDataToInsertQuery(array $fieldsArray): string
     {
-        $fieldsArray = self::getInstance()->convertValuesToInsertQueryFormat($fieldsArray);
+        $fieldsArray = $this->convertValuesToInsertQueryFormat($fieldsArray);
 
         $dataBaseFields = implode(", ", array_keys($fieldsArray));
         $valueModel = implode(", ", array_values($fieldsArray));
@@ -143,9 +145,9 @@ class SqlHelper
      * @param integer $id
      * @return string
      */
-    public static function convertDataToUpdateQuery(array $fieldsArray, int $id): string
+    public function convertDataToUpdateQuery(array $fieldsArray, int $id): string
     {
-        $fields = self::getInstance()->convertValuesToQueryFormat($fieldsArray);
+        $fields = $this->convertValuesToQueryFormat($fieldsArray);
         
         return " SET $fields WHERE id = $id";
     }
@@ -155,6 +157,7 @@ class SqlHelper
      * If it is a string, then it will call another function to convert the data, in the table,
      * into the correct format for the sql WHERE clause in a query
      * and return a string for the sql query
+     * else return a empty string
      * @param array $criteria
      * @return string
      */
@@ -168,35 +171,38 @@ class SqlHelper
      * If it isn't, then it will call another function to convert the data, in the table,
      * into the correct format for the sql ORDER BY keyword in a query
      * and return a string for the sql query
+     * else return a empty string
      * @param array $orderBy
      * @return string
      */
-    public static function addOrderByKeyword(array $orderBy): string
+    public function addOrderByKeyword(array $orderBy): string
     {
         $string = ["=", "'"];
-        return count($orderBy) == 0 ? "" : " ORDER BY " . str_replace($string, "", self::getInstance()->convertValuesToQueryFormat($orderBy));
+        return count($orderBy) == 0 ? "" : " ORDER BY " . str_replace($string, "", $this->convertValuesToQueryFormat($orderBy));
     }
 
     /**
      * Check if the first parameter is null or a string.
      * If it is a integer, then it will call another function to check the second parameter 
      * and return a string for the sql query
+     * else return a empty string
      * @param int|null $limit
      * @param int|null $offset
      * @return string
      */
-    public static function addLimitRestrictions(?int $limit, ?int $offset): string
+    public function addLimitRestrictions(?int $limit, ?int $offset): string
     {
-        return $limit == null ? "" : " LIMIT " . $limit . self::addOffset($offset);
+        return $limit == null ? "" : " LIMIT " . $limit . $this->addOffset($offset);
     }
 
     /**
      * Check if the parameter is null or a string.
      * If it is a integer, then it will return a string for the sql query
+     * else return a empty string
      * @param int|null $offset
      * @return string
      */
-    public static function addOffset(?int $offset): string
+    public function addOffset(?int $offset): string
     {
         return $offset == null ? "" : " OFFSET " . $offset;
     }
