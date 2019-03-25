@@ -184,7 +184,9 @@ abstract class DatabaseDAO
         $fieldsArray = $this->modelValuesToDatabase($model);
         
         $sqlQuery = "INSERT INTO $this->tableName";
-        $sqlQuery .= SqlHelper::getInstace()->convertDataToInsertQuery($fieldsArray);
+        $sqlQuery .= SqlHelper::getInstance()->convertDataToInsertQuery($fieldsArray);
+
+        $this->editManyToManyRelation($model);
         
         return $this->query($sqlQuery);
     }
@@ -373,6 +375,13 @@ abstract class DatabaseDAO
         return $results;
     }
 
+    /**
+     * Edit relations between tables depending on the key mapped in the config file of the table
+     * If the model's id isn't null, it will delete the relation
+     * else it will insert the relation
+     * @param AbstractModel $model
+     * @return void
+     */
     protected function editManyToManyRelation(AbstractModel $model)
     {
         $config = $this->getConfig();
@@ -392,6 +401,13 @@ abstract class DatabaseDAO
         }
     }
 
+    /**
+     * Insert data in the relationship's table
+     * @param AbstractModel $model
+     * @param string $parameterName
+     * @param array $fieldName
+     * @return boolean
+     */
     protected function insertManyToManyRelation(AbstractModel $model, string $parameterName, array $fieldName): bool
     {
         //TODO: Define $parameters variable (array<AbstractModel>) and write the end of this method and its documentation.
@@ -404,6 +420,12 @@ abstract class DatabaseDAO
         }
     }
 
+    /**
+     * Delete data in the relationship's table
+     * @param AbstractModel $model
+     * @param array $fieldName
+     * @return boolean
+     */
     protected function deleteManyToManyRelation(AbstractModel $model, array $fieldName): bool
     {
         //TODO: Write the end of this method and its documentation.
