@@ -64,7 +64,7 @@ class SqlHelper
      * Convert the data in the array into the correct syntax for a sql query
      * return all the converted data as a string
      * @param array $fieldsArray
-     * @return string|null
+     * @return string
      */
     public static function convertValuesToQueryFormat(array $fieldsArray): ?string
     {
@@ -75,6 +75,26 @@ class SqlHelper
                 $fields .= ($cpt++ ? ", " : "") . addslashes($key) . ' IN (' . implode(',', $value) . ')';
             } else {
                 $fields .= ($cpt++ ? ", " : "") . addslashes($key) . " = '" . addslashes($value) . "'";
+            }
+        }
+        return $fields;
+    }
+
+    /**
+     * Convert the data in the array into the correct syntax for a sql query with a where clause
+     * return all the converted data as a string
+     * @param array $fieldsArray
+     * @return string
+     */
+    public static function convertValuesToQueryWhereFormat(array $fieldsArray): ?string
+    {
+        $cpt = 0;
+        $fields = "";
+        foreach ($fieldsArray as $key => $value) {
+            if (is_array($value)) {
+                $fields .= ($cpt++ ? " AND " : "") . addslashes($key) . ' IN (' . implode(',', $value) . ')';
+            } else {
+                $fields .= ($cpt++ ? " AND " : "") . addslashes($key) . " = '" . addslashes($value) . "'";
             }
         }
         return $fields;
@@ -140,7 +160,7 @@ class SqlHelper
      */
     public static function addWhereClause(array $criteria): ?string
     {
-        return count($criteria) == 0 ? "" : " WHERE " . self::convertValuesToQueryFormat($criteria);
+        return count($criteria) == 0 ? "" : " WHERE " . self::convertValuesToQueryWhereFormat($criteria);
     }
 
     /**
