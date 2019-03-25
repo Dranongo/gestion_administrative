@@ -372,4 +372,44 @@ abstract class DatabaseDAO
 
         return $results;
     }
+
+    protected function editManyToManyRelation(AbstractModel $model)
+    {
+        $config = $this->getConfig();
+        foreach ($config as $parameterName => $fieldName) {
+            if (is_array($fieldName)) {
+                if (array_key_exists('mapped', $fieldName) && $fieldName['mapped'] === true) {
+                    if ($model->getId() !== null) {
+                        $this->deleteManyToManyRelation($model, $fieldName);
+                    }
+                    $this->insertManyToManyRelation($model, $parameterName, $fieldName);
+                } else {
+                    continue;
+                }
+            } else {
+                continue;
+            }
+        }
+    }
+
+    protected function insertManyToManyRelation(AbstractModel $model, string $parameterName, array $fieldName): bool
+    {
+        //TODO: Define $parameters variable (array<AbstractModel>) and write the end of this method and its documentation.
+        $sql = '';
+
+        /** @var AbstractModel $parameter */
+        foreach ($parameters as $parameter) {
+            $sql .= "INSERT INTO $fieldName[tableName] ($fieldName[foreignKey], $fieldName[otherForeignKey])
+                    VALUES ({$model->getId()}, {$parameter->getId()});";
+        }
+    }
+
+    protected function deleteManyToManyRelation(AbstractModel $model, array $fieldName): bool
+    {
+        //TODO: Write the end of this method and its documentation.
+        $sql = "DELETE FROM $fieldName[tableName]
+                WHERE $fieldName[foreignKey] = {$model->getId()};";
+
+        return true;
+    }
 }
