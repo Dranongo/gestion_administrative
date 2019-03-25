@@ -86,7 +86,7 @@ class SqlHelper
      * @param array $fieldsArray
      * @return array
      */
-    protected function convertValuesToInsertQueryFormat(array $fieldsArray): array
+    public static function convertValuesToInsertQueryFormat(array $fieldsArray): array
     {
         foreach ($fieldsArray as $key => $value) {
             if (is_string($value)) {
@@ -125,7 +125,7 @@ class SqlHelper
      */
     public static function convertDataToUpdateQuery(array $fieldsArray, int $id): string
     {
-        $fields = convertValuesToQueryFormat($fieldsArray);
+        $fields = self::convertValuesToQueryFormat($fieldsArray);
         
         return "SET $fields WHERE id = $id";
     }
@@ -135,9 +135,8 @@ class SqlHelper
      * If it is a string, then it will call another function to convert the data, in the table,
      * into the correct format for the sql WHERE clause in a query
      * and return a string for the sql query
-     * else null
      * @param array $criteria
-     * @return string|null
+     * @return string
      */
     public static function addWhereClause(array $criteria): ?string
     {
@@ -149,9 +148,8 @@ class SqlHelper
      * If it isn't, then it will call another function to convert the data, in the table,
      * into the correct format for the sql ORDER BY keyword in a query
      * and return a string for the sql query
-     * else null
      * @param array $orderBy
-     * @return string|null
+     * @return string
      */
     public static function addOrderByKeyword(array $orderBy): ?string
     {
@@ -163,10 +161,9 @@ class SqlHelper
      * Check if the first parameter is null or a string.
      * If it is a integer, then it will call another function to check the second parameter 
      * and return a string for the sql query
-     * else null
      * @param int|null $limit
      * @param int|null $offset
-     * @return string|null
+     * @return string
      */
     public static function addLimitRestrictions(?int $limit, ?int $offset): ?string
     {
@@ -176,7 +173,6 @@ class SqlHelper
     /**
      * Check if the parameter is null or a string.
      * If it is a integer, then it will return a string for the sql query
-     * else null
      * @param int|null $offset
      * @return string
      */

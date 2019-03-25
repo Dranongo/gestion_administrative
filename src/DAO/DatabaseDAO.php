@@ -89,7 +89,7 @@ abstract class DatabaseDAO
     {
         $sqlQuery = "SELECT *
                        FROM $this->tableName";
-        $sqlQuery .= SqlHelper::convertDataToSqlQuery($criteria, $orderBy, $limit, $offset);
+        $sqlQuery .= SqlHelper::convertDataToSqlQuery([], $orderBy, $limit, $offset);
 
         $stmt = $this->connection->query($sqlQuery);
 
