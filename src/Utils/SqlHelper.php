@@ -49,8 +49,8 @@ class SqlHelper
      * @param int|null $offset
      * @return string
      */
-    public static function convertDataToSqlQuery(array $criteria, 
-        array $orderBy, 
+    public static function convertDataToSqlQuery(array $criteria = [], 
+        array $orderBy = [], 
         ?int $limit, 
         ?int $offset)
     : string
@@ -147,7 +147,7 @@ class SqlHelper
     {
         $fields = self::convertValuesToQueryFormat($fieldsArray);
         
-        return "SET $fields WHERE id = $id";
+        return " SET $fields WHERE id = $id";
     }
 
     /**
