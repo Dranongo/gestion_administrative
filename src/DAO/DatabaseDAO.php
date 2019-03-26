@@ -169,10 +169,11 @@ abstract class DatabaseDAO
     public function save(AbstractModel $model): bool
     {
         if ($model->getId() === null) {
-           return $this->insert($model);
+           $result = $this->insert($model);
         } else { 
-            return $this->update($model); 
+            $result = $this->update($model); 
         }
+        return $result ? $this->editManyToManyRelation($model) : $result;
     }
 
     /**
@@ -185,8 +186,7 @@ abstract class DatabaseDAO
         
         $sqlQuery = "INSERT INTO $this->tableName";
         $sqlQuery .= SqlHelper::getInstance()->convertDataToInsertQuery($fieldsArray);
-
-        $this->editManyToManyRelation($model);
+        
         
         return $this->query($sqlQuery);
     }
@@ -230,7 +230,6 @@ abstract class DatabaseDAO
                 } elseif ($value instanceof AbstractModel) {
                     $value = $value->getId();
                 }
-                
                 $fieldsArray[$field] = $value;
             }
         }
@@ -380,18 +379,18 @@ abstract class DatabaseDAO
      * If the model's id isn't null, it will delete the relation
      * else it will insert the relation
      * @param AbstractModel $model
-     * @return void
+     * @return boolean
      */
-    protected function editManyToManyRelation(AbstractModel $model)
+    protected function editManyToManyRelation(AbstractModel $model): bool
     {
         $config = $this->getConfig();
         foreach ($config as $parameterName => $fieldName) {
             if (is_array($fieldName)) {
                 if (array_key_exists('mapped', $fieldName) && $fieldName['mapped'] === true) {
                     if ($model->getId() !== null) {
-                        $this->deleteManyToManyRelation($model, $fieldName);
+                        return $this->deleteManyToManyRelation($model, $fieldName);
                     }
-                    $this->insertManyToManyRelation($model, $parameterName, $fieldName);
+                    return $this->insertManyToManyRelation($model, $parameterName, $fieldName);
                 } else {
                     continue;
                 }
@@ -410,14 +409,21 @@ abstract class DatabaseDAO
      */
     protected function insertManyToManyRelation(AbstractModel $model, string $parameterName, array $fieldName): bool
     {
-        //TODO: Define $parameters variable (array<AbstractModel>) and write the end of this method and its documentation.
-        $sql = '';
+        $getter = 'get' . ucfirst($parameterName);
+        if (method_exists($model, $getter)) {
+            $parameters = $model->{$getter}();
+        } else {
+            return false;
+        }
+        $model->setId($this->connection->lastInsertId());
 
+        $sql = '';
         /** @var AbstractModel $parameter */
         foreach ($parameters as $parameter) {
             $sql .= "INSERT INTO $fieldName[tableName] ($fieldName[foreignKey], $fieldName[otherForeignKey])
                     VALUES ({$model->getId()}, {$parameter->getId()});";
         }
+        return $this->query($sql);
     }
 
     /**
@@ -428,10 +434,8 @@ abstract class DatabaseDAO
      */
     protected function deleteManyToManyRelation(AbstractModel $model, array $fieldName): bool
     {
-        //TODO: Write the end of this method and its documentation.
         $sql = "DELETE FROM $fieldName[tableName]
                 WHERE $fieldName[foreignKey] = {$model->getId()};";
-
-        return true;
+        return $this->query($sql);
     }
 }

@@ -7,6 +7,7 @@
         'nomJeuneFille' => 'nom_jeune_fille',
         'nationalite' => 'nationalite',
         'dateNaissance' => 'date_naissance',
+        'lieuNaissance' => 'lieu_naissance',
         'adresse' => 'adresse',
         'codePostal' => 'code_postal',
         'ville' => 'ville',

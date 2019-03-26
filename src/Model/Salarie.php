@@ -291,10 +291,10 @@ class Salarie extends AbstractModel
     }
 
     /**
-     * @param \Datetime $dateNaissance
+     * @param \DateTime $dateNaissance
      * @return Salarie
      */
-    public function setDateNaissance(\Datetime $dateNaissance): Salarie
+    public function setDateNaissance(\DateTime $dateNaissance): Salarie
     {
         $this->dateNaissance = $dateNaissance;
 
@@ -302,9 +302,9 @@ class Salarie extends AbstractModel
     }
 
     /**
-     * @return \Datetime
+     * @return \DateTime
      */
-    public function getDateNaissance(): \Datetime
+    public function getDateNaissance(): \DateTime
     {
         return $this->dateNaissance;
     }
