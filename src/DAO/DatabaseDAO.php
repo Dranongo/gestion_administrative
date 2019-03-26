@@ -4,7 +4,7 @@ namespace DAO;
 
 
 use Model\AbstractModel;
-use Utils\DatabaseConnection;
+use Service\DatabaseConnection;
 use Utils\DateHelper;
 use Utils\SqlHelper;
 

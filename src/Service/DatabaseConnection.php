@@ -1,6 +1,8 @@
 <?php
 
-namespace Utils;
+namespace Service;
+
+use Exception\SingletonException;
 
 class DatabaseConnection
 {
@@ -19,9 +21,10 @@ class DatabaseConnection
      */
     final private function __construct()
     {
-        $config = require __CONFIG_DIR__ . 'database.php';
-        $dsn = $config['driver'] . ':dbname=' . $config['dbname'] . ';host=' . $config['host'] . ';charset=' . $config['charset'];
-        self::$_connection = new \PDO($dsn, $config['user'], $config['password']);
+        $config = require __CONFIG_DIR__ . 'config.php';
+        $databaseConfig = $config['database'];
+        $dsn = $databaseConfig['driver'] . ':dbname=' . $databaseConfig['dbname'] . ';host=' . $databaseConfig['host'] . ';charset=' . $databaseConfig['charset'];
+        self::$_connection = new \PDO($dsn, $databaseConfig['user'], $databaseConfig['password']);
     }
 
     /**
@@ -29,7 +32,7 @@ class DatabaseConnection
      */
     final private function __clone()
     {
-        throw new \Exception("Le clonage n'est pas autorisé");
+        throw new SingletonException('Clone Method is not allowed');
     }
 
     /**

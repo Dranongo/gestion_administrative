@@ -2,6 +2,10 @@
 
 define('__SRC_DIR__', __DIR__ . DIRECTORY_SEPARATOR);
 
+define('__VAR_DIR__', __DIR__ . '..' . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR);
+
+define('__VIEWS_DIR__', __DIR__ . '..' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
+
 define('__CONFIG_DIR__', __SRC_DIR__ . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR);
 
 define('__PUBLIC_DIR__', __SRC_DIR__ . '..' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
@@ -23,19 +27,19 @@ try {
     // You have to init the session after the classes are loaded
     session_start();
 
-    //$template = \Utils\Route::dispatchRoute();
+    $template = \Service\Router::dispatchRoute();
 } catch (Exception $e) {
-    /*$errorVariables = [
+    $errorVariables = [
         'title' => 'Error ' . $e->getCode(),
-        'template' => \Utils\Template::getErrorTemplateName(),
+        'template' => \Service\Template::getErrorTemplateName(),
         'error' => $e->getMessage()
     ];
-    $template = \Utils\Template::getTemplateVariables($errorVariables);*/
+    $template = \Service\Template::getTemplateVariables($errorVariables);
 }
 
-//require_once __VIEWS_DIR__ . DIRECTORY_SEPARATOR . 'base.html.php';
+require_once __VIEWS_DIR__ . DIRECTORY_SEPARATOR . 'base.html.php';
 
-echo'<pre>';
+//echo'<pre>';
 /*var_dump(\Model\Formation::getDAOInstance());
 $formationDAO = \DAO\FormationDAO::getInstance();
 var_dump($formationDAO->find(3, true));*/
@@ -44,8 +48,8 @@ var_dump($formationDAO->find(3, true));*/
 //$salarieDAO = \DAO\SalarieDAO::getInstance();
 //var_dump($salarieDAO->findBy(['id' => [95, 96]], [], true));
 
-$categorieSocioProDAO = \DAO\CategorieSocioProfessionnelleDAO::getInstance();
-var_dump($categorieSocioProDAO->findBy(['id' => [3]], [], true));
+//$categorieSocioProDAO = \DAO\TravailleurEtrangerDAO::getInstance();
+//var_dump($categorieSocioProDAO->find(2));
 
 /*var_dump($enfantDAO->findAll());
 
@@ -56,3 +60,25 @@ $orderBy = array(
     "id" => "DESC");
 
 var_dump($enfantDAO->findBy($criteria, $orderBy));*/
+
+
+/*	class Mere {
+        protected static $endroit = 'DTC';
+
+        public static function JeSuisIci() {
+            echo self::$endroit;
+        }
+
+        public static function JeSuisLa() {
+            echo static::$endroit;
+        }
+    }
+
+	class Fille extends Mere {
+        protected static $endroit = 'CMB';
+    }
+
+Mere::JeSuisIci();
+Mere::JeSuisLa();
+Fille::JeSuisIci();
+Fille::JeSuisLa();*/
