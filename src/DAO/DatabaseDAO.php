@@ -187,8 +187,9 @@ abstract class DatabaseDAO
         $sqlQuery = "INSERT INTO $this->tableName";
         $sqlQuery .= SqlHelper::getInstance()->convertDataToInsertQuery($fieldsArray);
         
-        
-        return $this->query($sqlQuery);
+        $result = $this->query($sqlQuery);
+        $model->setId($this->connection->lastInsertId());
+        return $result;
     }
 
     /**
@@ -227,8 +228,12 @@ abstract class DatabaseDAO
                 $value = $model->{$getter}();
                 if ($value instanceof \DateTime) {
                     $value = DateHelper::convertDateTimeToDatabaseFormat($value);
+                } elseif (is_bool($value)) {
+                    $value = intval($value);
                 } elseif ($value instanceof AbstractModel) {
                     $value = $value->getId();
+                } if (is_array($value)){
+                    continue;
                 }
                 $fieldsArray[$field] = $value;
             }
@@ -383,14 +388,17 @@ abstract class DatabaseDAO
      */
     protected function editManyToManyRelation(AbstractModel $model): bool
     {
+        if ($model->getId() === null) {
+            return false;
+        }
+
         $config = $this->getConfig();
+        
         foreach ($config as $parameterName => $fieldName) {
             if (is_array($fieldName)) {
-                if (array_key_exists('mapped', $fieldName) && $fieldName['mapped'] === true) {
-                    if ($model->getId() !== null) {
-                        return $this->deleteManyToManyRelation($model, $fieldName);
-                    }
-                    return $this->insertManyToManyRelation($model, $parameterName, $fieldName);
+                if (array_key_exists('mapped', $fieldName) && $fieldName['mapped'] === true) {            
+                    $this->deleteManyToManyRelation($model, $fieldName);
+                    $result = $this->insertManyToManyRelation($model, $parameterName, $fieldName);
                 } else {
                     continue;
                 }
@@ -398,6 +406,7 @@ abstract class DatabaseDAO
                 continue;
             }
         }
+        return $result;
     }
 
     /**
@@ -415,7 +424,6 @@ abstract class DatabaseDAO
         } else {
             return false;
         }
-        $model->setId($this->connection->lastInsertId());
 
         $sql = '';
         /** @var AbstractModel $parameter */
