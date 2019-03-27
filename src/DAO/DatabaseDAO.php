@@ -187,6 +187,7 @@ abstract class DatabaseDAO
         $sqlQuery = "INSERT INTO $this->tableName";
         $sqlQuery .= SqlHelper::getInstance()->convertDataToInsertQuery($fieldsArray);
         
+        var_dump($sqlQuery);
         $result = $this->query($sqlQuery);
         $model->setId($this->connection->lastInsertId());
         return $result;
@@ -373,7 +374,11 @@ abstract class DatabaseDAO
             }
             $orderBy = array_key_exists('orderBy', $config[$parameter]) && is_array($config[$parameter]['orderBy']) ?
                 $config[$parameter]['orderBy'] : [];
-            $results = $relationDAO->findBy(['id' => $idsResults], $orderBy, false);
+            $limit = array_key_exists('limit', $config[$parameter]) && is_array($config[$parameter]['limit']) ?
+                $config[$parameter]['limit'] : [];
+            $offset = count($limit) != 0 && array_key_exists('offset', $config[$parameter]) && is_array($config[$parameter]['offset']) ?
+                $config[$parameter]['offset'] : [];
+            $results = $relationDAO->findBy(['id' => $idsResults], $orderBy, false, $limit, $offset);
         }
 
         return $results;
@@ -424,12 +429,29 @@ abstract class DatabaseDAO
         } else {
             return false;
         }
-
+        
         $sql = '';
         /** @var AbstractModel $parameter */
         foreach ($parameters as $parameter) {
             $sql .= "INSERT INTO $fieldName[tableName] ($fieldName[foreignKey], $fieldName[otherForeignKey])
                     VALUES ({$model->getId()}, {$parameter->getId()});";
+            
+            if ($fieldName['otherFields'] != []) {
+                foreach ($fieldName['otherFields'] as $key => $value) {
+                    $getterOtherFields = 'get' . ucfirst($key);
+                    
+                    if ($parameter->{$getterOtherFields}() instanceof \DateTime){
+                        $otherField = DateHelper::convertDateTimeToDatabaseFormat($parameter->{$getterOtherFields}());
+                    } else {
+                        $otherField = $parameter->{$getterOtherFields}();
+                    }
+                    
+                    $sql .= "UPDATE $fieldName[tableName] 
+                        SET $value = '$otherField' 
+                        WHERE $fieldName[foreignKey] = {$model->getId()} 
+                        AND $fieldName[otherForeignKey] = {$parameter->getId()};";
+                }
+            }
         }
         return $this->query($sql);
     }
