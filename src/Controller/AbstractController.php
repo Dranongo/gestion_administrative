@@ -11,12 +11,12 @@ abstract class AbstractController
     /**
      * @var string
      */
-    const DEFAULT_CONTROLLER = 'login';
+    const DEFAULT_CONTROLLER = 'salarie';
 
     /**
      * @var string
      */
-    const DEFAULT_METHOD = 'home';
+    const DEFAULT_METHOD = 'list';
 
     /**
      * @return \Service\Request
@@ -58,7 +58,7 @@ abstract class AbstractController
     {
         $request = $this->getRequest();
 
-        $file = __VIEWS_DIR__ . DIRECTORY_SEPARATOR . $request->getQuery('controller') . DIRECTORY_SEPARATOR
+        $file = __VIEWS_DIR__ . $request->getQuery('controller') . DIRECTORY_SEPARATOR
             . $request->getQuery('method') . '.' . $type . '.php';
 
         if (file_exists($file)) {

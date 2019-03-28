@@ -30,7 +30,7 @@ try {
     $robert = \Service\Logger::getInstance();
     //$simone = clone $robert;
 
-    //$template = \Service\Router::dispatchRoute();
+    $template = \Service\Router::dispatchRoute();
 } catch (\Exception\ComiXExceptionInterface $e) {
     \Service\Logger::getInstance()->error($e->getLoggerMessage());
     /*$errorVariables = [
@@ -43,9 +43,7 @@ try {
 
 $formationDAO = \DAO\FormationDAO::getInstance();
 
-\Service\Logger::getInstance()->dump('robert');
-
-//require_once __VIEWS_DIR__ . 'base.html.php';
+require_once __VIEWS_DIR__ . 'base.html.php';
 
 //echo'<pre>';
 /*var_dump(\Model\Formation::getDAOInstance());

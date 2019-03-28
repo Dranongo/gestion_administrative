@@ -19,11 +19,11 @@
     <?php endif; ?>
 </head>
 <body>
-<?php require_once 'menu.html.php' ?>
+<?php require_once 'include/menu.html.php' ?>
 <div class="container-fluid">
-    <?= \Utils\Template::getTemplate($template->template, $template) ?>
+    <?= \Service\Template::getTemplate($template->template, $template) ?>
 </div>
-<?php require_once 'footer.html.php' ?>
+<?php require_once 'include/footer.html.php' ?>
 <script type="text/javascript" src="<?= $template->getJsFile('jquery.js') ?>"></script>
 <script type="text/javascript" src="<?= $template->getJsFile('bootstrap.min.js') ?>"></script>
 <?php if (isset($template->jsFiles)): ?>

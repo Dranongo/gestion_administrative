@@ -13,7 +13,7 @@ class Template
      */
     public static function getErrorTemplateName($type = 'html'): string
     {
-        $errorTemplate = __VIEWS_DIR__ . DIRECTORY_SEPARATOR . 'error.' . $type . '.php';
+        $errorTemplate = __VIEWS_DIR__ . 'error.' . $type . '.php';
         if (file_exists($errorTemplate)) {
             return $errorTemplate;
         }

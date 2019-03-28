@@ -11,7 +11,7 @@ class Router
      */
     public static function dispatchRoute()
     {
-        self::checkIfLoggedIn();
+        //self::checkIfLoggedIn();
         $request = Request::getInstance();
         $controllerParam = empty($request->getQuery('Controller'))
             ? AbstractController::DEFAULT_CONTROLLER
