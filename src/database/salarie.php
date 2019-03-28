@@ -67,9 +67,9 @@
                 'dateDebutSalarie' => 'date_debut',
                 'dateFinSalarie' => 'date_fin'
             ],
-            //'orderBy' => [
-            //    'dateDebutSalarie' => 'DESC'
-            //],
+            'orderBy' => [
+                'dateDebutSalarie' => 'DESC'
+            ],
             'mapped' => true
         ]
     ];
