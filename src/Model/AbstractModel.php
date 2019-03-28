@@ -28,6 +28,8 @@ abstract class AbstractModel
     }
 
     /**
+     * 
+     * 
      * @return int
      */
     final public function getId(): ?int

@@ -7,6 +7,7 @@
         'nomJeuneFille' => 'nom_jeune_fille',
         'nationalite' => 'nationalite',
         'dateNaissance' => 'date_naissance',
+        'lieuNaissance' => 'lieu_naissance',
         'adresse' => 'adresse',
         'codePostal' => 'code_postal',
         'ville' => 'ville',
@@ -66,9 +67,9 @@
                 'dateDebutSalarie' => 'date_debut',
                 'dateFinSalarie' => 'date_fin'
             ],
-            //'orderBy' => [
-            //    'dateDebutSalarie' => 'DESC'
-            //],
+            'orderBy' => [
+                'dateDebutSalarie' => 'DESC'
+            ],
             'mapped' => true
         ]
     ];

@@ -14,6 +14,6 @@
             'className' => 'TypeContrat',
             'foreignKey' => 'id_type_document',
             'otherForeignKey' => 'id_type_contrat',
-            'mapped' => false
+            'mapped' => true
         ]
     ];

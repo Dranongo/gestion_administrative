@@ -73,7 +73,9 @@ class SqlHelper
         $fields = "";
         foreach ($fieldsArray as $key => $value) {
             if (is_array($value)) {
-                $fields .= ($cpt++ ? ", " : "") . addslashes($key) . ' IN (' . implode(',', $value) . ')';
+                if( count($value) != 0) {
+                    $fields .= ($cpt++ ? ", " : "") . addslashes($key) . ' IN (' . implode(',', $value) . ')';
+                }
             } else {
                 $fields .= ($cpt++ ? ", " : "") . addslashes($key) . " = '" . addslashes($value) . "'";
             }
