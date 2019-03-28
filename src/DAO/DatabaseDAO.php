@@ -4,7 +4,7 @@ namespace DAO;
 
 
 use Model\AbstractModel;
-use Utils\DatabaseConnection;
+use Service\DatabaseConnection;
 use Utils\DateHelper;
 use Utils\SqlHelper;
 
@@ -47,11 +47,11 @@ abstract class DatabaseDAO
 
     /**
      * Clone method is not allowed
-     * @throws \Exception
+     * @throws \Exception\SingletonException
      */
     final private function __clone()
     {
-        throw new \Exception('Clone method is not allowed');
+        throw new \Exception\SingletonException('Clone method is not allowed');
     }
 
     /**

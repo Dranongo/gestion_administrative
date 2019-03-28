@@ -123,4 +123,16 @@ class DateHelper
 
         return $dateToCompare < $dateStart;
     }
+
+    /**
+     * Return the current date as a string with the selected format passed by parameter.
+     * @param string $format
+     * @return string
+     * @throws \Exception
+     */
+    public function getCurrentDateAsString(string $format = 'Y-m-d H:i:s'): string
+    {
+        $currentDate = new \DateTime();
+        return $currentDate->format($format);
+    }
 }

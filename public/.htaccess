@@ -1,0 +1,7 @@
+Options +FollowSymlinks
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^([a-z]*)/([a-z]*)$ /index.php?controller=$1&method=$2 [L]
+    RewriteRule ^([a-z]*)/([a-z]*)/([0-9]*)$ /index.php?controller=$1&method=$2&id=$3 [L]
+</IfModule>
