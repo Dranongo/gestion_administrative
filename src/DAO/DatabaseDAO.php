@@ -389,7 +389,7 @@ abstract class DatabaseDAO
                 $config[$parameter]['orderBy'] : [];
             $limit = array_key_exists('limit', $config[$parameter]) && is_int($config[$parameter]['limit']) ?
                 $config[$parameter]['limit'] : 50;
-            $offset = array_key_exists('offset', $config[$parameter]) && is_int($config[$parameter]['offset']) ?
+            $offset = $limit != 0 && array_key_exists('offset', $config[$parameter]) && is_int($config[$parameter]['offset']) ?
                 $config[$parameter]['offset'] : 0;
             $results = $relationDAO->findBy(['id' => $idsResults], $orderBy, false, $limit, $offset);
         }
