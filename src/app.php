@@ -2,9 +2,9 @@
 
 define('__SRC_DIR__', __DIR__ . DIRECTORY_SEPARATOR);
 
-define('__VAR_DIR__', __DIR__ . '..' . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR);
+define('__VAR_DIR__', __SRC_DIR__ . '..' . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR);
 
-define('__VIEWS_DIR__', __DIR__ . '..' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
+define('__VIEWS_DIR__', __SRC_DIR__ . '..' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
 
 define('__CONFIG_DIR__', __SRC_DIR__ . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR);
 
@@ -27,17 +27,25 @@ try {
     // You have to init the session after the classes are loaded
     session_start();
 
-    $template = \Service\Router::dispatchRoute();
-} catch (Exception $e) {
-    $errorVariables = [
+    $robert = \Service\Logger::getInstance();
+    $simone = clone $robert;
+
+    //$template = \Service\Router::dispatchRoute();
+} catch (\Exception\ComiXExceptionInterface $e) {
+    \Service\Logger::getInstance()->error($e->getLoggerMessage());
+    /*$errorVariables = [
         'title' => 'Error ' . $e->getCode(),
         'template' => \Service\Template::getErrorTemplateName(),
         'error' => $e->getMessage()
     ];
-    $template = \Service\Template::getTemplateVariables($errorVariables);
+    $template = \Service\Template::getTemplateVariables($errorVariables);*/
 }
 
-require_once __VIEWS_DIR__ . DIRECTORY_SEPARATOR . 'base.html.php';
+$formationDAO = \DAO\FormationDAO::getInstance();
+
+\Service\Logger::getInstance()->dump('robert');
+
+//require_once __VIEWS_DIR__ . 'base.html.php';
 
 //echo'<pre>';
 /*var_dump(\Model\Formation::getDAOInstance());

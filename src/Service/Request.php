@@ -41,6 +41,15 @@ class Request
     }
 
     /**
+     * Clone method is not allowed
+     * @throws \Exception\SingletonException
+     */
+    final private function __clone()
+    {
+        throw new \Exception\SingletonException('Clone method is not allowed');
+    }
+
+    /**
      * @return Request
      */
     public static function getInstance(): Request

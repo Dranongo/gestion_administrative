@@ -11,7 +11,7 @@
             'password' => ''
         ],
 		'logger' => [
-            'filePath' => __VAR_DIR__ . 'logs',
-            'filename' => 'execution.log'
+            'filePath' => __VAR_DIR__ . 'logs' . DIRECTORY_SEPARATOR,
+            'fileName' => 'execution.log'
         ]
 	];
