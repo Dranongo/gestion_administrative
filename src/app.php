@@ -28,7 +28,7 @@ try {
     session_start();
 
     $robert = \Service\Logger::getInstance();
-    $simone = clone $robert;
+    //$simone = clone $robert;
 
     //$template = \Service\Router::dispatchRoute();
 } catch (\Exception\ComiXExceptionInterface $e) {
