@@ -187,7 +187,6 @@ abstract class DatabaseDAO
         $sqlQuery = "INSERT INTO $this->tableName";
         $sqlQuery .= SqlHelper::getInstance()->convertDataToInsertQuery($fieldsArray);
         
-        var_dump($sqlQuery);
         $result = $this->query($sqlQuery);
         $model->setId($this->connection->lastInsertId());
         return $result;
@@ -227,19 +226,33 @@ abstract class DatabaseDAO
             $getter = 'get' . ucfirst($param);
             if (method_exists($model, $getter)) {
                 $value = $model->{$getter}();
-                if ($value instanceof \DateTime) {
-                    $value = DateHelper::convertDateTimeToDatabaseFormat($value);
-                } elseif (is_bool($value)) {
-                    $value = intval($value);
-                } elseif ($value instanceof AbstractModel) {
-                    $value = $value->getId();
-                } if (is_array($value)){
-                    continue;
+                if (!is_array($value)) {
+                    $fieldsArray[$field] = $this->convertValueToFormatDatabase($value);
                 }
-                $fieldsArray[$field] = $value;
             }
         }
         return $fieldsArray;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param $value
+     * @return 
+     */
+    protected function convertValueToFormatDatabase($value)
+    {
+        if (!is_array($value)) {
+            $result = $value;
+            if ($value instanceof \DateTime) {
+                $result = DateHelper::convertDateTimeToDatabaseFormat($value);
+            } elseif (is_bool($value)) {
+               $result = intval($value);
+            } elseif ($value instanceof AbstractModel) {
+                $result = $value->getId();
+            }
+            return $result;
+        }
     }
 
     /**
@@ -374,10 +387,10 @@ abstract class DatabaseDAO
             }
             $orderBy = array_key_exists('orderBy', $config[$parameter]) && is_array($config[$parameter]['orderBy']) ?
                 $config[$parameter]['orderBy'] : [];
-            $limit = array_key_exists('limit', $config[$parameter]) && is_array($config[$parameter]['limit']) ?
-                $config[$parameter]['limit'] : [];
-            $offset = count($limit) != 0 && array_key_exists('offset', $config[$parameter]) && is_array($config[$parameter]['offset']) ?
-                $config[$parameter]['offset'] : [];
+            $limit = array_key_exists('limit', $config[$parameter]) && is_int($config[$parameter]['limit']) ?
+                $config[$parameter]['limit'] : 50;
+            $offset = array_key_exists('offset', $config[$parameter]) && is_int($config[$parameter]['offset']) ?
+                $config[$parameter]['offset'] : 0;
             $results = $relationDAO->findBy(['id' => $idsResults], $orderBy, false, $limit, $offset);
         }
 
@@ -433,24 +446,19 @@ abstract class DatabaseDAO
         $sql = '';
         /** @var AbstractModel $parameter */
         foreach ($parameters as $parameter) {
-            $sql .= "INSERT INTO $fieldName[tableName] ($fieldName[foreignKey], $fieldName[otherForeignKey])
-                    VALUES ({$model->getId()}, {$parameter->getId()});";
-            
-            if ($fieldName['otherFields'] != []) {
+            if (array_key_exists('otherFields', $fieldName)) {
+                $fieldDatabase = "";
+                $otherField = "";
                 foreach ($fieldName['otherFields'] as $key => $value) {
-                    $getterOtherFields = 'get' . ucfirst($key);
-                    
-                    if ($parameter->{$getterOtherFields}() instanceof \DateTime){
-                        $otherField = DateHelper::convertDateTimeToDatabaseFormat($parameter->{$getterOtherFields}());
-                    } else {
-                        $otherField = $parameter->{$getterOtherFields}();
-                    }
-                    
-                    $sql .= "UPDATE $fieldName[tableName] 
-                        SET $value = '$otherField' 
-                        WHERE $fieldName[foreignKey] = {$model->getId()} 
-                        AND $fieldName[otherForeignKey] = {$parameter->getId()};";
+                    $getterOtherField = 'get' . ucfirst($key);
+                    $otherField .= ", '" . $this->convertValueToFormatDatabase($parameter->{$getterOtherField}()) . "'";
+                    $fieldDatabase .= ", " . $value; 
                 }
+                $sql .= " INSERT INTO $fieldName[tableName] ($fieldName[foreignKey], $fieldName[otherForeignKey] $fieldDatabase)
+                    VALUES ({$model->getId()}, {$parameter->getId()} $otherField);";
+            } else {
+                $sql .= " INSERT INTO $fieldName[tableName] ($fieldName[foreignKey], $fieldName[otherForeignKey])
+                    VALUES ({$model->getId()}, {$parameter->getId()});";
             }
         }
         return $this->query($sql);
@@ -468,4 +476,5 @@ abstract class DatabaseDAO
                 WHERE $fieldName[foreignKey] = {$model->getId()};";
         return $this->query($sql);
     }
+
 }
