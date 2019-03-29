@@ -1,5 +1,3 @@
-Robert !!!
-
-<a href="/salarie/create">Créer mon salarié</a>
+<h1 class="col-sm-offset-3 col-sm-6"><?= $template->title ?></h1>
 
 <?php require_once 'form.html.php' ?>

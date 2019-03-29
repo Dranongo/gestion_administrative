@@ -16,7 +16,7 @@ abstract class AbstractController
     /**
      * @var string
      */
-    const DEFAULT_METHOD = 'list';
+    const DEFAULT_METHOD = 'create';
 
     /**
      * @return \Service\Request
