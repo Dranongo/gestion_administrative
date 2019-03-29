@@ -5,6 +5,7 @@ namespace Controller;
 
 use Model\User;
 use Model\Salarie;
+use DAO\SalarieDAO;
 use Service\Router;
 use Service\Template;
 use Utils\DateHelper;
@@ -28,35 +29,14 @@ class SalarieController extends AbstractController
     {
         $request = $this->getRequest();
         $form = $request->getRequest('salarie_form');
-        $salarie = new Salarie();
+        $salarie = new \Model\Salarie();
+        $salarieDAO = \DAO\SalarieDAO::getInstance();
         $formErrors = [];
         $successMessage = $errorMessage = '';
 
         if ($request->isPost()) {
             if (count($formErrors) === 0) {
-                $salarie->setQualite($form['gender'])
-                        ->setNom($form['lastName'])
-                        ->setPrenom($form['firstName'])
-                        ->setNomJeuneFille($form['maidenName'])
-                        ->setNationalite($form['nationality'])
-                        ->setDateNaissance(DateHelper::convertformbaseDateToDateTime($form['birthdate']))
-                        ->setLieuNaissance($form['birthplace'])
-                        ->setAdresse($form['address'])
-                        ->setCodePostal($form['postalCode'])
-                        ->setVille($form['city'])
-                        ->setTelephone($form['phoneNumber'])
-                        ->setMailProfessionnel($form['professionnaleEmail'])
-                        ->setMailPersonnel($form['personalEmail'])
-                        ->setNumeroSecuriteSociale($form['socialSecurityNumber'])
-                        ->setRemuneration($form['salary'])
-                        ->setEnPoste($form['currentlyEmployed'])
-                        ->setSituationFamiliale($form['familyStatus'])
-                        ->setLangues($form['languages'])
-                        ->setAutreActivite($form['additionalActivity'])
-                        ->setDetailActivite($form['detailsAdditionalActivity'])
-                        ->setAutorisationTravailMineur($form['parentalPermit'])
-                        ->setStatutHandicap($form['disabledWorker'])
-                        ->setTauxInvalidite($form['detailsDisabledWorker']);
+                $salarieDAO->buildDomainObject($form);
             }
         }
         return [
