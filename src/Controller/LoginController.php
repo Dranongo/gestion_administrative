@@ -4,10 +4,10 @@ namespace Controller;
 
 
 use DAO\UserDAO;
-use Entity\User;
-use Utils\Route;
-use Utils\StringFormatter;
-use Utils\Template;
+use Model\User;
+use Service\Router;
+use Utils\StringHelper;
+use Service\Template;
 
 class LoginController extends AbstractController
 {
@@ -20,7 +20,7 @@ class LoginController extends AbstractController
         $request = $this->getRequest();
 
         if ($request->isLoggedIn()) {
-            Route::redirect('/user/');
+            Router::redirect('/user/');
         }
 
         $form = $formErrors = null;
@@ -29,8 +29,8 @@ class LoginController extends AbstractController
         if ($request->isPost()) {
             $form = $request->getRequest('login_form');
             $userMail = $form['mail'];
-            $userPassword = StringFormatter::encodePassword($userMail, $form['password']);
-            $userDao = new UserDAO();
+            $userPassword = StringHelper::encodePassword($userMail, $form['password']);
+            $userDao = UserDAO::getInstance();
             $users = $userDao->findBy([
                 'mail' => $userMail,
                 'password' => $userPassword
@@ -38,7 +38,7 @@ class LoginController extends AbstractController
 
             if (count($users)) {
                 $request->addToSession('user', $users[0]);
-                Route::redirect('/user/');
+                Router::redirect('/user/');
             }
 
             $formErrors = true;
@@ -49,8 +49,7 @@ class LoginController extends AbstractController
             'title' => 'Welcome on ComiX Little Thing',
             'form' => $form,
             'formErrors' => $formErrors,
-            'errorMessage' => $errorMessage,
-            'template' => $this->getTemplateName()
+            'errorMessage' => $errorMessage
         ];
     }
 
@@ -63,7 +62,7 @@ class LoginController extends AbstractController
         $request = $this->getRequest();
 
         if ($request->isLoggedIn()) {
-            Route::redirect('/user/');
+            Router::redirect('/user/');
         }
 
         $user = new User();
@@ -76,20 +75,19 @@ class LoginController extends AbstractController
                     $formErrors[$field] = 'has-error';
                 }
             }
-            if (!StringFormatter::isEmailValid($form['mail'])) {
+            if (! StringHelper::isEmailValid($form['mail'])) {
                 $formErrors['mail'] = 'has-error';
             }
             if ($form['password'] !== $form['confirm_password']) {
                 $formErrors['confirm_password'] = 'has-error';
             }
             if (count($formErrors) === 0) {
-                $password = StringFormatter::encodePassword($form['mail'], $form['password']);
+                $password = StringHelper::encodePassword($form['mail'], $form['password']);
                 $user->setFirstname($form['firstname'])
                     ->setLastname($form['lastname'])
-                    ->setDescription($form['description'])
                     ->setMail($form['mail'])
                     ->setPassword($password);
-                $userDao = $user->getDAO();
+                $userDao = $user::getDAOInstance();
                 if ($userDao->save($user)) {
                     $successMessage = 'Account created';
                 } else {
@@ -104,8 +102,7 @@ class LoginController extends AbstractController
             'form' => $form,
             'formErrors' => $formErrors,
             'successMessage' => $successMessage,
-            'errorMessage' => $errorMessage,
-            'template' => $this->getTemplateName()
+            'errorMessage' => $errorMessage
         ];
     }
 
@@ -115,7 +112,7 @@ class LoginController extends AbstractController
     public function logoutAction()
     {
         if ($this->getRequest()->destroySession()) {
-            Route::redirect('/');
+            Router::redirect('/');
         }
 
         return [

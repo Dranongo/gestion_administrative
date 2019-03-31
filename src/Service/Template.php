@@ -2,6 +2,7 @@
 
 namespace Service;
 
+use Exception\FileNotFoundException;
 use Model\User;
 
 class Template
@@ -17,7 +18,7 @@ class Template
         if (file_exists($errorTemplate)) {
             return $errorTemplate;
         }
-        throw new \Exception("Error template '$errorTemplate' not found.");
+        throw new FileNotFoundException("Error template '$errorTemplate' not found.");
     }
 
     /**

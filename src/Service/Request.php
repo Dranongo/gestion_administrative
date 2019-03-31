@@ -4,6 +4,7 @@ namespace Service;
 
 
 use Controller\AbstractController;
+use Exception\SingletonException;
 use Model\User;
 
 class Request
@@ -46,7 +47,7 @@ class Request
      */
     final private function __clone()
     {
-        throw new \Exception\SingletonException('Clone method is not allowed');
+        throw new SingletonException('Clone method is not allowed');
     }
 
     /**

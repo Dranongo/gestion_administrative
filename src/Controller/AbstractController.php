@@ -3,6 +3,8 @@
 namespace Controller;
 
 
+use Exception\BadFunctionCallException;
+use Exception\FileNotFoundException;
 use Service\Request;
 use Model\User;
 
@@ -39,14 +41,18 @@ abstract class AbstractController
         $action = $method . 'Action';
 
         if (method_exists($this, $action)) {
-            return $this->$action($request);
+            $templateVariables = $this->$action($request);
+            if (! array_key_exists('template', $templateVariables)) {
+                $templateVariables['template'] = $this->getTemplateName();
+            }
+            return $templateVariables;
         } elseif (method_exists($this, $method)) {
             $errorMessage = "Method '$method' found in class '" . get_class($this) . "' but not callable.";
         } else {
             $errorMessage = "Method '$method' not found in class '" . get_class($this) . "'.";
         }
 
-        throw new \Exception($errorMessage);
+        throw new BadFunctionCallException($errorMessage);
     }
 
     /**
@@ -65,7 +71,7 @@ abstract class AbstractController
             return $file;
         }
 
-        throw new \Exception("Template '$file' not found.");
+        throw new FileNotFoundException("Template '$file' not found.");
     }
 
     /**

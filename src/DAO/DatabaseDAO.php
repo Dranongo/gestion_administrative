@@ -3,6 +3,10 @@
 namespace DAO;
 
 
+use Exception\FileNotFoundException;
+use Exception\PDOException;
+use Exception\SingletonException;
+use Exception\ComiXExceptionInterface;
 use Model\AbstractModel;
 use Service\DatabaseConnection;
 use Utils\DateHelper;
@@ -32,14 +36,14 @@ abstract class DatabaseDAO
 
     /**
      * DatabaseDAO constructor.
-     * @throws \Exception
+     * @throws \Exception\SingletonException
      */
     final private function __construct()
     {
         if (! property_exists(static::class, 'configFileName') ||
             ! property_exists(static::class, 'tableName')
         ) {
-            throw new \Exception(static::class . ' needs configFileName and tableName properties');
+            throw new SingletonException(static::class . ' needs configFileName and tableName properties');
         }
         $this->connection = DatabaseConnection::getInstance()->getConnection();
         $this->modelToDatabaseFields();
@@ -51,17 +55,17 @@ abstract class DatabaseDAO
      */
     final private function __clone()
     {
-        throw new \Exception\SingletonException('Clone method is not allowed');
+        throw new SingletonException('Clone method is not allowed');
     }
 
     /**
      * @return DatabaseDAO
-     * @throws \Exception
+     * @throws \Exception\SingletonException
      */
     public static function getInstance(): DatabaseDAO
     {
         if (! property_exists(static::class, '_instance')) {
-            throw new \Exception(static::class . ' needs static $_instance property');
+            throw new SingletonException(static::class . ' needs static $_instance property');
         }
         if (! static::$_instance instanceof DatabaseDAO) {
             static::$_instance = new static();
@@ -264,10 +268,12 @@ abstract class DatabaseDAO
         try {
             $result = $this->connection->query($sqlQuery);
             if (! $result) {
-                throw new \Exception(implode($this->connection->errorInfo(), ','));   
+                throw new PDOException(implode($this->connection->errorInfo(), ','));
             }
         }
-        catch(\Exception $e) {
+        catch(ComiXExceptionInterface $e) {
+            // TODO: Utiliser le logger ou l'attraper ailleurs. Mais pas de echo, ni de print. Et pense à utiliser la
+            // méthode la plus appropriée (cf les catch un peu partout dans l'application)
             echo '<pre>';
             print_r($e->getMessage());
         }
@@ -319,7 +325,7 @@ abstract class DatabaseDAO
         if (is_file($filePath)) {
             $this->config = require $filePath;
         } else {
-            throw new \Exception(get_class($this) . ' Config File not found');
+            throw new FileNotFoundException(get_class($this) . ' Config File not found');
         }
     }
 
@@ -329,6 +335,18 @@ abstract class DatabaseDAO
      * @return AbstractModel
      */
     protected abstract function buildDomainObject(array $data, bool $recursive = false): AbstractModel;
+
+    /**
+     * Public alias for buildDomainObject method
+     *
+     * @param array $data
+     * @param bool $recursive
+     * @return AbstractModel
+     */
+    public function hydrate(array $data, bool $recursive = false): AbstractModel
+    {
+        return $this->buildDomainObject($data, $recursive);
+    }
 
     /**
      * @param AbstractModel $model
@@ -440,6 +458,7 @@ abstract class DatabaseDAO
         if (method_exists($model, $getter)) {
             $parameters = $model->{$getter}();
         } else {
+            // TODO : un petit log ici ne sera pas de trop
             return false;
         }
         

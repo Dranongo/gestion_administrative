@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Exception\ClassNotFoundException;
+
 abstract class AbstractModel
 {
     /**
@@ -47,7 +49,7 @@ abstract class AbstractModel
 
     /**
      * @return \DAO\DatabaseDAO
-     * @throws \Exception
+     * @throws \Exception\ClassNotFoundException
      */
     final public static function getDAOInstance(): \DAO\DatabaseDAO
     {
@@ -55,7 +57,7 @@ abstract class AbstractModel
         if (class_exists($DAOClassName)) {
             return $DAOClassName::getInstance();
         } else {
-            throw new \Exception(static::class . ' DAO not found');
+            throw new ClassNotFoundException(static::class . ' DAO not found');
         }
     }
 

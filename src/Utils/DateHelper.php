@@ -3,43 +3,12 @@
 namespace Utils;
 
 /**
- * This class contains method to convert and compare the dates in the application.
- * This is a singleton with static methods. 
+ * This class contains methods to convert and compare the dates in the application.
  * Class DateHelper
  * @package Utils
  */
 class DateHelper
 {
-    /**
-     * @var DateHelper|null
-     */
-    private static $_instance = null;
-
-    /**
-     * DateHelper constructor.
-     */
-    final private function __construct() {}
-
-    /**
-     * Clone method is not allowed
-     */
-    final private function __clone()
-    {
-        throw new \Exception("Le clonage n'est pas autorisé");
-    }
-
-    /**
-     * @return DateHelper
-     */
-    public static function getInstance(): DateHelper
-    {
-        if (! self::$_instance instanceof DateHelper) {
-            self::$_instance = new static();
-        }
-
-        return self::$_instance;
-    }
-
     /**
      * Check if the parameter is null or a string.
      * If it is a string then it will return a DateTime object else null
@@ -80,6 +49,7 @@ class DateHelper
     ): bool
     {
         if ($startDate === null && $endDate === null) {
+            // TODO : un petit log précisant l'inutilité de l'appel
             return false;
         }
 
@@ -130,7 +100,7 @@ class DateHelper
      * @return string
      * @throws \Exception
      */
-    public function getCurrentDateAsString(string $format = 'Y-m-d H:i:s'): string
+    public static function getCurrentDateAsString(string $format = 'Y-m-d H:i:s'): string
     {
         $currentDate = new \DateTime();
         return $currentDate->format($format);

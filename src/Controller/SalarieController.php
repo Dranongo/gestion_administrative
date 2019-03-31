@@ -20,8 +20,7 @@ class SalarieController extends AbstractController
     {
         return [
             'title' => 'Affichage Salarie',
-            'error' => 'An error has occured destroying the session',
-            'template' => $this->getTemplateName()
+            'error' => 'An error has occured destroying the session'
         ];
     }
 
@@ -36,7 +35,7 @@ class SalarieController extends AbstractController
 
         if ($request->isPost()) {
             if (count($formErrors) === 0) {
-                $salarieDAO->buildDomainObject($form);
+                $salarieDAO->hydrate($form);
             }
         }
         return [
@@ -45,8 +44,7 @@ class SalarieController extends AbstractController
             'formErrors' => $formErrors,
             'salarie' => $salarie,
             'successMessage' => $successMessage,
-            'errorMessage' => $errorMessage,
-            'template' => $this->getTemplateName()
+            'errorMessage' => $errorMessage
         ];
     }
 }

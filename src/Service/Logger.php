@@ -2,6 +2,7 @@
 
 namespace Service;
 
+use Exception\SingletonException;
 use Utils\DateHelper;
 
 class Logger
@@ -99,7 +100,7 @@ class Logger
      */
     final private function __clone()
     {
-        throw new \Exception\SingletonException('Clone method is not allowed');
+        throw new SingletonException('Clone method is not allowed');
     }
 
     /**
@@ -187,7 +188,7 @@ class Logger
     protected function addLine(int $level, string $message): bool
     {
         if ($this->fileName !== null && array_key_exists($level, self::$levels)) {
-            $line = DateHelper::getInstance()->getCurrentDateAsString();
+            $line = DateHelper::getCurrentDateAsString();
             $line .= ' : [' . self::$levels[$level] . '] ' . $message . "\r\n";
             return $this->writeLine($line);
         }

@@ -33,17 +33,17 @@ try {
     $template = \Service\Router::dispatchRoute();
 } catch (\Exception\ComiXExceptionInterface $e) {
     \Service\Logger::getInstance()->error($e->getLoggerMessage());
-    /*$errorVariables = [
+    $errorVariables = [
         'title' => 'Error ' . $e->getCode(),
         'template' => \Service\Template::getErrorTemplateName(),
         'error' => $e->getMessage()
     ];
-    $template = \Service\Template::getTemplateVariables($errorVariables);*/
+    $template = \Service\Template::getTemplateVariables($errorVariables);
 }
 
 $formationDAO = \DAO\FormationDAO::getInstance();
 
-require_once __VIEWS_DIR__ . 'base.html.php';
+require_once __VIEWS_DIR__ . 'include/base.html.php';
 
 //echo'<pre>';
 /*var_dump(\Model\Formation::getDAOInstance());
