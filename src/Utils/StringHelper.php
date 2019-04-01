@@ -11,36 +11,6 @@ namespace Utils;
 class StringHelper
 {
     /**
-     * @var StringHelper|null
-     */
-    private static $_instance = null;
-
-    /**
-     * StringHelper constructor.
-     */
-    final private function __construct() {}
-
-    /**
-     * Clone method is not allowed
-     */
-    final private function __clone()
-    {
-        throw new \Exception("Le clonage n'est pas autorisé");
-    }
-
-    /**
-     * @return StringHelper
-     */
-    public static function getInstance(): StringHelper
-    {
-        if (! self::$_instance instanceof StringHelper) {
-            self::$_instance = new static();
-        }
-
-        return self::$_instance;
-    }
-
-    /**
      * 
      *
      * @param string $email
