@@ -6,7 +6,7 @@
                 <table class="table text-center">
                     <thead>
                         <tr>
-                            <th class="text-center">Formation</th>
+                            <th class="text-center">Nom</th>
                             <th class="text-center">Niveau</th>
                             <th class="text-center">Organisme</th>
                             <th class="text-center">Lieu</th>
@@ -17,19 +17,19 @@
                     </thead>
                     <tbody>
                         <tr class="hide">
-                            <td><input class="form-control" type="text"></td>
+                            <td><input class="form-control" type="text" name="formation_form[nom]"></td>
                             <td>
-                                <select class="form-control">
+                                <select class="form-control" name="formation_form[niveau]">
                                     <option value="">Niveau</option>
                                     
                                 </select>
                             </td>
-                            <td><input class="form-control" type="text"></td>
-                            <td><input class="form-control" type="text"></td>
-                            <td><input class="form-control" type="date"></td>
-                            <td><input class="form-control" type="date"></td>
-                            <td><input class="form-check-input" type="checkbox" value="1"></td>
-                            <td><span class="table_remove_formation glyphicon glyphicon-remove"></span></td>
+                            <td><input class="form-control" type="text" name="formation_form[organisme]"></td>
+                            <td><input class="form-control" type="text" name="formation_form[lieu]"></td>
+                            <td><input class="form-control" type="date" name="formation_form[date_debut]"></td>
+                            <td><input class="form-control" type="date" name="formation_form[date_fin]"></td>
+                            <td><input class="form-check-input" type="checkbox" value="1" name="formation_form[obtenu]"></td>
+                            <td><span class="removeLine glyphicon glyphicon-remove"></span></td>
                         </tr>
                     </tbody>
                 </table>                      							

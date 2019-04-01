@@ -13,10 +13,10 @@
                     </thead>
                     <tbody>					
                         <tr class="hide">
-                            <td><input class="lastName form-control" type="text" data-name="LastNameChild[%%d%%]"></td>
-                            <td><input class="firstName form-control" type="text" data-name="FirstNameChild[%%d%%]"></td>
-                            <td><input class="birthdate form-control" type="date" data-name="BirthdateChild[%%d%%]"></td>
-                            <td><span class="table_remove_enfant glyphicon glyphicon-remove"></span></td>
+                            <td><input class="form-control" type="text" name="enfant_form[nom]"></td>
+                            <td><input class="form-control" type="text" name="enfant_form[prenom]"></td>
+                            <td><input class="form-control" type="date" name="enfant_form[date_naissance]"></td>
+                            <td><span class="removeLine glyphicon glyphicon-remove"></span></td>
                         </tr>
                     </tbody>
                 </table>

@@ -3,7 +3,7 @@
 	return [
             'id' => 'id',
             'nom' => 'nom',
-            'niveau' => 'formation',
+            'niveau' => 'niveau',
             'organisme' => 'organisme',
             'lieu' => 'lieu',
             'dateDebut' => 'date_debut',

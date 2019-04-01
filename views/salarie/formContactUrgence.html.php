@@ -14,19 +14,18 @@
                     </thead>
                     <tbody>					
                         <tr class="contact">
-                            <td><input class="lastName form-control" type="text" data-name="LastNameContact[%%d%%]"></td>
-                            <td><input class="firstName form-control" type="text" data-name="FirstNameContact[%%d%%]"></td>
-                            <td><input class="relationship form-control" type="text" data-name="RelationshipContact[%%d%%]"></td>
-                            <td><input class="phoneNumber form-control" type="number" data-name="PhoneNumberContact[%%d%%]"></td>
+                            <td><input class="form-control" type="text" name="contact_urgence_form[nom]"></td>
+                            <td><input class="form-control" type="text" name="contact_urgence_form[prenom]"></td>
+                            <td><input class="form-control" type="text" name="contact_urgence_form[lien]"></td>
+                            <td><input class="form-control" type="number" name="contact_urgence_form[telephone]"></td>
                         </tr>
                         <tr class="hide">
-                            <td><input class="lastName form-control" type="text" data-name="LastNameContact[%%d%%]"></td>
-                            <td><input class="firstName form-control" type="text" data-name="FirstNameContact[%%d%%]"></td>
-                            <td><input class="relationship form-control" type="text" data-name="RelationshipContact[%%d%%]"></td>
-                            <td><input class="phoneNumber form-control" type="number" data-name="PhoneNumberContact[%%d%%]"></td>
-                            <td><span class="table_remove_contact glyphicon glyphicon-remove"></span></td>
+                            <td><input class="form-control" type="text" name="contact_urgence_form[nom]"></td>
+                            <td><input class="form-control" type="text" name="contact_urgence_form[prenom]"></td>
+                            <td><input class="form-control" type="text" name="contact_urgence_form[lien]"></td>
+                            <td><input class="form-control" type="number" name="contact_urgence_form[telephone]"></td>
+                            <td><span class="removeLine glyphicon glyphicon-remove"></span></td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>

@@ -9,10 +9,10 @@
 			<div class="collapse navbar-collapse" id="navCollapse">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link text-muted" id="nav_accueil" href="#">Liste des salariés</a>
+						<a class="nav-link text-muted" id="nav_accueil" href="/salarie/list">Liste des salariés</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-muted" id="nav_competence" href="#">Création d'une fiche</a>
+						<a class="nav-link text-muted" id="nav_competence" href="/salarie/create">Création d'une fiche</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link text-muted" id="nav_experience" href="#">Indicateur de performance</a>

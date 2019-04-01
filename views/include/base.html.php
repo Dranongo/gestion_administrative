@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="<?= $template->getCssFile('bootstrap.css') ?>">
         <link rel="stylesheet" href="<?= $template->getCssFile('font-awesome.min.css') ?>">
         <link rel="stylesheet" href="<?= $template->getCssFile('omicx.css') ?>">
-        
+
         <?php if (isset($template->cssFiles)): ?>
             <?php foreach ($template->cssFiles as $cssFile): ?>
                 <link rel="stylesheet" href="<?= $cssFile ?>">
@@ -18,6 +18,7 @@
                 <?= $template->cssInline ?>
             </style>
         <?php endif; ?>
+        <?php require_once 'header.html.php' ?>
     </head>
     <body>
     <?php require_once 'menu.html.php' ?>

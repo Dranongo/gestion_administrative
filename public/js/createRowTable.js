@@ -22,18 +22,6 @@ $('.table_add_document').click(function () {
 	$TABLE.find('table').append($clone);
 });
 
-$('.table_remove_enfant').click(function () {
-  $(this).parents('tr').detach();
-});
-
-$('.table_remove_contact').click(function () {
-  $(this).parents('tr').detach();
-});
-
-$('.table_remove_formation').click(function () {
-  $(this).parents('tr').detach();
-});
-
-$('.table_remove_document').click(function () {
-  $(this).parents('tr').detach();
+$('.removeLine').click(function () {
+	$(this).parents('tr').detach();
 });
