@@ -2,22 +2,25 @@
 <?php $formErrors = $template->formErrors ?>
 <?php $salarie = $template->salarie ?>
 
-<form action="" method="post">
-        <div class="custom-control custom-radio custom-control-inline">
-			<input type="radio" class="custom-control-input" id="qualite_Monsieur" name="salarie_form[qualite]" value="Monsieur">
-			<label class="custom-control-label" for="qualite_Monsieur">Monsieur</label>
-		</div>
-		<div class="custom-control custom-radio custom-control-inline">
-			<input type="radio" class="custom-control-input" id="qualite_Madame" name="salarie_form[qualite]" value="Madame">
-			<label class="custom-control-label" for="qualite_Madame">Madame</label>
-		</div>
+
+    <form action="" method="post">
+        <label>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="qualite_Monsieur" name="salarie_form[qualite]" value="Monsieur">
+                <label class="custom-control-label" for="qualite_Monsieur">Monsieur</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="qualite_Madame" name="salarie_form[qualite]" value="Madame">
+                <label class="custom-control-label" for="qualite_Madame">Madame</label>
+            </div>
+        </label>
         <div class="form-row">
-            <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['prenom'] : '' ?>">
+            <div class="form-group col-md-3  <?= $formErrors != null ? $formErrors['prenom'] : '' ?>">
                 <label for="prenom">Prénom *</label>
                 <input type="text" class="form-control" id="prenom" name="salarie_form[prenom]"
                     value="<?= $form != null ? $form['prenom'] : '' ?>">
             </div> 
-            <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['nom'] : '' ?>">
+            <div class="form-group col-md-3 col-md-offset-3<?= $formErrors != null ? $formErrors['nom'] : '' ?>">
                 <label for="nom">Nom *</label>
                 <input type="text" class="form-control" id="nom" name="salarie_form[nom]"
                     value="<?= $form != null ? $form['nom'] : '' ?>">
@@ -162,39 +165,12 @@
             <input type="text" class="form-control" id="taux_invalidite" name="salarie_form[taux_invalidite]"
                    value="<?= $form != null ? $form['taux_invalidite'] : '' ?>">
         </div>
-        <div class="form-group" id="formations">
-            <label class="form-label" for="formations">Formations et Expériences professionnelles</label>
-            <div id="table_formation" class="table-editable">
-                <table class="table text-center">
-                    <thead>
-                        <tr>
-							<th class="text-center">Formation</th>
-							<th class="text-center">Niveau</th>
-							<th class="text-center">Organisme</th>
-							<th class="text-center">Lieu</th>
-							<th class="text-center">Début de la formation</th>
-							<th class="text-center">Fin de la formation</th>
-							<th class="text-center">Diplôme obtenu</th>
-						</tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-							<td><input class="form-control" type="text"></td>
-							<td>
-								<select class="form-control">
-						    		<option value="">Niveau</option>
-									
-                                </select>
-							</td>
-							<td><input class="form-control" type="text"></td>
-							<td><input class="form-control" type="text"></td>
-							<td><input class="form-control" type="date"></td>
-							<td><input class="form-control" type="date"></td>
-							<td><input class="form-check-input" type="checkbox" value="1"></td>
-						</tr>
-					</tbody>
-				</table>                      							
-            </div>
-        </div>
+
+        <?php require_once 'formFormation.html.php' ?>
+        <?php require_once 'formEnfant.html.php' ?>
+        <?php require_once 'formContactUrgence.html.php' ?>
+        <?php require_once 'formDocument.html.php' ?>
+                
         <button type="submit" class="pull-right btn btn-success">Enregistrer</button>
-</form>
+    </form>
+    

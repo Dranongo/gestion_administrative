@@ -1,5 +1,3 @@
-<?php require_once('../DAO/employeeDAO.php'); ?>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,15 +5,12 @@
 		<title>Création d'une fiche</title>
 		<link href="../public/css/bootstrap.css" rel="stylesheet"/>
 		<link href="../public/css/tableChild.css" rel="stylesheet"/>
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
 		<script src="../public/js/jquery-3.3.1.min.js"></script>
 		<script src="../public/js/bootstrap.min.js"></script>
 		<script src="../public/js/creationEmployee.js"></script>
 	</head>
 	<body>
-		<?php
-			require_once('../include/header.php');
-		?>
+		
 
 		<div class="container">
 			<form class="needs-validation" method="POST" action="../src/Controller/creationEmployeeController.php" enctype="multipart/form-data" novalidate>
@@ -116,9 +111,7 @@
 				<div class="form-group">
 					<select id="SocialProfessionalGroup" name="SocialProfessionalGroup" class="custom-select" >
 						<option value="">Catégorie Socio-professionnelle</option>						
-						<?php foreach (getDataRepository("categorie_socio_professionnelle") as $key => $value): ?>
-							<option value="<?= $key ?>"><?= $value ?></option>
-						<?php endforeach; ?>
+						
 					</select>
 				</div>
 
@@ -137,9 +130,7 @@
 				<div class="form-group">
 					<select id="EmploymentContract" name="EmploymentContract" class="custom-select" >
 						<option value="">Type de contrat</option>
-						<?php foreach (getDataRepository("type_contrat") as $key => $value): ?>
-							<option value="<?= $key ?>"><?= $value ?></option>
-						<?php endforeach; ?>
+						
 						?>
 					</select>
 				</div>
@@ -147,9 +138,7 @@
 				<div class="form-group">
 					<select id="InformationJob" name="InformationJob" class="custom-select" >
 						<option value="">Renseignement du poste</option>
-						<?php foreach (getDataRepository("renseignement_poste") as $key => $value): ?>
-							<option value="<?= $key ?>"><?= $value ?></option>
-						<?php endforeach; ?>
+						
 					</select>
 				</div>
 
@@ -423,9 +412,6 @@
 									<td>
 										<select class="typeAttachment custom-select" data-name="TypeAttachment[%%d%%]">
 											<option value="">Type de Document</option>
-												<?php foreach (getDataRepository("type_document") as $key => $value): ?>
-													<option value="<?= $key ?>"><?= $value ?></option>
-												<?php endforeach; ?>
 										</select>
 									</td>
 									<td><span class="table-remove-attachment glyphicon glyphicon-remove"></span></td>

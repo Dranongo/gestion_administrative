@@ -32,6 +32,7 @@ class SalarieController extends AbstractController
         $salarieDAO = \DAO\SalarieDAO::getInstance();
         $formErrors = [];
         $successMessage = $errorMessage = '';
+        $jsFiles = ['/js/createRowTable.js'];
 
         if ($request->isPost()) {
             if (count($formErrors) === 0) {
@@ -44,7 +45,8 @@ class SalarieController extends AbstractController
             'formErrors' => $formErrors,
             'salarie' => $salarie,
             'successMessage' => $successMessage,
-            'errorMessage' => $errorMessage
+            'errorMessage' => $errorMessage,
+            'jsFiles' => $jsFiles
         ];
     }
 }
