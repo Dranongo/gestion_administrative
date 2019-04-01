@@ -28,15 +28,15 @@ class SalarieController extends AbstractController
     {
         $request = $this->getRequest();
         $form = $request->getRequest('salarie_form');
-        $salarie = new \Model\Salarie();
-        $salarieDAO = \DAO\SalarieDAO::getInstance();
+        $salarie = new Salarie();
+        $salarieDAO = SalarieDAO::getInstance();
         $formErrors = [];
         $successMessage = $errorMessage = '';
         $jsFiles = ['/js/createRowTable.js'];
 
         if ($request->isPost()) {
             if (count($formErrors) === 0) {
-                $salarieDAO->hydrate($form);
+                $salarie = $salarieDAO->hydrate($form);
             }
         }
         return [
