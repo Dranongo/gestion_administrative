@@ -2,7 +2,7 @@
             <label class="form-label" for="contactsUrgence">Renseignement des contacts d'urgence</label>
 
             <div id="table_contact" class="table-editable">
-                <span class="table_add_contact glyphicon glyphicon-plus"></span>
+                <span class="addLine glyphicon glyphicon-plus"></span>
                 <table class="table text-center">
                     <thead>	
                         <tr>

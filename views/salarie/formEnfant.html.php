@@ -2,7 +2,7 @@
             <label class="form-label" for="enfants">Renseignement des enfants</label>
 
             <div id="table_enfant" class="table-editable">
-                <span class="table-add-enfant glyphicon glyphicon-plus"></span>
+                <span class="addLine glyphicon glyphicon-plus"></span>
                 <table class="table text-center">
                     <thead>	
                         <tr>

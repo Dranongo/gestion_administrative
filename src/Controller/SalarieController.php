@@ -28,7 +28,7 @@ class SalarieController extends AbstractController
     public function createAction()
     {
         $request = $this->getRequest();
-        $form = $request->getRequest('salarie_form');
+        $formSalarie = $request->getRequest('salarie_form');
         $salarie = new Salarie();
         $formation = new Formation();
         $salarieDAO = SalarieDAO::getInstance();
@@ -43,7 +43,7 @@ class SalarieController extends AbstractController
         }
         return [
             'title' => 'Creation Salarie',
-            'form' => $form,
+            'formSalarie' => $formSalarie,
             'formErrors' => $formErrors,
             'salarie' => $salarie,
             'formation' => $formation,

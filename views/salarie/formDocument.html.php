@@ -2,7 +2,7 @@
             <label class="form-label" for="documents">Document et pièces à fournir</label>
 
             <div id="table_document" class="table-editable">
-                <span class="table_add_document glyphicon glyphicon-plus"></span>
+                <span class="addLine glyphicon glyphicon-plus"></span>
                 <table class="table text-center">
                     <thead>	
                         <tr>

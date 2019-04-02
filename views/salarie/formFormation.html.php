@@ -2,7 +2,7 @@
             <label class="form-label" for="formations">Formations et Expériences professionnelles</label>
 
             <div id="table_formation" class="table-editable">
-                <span class="table_add_formation glyphicon glyphicon-plus"></span>
+                <span class="addLine glyphicon glyphicon-plus"></span>
                 <table class="table text-center">
                     <thead>
                         <tr>
