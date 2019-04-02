@@ -18,7 +18,7 @@
                             <td>
                                 <select class="typeAttachment custom-select" name="document_form[typeDocument]">
                                     <option value="">Type de Document</option>
-                                        
+                                    
                                 </select>
                             </td>
                             <td><span class="removeLine glyphicon glyphicon-remove"></span></td>

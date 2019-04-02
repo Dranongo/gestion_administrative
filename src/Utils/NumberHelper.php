@@ -13,11 +13,11 @@ class NumberHelper
     /**
      * 
      *
-     * @param integer $number
+     * @param string $number
      * @param integer $limitLength
      * @return boolean
      */
-    public static function checkSocialSecurityNumber(int $number, int $limitLength = 15): bool 
+    public static function checkSocialSecurityNumber(string $number, int $limitLength = 15): bool 
     {
         return strlen($number) == $limitLength;
     }
@@ -25,11 +25,11 @@ class NumberHelper
     /**
      * 
      *
-     * @param integer $salary
+     * @param string $salary
      * @param integer $limitLength
      * @return boolean
      */
-    public static function checkSalary(int $salary, int $limitLength = 6): bool 
+    public static function checkSalary(string $salary, int $limitLength = 6): bool 
     {
         return is_numeric($salary) && strlen($salary) <= $limitLength;
     }
@@ -61,11 +61,11 @@ class NumberHelper
     /**
      * 
      *
-     * @param integer $residencePermitNumber
+     * @param string $residencePermitNumber
      * @param integer $limitLength
      * @return boolean
      */
-    public static function checkResidencePermitNumber(int $residencePermitNumber, int $limitLength = 10): bool 
+    public static function checkResidencePermitNumber(string $residencePermitNumber, int $limitLength = 10): bool 
     {
         return is_numeric($residencePermitNumber) && strlen($residencePermitNumber) <= $limitLength;
     }

@@ -18,9 +18,9 @@
                 <?= $template->cssInline ?>
             </style>
         <?php endif; ?>
-        <?php require_once 'header.html.php' ?>
     </head>
     <body>
+    <?php require_once 'header.html.php' ?>
     <?php require_once 'menu.html.php' ?>
     <div class="container-fluid">
         <?= \Service\Template::getTemplate($template->template, $template) ?>

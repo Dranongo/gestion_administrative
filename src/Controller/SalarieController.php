@@ -5,6 +5,7 @@ namespace Controller;
 
 use Model\User;
 use Model\Salarie;
+use Model\Formation;
 use DAO\SalarieDAO;
 use Service\Router;
 use Service\Template;
@@ -29,6 +30,7 @@ class SalarieController extends AbstractController
         $request = $this->getRequest();
         $form = $request->getRequest('salarie_form');
         $salarie = new Salarie();
+        $formation = new Formation();
         $salarieDAO = SalarieDAO::getInstance();
         $formErrors = [];
         $successMessage = $errorMessage = '';
@@ -44,6 +46,7 @@ class SalarieController extends AbstractController
             'form' => $form,
             'formErrors' => $formErrors,
             'salarie' => $salarie,
+            'formation' => $formation,
             'successMessage' => $successMessage,
             'errorMessage' => $errorMessage,
             'jsFiles' => $jsFiles

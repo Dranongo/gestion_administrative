@@ -21,7 +21,9 @@
                             <td>
                                 <select class="form-control" name="formation_form[niveau]">
                                     <option value="">Niveau</option>
-                                    
+                                    <?php foreach($formation->getNiveauxPossibles() as $value): ?> 
+                                        <option value="<?= $value ?>"><?= $value ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </td>
                             <td><input class="form-control" type="text" name="formation_form[organisme]"></td>
