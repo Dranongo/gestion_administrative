@@ -18,7 +18,9 @@
                             <td>
                                 <select class="typeAttachment custom-select" name="document_form[typeDocument]">
                                     <option value="">Type de Document</option>
-                                    
+                                    <?php foreach($typesDocument as $typeDocument): ?> 
+                                        <option value="<?= $typeDocument->getId() ?>"><?= $typeDocument->getNom() ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </td>
                             <td><span class="removeLine glyphicon glyphicon-remove"></span></td>

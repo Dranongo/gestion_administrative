@@ -2,6 +2,10 @@
 <?php $formErrors = $template->formErrors ?>
 <?php $salarie = $template->salarie ?>
 <?php $formation = $template->formation ?>
+<?php $categories = $template->categories ?>
+<?php $typesContrat = $template->typesContrat ?>
+<?php $typesDocument = $template->typesDocument ?>
+<?php $renseignementsPoste = $template->renseignementsPoste ?>
 
         <form action="" method="post" class="col-md-8 offset-md-2">
             <div class="form-row">
@@ -178,7 +182,7 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['taux_invalidite'] : '' ?>">
-                    <label for="taux_invalidite">Détails taux invalidité *</label>
+                    <label for="taux_invalidite">Détails taux invalidité </label>
                     <input type="text" class="form-control" id="taux_invalidite" name="salarie_form[taux_invalidite]"
                         value="<?= $formSalarie != null ? $formSalarie['taux_invalidite'] : '' ?>">
                 </div>
@@ -187,6 +191,8 @@
             <?php require_once 'formEnfant.html.php' ?>
             <?php require_once 'formContactUrgence.html.php' ?>
             <?php require_once 'formDocument.html.php' ?>
+            <?php require_once 'formCategorieSocioProfessionnelle.html.php' ?>
+            <?php require_once 'formContrat.html.php' ?>
                     
             <button type="submit" class="pull-right btn btn-success">Enregistrer</button>
         </form>
