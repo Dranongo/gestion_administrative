@@ -33,8 +33,10 @@ class SalarieDAO extends DatabaseDAO
     protected function buildDomainObject(array $data, bool $recursive = false): AbstractModel
     {
         $salarie = new Salarie();
-        $salarie->setId($data['id'])
-                ->setQualite($data['qualite'])
+        if (array_key_exists('id', $data) && $data['id'] != null) {
+            $salarie->setId($data['id']);
+        }
+        $salarie->setQualite($data['qualite'])
                 ->setNom($data['nom'])
                 ->setPrenom($data['prenom'])
                 ->setNomJeuneFille($data['nom_jeune_fille'])

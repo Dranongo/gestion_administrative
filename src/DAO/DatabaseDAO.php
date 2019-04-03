@@ -7,6 +7,7 @@ use Exception\FileNotFoundException;
 use Exception\PDOException;
 use Exception\SingletonException;
 use Exception\ComiXExceptionInterface;
+use Exception\ClassNotFoundException;
 use Model\AbstractModel;
 use Service\DatabaseConnection;
 use Utils\DateHelper;
@@ -265,6 +266,7 @@ abstract class DatabaseDAO
      */
     protected function query(string $sqlQuery): bool
     {
+        var_dump($sqlQuery);
         try {
             $result = $this->connection->query($sqlQuery);
             if (! $result) {
@@ -274,7 +276,8 @@ abstract class DatabaseDAO
         catch(ComiXExceptionInterface $e) {
             // TODO: Utiliser le logger ou l'attraper ailleurs. Mais pas de echo, ni de print. Et pense à utiliser la
             // méthode la plus appropriée (cf les catch un peu partout dans l'application)
-            echo '<pre>';
+            var_dump($sqlQuery);
+            //echo '<pre>';
             print_r($e->getMessage());
         }
 
@@ -458,7 +461,7 @@ abstract class DatabaseDAO
         if (method_exists($model, $getter)) {
             $parameters = $model->{$getter}();
         } else {
-            // TODO : un petit log ici ne sera pas de trop
+            throw new BadFunctionCallException("Method '$getter' not found in class '$model'.");
             return false;
         }
         
