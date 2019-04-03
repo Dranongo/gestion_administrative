@@ -9,6 +9,7 @@
         'dateNaissance' => 'date_naissance',
         'lieuNaissance' => 'lieu_naissance',
         'adresse' => 'adresse',
+        'adresseComplement' => 'adresse_complement',
         'codePostal' => 'code_postal',
         'ville' => 'ville',
         'telephone' => 'telephone',

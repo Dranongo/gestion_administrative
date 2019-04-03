@@ -60,6 +60,11 @@ class Salarie extends AbstractModel
     /**
      * @var string
      */
+    protected $adresseComplement;
+
+    /**
+     * @var string
+     */
     protected $codePostal;
 
     /**
@@ -345,6 +350,25 @@ class Salarie extends AbstractModel
     public function getAdresse(): string
     {
         return $this->adresse;
+    }
+
+    /** 
+     * @param string $adresseComplément
+     * @return Salarie
+     */
+    public function setAdresseComplement(?string $adresseComplement): Salarie
+    {
+        $this->adresseComplement = $adresseComplement;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdresseComplement(): ?string
+    {
+        return $this->adresseComplement;
     }
 
     /**

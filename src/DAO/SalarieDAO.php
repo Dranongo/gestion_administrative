@@ -42,6 +42,7 @@ class SalarieDAO extends DatabaseDAO
                 ->setDateNaissance(DateHelper::convertDatabaseDateToDateTime($data['date_naissance']))
                 ->setLieuNaissance($data['lieu_naissance'])
                 ->setAdresse($data['adresse'])
+                ->setAdresseComplement($data['adresse_complement'])
                 ->setCodePostal($data['code_postal'])
                 ->setVille($data['ville'])
                 ->setTelephone($data['telephone'])

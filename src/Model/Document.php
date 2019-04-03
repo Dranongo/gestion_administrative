@@ -44,25 +44,6 @@ class Document extends AbstractModel
     }
 
     /**
-     * @param string $content
-     * @return Document
-     */
-    public function setContent(string $content): Document
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    /**
      * @param DocumentType $documentType
      * @return Document
      */
