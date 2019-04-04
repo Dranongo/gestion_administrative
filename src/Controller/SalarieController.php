@@ -69,7 +69,7 @@ class SalarieController extends AbstractController
             }
         }
         return [
-            'title' => 'Creation Salarié',
+            'title' => 'Creation d\'une fiche de renseignements à l\'embauche',
             'formSalarie' => $formSalarie,
             'formEnfant' => $formEnfant,
             'formFormation' => $formFormation,
