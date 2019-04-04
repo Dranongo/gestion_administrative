@@ -30,8 +30,10 @@ class ContactUrgenceDAO extends DatabaseDAO
     protected function buildDomainObject(array $data, bool $recursive = false): AbstractModel
     {
         $contactUrgence = new ContactUrgence();
-        $contactUrgence->setId($data['id'])
-                       ->setNom($data['nom'])
+        if (array_key_exists('id', $data) && $data['id'] != null) {
+            $contactUrgence->setId($data['id']);
+        }
+        $contactUrgence->setNom($data['nom'])
                        ->setPrenom($data['prenom'])
                        ->setLien($data['lien'])
                        ->setTelephone($data['telephone']);

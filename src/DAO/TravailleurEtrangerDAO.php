@@ -31,8 +31,10 @@ class TravailleurEtrangerDAO extends DatabaseDAO
     protected function buildDomainObject(array $data, bool $recursive = false): AbstractModel
     {
         $travailleurEtranger = new TravailleurEtranger();
-        $travailleurEtranger->setId($data['id'])
-                            ->setAutorisationTravail($data['autorisation_travail'])
+        if (array_key_exists('id', $data) && $data['id'] != null) {
+            $travailleurEtranger->setId($data['id']);
+        }
+        $travailleurEtranger->setAutorisationTravail($data['autorisation_travail'])
                             ->setDateAutorisationEmbauche(DateHelper::convertDatabaseDateToDateTime($data['date_autorisation_embauche']))
                             ->setNumeroCarteSejour($data['num_carte_sejour'])
                             ->setDateLimiteValidite(DateHelper::convertDatabaseDateToDateTime($data['date_limite_validite']));

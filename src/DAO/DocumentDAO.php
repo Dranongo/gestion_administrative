@@ -30,8 +30,10 @@ class DocumentDAO extends DatabaseDAO
     protected function buildDomainObject(array $data, bool $recursive = false): AbstractModel
     {
         $document = new Document();
-        $document->setId($data['id'])
-                 ->setNom($data['nom']);
+        if (array_key_exists('id', $data) && $data['id'] != null) {
+            $document->setId($data['id']);
+        }
+        $document->setNom($data['nom']);
 
         if ($recursive) {
             $salarieDAO = \Model\Salarie::getDAOInstance();

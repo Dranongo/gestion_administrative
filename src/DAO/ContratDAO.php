@@ -31,8 +31,10 @@ class ContratDAO extends DatabaseDAO
     protected function buildDomainObject(array $data, bool $recursive = false): AbstractModel
     {
         $contrat = new Contrat();
-        $contrat->setId($data['id'])
-                ->setDateDebut(DateHelper::convertDatabaseDateToDateTime($data['date_debut']));
+        if (array_key_exists('id', $data) && $data['id'] != null) {
+            $contrat->setId($data['id']);
+        }
+        $contrat->setDateDebut(DateHelper::convertDatabaseDateToDateTime($data['date_debut']));
 
         if ($data['date_fin'] != null) {
             $contrat->setDateFin(DateHelper::convertDatabaseDateToDateTime($data['date_fin']));

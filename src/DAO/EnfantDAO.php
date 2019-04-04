@@ -32,8 +32,10 @@ class EnfantDAO extends DatabaseDAO
     protected function buildDomainObject(array $data, bool $recursive = false): AbstractModel
     {
         $enfant = new Enfant();
-        $enfant->setId($data['id'])
-               ->setNom($data['nom'])
+        if (array_key_exists('id', $data) && $data['id'] != null) {
+            $enfant->setId($data['id']);
+        }
+        $enfant->setNom($data['nom'])
                ->setPrenom($data['prenom'])
                ->setDateNaissance(DateHelper::convertDatabaseDateToDateTime($data['date_naissance']));
 
