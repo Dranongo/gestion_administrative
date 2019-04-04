@@ -10,6 +10,8 @@ use Exception\ComiXExceptionInterface;
 use Exception\ClassNotFoundException;
 use Model\AbstractModel;
 use Service\DatabaseConnection;
+use Service\Logger;
+use Service\Template;
 use Utils\DateHelper;
 use Utils\SqlHelper;
 
@@ -178,7 +180,7 @@ abstract class DatabaseDAO
         } else { 
             $result = $this->update($model); 
         }
-        return $result ? $this->editManyToManyRelation($model) : $result;
+        return $result ? /*$this->editManyToManyRelation($model)*/ true : $result;
     }
 
     /**
@@ -266,7 +268,6 @@ abstract class DatabaseDAO
      */
     protected function query(string $sqlQuery): bool
     {
-        var_dump($sqlQuery);
         try {
             $result = $this->connection->query($sqlQuery);
             if (! $result) {
@@ -274,11 +275,13 @@ abstract class DatabaseDAO
             }
         }
         catch(ComiXExceptionInterface $e) {
-            // TODO: Utiliser le logger ou l'attraper ailleurs. Mais pas de echo, ni de print. Et pense à utiliser la
-            // méthode la plus appropriée (cf les catch un peu partout dans l'application)
-            var_dump($sqlQuery);
-            //echo '<pre>';
-            print_r($e->getMessage());
+            Logger::getInstance()->error($e->getLoggerMessage());
+            $errorVariables = [
+                'title' => 'Error ' . $e->getCode(),
+                'template' => Template::getErrorTemplateName(),
+                'error' => $e->getMessage()
+            ];
+            $template = Template::getTemplateVariables($errorVariables);
         }
 
         return boolval($result);
@@ -461,7 +464,7 @@ abstract class DatabaseDAO
         if (method_exists($model, $getter)) {
             $parameters = $model->{$getter}();
         } else {
-            throw new BadFunctionCallException("Method '$getter' not found in class '$model'.");
+            Logger::getInstance()->error("Method '$getter' not found in class '$model'.");
             return false;
         }
         

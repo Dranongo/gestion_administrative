@@ -24,39 +24,33 @@ class SalarieController extends AbstractController
     public function listAction()
     {
         return [
-            'title' => 'Affichage Salarié',
+            'title' => 'Affichage de la fiche de renseignement du salarié',
             'error' => 'An error has occured destroying the session'
         ];
     }
 
     /**
-     *
+     * Collect the form's data to create an employee
      */
     public function createAction()
     {
         $request = $this->getRequest();
 
-        /** A modifier */
         $formSalarie = $request->getRequest('salarie_form');
         $formEnfant = $request->getRequest('enfant_form');
-        $formFormation = $request->getRequest('enfant_form');
+        $formFormation = $request->getRequest('formation_form');
         $formContactUrgence = $request->getRequest('contact_urgence_form');
         $formDocument =  $request->getRequest('document_form');
+        $formContrat = $request->getRequest('contrat_form');
 
-        /** A modifier */
         $salarie = new Salarie();
         $formation = new Formation();
 
-        /** A modifier */
         $salarieDAO = SalarieDAO::getInstance();
-        $categorieSocioProfessionnelleDAO = CategorieSocioProfessionnelleDAO::getInstance();
-        $categories = $categorieSocioProfessionnelleDAO->findAll();
-        $typeContratDAO = TypeContratDAO::getInstance();
-        $typesContrat = $typeContratDAO->findAll();
-        $typeDocumentDAO = DocumentTypeDAO::getInstance();
-        $typesDocument = $typeDocumentDAO->findAll();
-        $renseignementPosteDAO = RenseignementPosteDAO::getInstance();
-        $renseignementsPoste = $renseignementPosteDAO->findAll();
+        $categories = $this->getDatabaseReference(CategorieSocioProfessionnelleDAO::getInstance());
+        $typesContrat = $this->getDatabaseReference(TypeContratDAO::getInstance());
+        $typesDocument = $this->getDatabaseReference(DocumentTypeDAO::getInstance());
+        $renseignementsPoste = $this->getDatabaseReference(RenseignementPosteDAO::getInstance());
 
         $formErrors = [];
         $successMessage = $errorMessage = '';
@@ -66,11 +60,18 @@ class SalarieController extends AbstractController
             if (count($formErrors) === 0) {
                 $salarie = $salarieDAO->hydrate($formSalarie);
                 $salarieDAO->save($salarie);
+
+                //$this->saveData(\DAO\ContratDAO::getInstance(), $formContrat, $salarie);
+                $this->saveData(\DAO\EnfantDAO::getInstance(), $formEnfant, $salarie);
+                $this->saveData(\DAO\ContactUrgenceDAO::getInstance(), $formContactUrgence, $salarie);
+                $this->saveData(\DAO\FormationDAO::getInstance(), $formFormation, $salarie);
+                //$this->saveData(\DAO\DocumentDAO::getInstance(), $formDocument, $salarie);
             }
         }
         return [
             'title' => 'Creation d\'une fiche de renseignements à l\'embauche',
             'formSalarie' => $formSalarie,
+            'formContrat' => $formContrat,            
             'formEnfant' => $formEnfant,
             'formFormation' => $formFormation,
             'formContactUrgence' => $formContactUrgence,
@@ -86,6 +87,32 @@ class SalarieController extends AbstractController
             'errorMessage' => $errorMessage,
             'jsFiles' => $jsFiles
         ];
+    }
+
+    /**
+     * Get the table's reference in the database
+     *
+     * @param \DAO\DatabaseDAO $modelDAO
+     * @return array
+     */
+    protected function getDatabaseReference(\DAO\DatabaseDAO $modelDAO): array
+    {
+       return $modelDAO->findAll();
+    }
+
+    /**
+     * Save data into database in relation with the employee previously created
+     *
+     * @param \DAO\DatabaseDAO $modelDAO
+     * @param array $form
+     * @param Salarie $salarie
+     * @return void
+     */
+    protected function saveData(\DAO\DatabaseDAO $modelDAO, array $form, Salarie $salarie)
+    {
+        $model = $modelDAO->hydrate($form);
+        $model->setSalarie($salarie);
+        $modelDAO->save($model);
     }
 
 
