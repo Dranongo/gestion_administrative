@@ -2,7 +2,6 @@
 
 namespace Controller;
 
-
 use Exception\BadFunctionCallException;
 use Exception\FileNotFoundException;
 use Service\Request;

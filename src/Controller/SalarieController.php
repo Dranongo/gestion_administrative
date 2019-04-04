@@ -12,11 +12,41 @@ use DAO\TypeContratDAO;
 use DAO\DocumentTypeDAO;
 use DAO\RenseignementPosteDAO;
 use Service\Router;
+use Service\Request;
 use Service\Template;
 use Utils\DateHelper;
 
 class SalarieController extends AbstractController
 {
+    /**
+     * @var array
+     */
+    protected $formSalarie;
+
+    /**
+     * @var array
+     */
+    protected $formEnfant;
+
+    /**
+     * @var array
+     */
+    protected $formFormation;
+
+    /**
+     * @var array
+     */
+    protected $formContactUrgence;
+
+    /**
+     * @var array
+     */
+    protected $formDocument;
+
+    /**
+     * @var array
+     */
+    protected $formContrat;
 
     /**
      *
@@ -35,13 +65,7 @@ class SalarieController extends AbstractController
     public function createAction()
     {
         $request = $this->getRequest();
-
-        $formSalarie = $request->getRequest('salarie_form');
-        $formEnfant = $request->getRequest('enfant_form');
-        $formFormation = $request->getRequest('formation_form');
-        $formContactUrgence = $request->getRequest('contact_urgence_form');
-        $formDocument =  $request->getRequest('document_form');
-        $formContrat = $request->getRequest('contrat_form');
+        $this->collectDataForm($request);
 
         $salarie = new Salarie();
         $formation = new Formation();
@@ -58,24 +82,24 @@ class SalarieController extends AbstractController
 
         if ($request->isPost()) {
             if (count($formErrors) === 0) {
-                $salarie = $salarieDAO->hydrate($formSalarie);
+                $salarie = $salarieDAO->hydrate($this->formSalarie);
                 $salarieDAO->save($salarie);
 
-                //$this->saveData(\DAO\ContratDAO::getInstance(), $formContrat, $salarie);
-                $this->saveData(\DAO\EnfantDAO::getInstance(), $formEnfant, $salarie);
-                $this->saveData(\DAO\ContactUrgenceDAO::getInstance(), $formContactUrgence, $salarie);
-                $this->saveData(\DAO\FormationDAO::getInstance(), $formFormation, $salarie);
-                //$this->saveData(\DAO\DocumentDAO::getInstance(), $formDocument, $salarie);
+                //$this->saveData(\DAO\ContratDAO::getInstance(), $this->formContrat, $salarie);
+                $this->saveData(\DAO\EnfantDAO::getInstance(), $this->formEnfant, $salarie);
+                $this->saveData(\DAO\ContactUrgenceDAO::getInstance(), $this->formContactUrgence, $salarie);
+                //$this->saveData(\DAO\FormationDAO::getInstance(), $this->formFormation, $salarie);
+                //$this->saveData(\DAO\DocumentDAO::getInstance(), $this->formDocument, $salarie);
             }
         }
         return [
             'title' => 'Creation d\'une fiche de renseignements à l\'embauche',
-            'formSalarie' => $formSalarie,
-            'formContrat' => $formContrat,            
-            'formEnfant' => $formEnfant,
-            'formFormation' => $formFormation,
-            'formContactUrgence' => $formContactUrgence,
-            'formDocument' => $formDocument,
+            'formSalarie' => $this->formSalarie,
+            'formContrat' => $this->formContrat,            
+            'formEnfant' => $this->formEnfant,
+            'formFormation' => $this->formFormation,
+            'formContactUrgence' => $this->formContactUrgence,
+            'formDocument' => $this->formDocument,
             'formErrors' => $formErrors,
             'salarie' => $salarie,
             'formation' => $formation,
@@ -87,6 +111,22 @@ class SalarieController extends AbstractController
             'errorMessage' => $errorMessage,
             'jsFiles' => $jsFiles
         ];
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @return void
+     */
+    protected function collectDataForm(Request $request)
+    {
+        $this->formSalarie = $request->getRequest('salarie_form');
+        $this->formEnfant = $request->getRequest('enfant_form');
+        $this->formFormation = $request->getRequest('formation_form');
+        $this->formContactUrgence = $request->getRequest('contact_urgence_form');
+        $this->formDocument =  $request->getRequest('document_form');
+        $this->formContrat = $request->getRequest('contrat_form');
     }
 
     /**

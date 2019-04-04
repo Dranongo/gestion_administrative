@@ -22,7 +22,7 @@
                             <td><input class="form-control" type="text" name="contact_urgence_form[nom]"></td>
                             <td><input class="form-control" type="text" name="contact_urgence_form[prenom]"></td>
                             <td><input class="form-control" type="text" name="contact_urgence_form[lien]"></td>
-                            <td><input class="form-control" type="number" name="contact_urgence_form[telephone]"></td>
+                            <td><input class="form-control" type="text" name="contact_urgence_form[telephone]"></td>
                             <td><span class="removeLine glyphicon glyphicon-remove"></span></td>
                         </tr>
                     </tbody>
