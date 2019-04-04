@@ -1,6 +1,5 @@
+        <h2>Enfants à charge</h2>
         <div class="form-group" id="enfants">
-            <label class="form-label" for="enfants">Renseignement des enfants</label>
-
             <div id="table_enfant" class="table-editable">
                 <span class="addLine glyphicon glyphicon-plus"></span>
                 <table class="table text-center">

@@ -1,6 +1,5 @@
+        <h2>Formations et expériences professionnelles</h2>
         <div class="form-group" id="formations">
-            <label class="form-label" for="formations">Formations et Expériences professionnelles</label>
-
             <div id="table_formation" class="table-editable">
                 <span class="addLine glyphicon glyphicon-plus"></span>
                 <table class="table text-center">

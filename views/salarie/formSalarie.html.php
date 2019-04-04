@@ -1,8 +1,14 @@
 <?php $formSalarie = $template->formSalarie ?>
+<?php $formContrat = $template->formContrat ?>
+<?php $formContactUrgence = $template->formContactUrgence ?>
+<?php $formEnfant = $template->formEnfant ?>
+<?php $formFormation = $template->formFormation ?>
+<?php $formDocument = $template->formDocument ?>
 <?php $formErrors = $template->formErrors ?>
 <?php $salarie = $template->salarie ?>
 <?php $formation = $template->formation ?>
 <?php $categories = $template->categories ?>
+<?php $typesContrat = $template->typesContrat ?>
 <?php $typesContrat = $template->typesContrat ?>
 <?php $typesDocument = $template->typesDocument ?>
 <?php $renseignementsPoste = $template->renseignementsPoste ?>
@@ -171,7 +177,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['statut_handicap'] : '' ?>">
-                    <label>Le salarié(e) est-il(elle) reconnu comme un travailleur handicapé ?</label><br />
+                    <label>Le salarié(e) est-il(elle) reconnu comme un(e) travailleur handicapé(e) ?</label><br />
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="statut_handicap_oui" name="salarie_form[statut_handicap]" value="1">
                         <label class="custom-control-label" for="statut_handicap_oui">Oui</label>
@@ -192,6 +198,7 @@
             <?php require_once 'formContactUrgence.html.php' ?>
             <?php require_once 'formDocument.html.php' ?>
             <?php require_once 'formCategorieSocioProfessionnelle.html.php' ?>
+            <?php require_once 'formTravailleurEtranger.html.php' ?>
             <?php require_once 'formContrat.html.php' ?>
                     
             <button type="submit" class="pull-right btn btn-success">Enregistrer</button>

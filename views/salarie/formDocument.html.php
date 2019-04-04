@@ -1,6 +1,5 @@
+        <h2>Document et pièces à fournir</h2>
         <div class="form-group" id="documents">
-            <label class="form-label" for="documents">Document et pièces à fournir</label>
-
             <div id="table_document" class="table-editable">
                 <span class="addLine glyphicon glyphicon-plus"></span>
                 <table class="table text-center">

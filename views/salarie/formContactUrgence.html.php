@@ -1,6 +1,5 @@
+        <h2>Contact d'urgence</h2>
         <div class="form-group" id="contactsUrgence">
-            <label class="form-label" for="contactsUrgence">Renseignement des contacts d'urgence</label>
-
             <div id="table_contact" class="table-editable">
                 <span class="addLine glyphicon glyphicon-plus"></span>
                 <table class="table text-center">

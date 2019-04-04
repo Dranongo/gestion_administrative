@@ -1,6 +1,6 @@
-        <div class="form-row">
+		<h2>Catégorie Socio-professionnelle</h2>
+		<div class="form-row">
             <div class="form-group col-md-6">
-                <label for="nom_categorie_socio_professionnelle">Categorie Socio-Professionnelle</label>
 				<select id="nom_categorie_socio_professionnelle" class="custom-select" name="categorie_socio_professionnelle_form[nom]">
 					<option value="">Catégorie Socio-professionnelle</option>
                     <?php foreach($categories as $categorie): ?> 
