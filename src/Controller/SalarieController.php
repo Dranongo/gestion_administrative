@@ -63,11 +63,10 @@ class SalarieController extends AbstractController
 
         if ($request->isPost()) {
             $this->isFormValid($formSalarie, $formErrors);
-            var_dump($formErrors);
             if (count($formErrors) === 0) {
-                var_dump($formSalarie);
-                //$salarie = $salarieDAO->hydrate($formSalarie);
-                //$salarieDAO->save($salarie);
+
+                $salarie = $salarieDAO->hydrate($formSalarie);
+                $salarieDAO->save($salarie);
 
                 //$this->saveData(\DAO\ContratDAO::getInstance(), $this->formContrat, $salarie);
                 //$this->saveData(\DAO\EnfantDAO::getInstance(), $this->formEnfant, $salarie);
