@@ -155,5 +155,73 @@ class SalarieController extends AbstractController
         $modelDAO->save($model);
     }
 
+    /**
+     * @param array $form
+     * @param array $formErrors
+     * @return bool
+     */
+    protected function isFormValid(array $form, array &$formErrors): bool
+    {
+        return count($formErrors) === 0;
+    }
 
+    /**
+     * @param array $form
+     * @param array $formErrors
+     * @return void
+     */
+    protected function checkFormSalarie(array $form, array &$formErrors)
+    {
+
+    }
+
+    /**
+     * @param array $form
+     * @param array $formErrors
+     * @return void
+     */
+    protected function checkFormContrat(array $form, array &$formErrors)
+    {
+
+    }
+
+    /**
+     * @param array $form
+     * @param array $formErrors
+     * @return void
+     */
+    protected function checkFormEnfant(array $form, array &$formErrors)
+    {
+
+    }
+
+    /**
+     * @param array $form
+     * @param array $formErrors
+     * @return void
+     */
+    protected function checkFormFormation(array $form, array &$formErrors)
+    {
+
+    }
+
+    /**
+     * @param array $form
+     * @param array $formErrors
+     * @return void
+     */
+    protected function checkFormContactUrgence(array $form, array &$formErrors)
+    {
+
+    }
+
+    /**
+     * @param array $form
+     * @param array $formErrors
+     * @return void
+     */
+    protected function checkFormDocument(array $form, array &$formErrors)
+    {
+
+    }
 }
