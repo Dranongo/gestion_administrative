@@ -1,7 +1,7 @@
         <h2>Statut travailleur étranger</h2>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label>A-t-il une permission de travail ?</label><br />
+                <label>A-t-il/elle une permission de travail ?</label><br />
                 <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" class="custom-control-input" id="autorisation_travail_oui" name="travailleur_etranger_form[autorisation_travail]" value="1">
                     <label class="custom-control-label" for="autorisation_travail_oui">Oui</label>

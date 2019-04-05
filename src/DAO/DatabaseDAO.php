@@ -276,12 +276,6 @@ abstract class DatabaseDAO
         }
         catch(ComiXExceptionInterface $e) {
             Logger::getInstance()->error($e->getLoggerMessage());
-            $errorVariables = [
-                'title' => 'Error ' . $e->getCode(),
-                'template' => Template::getErrorTemplateName(),
-                'error' => $e->getMessage()
-            ];
-            $template = Template::getTemplateVariables($errorVariables);
         }
 
         return boolval($result);
@@ -464,7 +458,7 @@ abstract class DatabaseDAO
         if (method_exists($model, $getter)) {
             $parameters = $model->{$getter}();
         } else {
-            Logger::getInstance()->error("Method '$getter' not found in class '$model'.");
+            Logger::getInstance()->error("Method '$getter' not found in class '$model', in C:\wamp64\www\gestion_administrative\src\DAO\Database.php on line 459.");
             return false;
         }
         

@@ -1,17 +1,12 @@
 <?php $formSalarie = $template->formSalarie ?>
-<?php $formContrat = $template->formContrat ?>
-<?php $formContactUrgence = $template->formContactUrgence ?>
-<?php $formEnfant = $template->formEnfant ?>
-<?php $formFormation = $template->formFormation ?>
-<?php $formDocument = $template->formDocument ?>
 <?php $formErrors = $template->formErrors ?>
 <?php $salarie = $template->salarie ?>
 <?php $formation = $template->formation ?>
 <?php $categories = $template->categories ?>
 <?php $typesContrat = $template->typesContrat ?>
-<?php $typesContrat = $template->typesContrat ?>
 <?php $typesDocument = $template->typesDocument ?>
 <?php $renseignementsPoste = $template->renseignementsPoste ?>
+<?php $motifsFinContrat = $template->motifsFinContrat ?>
 
         <form action="" method="post" class="col-md-8 offset-md-2">
             <div class="form-row">
@@ -50,7 +45,7 @@
                 </div>
                 <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['nom_jeune_fille'] : '' ?>">
                     <label for="nom_jeune_fille">Nom de jeune fille </label>
-                    <input type="text" class="form-control" id="nom_jeune_fille" name="salarie_form[nom_jeune_fille]"
+                    <input type="text" color="red" class="form-control" id="nom_jeune_fille" name="salarie_form[nom_jeune_fille]"
                         value="<?= $formSalarie != null ? $formSalarie['nom_jeune_fille'] : '' ?>">
                 </div>
             </div> 
@@ -121,7 +116,7 @@
                         value="<?= $formSalarie != null ? $formSalarie['remuneration'] : '' ?>">
                 </div>
                 <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['en_poste'] : '' ?>">
-                    <label>Le salarié(e) est-il/elle en poste ?</label><br />
+                    <label>Le/La salarié(e) est-il/elle en poste ?</label><br />
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="en_poste_oui" name="salarie_form[en_poste]" value="1">
                         <label class="custom-control-label" for="en_poste_oui">Oui</label>
@@ -146,7 +141,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['autre_activite'] : '' ?>">
-                    <label>Le salarié(e) exerce-t-il(elle) une activité professionnel secondaire ?</label><br />
+                    <label>Le/La salarié(e) exerce-t-il/elle une activité professionnelle secondaire ?</label><br />
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="autre_activite_oui" name="salarie_form[autre_activite]" value="1">
                         <label class="custom-control-label" for="autre_activite_oui">Oui</label>
@@ -164,7 +159,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['autorisation_travail_mineur'] : '' ?>">
-                    <label>Le salarié(e) possède une autorisation écrite de travail de ses responsables légaux ?</label><br />
+                    <label>Le/La salarié(e) possède une autorisation écrite de travail de ses responsables légaux ?</label><br />
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="autorisation_travail_mineur_oui" name="salarie_form[autorisation_travail_mineur]" value="1">
                         <label class="custom-control-label" for="autorisation_travail_mineur_oui">Oui</label>
@@ -177,7 +172,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['statut_handicap'] : '' ?>">
-                    <label>Le salarié(e) est-il(elle) reconnu comme un(e) travailleur handicapé(e) ?</label><br />
+                    <label>Le/La salarié(e) est-il/elle reconnu(e) comme un(e) travailleur/euse handicapé(e) ?</label><br />
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="statut_handicap_oui" name="salarie_form[statut_handicap]" value="1">
                         <label class="custom-control-label" for="statut_handicap_oui">Oui</label>
