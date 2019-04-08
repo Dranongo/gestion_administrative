@@ -4,7 +4,7 @@
                 <label for="renseignement_poste">Renseignement du poste *</label>
 				<select id="renseignement_poste" class="custom-select" name="contrat_form[id_renseignement_poste]">
 					<option value="">Renseignement du poste</option>	
-                    <?php foreach($renseignementsPoste as $renseignementPoste): ?> 
+                    <?php foreach ($renseignementsPoste as $renseignementPoste): ?> 
                         <option value="<?= $renseignementPoste->getId() ?>"><?= $renseignementPoste->getNom() ?></option>
                     <?php endforeach; ?>	
 				</select>
@@ -13,7 +13,7 @@
                 <label for="type_contrat">Type du contrat *</label>
 				<select id="type_contrat" class="custom-select" name="contrat[id_type_contrat]">
 					<option value="">Type du contrat</option>
-                    <?php foreach($typesContrat as $typeContrat): ?> 
+                    <?php foreach ($typesContrat as $typeContrat): ?> 
                         <option value="<?= $typeContrat->getId() ?>"><?= $typeContrat->getNom() ?></option>
                     <?php endforeach; ?>	
 				</select>
@@ -34,7 +34,7 @@
                 <label for="motif_fin_contrat">Motif fin de contrat</label>
 				<select id="motif_fin_contrat" class="custom-select" name="contrat[id_type_contrat]">
 					<option value="">Motif fin de contrat</option>
-                    <?php foreach($motifsFinContrat as $motifFinContrat): ?> 
+                    <?php foreach ($motifsFinContrat as $motifFinContrat): ?> 
                         <option value="<?= $motifFinContrat->getId() ?>"><?= $motifFinContrat->getNom() ?></option>
                     <?php endforeach; ?>	
 				</select>
