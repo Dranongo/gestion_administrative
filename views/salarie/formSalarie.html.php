@@ -22,100 +22,127 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['nom'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="nom">Nom *</label>
-                    <input type="text" class="form-control" id="nom" name="salarie_form[nom]"
-                        value="<?= $formSalarie != null ? $formSalarie['nom'] : '' ?>">
+                    <input type="text" class="form-control <?= array_key_exists('nom', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="nom" name="salarie_form[nom]" value="<?= $formSalarie != null ? $formSalarie['nom'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['nom'] : '' ?></span>
                 </div> 
                 <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['prenom'] : '' ?>">
                     <label for="prenom">Prénom *</label>
-                    <input type="text" class="form-control" id="prenom" name="salarie_form[prenom]"
+                    <input type="text" class="form-control <?= array_key_exists('prenom', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="prenom" name="salarie_form[prenom]"
                         value="<?= $formSalarie != null ? $formSalarie['prenom'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['prenom'] : '' ?></span>
                 </div> 
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['situation_familiale'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="situation_familiale">Situation familiale *</label>
-                    <select id="situation_familiale" name="salarie_form[situation_familiale]" class="custom-select">
+                    <select id="situation_familiale" name="salarie_form[situation_familiale]" 
+                        class="custom-select <?= array_key_exists('situation_familiale', $formErrors) ? 'border border-danger' : ''?>">
                         <option value="">Choisissez une situation familiale</option>
                         <?php foreach($salarie->getSituationFamilialePossibles() as $value): ?> 
                                 <option value="<?= $value ?>"><?= $value ?></option>
                         <?php endforeach; ?>
                     </select>
+                    <?= $formErrors != null ? $formErrors['situation_familiale'] : '' ?></span>
                 </div>
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['nom_jeune_fille'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="nom_jeune_fille">Nom de jeune fille </label>
-                    <input type="text" color="red" class="form-control" id="nom_jeune_fille" name="salarie_form[nom_jeune_fille]"
+                    <input type="text" class="form-control" id="nom_jeune_fille" name="salarie_form[nom_jeune_fille]"
                         value="<?= $formSalarie != null ? $formSalarie['nom_jeune_fille'] : '' ?>">
                 </div>
+                
             </div> 
             <div class="form-row">
-                <div class="form-group col-md-4 <?= $formErrors != null ? $formErrors['date_naissance'] : '' ?>">
+                <div class="form-group col-md-4">
                     <label for="date_naissance">Date de naissance *</label>
-                    <input type="text" class="form-control" id="date_naissance" name="salarie_form[date_naissance]"
+                    <input type="text" class="form-control <?= array_key_exists('date_naissance', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="date_naissance" name="salarie_form[date_naissance]" 
                         value="<?= $formSalarie != null ? $formSalarie['date_naissance'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['date_naissance'] : '' ?></span>
                 </div> 
-                <div class="form-group col-md-8 <?= $formErrors != null ? $formErrors['lieu_naissance'] : '' ?>">
+                <div class="form-group col-md-8">
                     <label for="lieu_naissance">Lieu de naissance *</label>
-                    <input type="text" class="form-control" id="lieu_naissance" name="salarie_form[lieu_naissance]"
+                    <input type="text" class="form-control <?= array_key_exists('lieu_naissance', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="lieu_naissance" name="salarie_form[lieu_naissance]"
                         value="<?= $formSalarie != null ? $formSalarie['lieu_naissance'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['lieu_naissance'] : '' ?></span>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['adresse'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="adresse">Adresse *</label>
-                    <input type="text" class="form-control" id="adresse" name="salarie_form[adresse]"
+                    <input type="text" class="form-control <?= array_key_exists('adresse', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="adresse" name="salarie_form[adresse]"
                         value="<?= $formSalarie != null ? $formSalarie['adresse'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['adresse'] : '' ?></span>
                 </div>
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['adresse_complement'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="adresse_complement">Adresse Complément</label>
-                    <input type="text" class="form-control" id="adresse_complement" name="salarie_form[adresse_complement]"
+                    <input type="text" class="form-control <?= array_key_exists('adresse_complement', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="adresse_complement" name="salarie_form[adresse_complement]"
                         value="<?= $formSalarie != null ? $formSalarie['adresse_complement'] : '' ?>">
                 </div>   
             </div>
             <div class="form-row"> 
-                <div class="form-group col-md-4 <?= $formErrors != null ? $formErrors['code_postal'] : '' ?>">
+                <div class="form-group col-md-4">
                     <label for="code_postal">Code Postal *</label>
-                    <input type="text" class="form-control" id="code_postal" name="salarie_form[code_postal]"
+                    <input type="text" class="form-control <?= array_key_exists('code_postal', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="code_postal" name="salarie_form[code_postal]"
                         value="<?= $formSalarie != null ? $formSalarie['code_postal'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['code_postal'] : '' ?></span>
                 </div> 
-                <div class="form-group col-md-8 <?= $formErrors != null ? $formErrors['ville'] : '' ?>">
+                <div class="form-group col-md-8">
                     <label for="ville">Ville *</label>
-                    <input type="text" class="form-control" id="ville" name="salarie_form[ville]"
+                    <input type="text" class="form-control <?= array_key_exists('ville', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="ville" name="salarie_form[ville]"
                         value="<?= $formSalarie != null ? $formSalarie['ville'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['ville'] : '' ?></span>
                 </div>
             </div> 
             <div class="form-row">
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['mail_professionnel'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="mail_professionnel">Email professionnel *</label>
-                    <input type="text" class="form-control" id="mail_professionnel" name="salarie_form[mail_professionnel]"
+                    <input type="text" class="form-control <?= array_key_exists('mail_professionnel', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="mail_professionnel" name="salarie_form[mail_professionnel]"
                         value="<?= $formSalarie != null ? $formSalarie['mail_professionnel'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['mail_professionnel'] : '' ?></span>
                 </div> 
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['mail_personnel'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="mail_personnel">Email personnel *</label>
-                    <input type="text" class="form-control" id="mail_personnel" name="salarie_form[mail_personnel]"
+                    <input type="text" class="form-control <?= array_key_exists('mail_personnel', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="mail_personnel" name="salarie_form[mail_personnel]"
                         value="<?= $formSalarie != null ? $formSalarie['mail_personnel'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['mail_personnel'] : '' ?></span>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-4 <?= $formErrors != null ? $formErrors['telephone'] : '' ?>">
+                <div class="form-group col-md-4">
                     <label for="telephone">Numéro de téléphone *</label>
-                    <input type="text" class="form-control" id="telephone" name="salarie_form[telephone]"
+                    <input type="text" class="form-control <?= array_key_exists('telephone', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="telephone" name="salarie_form[telephone]"
                         value="<?= $formSalarie != null ? $formSalarie['telephone'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['telephone'] : '' ?></span>
                 </div>
-                <div class="form-group col-md-8 <?= $formErrors != null ? $formErrors['numero_securite_sociale'] : '' ?>">
+                <div class="form-group col-md-8">
                     <label for="numero_securite_sociale">Numéro de sécurité social *</label>
-                    <input type="text" class="form-control" id="numero_securite_sociale" name="salarie_form[numero_securite_sociale]"
+                    <input type="text" class="form-control <?= array_key_exists('numero_securite_sociale', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="numero_securite_sociale" name="salarie_form[numero_securite_sociale]"
                         value="<?= $formSalarie != null ? $formSalarie['numero_securite_sociale'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['numero_securite_sociale'] : '' ?></span>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['remuneration'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="remuneration">Rémunération *</label>
-                    <input type="text" class="form-control" id="remuneration" name="salarie_form[remuneration]"
+                    <input type="text" class="form-control <?= array_key_exists('remuneration', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="remuneration" name="salarie_form[remuneration]"
                         value="<?= $formSalarie != null ? $formSalarie['remuneration'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['remuneration'] : '' ?></span>
                 </div>
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['en_poste'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label>Le/La salarié(e) est-il/elle en poste ?</label><br />
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="en_poste_oui" name="salarie_form[en_poste]" value="1">
@@ -125,22 +152,27 @@
                         <input type="radio" class="custom-control-input" id="en_poste_non" name="salarie_form[en_poste]" value="0">
                         <label class="custom-control-label" for="en_poste_non">Non</label>
                     </div>
+                    <?= $formErrors != null ? $formErrors['en_poste'] : '' ?></span>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['nationalite'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="nationalite">Nationalité *</label>
-                    <input type="text" class="form-control" id="nationalite" name="salarie_form[nationalite]"
+                    <input type="text" class="form-control <?= array_key_exists('nationalite', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="nationalite" name="salarie_form[nationalite]"
                         value="<?= $formSalarie != null ? $formSalarie['nationalite'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['nationalite'] : '' ?></span>
                 </div>
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['langues_etrangeres'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="langues_etrangeres">Langues *</label>
-                    <input type="text" class="form-control" id="langues_etrangeres" name="salarie_form[langues_etrangeres]"
+                    <input type="text" class="form-control <?= array_key_exists('langues_etrangeres', $formErrors) ? 'border border-danger' : ''?>" 
+                        id="langues_etrangeres" name="salarie_form[langues_etrangeres]"
                         value="<?= $formSalarie != null ? $formSalarie['langues_etrangeres'] : '' ?>">
+                    <?= $formErrors != null ? $formErrors['langues_etrangeres'] : '' ?></span>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['autre_activite'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label>Le/La salarié(e) exerce-t-il/elle une activité professionnelle secondaire ?</label><br />
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="autre_activite_oui" name="salarie_form[autre_activite]" value="1">
@@ -151,14 +183,14 @@
                         <label class="custom-control-label" for="autre_activite_non">Non</label>
                     </div>
                 </div>
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['details_autre_activite'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="details_autre_activite">Détails activité secondaire </label>
                     <input type="text" class="form-control" id="details_autre_activite" name="salarie_form[details_autre_activite]"
                         value="<?= $formSalarie != null ? $formSalarie['details_autre_activite'] : '' ?>">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['autorisation_travail_mineur'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label>Le/La salarié(e) possède une autorisation écrite de travail de ses responsables légaux ?</label><br />
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="autorisation_travail_mineur_oui" name="salarie_form[autorisation_travail_mineur]" value="1">
@@ -171,7 +203,7 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['statut_handicap'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label>Le/La salarié(e) est-il/elle reconnu(e) comme un(e) travailleur/euse handicapé(e) ?</label><br />
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="statut_handicap_oui" name="salarie_form[statut_handicap]" value="1">
@@ -182,7 +214,7 @@
                         <label class="custom-control-label" for="statut_handicap_non">Non</label>
                     </div>
                 </div>
-                <div class="form-group col-md-6 <?= $formErrors != null ? $formErrors['taux_invalidite'] : '' ?>">
+                <div class="form-group col-md-6">
                     <label for="taux_invalidite">Détails taux invalidité </label>
                     <input type="text" class="form-control" id="taux_invalidite" name="salarie_form[taux_invalidite]"
                         value="<?= $formSalarie != null ? $formSalarie['taux_invalidite'] : '' ?>">

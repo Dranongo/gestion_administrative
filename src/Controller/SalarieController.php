@@ -41,9 +41,9 @@ class SalarieController extends AbstractController
 
         
         $formSalarie = $request->getRequest('salarie_form');
+
         /*$formSalarie['enfant_form'] = $request->getRequest('enfant_form');
         $formSalarie['formation_form'] = $request->getRequest('formation_form');
-        $formSalarie['contact_urgence_form'] = $request->getRequest('contact_urgence_form');
         $formSalarie['document_form'] = $request->getRequest('document_form');
         $formSalarie['contrat_form'] = $request->getRequest('contrat_form');*/
 
@@ -62,11 +62,9 @@ class SalarieController extends AbstractController
         $jsFiles = ['/js/createRowTable.js'];
 
         if ($request->isPost()) {
-            $this->isFormValid($formSalarie, $formErrors);
-            if (count($formErrors) === 0) {
-
+            if ($this->isFormValid($formSalarie, $formErrors)) {
                 $salarie = $salarieDAO->hydrate($formSalarie);
-                $salarieDAO->save($salarie);
+                //$salarieDAO->save($salarie);
 
                 //$this->saveData(\DAO\ContratDAO::getInstance(), $this->formContrat, $salarie);
                 //$this->saveData(\DAO\EnfantDAO::getInstance(), $this->formEnfant, $salarie);
@@ -136,22 +134,17 @@ class SalarieController extends AbstractController
                 if ($key == 'taux_invalidite' && $form['statut_handicap'] == '') {
                     continue;
                 }
-                $formErrors[$key] = "Le champ est obligatoire";
-            }
-            elseif ($key == 'telephone' && !NumberHelper::checkPhoneNumber($value)) {
-                $formErrors[$key] = "Le numero de telephone est incorrect";
-            }
-            elseif ($key == 'code_postal' && !NumberHelper::checkPostalCode($value)) {
-                $formErrors[$key] = "Le code postal est incorrect";
-            }
-            elseif ($key == 'remuneration' && !NumberHelper::checkSalary($value)) {
-                $formErros[$key] = "Le salaire est invalide";
-            }
-            elseif ($key == 'numero_securite_sociale' && !NumberHelper::checkSocialSecurityNumber($value)) {
-                $formErrors[$key] = "Le numero de securite sociale est incorrect";
-            }
-            elseif ($key == 'mail_professionnel' || $key == 'mail_personnel' && !StringHelper::isEmailValid($value)) {
-                $formErros[$key] = "L'email est incorrect";
+                $formErrors[$key] = '<span>Le champ est obligatoire</span>';
+            } elseif ($key == 'telephone' && !NumberHelper::checkPhoneNumber($value)) {
+                $formErrors[$key] = '<span>Le numero de téléphone est incorrect</span>';
+            } elseif ($key == 'code_postal' && !NumberHelper::checkPostalCode($value)) {
+                $formErrors[$key] = '<span>Le code postal est incorrect</span>';
+            } elseif ($key == 'remuneration' && !NumberHelper::checkSalary($value)) {
+                $formErros[$key] = '<span>Le salaire est invalide</span>';
+            } elseif ($key == 'numero_securite_sociale' && !NumberHelper::checkSocialSecurityNumber($value)) {
+                $formErrors[$key] = '<span>Le numero de securite sociale est incorrect</span>';
+            } elseif ($key == 'mail_professionnel' || $key == 'mail_personnel' && !StringHelper::isEmailValid($value)) {
+                $formErros[$key] = '<span>L\'email est incorrect</span>';
             }
         }
     }
@@ -165,13 +158,13 @@ class SalarieController extends AbstractController
     {
         foreach ($form as $key => $value) {
             if (trim($value) == "") {
-                if ($key == 'date_fin_contrat' ) {
+                if ($key == 'date_fin_contrat') {
                     continue;
                 }
                 if ($key == 'motif_fin_contrat' && $form['date_fin_contrat'] == '') {
                     continue;
                 }
-                $formErrors[$key] = "Le champ est obligatoire";
+                $formErrors[$key] = '<span>Le champ est obligatoire</span>';
             }
         }
     }
@@ -185,7 +178,7 @@ class SalarieController extends AbstractController
     {
         foreach ($form as $key => $value) {
             if (trim($value) == "") {
-                $formErrors[$key] = "Le champ est obligatoire";
+                $formErrors[$key] = '<span>Le champ est obligatoire</span>';
             }
         }
     }
@@ -199,7 +192,7 @@ class SalarieController extends AbstractController
     {
         foreach ($form as $key => $value) {
             if (trim($value) == "") {
-                $formErrors[$key] = "Le champ est obligatoire";
+                $formErrors[$key] = '<span>Le champ est obligatoire</span>';
             }
         }
     }
@@ -213,10 +206,10 @@ class SalarieController extends AbstractController
     {
         foreach ($form as $key => $value) {
             if (trim($value) == "") {
-                $formErrors[$key] = "Le champ est obligatoire";
+                $formErrors[$key] = 'Le champ est obligatoire';
             }
             elseif ($key == 'telephone' && !NumberHelper::checkPhoneNumber($value)) {
-                $formErrors[$key] = "Le numero de telephone est incorrect";
+                $formErrors[$key] = '<span>Le numero de telephone est incorrect</span>';
             }
         }
     }
