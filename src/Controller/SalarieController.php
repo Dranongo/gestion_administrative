@@ -124,30 +124,27 @@ class SalarieController extends AbstractController
      */
     protected function checkFormSalarie(array $form, array &$formErrors)
     {
-        if (! array_key_exists('qualite', $form)) {
-            $formErrors['qualite'] = 'Veuillez sélectionner un genre';
-        }
-        if (! array_key_exists('en_poste', $form)) {
-            $formErrors['en_poste'] = 'Veuillez sélectionner une réponse';
-        }
-        if (! array_key_exists('autre_activite', $form)) {
-            $formErrors['autre_activite'] = 'Veuillez sélectionner une réponse';
-        }
-        if (! array_key_exists('autorisation_travail_mineur', $form)) {
-            $formErrors['autorisation_travail_mineur'] = 'Veuillez sélectionner une réponse';
-        }
-        if (! array_key_exists('statut_handicap', $form)) {
-            $formErrors['statut_handicap'] = 'Veuillez sélectionner une réponse';
-        }
+        $radioFields = [ 
+            'qualite',
+            'en_poste',
+            'autre_activite',
+            'autorisation_travail_mineur',
+            'statut_handicap'
+        ];
+
+        $this->checkRadioField($form, $formErrors, $radioFields);
+
         foreach ($form as $key => $value) {
             if (trim($value) == "") {
-                if ($key == 'nom_jeune_fille' && $form['qualite'] == 'Monsieur') {
+                if ($key == 'nom_jeune_fille' && array_key_exists('qualite', $form) && $form['qualite'] == 'Monsieur') {
                     continue;
                 }
-                if ($key == 'details_autre_activite' && $form['autre_activite'] == '0') {
+                if ($key == 'details_autre_activite' && 
+                    (! array_key_exists('autre_activite', $form) || $form['autre_activite'] == '0')) {
                     continue;
                 }
-                if ($key == 'taux_invalidite' && $form['statut_handicap'] == '0') {
+                if ($key == 'taux_invalidite' && 
+                    (! array_key_exists('statut_handicap', $form) || $form['statut_handicap'] == '0')) {
                     continue;
                 }
                 $formErrors[$key] = 'Le champ est obligatoire ';
@@ -161,6 +158,21 @@ class SalarieController extends AbstractController
                 $formErrors[$key] = 'Le numero de securite sociale est incorrect';
             } elseif ($key == 'mail_professionnel' || $key == 'mail_personnel' && !StringHelper::isEmailValid($value)) {
                 $formErros[$key] = 'L\'email est incorrect';
+            }
+        }
+    }
+
+    /**
+     * @param array $form
+     * @param array $formErrors
+     * @param array $radioFields
+     * @return void
+     */
+    protected function checkRadioField(array $form, array &$formErrors, array $radioFields)
+    {
+        foreach ($radioFields as $radioField) {
+            if (! array_key_exists($radioField, $form)) {
+                $formErrors[$radioField] = 'Veuillez sélectionner une réponse';
             }
         }
     }
@@ -239,4 +251,6 @@ class SalarieController extends AbstractController
     {
 
     }
+
+    
 }

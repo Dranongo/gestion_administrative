@@ -458,7 +458,8 @@ abstract class DatabaseDAO
         if (method_exists($model, $getter)) {
             $parameters = $model->{$getter}();
         } else {
-            Logger::getInstance()->error("Method '$getter' not found in class '$model', in C:\wamp64\www\gestion_administrative\src\DAO\Database.php on line 459.");
+            Logger::getInstance()->error("Method $getter not found in class $model, in " 
+                . __SRC_DIR__ . "DAO" . DIRECTORY_SEPARATOR . "DatabaseDAO on line 459.");
             return false;
         }
         

@@ -12,9 +12,9 @@
                     </thead>
                     <tbody>					
                         <tr class="hide">
-                            <td><input class="form-control" type="text" name="enfant_form[nom]"></td>
-                            <td><input class="form-control" type="text" name="enfant_form[prenom]"></td>
-                            <td><input class="form-control" type="date" name="enfant_form[date_naissance]"></td>
+                            <td><input class="form-control" type="text" name="salarie_form[enfant_form[nom]]"></td>
+                            <td><input class="form-control" type="text" name="salarie_form[enfant_form[prenom]]"></td>
+                            <td><input class="form-control" type="date" name="salarie_form[enfant_form[date_naissance]]"></td>
                             <td><span class="removeLine glyphicon glyphicon-remove"></span></td>
                         </tr>
                     </tbody>
