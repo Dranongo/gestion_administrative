@@ -1,10 +1,8 @@
-$('.addLine').click(function() {
-	var $TABLE = $(this).parent('div');
-	var $clone = $(this).next().find('tr.hide').clone(true).removeClass('hide table-line');
-	$TABLE.find('table').append($clone);
+$('.addLine').click(function(){
+	var $clone = $(this).next().clone(true).removeClass('hide').addClass('form-row');
+	$(this).parent().append($clone);
 });
 
-
 $('.removeLine').click(function () {
-	$(this).parents('tr').detach();
+	$(this).parent('div').detach();
 });

@@ -35,14 +35,14 @@ use Utils\FormHelper;
                 <div class="form-group col-md-6">
                     <label for="nom">Nom *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'nom') ?>" 
-                        id="nom" name="salarie_form[nom]" value="<?= $formSalarie != null ? $formSalarie['nom'] : '' ?>">
+                        id="nom" name="salarie_form[nom]" value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'nom') ?>
                 </div> 
                 <div class="form-group col-md-6">
                     <label for="prenom">Prénom *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'prenom') ?>" 
                         id="prenom" name="salarie_form[prenom]"
-                        value="<?= $formSalarie != null ? $formSalarie['prenom'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'prenom') ?>
                 </div> 
             </div>
@@ -61,7 +61,7 @@ use Utils\FormHelper;
                 <div class="form-group col-md-6">
                     <label for="nom_jeune_fille">Nom de jeune fille </label>
                     <input type="text" class="form-control" id="nom_jeune_fille" name="salarie_form[nom_jeune_fille]"
-                        value="<?= $formSalarie != null ? $formSalarie['nom_jeune_fille'] : '' ?>">
+                        value="">
                 </div>
             </div> 
             <div class="form-row">
@@ -69,14 +69,14 @@ use Utils\FormHelper;
                     <label for="date_naissance">Date de naissance *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'date_naissance') ?>" 
                         id="date_naissance" name="salarie_form[date_naissance]" 
-                        value="<?= $formSalarie != null ? $formSalarie['date_naissance'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'date_naissance') ?>
                 </div> 
                 <div class="form-group col-md-8">
                     <label for="lieu_naissance">Lieu de naissance *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'lieu_naissance') ?>" 
                         id="lieu_naissance" name="salarie_form[lieu_naissance]"
-                        value="<?= $formSalarie != null ? $formSalarie['lieu_naissance'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'lieu_naissance') ?>
                 </div>
             </div>
@@ -85,14 +85,14 @@ use Utils\FormHelper;
                     <label for="adresse">Adresse *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'adresse') ?>" 
                         id="adresse" name="salarie_form[adresse]"
-                        value="<?= $formSalarie != null ? $formSalarie['adresse'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'adresse') ?>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="adresse_complement">Adresse Complément</label>
                     <input type="text" class="form-control" 
                         id="adresse_complement" name="salarie_form[adresse_complement]"
-                        value="<?= $formSalarie != null ? $formSalarie['adresse_complement'] : '' ?>">
+                        value="">
                 </div>   
             </div>
             <div class="form-row"> 
@@ -100,14 +100,14 @@ use Utils\FormHelper;
                     <label for="code_postal">Code Postal *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'code_postal') ?>" 
                         id="code_postal" name="salarie_form[code_postal]"
-                        value="<?= $formSalarie != null ? $formSalarie['code_postal'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'code_postal') ?>
                 </div> 
                 <div class="form-group col-md-8">
                     <label for="ville">Ville *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'ville') ?>" 
                         id="ville" name="salarie_form[ville]"
-                        value="<?= $formSalarie != null ? $formSalarie['ville'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'ville') ?>
                 </div>
             </div> 
@@ -116,14 +116,14 @@ use Utils\FormHelper;
                     <label for="mail_professionnel">Email professionnel *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'mail_professionnel') ?>" 
                         id="mail_professionnel" name="salarie_form[mail_professionnel]"
-                        value="<?= $formSalarie != null ? $formSalarie['mail_professionnel'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'mail_professionnel') ?>
                 </div> 
                 <div class="form-group col-md-6">
                     <label for="mail_personnel">Email personnel *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'mail_personnel') ?>" 
                         id="mail_personnel" name="salarie_form[mail_personnel]"
-                        value="<?= $formSalarie != null ? $formSalarie['mail_personnel'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'mail_personnel') ?>
                 </div>
             </div>
@@ -132,14 +132,14 @@ use Utils\FormHelper;
                     <label for="telephone">Numéro de téléphone *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'telephone') ?>" 
                         id="telephone" name="salarie_form[telephone]"
-                        value="<?= $formSalarie != null ? $formSalarie['telephone'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'telephone') ?>
                 </div>
                 <div class="form-group col-md-8">
                     <label for="numero_securite_sociale">Numéro de sécurité social *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'numero_securite_sociale') ?>" 
                         id="numero_securite_sociale" name="salarie_form[numero_securite_sociale]"
-                        value="<?= $formSalarie != null ? $formSalarie['numero_securite_sociale'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'numero_securite_sociale') ?>
                 </div>
             </div>
@@ -148,7 +148,7 @@ use Utils\FormHelper;
                     <label for="remuneration">Rémunération *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'remuneration') ?>" 
                         id="remuneration" name="salarie_form[remuneration]"
-                        value="<?= $formSalarie != null ? $formSalarie['remuneration'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'remuneration') ?>
                 </div>
                 <div class="form-group col-md-6">
@@ -171,14 +171,14 @@ use Utils\FormHelper;
                     <label for="nationalite">Nationalité *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'nationalite') ?>" 
                         id="nationalite" name="salarie_form[nationalite]"
-                        value="<?= $formSalarie != null ? $formSalarie['nationalite'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'nationalite') ?>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="langues_etrangeres">Langues *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'langues_etrangeres') ?>" 
                         id="langues_etrangeres" name="salarie_form[langues_etrangeres]"
-                        value="<?= $formSalarie != null ? $formSalarie['langues_etrangeres'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'langues_etrangeres') ?>
                 </div>
             </div>
@@ -200,7 +200,7 @@ use Utils\FormHelper;
                 <div class="form-group col-md-6">
                     <label for="details_autre_activite">Détails activité secondaire </label>
                     <input type="text" class="form-control" id="details_autre_activite" name="salarie_form[details_autre_activite]"
-                        value="<?= $formSalarie != null ? $formSalarie['details_autre_activite'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'details_autre_activite') ?>
                 </div>
             </div>
@@ -238,7 +238,7 @@ use Utils\FormHelper;
                 <div class="form-group col-md-6">
                     <label for="taux_invalidite">Détails taux invalidité </label>
                     <input type="text" class="form-control" id="taux_invalidite" name="salarie_form[taux_invalidite]"
-                        value="<?= $formSalarie != null ? $formSalarie['taux_invalidite'] : '' ?>">
+                        value="">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'taux_invalidite') ?>
                 </div>
             <div>
@@ -250,6 +250,6 @@ use Utils\FormHelper;
             <?php require_once 'formTravailleurEtranger.html.php' ?>
             <?php require_once 'formContrat.html.php' ?>
                     
-            <button type="submit" class="pull-right btn btn-danger">Enregistrer</button>
+            <button type="submit" id="envoyer" class="pull-right btn btn-danger">Enregistrer</button>
         </form>
      
