@@ -10,7 +10,7 @@ class FormHelper
      */
     public static function setFeedbackInvalidity(array $formErrors, string $field): string
     {
-        return count($formErrors) != 0 && array_key_exists($field, $formErrors) ? '<span>' . $formErrors[$field] . '</span>' : '';
+        return count($formErrors) != 0 && array_key_exists($field, $formErrors) ? $formErrors[$field] : '';
     }
 
     /**
