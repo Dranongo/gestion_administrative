@@ -459,7 +459,7 @@ abstract class DatabaseDAO
             $parameters = $model->{$getter}();
         } else {
             Logger::getInstance()->error("Method $getter not found in class $model, in " 
-                . __SRC_DIR__ . "DAO" . DIRECTORY_SEPARATOR . "DatabaseDAO on line 459.");
+                . __FILE__ . "on" . __LINE__);
             return false;
         }
         
