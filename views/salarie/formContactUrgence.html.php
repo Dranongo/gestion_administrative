@@ -1,5 +1,5 @@
         <h2>Contact d'urgence</h2>
-        <div class="form-group group" id="contactsUrgence">
+        <div class="form-group" id="contactsUrgence">
             <span class="addLine glyphicon glyphicon-plus"></span>
             <div class="hide">
                 <div class="form-group col-md-3">

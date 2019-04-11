@@ -5,7 +5,7 @@
                 <div class="form-group col-md-4">
                     <label>Nom</label>
                     <input type="text" class="form-control" 
-                        name="formation_form[%%d%%][nom]" value="">
+                        data-name="formation_form[%%d%%][nom]" value="">
                 </div>
                 <div class="form-group col-md-4">
                     <label>Niveau</label>
@@ -19,27 +19,27 @@
                 <div class="form-group col-md-4">
                     <label>Organisme</label>
                     <input type="text" class="form-control" 
-                        name="formation_form[%%d%%][organisme]" value="">
+                        data-name="formation_form[%%d%%][organisme]" value="">
                 </div>
                 <div class="form-group col-md-4">
                     <label>Lieu</label>
                     <input type="text" class="form-control" 
-                        name="formation_form[%%d%%][lieu]" value="">
+                        data-name="formation_form[%%d%%][lieu]" value="">
                 </div>
                 <div class="form-group col-md-4">
                     <label>Début de la formation</label>
                     <input type="date" class="form-control" 
-                        name="formation_form[%%d%%][date_debut]" value="">
+                        data-name="formation_form[%%d%%][date_debut]" value="">
                 </div>
                 <div class="form-group col-md-4">
                     <label>Fin de la formation</label>
                     <input type="date" class="form-control" 
-                        name="formation_form[%%d%%][date_fin]" value="">
+                        data-name="formation_form[%%d%%][date_fin]" value="">
                 </div>
                 <div class="form-group col-md-4">
                     <label>Diplôme obtenu</label>
                     <input type="checkbox" class="form-check-input" 
-                        name="formation_form[%%d%%][obtenu]" value="1">
+                        data-name="formation_form[%%d%%][obtenu]" value="1">
                 </div>
                 <span class="removeLine glyphicon glyphicon-remove"></span>
             </div>

@@ -41,6 +41,8 @@ class SalarieController extends AbstractController
         $formSalarie = $request->getRequest('salarie_form');
         $formSalarie['enfants'] = $request->getRequest('enfant_form');
         $formSalarie['contacts'] = $request->getRequest('contact_urgence_form');
+        //$formSalarie['formations'] = $request->getRequest('formation_form');
+        //$formSalarie['documents'] = $request->getRequest('document_form');
 
         $salarie = new Salarie();
         $formation = new Formation();
@@ -60,8 +62,6 @@ class SalarieController extends AbstractController
         ];
 
         if ($request->isPost()) {
-            var_dump('<pre>');
-            var_dump($formSalarie);
             if ($this->isFormValid($formSalarie, $formErrors)) {
                 
                 $salarie = $salarieDAO->hydrate($formSalarie);

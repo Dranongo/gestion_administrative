@@ -1,14 +1,24 @@
-$(".addLine").button().bind("click", function(){
-
-	$("div.group").each(function(){
-		$("div.line").each(function(index){ 
-			var elem = $(this);
-			elem.find("input").each(function(){
-				replaceName($(this), index);
-			});
+$(".addLine").click(function(){
+	var parent = $(this).parent();
+	console.log(parent);
+	parent.find("div.line").each(function(index){ 
+		var elem = $(this);
+		elem.find("input").each(function(){
+			replaceName($(this), index);
 		});
 	});
 });
+
+/*$(".removeLine").click(function(){
+	var parent = $(this).parent().parent();
+	parent.find("div.line").each(function(index){ 
+		var elem = $(this);
+		elem.find("input").each(function(){
+			replaceName($(this), index);
+		});
+	});
+});*/
+
 
 function replaceName(elem, index){
 	var _name = elem.data("name").replace("%%d%%", index.toString());

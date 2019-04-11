@@ -1,5 +1,5 @@
         <h2>Enfants à charge</h2>
-        <div class="form-group group" id="enfants">
+        <div class="form-group" id="enfants">
         <span class="addLine glyphicon glyphicon-plus"></span>
             <div class="hide">
                 <div class="form-group col-md-4">
