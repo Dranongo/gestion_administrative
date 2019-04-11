@@ -1,5 +1,5 @@
 $('.addLine').click(function(){
-	var $clone = $(this).next().clone(true).removeClass('hide').addClass('form-row');
+	var $clone = $(this).next().clone(true).removeClass('hide').addClass('form-row line');
 	$(this).parent().append($clone);
 });
 

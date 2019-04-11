@@ -2,7 +2,6 @@
 
 namespace Controller;
 
-
 use Model\User;
 use Model\Salarie;
 use Model\Formation;
@@ -39,13 +38,9 @@ class SalarieController extends AbstractController
     {
         $request = $this->getRequest();
 
-        
         $formSalarie = $request->getRequest('salarie_form');
-
-        /*$formSalarie['enfant_form'] = $request->getRequest('enfant_form');
-        $formSalarie['formation_form'] = $request->getRequest('formation_form');
-        $formSalarie['document_form'] = $request->getRequest('document_form');
-        $formSalarie['contrat_form'] = $request->getRequest('contrat_form');*/
+        $formSalarie['enfants'] = $request->getRequest('enfant_form');
+        $formSalarie['contacts'] = $request->getRequest('contact_urgence_form');
 
         $salarie = new Salarie();
         $formation = new Formation();
@@ -59,11 +54,16 @@ class SalarieController extends AbstractController
 
         $formErrors = [];
         $successMessage = $errorMessage = '';
-        $jsFiles = ['/js/createRowTable.js'];
+        $jsFiles = [
+            '/js/createRowTable.js',
+            '/js/generateName.js'
+        ];
 
         if ($request->isPost()) {
-            
+            var_dump('<pre>');
+            var_dump($formSalarie);
             if ($this->isFormValid($formSalarie, $formErrors)) {
+                
                 $salarie = $salarieDAO->hydrate($formSalarie);
                 //$salarieDAO->save($salarie);
 
@@ -182,6 +182,16 @@ class SalarieController extends AbstractController
      * @param array $formErrors
      * @return void
      */
+    protected function checkTravailleurEtranger(array $form, array &$formErrors)
+    {
+
+    }
+
+    /**
+     * @param array $form
+     * @param array $formErrors
+     * @return void
+     */
     protected function checkFormContrat(array $form, array &$formErrors)
     {
         foreach ($form as $key => $value) {
@@ -189,7 +199,8 @@ class SalarieController extends AbstractController
                 if ($key == 'date_fin_contrat') {
                     continue;
                 }
-                if ($key == 'motif_fin_contrat' && $form['date_fin_contrat'] == '') {
+                if ($key == 'motif_fin_contrat' && 
+                (! array_key_exists('date_fin_contrat', $form) || $form['date_fin_contrat'] == '')) {
                     continue;
                 }
                 $formErrors[$key] = ' Le champ est obligatoire  ';
