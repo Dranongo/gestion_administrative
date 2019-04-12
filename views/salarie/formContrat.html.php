@@ -39,8 +39,8 @@
 				<input type="date" id="date_fin_contrat"
 					class="form-control <?= FormHelper::editFieldErrors($formErrors, 'date_fin', 'contrat') ?>"
 					name="contrat_form[date_fin]">
+				<span><?= FormHelper::setFeedbackInvalidity($formErrors, 'date_fin', 'contrat') ?></span>
 			</div>
-			<span><?= FormHelper::setFeedbackInvalidity($formErrors, 'date_fin', 'contrat') ?></span>
         </div>
 		<div class="form-row">
 			<div class="form-group col-md-6 offset-md-6">

@@ -2824,6 +2824,14 @@ textarea.form-control {
   padding-left: 5px;
 }
 
+div.line:nth-child(odd) {
+  background-color: #b4c6e7;
+}
+
+div.line:nth-child(even) {
+  background-color: #d9e2f3;
+}
+
 .form-check {
   position: relative;
   display: block;
@@ -4961,6 +4969,7 @@ input[type="button"].btn-block {
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  height: 100%;
 }
 
 .navbar > .container,
@@ -10855,4 +10864,9 @@ a.text-dark:hover, a.text-dark:focus {
 .hide {
   display: none !important;
 }
+
+.redSquare {
+  background-color: #e12c2c;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

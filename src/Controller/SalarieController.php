@@ -44,6 +44,7 @@ class SalarieController extends AbstractController
         $formSalarie['documents'] = $request->getRequest('document_form');
         $formSalarie['formations'] = $request->getRequest('formation_form');
         $formSalarie['contrat'] = $request->getRequest('contrat_form');
+        $formSalarie['categorieSocioProfessionnelle'] = $request->getRequest('categorie_socio_professionnelle_form');
 
         $salarie = new Salarie();
         $formation = new Formation();
@@ -135,11 +136,13 @@ class SalarieController extends AbstractController
                 } elseif ($key == 'formations') {
                     //$this->checkFormFormation($value, $formErrors);
                 } elseif ($key == 'contacts') {
-                    //$this->checkFormContactUrgence($value, $formErrors);
+                    $this->checkFormContactUrgence($value, $formErrors);
                 } elseif ($key == 'documents') {
                     //$this->checkFormDocument($value, $formErrors);
                 } elseif ($key == 'contrat') {
                     $this->checkFormContrat($value, $formErrors);
+                } elseif ($key == 'categorieSocioProfessionnelle') {
+                    $this->checkFormCategorieSocioProfessionnelle($value, $formErrors);
                 }
             } elseif (trim($value) == "") {
                 if ($key == 'nom_jeune_fille' && array_key_exists('qualite', $form) && $form['qualite'] == 'Monsieur') {
@@ -269,5 +272,17 @@ class SalarieController extends AbstractController
 
     }
 
-    
+    /**
+     * @param array $form
+     * @param array $formErrors
+     * @return void
+     */
+    protected function checkFormCategorieSocioProfessionnelle(array $form, array &$formErrors)
+    {
+        foreach ($form as $key => $value) {
+            if (trim($value) == "") {
+                $formErrors['categorieSocioProfessionnelle'][$key] = ' Le champ est obligatoire  ';
+            }
+        }
+    }
 }
