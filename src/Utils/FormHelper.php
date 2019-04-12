@@ -8,9 +8,14 @@ class FormHelper
      * @param string $field
      * @return string
      */
-    public static function setFeedbackInvalidity(array $formErrors, string $field): string
+    public static function setFeedbackInvalidity(array $formErrors, string $field, ?string $fieldGroup = ''): string
     {
-        return count($formErrors) != 0 && array_key_exists($field, $formErrors) ? $formErrors[$field] : '';
+        if ($fieldGroup == '') {
+            return count($formErrors) != 0 && array_key_exists($field, $formErrors) ? $formErrors[$field] : '';
+        } else {
+            return count($formErrors) != 0 && array_key_exists($fieldGroup, $formErrors) 
+                && array_key_exists($field, $formErrors[$fieldGroup]) ? $formErrors[$fieldGroup][$field] : '';
+        }
     }
 
     /**
@@ -18,9 +23,14 @@ class FormHelper
      * @param string $field
      * @return string
      */
-    public static function editFieldErrors(array $formErrors, string $field): string
+    public static function editFieldErrors(array $formErrors, string $field, ?string $fieldGroup = ''): string
     {
-        return count($formErrors) != 0 && array_key_exists($field, $formErrors) ? 'border border-danger' : '';
+        if ($fieldGroup == '') {
+            return count($formErrors) != 0 && array_key_exists($field, $formErrors) ? 'border border-danger' : '';
+        } else {
+            return count($formErrors) != 0 && array_key_exists($fieldGroup, $formErrors) 
+                && array_key_exists($field, $formErrors[$fieldGroup]) ? 'border border-danger' : '';
+        }
     }
 
     /**
@@ -28,9 +38,14 @@ class FormHelper
      * @param string $field
      * @return string
      */
-    public static function editRadioFieldErrors(array $formErrors, string $field): string
+    public static function editRadioFieldErrors(array $formErrors, string $field, ?string $fieldGroup = ''): string
     {
-        return count($formErrors) != 0 && array_key_exists($field, $formErrors) ? 'text text-danger' : '';
+        if ($fieldGroup == '') {
+            return count($formErrors) != 0 && array_key_exists($field, $formErrors) ? 'text text-danger' : '';
+        } else {
+            return count($formErrors) != 0 && array_key_exists($fieldGroup, $formErrors) 
+                && array_key_exists($field, $formErrors[$fieldGroup]) ? 'text text-danger' : '';
+        }
     }
 }
 ?>

@@ -9,7 +9,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label>Niveau</label>
-                    <select class="form-control" name="formation_form[niveau]">
+                    <select class="form-control" data-name="formation_form[%%d%%][niveau]">
                         <option value="">Niveau</option>
                         <?php foreach($formation->getNiveauxPossibles() as $value): ?> 
                             <option value="<?= $value ?>"><?= $value ?></option>

@@ -41,8 +41,9 @@ class SalarieController extends AbstractController
         $formSalarie = $request->getRequest('salarie_form');
         $formSalarie['enfants'] = $request->getRequest('enfant_form');
         $formSalarie['contacts'] = $request->getRequest('contact_urgence_form');
-        //$formSalarie['formations'] = $request->getRequest('formation_form');
-        //$formSalarie['documents'] = $request->getRequest('document_form');
+        $formSalarie['documents'] = $request->getRequest('document_form');
+        $formSalarie['formations'] = $request->getRequest('formation_form');
+        $formSalarie['contrat'] = $request->getRequest('contrat_form');
 
         $salarie = new Salarie();
         $formation = new Formation();
@@ -63,15 +64,8 @@ class SalarieController extends AbstractController
 
         if ($request->isPost()) {
             if ($this->isFormValid($formSalarie, $formErrors)) {
-                
                 $salarie = $salarieDAO->hydrate($formSalarie);
                 //$salarieDAO->save($salarie);
-
-                //$this->saveData(\DAO\ContratDAO::getInstance(), $this->formContrat, $salarie);
-                //$this->saveData(\DAO\EnfantDAO::getInstance(), $this->formEnfant, $salarie);
-                //$this->saveData(\DAO\ContactUrgenceDAO::getInstance(), $this->formContactUrgence, $salarie);
-                //$this->saveData(\DAO\FormationDAO::getInstance(), $this->formFormation, $salarie);
-                //$this->saveData(\DAO\DocumentDAO::getInstance(), $this->formDocument, $salarie);
             }
         }
         return [
@@ -135,7 +129,19 @@ class SalarieController extends AbstractController
         $this->checkRadioField($form, $formErrors, $radioFields);
 
         foreach ($form as $key => $value) {
-            if (trim($value) == "") {
+            if (is_array($value)) {
+                if ($key == 'enfants') {
+                    //$this->checkFormEnfant($value, $formErrors);
+                } elseif ($key == 'formations') {
+                    //$this->checkFormFormation($value, $formErrors);
+                } elseif ($key == 'contacts') {
+                    //$this->checkFormContactUrgence($value, $formErrors);
+                } elseif ($key == 'documents') {
+                    //$this->checkFormDocument($value, $formErrors);
+                } elseif ($key == 'contrat') {
+                    $this->checkFormContrat($value, $formErrors);
+                }
+            } elseif (trim($value) == "") {
                 if ($key == 'nom_jeune_fille' && array_key_exists('qualite', $form) && $form['qualite'] == 'Monsieur') {
                     continue;
                 }
@@ -196,14 +202,14 @@ class SalarieController extends AbstractController
     {
         foreach ($form as $key => $value) {
             if (trim($value) == "") {
-                if ($key == 'date_fin_contrat') {
+                if ($key == 'date_fin') {
                     continue;
                 }
-                if ($key == 'motif_fin_contrat' && 
-                (! array_key_exists('date_fin_contrat', $form) || $form['date_fin_contrat'] == '')) {
+                if ($key == 'id_motif_fin_contrat' && 
+                (! array_key_exists('date_fin', $form) || $form['date_fin'] == '')) {
                     continue;
                 }
-                $formErrors[$key] = ' Le champ est obligatoire  ';
+                $formErrors['contrat'][$key] = ' Le champ est obligatoire  ';
             }
         }
     }
