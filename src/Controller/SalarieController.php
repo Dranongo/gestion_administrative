@@ -6,6 +6,7 @@ use Model\User;
 use Model\Salarie;
 use Model\Formation;
 use DAO\SalarieDAO;
+use DAO\EnfantDAO;
 use DAO\CategorieSocioProfessionnelleDAO;
 use DAO\TypeContratDAO;
 use DAO\DocumentTypeDAO;
@@ -45,11 +46,13 @@ class SalarieController extends AbstractController
         $formSalarie['formations'] = $request->getRequest('formation_form');
         $formSalarie['contrat'] = $request->getRequest('contrat_form');
         $formSalarie['categorieSocioProfessionnelle'] = $request->getRequest('categorie_socio_professionnelle_form');
+        $formSalarie['travailleurEtranger'] = $request->getRequest('travailleur_etranger_form');
 
         $salarie = new Salarie();
         $formation = new Formation();
 
         $salarieDAO = SalarieDAO::getInstance();
+        $enfantDAO = EnfantDAO::getInstance();
         $categories = CategorieSocioProfessionnelleDAO::getInstance()->findAll();
         $typesContrat = TypeContratDAO::getInstance()->findAll();
         $typesDocument = DocumentTypeDAO::getInstance()->findAll();
@@ -66,7 +69,15 @@ class SalarieController extends AbstractController
         if ($request->isPost()) {
             if ($this->isFormValid($formSalarie, $formErrors)) {
                 $salarie = $salarieDAO->hydrate($formSalarie);
-                //$salarieDAO->save($salarie);
+                $salarieDAO->save($salarie);
+
+                $idSalarie = $salarieDAO->getLastInsertId();
+
+                foreach ($formSalarie['enfants'] as $formEnfant) {
+                    $formEnfant['id_salarie'] = $idSalarie;
+                    $enfant = $enfantDAO->hydrate($formEnfant, true);
+                    $enfantDAO->save($enfant);
+                }
             }
         }
         return [
@@ -84,21 +95,6 @@ class SalarieController extends AbstractController
             'errorMessage' => $errorMessage,
             'jsFiles' => $jsFiles
         ];
-    }
-
-    /**
-     * Save data into database in relation with the employee previously created
-     *
-     * @param \DAO\DatabaseDAO $modelDAO
-     * @param array $form
-     * @param Salarie $salarie
-     * @return void
-     */
-    protected function saveData(\DAO\DatabaseDAO $modelDAO, array $form, Salarie $salarie)
-    {
-        $model = $modelDAO->hydrate($form);
-        $model->setSalarie($salarie);
-        $modelDAO->save($model);
     }
 
     /**
@@ -132,18 +128,21 @@ class SalarieController extends AbstractController
         foreach ($form as $key => $value) {
             if (is_array($value)) {
                 if ($key == 'enfants') {
-                    //$this->checkFormEnfant($value, $formErrors);
+                    $this->checkFormEnfant($value, $formErrors);
                 } elseif ($key == 'formations') {
-                    //$this->checkFormFormation($value, $formErrors);
+                    $this->checkFormFormation($value, $formErrors);
                 } elseif ($key == 'contacts') {
                     $this->checkFormContactUrgence($value, $formErrors);
                 } elseif ($key == 'documents') {
-                    //$this->checkFormDocument($value, $formErrors);
+                    $this->checkFormDocument($value, $formErrors);
                 } elseif ($key == 'contrat') {
                     $this->checkFormContrat($value, $formErrors);
                 } elseif ($key == 'categorieSocioProfessionnelle') {
                     $this->checkFormCategorieSocioProfessionnelle($value, $formErrors);
+                } elseif ($key == 'travailleurEtranger') {
+                    $this->checkFormTravailleurEtranger($value, $formErrors);
                 }
+                continue;
             } elseif (trim($value) == "") {
                 if ($key == 'nom_jeune_fille' && array_key_exists('qualite', $form) && $form['qualite'] == 'Monsieur') {
                     continue;
@@ -154,6 +153,9 @@ class SalarieController extends AbstractController
                 }
                 if ($key == 'taux_invalidite' && 
                     (! array_key_exists('statut_handicap', $form) || $form['statut_handicap'] == '0')) {
+                    continue;
+                }
+                if ($key == 'enfants' || $key == 'formations' || $key == 'documents') {
                     continue;
                 }
                 $formErrors[$key] = 'Le champ est obligatoire ';
@@ -191,7 +193,7 @@ class SalarieController extends AbstractController
      * @param array $formErrors
      * @return void
      */
-    protected function checkTravailleurEtranger(array $form, array &$formErrors)
+    protected function checkFormTravailleurEtranger(array $form, array &$formErrors)
     {
 
     }
@@ -213,6 +215,11 @@ class SalarieController extends AbstractController
                     continue;
                 }
                 $formErrors['contrat'][$key] = ' Le champ est obligatoire  ';
+            } elseif (DateHelper::isDateBefore(
+                    DateHelper::convertDatabaseDateToDateTime($form['date_fin']), 
+                    DateHelper::convertDatabaseDateToDateTime($form['date_debut']))) {
+                $formErrors['contrat']['date_fin'] = ' La date de fin de contrat doit être supérieur à celle du début';
+                $formErrors['contrat']['date_debut'] = 'La date de début doit être inférieur à celle de fin';
             }
         }
     }
@@ -224,9 +231,11 @@ class SalarieController extends AbstractController
      */
     protected function checkFormEnfant(array $form, array &$formErrors)
     {
-        foreach ($form as $key => $value) {
-            if (trim($value) == "") {
-                $formErrors[$key] = ' Le champ est obligatoire  ';
+        foreach ($form as $key => $enfant) {
+            foreach ($enfant as $paramEnfant => $value) {
+                if (trim($value) == "") {
+                    $formErrors['enfants'][$key][$paramEnfant] = ' Le champ est obligatoire  ';
+                }
             }
         }
     }
@@ -238,9 +247,11 @@ class SalarieController extends AbstractController
      */
     protected function checkFormFormation(array $form, array &$formErrors)
     {
-        foreach ($form as $key => $value) {
-            if (trim($value) == "") {
-                $formErrors[$key] = ' Le champ est obligatoire  ';
+        foreach ($form as $key => $formation) {
+            foreach ($formation as $paramFormation => $value) {
+                if (trim($value) == "") {
+                    $formErrors['formations'][$key][$paramFormation] = ' Le champ est obligatoire  ';
+                }
             }
         }
     }
@@ -252,12 +263,15 @@ class SalarieController extends AbstractController
      */
     protected function checkFormContactUrgence(array $form, array &$formErrors)
     {
-        foreach ($form as $key => $value) {
-            if (trim($value) == "") {
-                $formErrors[$key] = 'Le champ est obligatoire';
-            }
-            elseif ($key == 'telephone' && !NumberHelper::checkPhoneNumber($value)) {
-                $formErrors[$key] = ' Le numero de telephone est incorrect  ';
+        foreach ($form as $key => $contact) {
+            if ($key == 0) {
+                foreach ($contact as $paramContact => $value) {
+                    if (trim($value) == "") {
+                        $formErrors['contacts'][$key][$paramContact] = ' Le champ est obligatoire ';
+                    }elseif ($paramContact == 'telephone' && !NumberHelper::checkPhoneNumber($value)) {
+                        $formErrors['contacts'][$key][$paramContact] = 'Le numero de téléphone est incorrect ';
+                    }
+                }                
             }
         }
     }

@@ -86,6 +86,14 @@ abstract class DatabaseDAO
     }
 
     /**
+     * @return int
+     */
+    public function getLastInsertId(): int
+    {
+        return $this->connection->lastInsertId();
+    }
+
+    /**
      * @param array $orderBy
      * @param bool $recursive
      * @param int|null $limit

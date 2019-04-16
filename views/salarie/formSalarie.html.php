@@ -35,14 +35,15 @@ use Utils\FormHelper;
                 <div class="form-group col-md-6">
                     <label for="nom">Nom *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'nom') ?>" 
-                        id="nom" name="salarie_form[nom]" value="">
+                        id="nom" name="salarie_form[nom]" 
+                        value="<?= $salarie->getNom() ?>">
                     <?= FormHelper::setFeedbackInvalidity($formErrors, 'nom') ?></span>
                 </div> 
                 <div class="form-group col-md-6">
                     <label for="prenom">Prénom *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'prenom') ?>" 
                         id="prenom" name="salarie_form[prenom]"
-                        value="">
+                        value="<?= $salarie->getPrenom() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'prenom') ?></span>
                 </div> 
             </div>
@@ -61,7 +62,7 @@ use Utils\FormHelper;
                 <div class="form-group col-md-6">
                     <label for="nom_jeune_fille">Nom de jeune fille </label>
                     <input type="text" class="form-control" id="nom_jeune_fille" name="salarie_form[nom_jeune_fille]"
-                        value="">
+                        value="<?= $salarie->getNomJeuneFille() ?>">
                 </div>
             </div> 
             <div class="form-row">
@@ -69,14 +70,14 @@ use Utils\FormHelper;
                     <label for="date_naissance">Date de naissance *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'date_naissance') ?>" 
                         id="date_naissance" name="salarie_form[date_naissance]" 
-                        value="">
+                        value="<?= $salarie->getDateNaissance() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'date_naissance') ?></span>
                 </div> 
                 <div class="form-group col-md-8">
                     <label for="lieu_naissance">Lieu de naissance *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'lieu_naissance') ?>" 
                         id="lieu_naissance" name="salarie_form[lieu_naissance]"
-                        value="">
+                        value="<?= $salarie->getLieuNaissance() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'lieu_naissance') ?></span>
                 </div>
             </div>
@@ -85,14 +86,14 @@ use Utils\FormHelper;
                     <label for="adresse">Adresse *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'adresse') ?>" 
                         id="adresse" name="salarie_form[adresse]"
-                        value="">
+                        value="<?= $salarie->getAdresse() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'adresse') ?></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="adresse_complement">Adresse Complément</label>
                     <input type="text" class="form-control" 
                         id="adresse_complement" name="salarie_form[adresse_complement]"
-                        value="">
+                        value="<?= $salarie->getAdresseComplement() ?>">
                 </div>   
             </div>
             <div class="form-row"> 
@@ -100,14 +101,14 @@ use Utils\FormHelper;
                     <label for="code_postal">Code Postal *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'code_postal') ?>" 
                         id="code_postal" name="salarie_form[code_postal]"
-                        value="">
+                        value="<?= $salarie->getCodePostal() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'code_postal') ?></span>
                 </div> 
                 <div class="form-group col-md-8">
                     <label for="ville">Ville *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'ville') ?>" 
                         id="ville" name="salarie_form[ville]"
-                        value="">
+                        value="<?= $salarie->getVille() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'ville') ?></span>
                 </div>
             </div> 
@@ -116,14 +117,14 @@ use Utils\FormHelper;
                     <label for="mail_professionnel">Email professionnel *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'mail_professionnel') ?>" 
                         id="mail_professionnel" name="salarie_form[mail_professionnel]"
-                        value="">
+                        value="<?= $salarie->getMailProfessionnel() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'mail_professionnel') ?></span>
                 </div> 
                 <div class="form-group col-md-6">
                     <label for="mail_personnel">Email personnel *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'mail_personnel') ?>" 
                         id="mail_personnel" name="salarie_form[mail_personnel]"
-                        value="">
+                        value="<?= $salarie->getMailPersonnel() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'mail_personnel') ?></span>
                 </div>
             </div>
@@ -132,14 +133,14 @@ use Utils\FormHelper;
                     <label for="telephone">Numéro de téléphone *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'telephone') ?>" 
                         id="telephone" name="salarie_form[telephone]"
-                        value="">
+                        value="<?= $salarie->getTelephone() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'telephone') ?></span>
                 </div>
                 <div class="form-group col-md-8">
                     <label for="numero_securite_sociale">Numéro de sécurité social *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'numero_securite_sociale') ?>" 
                         id="numero_securite_sociale" name="salarie_form[numero_securite_sociale]"
-                        value="">
+                        value="<?= $salarie->getNumeroSecuriteSociale() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'numero_securite_sociale') ?></span>
                 </div>
             </div>
@@ -148,7 +149,7 @@ use Utils\FormHelper;
                     <label for="remuneration">Rémunération *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'remuneration') ?>" 
                         id="remuneration" name="salarie_form[remuneration]"
-                        value="">
+                        value="<?= $salarie->getRemuneration() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'remuneration') ?></span>
                 </div>
                 <div class="form-group col-md-6">
@@ -171,14 +172,14 @@ use Utils\FormHelper;
                     <label for="nationalite">Nationalité *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'nationalite') ?>" 
                         id="nationalite" name="salarie_form[nationalite]"
-                        value="">
+                        value="<?= $salarie->getNationalite() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'nationalite') ?></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="langues_etrangeres">Langues *</label>
                     <input type="text" class="form-control <?= FormHelper::editFieldErrors($formErrors, 'langues_etrangeres') ?>" 
                         id="langues_etrangeres" name="salarie_form[langues_etrangeres]"
-                        value="">
+                        value="<?= $salarie->getLanguesEtrangeres() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'langues_etrangeres') ?></span>
                 </div>
             </div>
@@ -200,7 +201,7 @@ use Utils\FormHelper;
                 <div class="form-group col-md-6">
                     <label for="details_autre_activite">Détails activité secondaire </label>
                     <input type="text" class="form-control" id="details_autre_activite" name="salarie_form[details_autre_activite]"
-                        value="">
+                        value="<?= $salarie->getDetailsAutreActivite() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'details_autre_activite') ?></span>
                 </div>
             </div>
@@ -238,7 +239,7 @@ use Utils\FormHelper;
                 <div class="form-group col-md-6">
                     <label for="taux_invalidite">Détails taux invalidité </label>
                     <input type="text" class="form-control" id="taux_invalidite" name="salarie_form[taux_invalidite]"
-                        value="">
+                        value="<?= $salarie->getTauxInvalidite() ?>">
                     <span><?= FormHelper::setFeedbackInvalidity($formErrors, 'taux_invalidite') ?></span>
                 </div>
             <div>

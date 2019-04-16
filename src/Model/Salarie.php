@@ -120,7 +120,7 @@ class Salarie extends AbstractModel
     /**
      * @var string
      */
-    protected $langues;
+    protected $languesEtrangeres;
 
     /**
      * @var bool
@@ -130,7 +130,7 @@ class Salarie extends AbstractModel
 	/**
      * @var string
      */
-    protected $detailActivite;
+    protected $detailsAutreActivite;
 
     /**
      * @var bool
@@ -233,7 +233,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
@@ -252,7 +252,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getPrenom(): string
+    public function getPrenom(): ?string
     {
         return $this->prenom;
     }
@@ -290,7 +290,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getNationalite(): string
+    public function getNationalite(): ?string
     {
         return $this->nationalite;
     }
@@ -309,7 +309,7 @@ class Salarie extends AbstractModel
     /**
      * @return \DateTime
      */
-    public function getDateNaissance(): \DateTime
+    public function getDateNaissance(): ?\DateTime
     {
         return $this->dateNaissance;
     }
@@ -328,7 +328,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getLieuNaissance(): string
+    public function getLieuNaissance(): ?string
     {
         return $this->lieuNaissance;
     }
@@ -347,7 +347,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getAdresse(): string
+    public function getAdresse(): ?string
     {
         return $this->adresse;
     }
@@ -385,7 +385,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getCodePostal(): string
+    public function getCodePostal(): ?string
     {
         return $this->codePostal;
     }
@@ -404,7 +404,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getVille(): string
+    public function getVille(): ?string
     {
         return $this->ville;
     }
@@ -423,7 +423,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getTelephone(): string
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
@@ -442,7 +442,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getMailProfessionnel(): string
+    public function getMailProfessionnel(): ?string
     {
         return $this->mailProfessionnel;
     }
@@ -461,7 +461,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getMailPersonnel(): string
+    public function getMailPersonnel(): ?string
     {
         return $this->mailPersonnel;
     }
@@ -480,7 +480,7 @@ class Salarie extends AbstractModel
     /**
      * @return int
      */
-    public function getNumeroSecuriteSociale(): int
+    public function getNumeroSecuriteSociale(): ?int
     {
         return $this->numeroSecuriteSociale;
     }
@@ -499,7 +499,7 @@ class Salarie extends AbstractModel
     /**
      * @return int
      */
-    public function getRemuneration(): int
+    public function getRemuneration(): ?int
     {
         return $this->remuneration;
     }
@@ -537,7 +537,7 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getSituationFamiliale(): string
+    public function getSituationFamiliale(): ?string
     {
         return $this->situationFamiliale;
     }
@@ -551,12 +551,12 @@ class Salarie extends AbstractModel
     }
 
     /**
-     * @param string $langues
+     * @param string $languesEtrangeres
      * @return Salarie
      */
-    public function setLangues(string $langues): Salarie
+    public function setLanguesEtrangeres(string $languesEtrangeres): Salarie
     {
-        $this->langues = $langues;
+        $this->languesEtrangeres = $languesEtrangeres;
 
         return $this;
     }
@@ -564,9 +564,9 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getLangues(): ?string
+    public function getLanguesEtrangeres(): ?string
     {
-        return $this->langues;
+        return $this->languesEtrangeres;
     }
 
     /**
@@ -589,12 +589,12 @@ class Salarie extends AbstractModel
     }
 
     /**
-     * @param string $detailActivite
+     * @param string $detailsAutreActivite
      * @return Salarie
      */
-    public function setDetailActivite(string $detailActivite): Salarie
+    public function setDetailsAutreActivite(string $detailsAutreActivite): Salarie
     {
-        $this->detailActivite = $detailActivite;
+        $this->detailsAutreActivite = $detailsAutreActivite;
 
         return $this;
     }
@@ -602,9 +602,9 @@ class Salarie extends AbstractModel
     /**
      * @return string
      */
-    public function getDetailActivite(): ?string
+    public function getDetailsAutreActivite(): ?string
     {
-        return $this->detailActivite;
+        return $this->detailsAutreActivite;
     }
 
     /**

@@ -8,9 +8,9 @@
                         data-name="formation_form[%%d%%][nom]" value="">
                 </div>
                 <div class="form-group col-md-4">
-                    <label>Niveau</label>
+                    <label>Niveau de formation</label>
                     <select class="form-control" data-name="formation_form[%%d%%][niveau]">
-                        <option value="">Niveau</option>
+                        <option value="">Veuillez sélectionner un niveau</option>
                         <?php foreach($formation->getNiveauxPossibles() as $value): ?> 
                             <option value="<?= $value ?>"><?= $value ?></option>
                         <?php endforeach; ?>
