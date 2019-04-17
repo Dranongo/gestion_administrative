@@ -54,9 +54,9 @@ class SalarieDAO extends DatabaseDAO
                 ->setRemuneration($data['remuneration'])
                 ->setEnPoste($data['en_poste'])
                 ->setSituationFamiliale($data['situation_familiale'])
-                ->setLangues($data['langues_etrangeres'])
+                ->setLanguesEtrangeres($data['langues_etrangeres'])
                 ->setAutreActivite($data['autre_activite'])
-                ->setDetailActivite($data['details_autre_activite'])
+                ->setDetailsAutreActivite($data['details_autre_activite'])
                 ->setAutorisationTravailMineur($data['autorisation_travail_mineur'])
                 ->setStatutHandicap($data['statut_handicap'])
                 ->setTauxInvalidite($data['taux_invalidite']);

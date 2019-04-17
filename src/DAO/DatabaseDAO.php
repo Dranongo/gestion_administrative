@@ -192,6 +192,21 @@ abstract class DatabaseDAO
     }
 
     /**
+     * @param array $form
+     * @param AbstractModel $model
+     * @param int|null $id
+     * 
+     */
+    public function saveAll(array $form, ?int $id = null) 
+    {
+        foreach ($form as $formModel) {
+            $formModel['id_salarie'] = $id;
+            $model = $this->hydrate($formModel, true);
+            $this->save($model);
+        }
+    }
+
+    /**
      * @param AbstractModel $model
      * @return bool
      */
