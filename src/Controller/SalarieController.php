@@ -7,6 +7,10 @@ use Model\Salarie;
 use Model\Formation;
 use DAO\SalarieDAO;
 use DAO\EnfantDAO;
+use DAO\FormationDAO;
+use DAO\ContratDAO;
+use DAO\DocumentDAO;
+use DAO\ContactUrgenceDAO;
 use DAO\CategorieSocioProfessionnelleDAO;
 use DAO\TypeContratDAO;
 use DAO\DocumentTypeDAO;
@@ -53,6 +57,11 @@ class SalarieController extends AbstractController
 
         $salarieDAO = SalarieDAO::getInstance();
         $enfantDAO = EnfantDAO::getInstance();
+        $formationDAO = FormationDAO::getInstance();
+        $contratDAO = ContratDAO::getInstance();
+        $documentDAO = DocumentDAO::getInstance();
+        $contactUrgenceDAO = ContactUrgenceDAO::getInstance();
+
         $categories = CategorieSocioProfessionnelleDAO::getInstance()->findAll();
         $typesContrat = TypeContratDAO::getInstance()->findAll();
         $typesDocument = DocumentTypeDAO::getInstance()->findAll();
@@ -69,14 +78,15 @@ class SalarieController extends AbstractController
         if ($request->isPost()) {
             if ($this->isFormValid($formSalarie, $formErrors)) {
                 $salarie = $salarieDAO->hydrate($formSalarie);
-                $salarieDAO->save($salarie);
+                
+                if($salarieDAO->save($salarie)){
+                    $idSalarie = $salarieDAO->getLastInsertId();
+                    $enfantDAO->saveAll($formSalarie['enfants'], $idSalarie);
+                    $formationDAO->saveAll($formSalarie['formations'], $idSalarie);
+                    $documentDAO->saveAll($formSalarie['documents'], $idSalarie);
+                    $contactUrgenceDAO->saveAll($formSalarie['contacts'], $idSalarie);
 
-                $idSalarie = $salarieDAO->getLastInsertId();
-
-                foreach ($formSalarie['enfants'] as $formEnfant) {
-                    $formEnfant['id_salarie'] = $idSalarie;
-                    $enfant = $enfantDAO->hydrate($formEnfant, true);
-                    $enfantDAO->save($enfant);
+                    //$contratDAO->saveAll($formSalarie['contrat'], $idSalarie);
                 }
             }
         }
@@ -160,13 +170,13 @@ class SalarieController extends AbstractController
                 }
                 $formErrors[$key] = 'Le champ est obligatoire ';
             } elseif ($key == 'telephone' && !NumberHelper::checkPhoneNumber($value)) {
-                $formErrors[$key] = 'Le numero de téléphone est incorrect ';
+                $formErrors[$key] = 'Le numéro de téléphone est incorrect ';
             } elseif ($key == 'code_postal' && !NumberHelper::checkPostalCode($value)) {
                 $formErrors[$key] = 'Le code postal est incorrect';
             } elseif ($key == 'remuneration' && !NumberHelper::checkSalary($value)) {
                 $formErros[$key] = 'Le salaire est invalide';
             } elseif ($key == 'numero_securite_sociale' && !NumberHelper::checkSocialSecurityNumber($value)) {
-                $formErrors[$key] = 'Le numero de securite sociale est incorrect';
+                $formErrors[$key] = 'Le numéro de sécurite sociale est incorrect';
             } elseif ($key == 'mail_professionnel' || $key == 'mail_personnel' && !StringHelper::isEmailValid($value)) {
                 $formErros[$key] = 'L\'email est incorrect';
             }
@@ -195,7 +205,15 @@ class SalarieController extends AbstractController
      */
     protected function checkFormTravailleurEtranger(array $form, array &$formErrors)
     {
-
+        if (!NumberHelper::checkResidencePermitNumber($form['num_carte_sejour'])) {
+            $formErros['travailleurEtranger']['num_carte_sejour'] = 'Le numéro de carte de séjour est incorrect';
+        }
+        if (DateHelper::isDateBefore(
+            DateHelper::convertDatabaseDateToDateTime($form['date_limite_validite']), 
+            DateHelper::convertDatabaseDateToDateTime($form['date_autorisation_embauche']))) {
+            $formErrors['travailleurEtranger']['date_limite_validite'] = ' La date limite doit être supérieure à celle du début';
+            $formErrors['travailleurEtranger']['date_autorisation_embauche'] = 'La date de début doit être inférieure à la limite';
+        }
     }
 
     /**
@@ -218,8 +236,8 @@ class SalarieController extends AbstractController
             } elseif (DateHelper::isDateBefore(
                     DateHelper::convertDatabaseDateToDateTime($form['date_fin']), 
                     DateHelper::convertDatabaseDateToDateTime($form['date_debut']))) {
-                $formErrors['contrat']['date_fin'] = ' La date de fin de contrat doit être supérieur à celle du début';
-                $formErrors['contrat']['date_debut'] = 'La date de début doit être inférieur à celle de fin';
+                $formErrors['contrat']['date_fin'] = ' La date de fin de contrat doit être supérieure à celle du début';
+                $formErrors['contrat']['date_debut'] = 'La date de début de contrat doit être inférieure à celle de fin';
             }
         }
     }
@@ -269,7 +287,7 @@ class SalarieController extends AbstractController
                     if (trim($value) == "") {
                         $formErrors['contacts'][$key][$paramContact] = ' Le champ est obligatoire ';
                     }elseif ($paramContact == 'telephone' && !NumberHelper::checkPhoneNumber($value)) {
-                        $formErrors['contacts'][$key][$paramContact] = 'Le numero de téléphone est incorrect ';
+                        $formErrors['contacts'][$key][$paramContact] = 'Le numéro de téléphone est incorrect ';
                     }
                 }                
             }
@@ -283,7 +301,13 @@ class SalarieController extends AbstractController
      */
     protected function checkFormDocument(array $form, array &$formErrors)
     {
-
+        foreach ($form as $key => $document) {
+            if ($document['document'] != null) {
+                if($document['type_document'] == '') {
+                    $formErrors['document']['typeDocument'] = 'Le type de document doit être renseigné';                    
+                }
+            }
+        }
     }
 
     /**
@@ -296,6 +320,11 @@ class SalarieController extends AbstractController
         foreach ($form as $key => $value) {
             if (trim($value) == "") {
                 $formErrors['categorieSocioProfessionnelle'][$key] = ' Le champ est obligatoire  ';
+            } elseif (DateHelper::isDateBefore(
+                DateHelper::convertDatabaseDateToDateTime($form['date_fin']), 
+                DateHelper::convertDatabaseDateToDateTime($form['date_debut']))) {
+                $formErrors['categorieSocioProfessionnelle']['date_fin'] = ' La date de fin du statut doit être supérieure à celle du début';
+                $formErrors['categorieSocioProfessionnelle']['date_debut'] = 'La date de début du statut doit être inférieure à celle de fin';
             }
         }
     }

@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label>Type du document</label>
-                    <select class="typeAttachment custom-select" data-name="document_form[typeDocument]">
+                    <select class="typeAttachment custom-select" data-name="document_form[%%d%%][type_document]">
                         <option value="">Veuillez sélectionner sa nature</option>
                         <?php foreach($typesDocument as $typeDocument): ?> 
                             <option value="<?= $typeDocument->getId() ?>"><?= $typeDocument->getNom() ?></option>
